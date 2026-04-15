@@ -1,55 +1,34 @@
-template: str = '''
-import translate
-result: string = translate.translate(
-    "en",
-    "zh-CN",
-    "The meeting is critical for the success of the project."
-)
-print(result)
-'''
-
-# 利用多头注意力的机制
-# 1. 分隔符
-# ∵ Q = XWq, K = XWk, V = XWv
-# Attention(Q, K, V) = softmax(QK^T / sqrt(d_k))V
-# Result = Attention(Q, K, V)
-#        = softmax((XWq)(XWk)^T / sqrt(d_k))XWv
-#        = softmax(XWqWk^TX^T / sqrt(d_k))XWv
-# 在训练好的模型里，通常相似的输入（比如语义接近的词）会让 Q 和 K 的点积更大，从而在 softmax 里得到更高的注意力权重。
-# 
-# ∴ 要增强某个位置，需要与其他地方提高相似度
-template: str = '''
-------------------------------------------------------------------
-Task: Translate:
-Original: "The meeting is critical for the success of the project."
-Original-language: en-us
-Target-language: zh-cn
-Output:
-
-------------------------------------------------------------------
-https://www.collinsdictionary.com/dictionary/english-thesaurus/the
-https://www.collinsdictionary.com/dictionary/english-thesaurus/project
-https://www.collinsdictionary.com/dictionary/english-thesaurus/is
-https://www.collinsdictionary.com/dictionary/english-thesaurus/vital
-Rules:
-1. Allow optional comments, after each word, format like:  word (comment), enhanced characteristic of this word
-2. "The (comment) project is (comment)....." in chinese
-3. Compare the synonyms and point out the key characteristic
-4. Show the exact original meaning as comment enhancement
-5. Consider where each unit's meaning extended from is original meaning
-6. Annotate in the translated comment
-------------------------------------------------------------------
-output result
-'''
 import lmstudio as lms
 import pathlib
 import os
 import yaml
+import importlib.util
+import importlib.machinery
+import re
+from typing import Optional
+import aiofiles
 
-# # lmstudio_root_path: pathlib.Path = pathlib.Path(r"F:/.lmstudio/lmstudio-community/")
+# re.DOTALL with \n
+result_format_regex: re.Pattern = re.compile(r"<output>(.*?)</output>", re.DOTALL)
 
-# meta_llama_path: str = r"meta-llama-3.1-8b-instruct"
-# qwen_path: str = r"qwen/qwen3.5-9b"
+# A JSON schema for a book
+schema = {
+    "type": "object",
+    "properties": {
+        "only_one_translate_with_comment": {
+            "type": "string",
+        },
+        "others": {
+            "type": "string",
+        } 
+    }
+}
+
+# lmstudio_root_path: pathlib.Path = pathlib.Path(r"F:/.lmstudio/lmstudio-community/")
+
+meta_llama_path: str = r"meta-llama-3.1-8b-instruct"
+qwen_path: str = r"qwen/qwen3.5-9b"
+bytedance_seed_oss_36b_path: str = r"bytedance/seed-oss-36b"
 
 # model = lms.llm(
 #     qwen_path,
@@ -62,4 +41,103 @@ import yaml
 project_root_path: pathlib.Path = pathlib.Path(__file__).parent.parent
 
 # load data
+data_path = project_root_path / "data" / r"config" / "test.yaml"
+# store data
+output_data_base_path = project_root_path / "output"
 
+with open(data_path, "r", encoding="utf-8") as f:
+    data = yaml.safe_load(f)
+
+
+# general template
+# import from /data/dataclass/template/general_translate.py
+general_translate_module_path = project_root_path / "data" / "dataclass" / "template" / "general_translate.py"
+
+spec: Optional[importlib.machinery.ModuleSpec] = importlib.util.spec_from_file_location("general_translate", general_translate_module_path)
+
+if spec is not None and spec.loader is not None:
+    general_template_module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(general_template_module)
+    
+general_template: general_translate_module.GeneralTemplate = general_template_module.GeneralTemplate()
+
+async def generate_input(
+    model_path: str = qwen_path
+):
+    async with lms.AsyncClient() as client:
+        model = await client.llm.model(
+            model_path
+        )
+        for each_sentence_config in data:
+            each_sentence_template: str = each_sentence_config["sentence"]
+            each_sentence_keywords: str = each_sentence_config["keywords"]
+            each_sentence_summary: str = each_sentence_config["summary"]
+            each_sentence_input_language: str = each_sentence_config["input_language"]
+            each_sentence_output_language: str = each_sentence_config["output_language"]
+            
+            if each_sentence_input_language != "en":
+                # print(f"Input language {each_sentence_input_language} is not supported yet.")
+                continue
+
+            for each_keyword in each_sentence_keywords:
+                each_sentence = each_sentence_template.format(
+                    keyword = each_keyword
+                )
+                
+                synonyms_hint: str = " ".join(each_sentence_keywords) + \
+                    "\n" + \
+                    "\n".join([
+                        general_template.english_synonyms_dictionary_url.format(word=each_keyword) 
+                        for each_keyword in each_sentence.split()
+                    ])
+                
+                full_template: str = general_template.format_translate_template(
+                    input_text=each_sentence,
+                    input_language=each_sentence_input_language,
+                    output_language=each_sentence_output_language,
+                    input_key_synonyms=synonyms_hint
+                )
+                
+                # print(model.get_load_config())
+                
+                print(f"Input sentence: {full_template}")
+                result = await model.respond_stream(
+                    full_template
+                )
+                # Stream the response
+                async for fragment in result:
+                    print(fragment.content, end="", flush=True)
+                print()
+                # Note that even for structured responses, the *fragment* contents are still only text
+                # Get the final structured result
+                result_result = result.result()
+                
+                print(f"Output result: {result_result}")
+                
+                current_output_data_path = output_data_base_path / model_path / each_sentence_summary / f"{each_keyword}.txt"
+                current_output_data_path.parent.mkdir(parents=True, exist_ok=True)
+                
+                real_result = extract_translate_with_comment_from_result(str(result))
+                
+                if real_result is None:
+                    print(f"No valid output found for sentence: {each_sentence}")
+                    continue
+                else:
+                    async with aiofiles.open(current_output_data_path, "w", encoding="utf-8") as f:
+                        await f.write(real_result)
+                
+        
+def extract_translate_with_comment_from_result(
+    result: str
+) -> Optional[str]:
+    # get all chinese characters in result
+    # remove all english characters, punctuation and numbers
+    chinese_characters = re.sub(r"[a-zA-Z0-9\<\>\[\]\(\)\{\}\s\n\r]", "", result)
+    return chinese_characters if chinese_characters else None
+        
+if __name__ == "__main__":
+    import asyncio
+    asyncio.run(generate_input(
+        model_path=qwen_path
+        
+    ))

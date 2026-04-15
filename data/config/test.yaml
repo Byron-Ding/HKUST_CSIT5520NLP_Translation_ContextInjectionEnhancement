@@ -31,15 +31,21 @@
 
 # 如何测试
 - sentence: "The meeting is {keyword} for the success of the project."
+  input_language: en
+  output_language: zh-CN
+  summary: 重要
   keywords:
+    - vital
     - important
     - significant
     - crucial
     - critical
-    - vital
     - essential
 
 - sentence: "I am {keyword} to hear the good news."
+  input_language: en
+  output_language: zh-CN
+  summary: 开心
   keywords:
     - happy
     - glad
@@ -53,6 +59,9 @@
 
 
 - sentence: "我对这件事很{keyword}"
+  input_language: zh-cn
+  output_language: en
+  summary: 烦
   keywords:
     # 闷闷地烦
     - 心烦
