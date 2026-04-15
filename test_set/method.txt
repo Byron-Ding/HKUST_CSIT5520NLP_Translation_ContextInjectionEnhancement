@@ -79,6 +79,13 @@ Result = Attention(Q, K, V)
        = softmax(XWqWk^TX^T / sqrt(d_k))XWv
 在训练好的模型里，通常相似的输入（比如语义接近的词）会让 Q 和 K 的点积更大，从而在 softmax 里得到更高的注意力权重。
 
+XWqWk^TX^T · XWv
+
+XQKX · XV
+
+X + Y = []
+X · Y 
+
 ∴ 要增强某个位置，需要与其他地方提高相似度
 
 于是，
@@ -101,10 +108,11 @@ Note: each "(comment)" |is> optional
 Note: Output and Comment |are> in Output-Language
 
 3. Compare the similar words of each words -> |point out> the key characteristic |of> each word
-4. Characteristic |based on> the original meaning evolute to the extension |of> each word;
+4. Characteristic |based on> the original meaning, the original meaning, the original meaning, the original meaning, , optional for evolute to the extension |of> each word;
     original meaning |is> important.
 5. |Annotate> the original meaning in the comment, which shown |as/in> the output language
 
+Ignore any un-visitable link, and continue the next link
 Input-Language-Section-Reference:
 https://www.collinsdictionary.com/dictionary/english-thesaurus/the
 https://www.collinsdictionary.com/dictionary/english-thesaurus/project
@@ -114,3 +122,66 @@ https://www.collinsdictionary.com/dictionary/english-thesaurus/vital
 output result
 
 
+
+
+
+
+
+
+------------------------------------------------------------------
+Input-Output-Task: Translate
+Input: "The meeting is critical for the success of the project."
+Input-language: en-us
+Output-language: zh-cn
+Output:
+
+------------------------------------------------------------------
+Rules:
+1. Allow optional comments, after Each word;
+    comments should |point out> the key characteristic |of> each word
+Output format:
+Note: each "(comment)" |is> optional
+    "The (comment) project (comment) is (comment)....." 
+Note: Output and Comment |are> in Output-Language
+
+
+
+
+
+critical, crucial, important, significant, vital, essential
+------------------------------------------------------------------
+Input-Output-Task: Translate
+Input: "The meeting is vital for the success of the project."
+Input-language: en-us
+Output-language: zh-cn
+Output:
+
+------------------------------------------------------------------
+Rules:
+1. Allow optional comments, after Each word;
+    comments should |point out> the key characteristic/original meaning |of> each word
+Output format:
+Note: each "(comment)" |is> optional
+    "The (comment) project (comment) is (comment)....." 
+Note: Output and Comment |are> in Output-Language
+3. Compare the similar words of each words -> |point out> the key characteristic |of> each word
+4. Characteristic |based on> the original meaning, the original meaning, the original meaning, the original meaning, , optional for evolute to the extension |of> each word;
+    original meaning |is> important.
+5. |Annotate> the original meaning in the comment, which shown |as/in> the output language
+
+
+
+
+
+
+
+
+
+
+另外的细分类任务
+
+
+终于；总算；最终；最后；
+做完；完成；结束；搞定；
+分析情感：
+他终于做完了作业

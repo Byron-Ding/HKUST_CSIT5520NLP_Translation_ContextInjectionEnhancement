@@ -43,15 +43,23 @@ output result
 '''
 import lmstudio as lms
 import pathlib
+import os
+import yaml
 
-lmstudio_root_path: pathlib.Path = pathlib.Path(r"F:/.lmstudio/lmstudio-community/")
+# # lmstudio_root_path: pathlib.Path = pathlib.Path(r"F:/.lmstudio/lmstudio-community/")
 
-meta_llama_path: str = r"meta-llama-3.1-8b-instruct"
-qwen_path: str = r"qwen/qwen3.5-9b"
+# meta_llama_path: str = r"meta-llama-3.1-8b-instruct"
+# qwen_path: str = r"qwen/qwen3.5-9b"
 
-model = lms.llm(
-    qwen_path,
-)
-result = model.respond(template)
+# model = lms.llm(
+#     qwen_path,
+# )
+# result = model.respond(template)
 
-print(result)
+# print(result)
+
+# set .. as the root path
+project_root_path: pathlib.Path = pathlib.Path(__file__).parent.parent
+
+# load data
+
