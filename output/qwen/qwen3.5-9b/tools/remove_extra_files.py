@@ -13,6 +13,6 @@ for folder in os.listdir(project_root_path):
     folder_path = os.path.join(project_root_path, folder)
     ls_files = os.listdir(folder_path)
     for file in ls_files:
-        if "_duplicate_reduced" in file:
+        if ".txt_" in file:
             file_path = os.path.join(folder_path, file)
             os.remove(file_path)

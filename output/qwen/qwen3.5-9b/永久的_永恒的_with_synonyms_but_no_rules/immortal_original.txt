@@ -1,0 +1,196 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Input sentence: "Nothing is immortal"
+    *   Input language: English (en)
+    *   Output language: Chinese (zh-CN)
+    *   Task: Translate
+    *   Context/Keywords provided: "permanent", "eternal", "everlasting", "perpetual", "timeless", "enduring", "immortal", plus links to Collins Dictionary thesaurus for "Nothing", "is", "immortal".
+
+2.  **Analyze the Sentence:**
+    *   "Nothing is immortal"
+    *   Meaning: Nothing exists forever / Nothing achieves immortality (in a physical or metaphysical sense). It could also be interpreted philosophically as "there is no eternal thing."
+    *   Literal translation: 万物皆非不朽 (All things are not immortal) or 没有任何事物是永生的 (Nothing is ever-living/permanent).
+    *   Common philosophical context: Often relates to the concept that all physical things decay/die, even if some entities claim divinity.
+
+3.  **Determine the Best Chinese Equivalent:**
+    *   "Nothing" can be translated as "没有什么东西" (nothing at all) or simply omitted in a universal statement using "万物" (all things) for emphasis, but keeping "Nothing" explicit is often clearer. "没有任何事物" (No thing exists).
+    *   "is" = "是".
+    *   "immortal":
+        *   Common translation: 不朽 (bùxiǔ), 永生 (yōngshēng).
+        *   "Immortal" implies not dying, existing forever.
+    *   Phrase construction:
+        *   Option 1 (Direct): 没有任何东西是不朽的。 (There is no thing that is immortal.)
+        *   Option 2 (Philosophical/Formal): 万物皆非不朽。 (All things are not immortal - similar to "Nothing is...")
+        *   Option 3 (Literal): 没有什么是不死的。
+    *   Considering the provided keywords ("permanent", "eternal", etc.), the focus is on the state of existence.
+    *   Standard translation for philosophical statements like this usually leans towards "没有任何事物是永生的/不朽的".
+    *   However, a very concise and poetic way often used in Chinese philosophy/religion is "万物皆非永生" or "世间万物皆非不朽".
+    *   But sticking close to the input structure: "Nothing" (没有什么) + "is" (是) + "immortal" (不朽的).
+    *   Refined: 没有任何事物是永恒的 / 不朽的。
+    *   Let's check the Collins links provided in the prompt context (though I cannot browse, I know their general usage). They define words. The prompt lists synonyms for immortal/eternal/etc. This suggests the translation should capture the "timeless/permanent" aspect of immortality.
+    *   "Immortal" in Chinese: 不朽 (bùxiǔ) is the most formal/literary equivalent, often used for ideas or fame ("name immortal"). For biological life, 永生 (yōngshēng) or 不死 (bùsǐ). "Nothing is immortal" usually refers to the concept of eternity. "不朽" fits well with the synonyms provided (permanent, eternal).
+    *   Let's go with a standard, clear translation.
+
+    *   Draft 1: 没有任何东西是不朽的。
+    *   Draft 2: 万物皆非永生。
+    *   Draft 3 (Slightly more philosophical): 世间万物皆无永恒。 (All things in the world have no eternity - changes meaning slightly).
+
+    *   Best balance of literal accuracy and naturalness: "没有任何事物是永生的/不朽的".
+    *   Wait, often "Nothing is immortal" is a translation of a Latin phrase or philosophical maxim.
+    *   Let's look at similar famous quotes. "Nothing is permanent except change." (无常). "Nothing is immortal." -> 万物皆逝？No.
+    *   Direct translation: 没有任何东西是不朽的。
+    *   Using the synonym context provided in the prompt title (permanent, eternal...), "不朽" or "永恒" works.
+    *   Let's choose "不朽" as it directly maps to "immortal".
+    *   Translation: 没有任何事物是不朽的。
+
+    *   Alternative concise version: 万物皆非不朽。 (A bit poetic).
+    *   Standard translation: 没有任何东西是永生的。
+
+    *   Let's check the nuances. "Nothing" implies no exception.
+    *   Selected translation: 没有任何事物是不朽的。 (No thing is immortal.)
+    *   Or simply: 世间万物皆非不朽。
+    *   Given the instruction is just "Translate", a direct but natural translation is best.
+    *   "Nothing" -> 没有什么 / 没有任何东西
+    *   "is" -> 是
+    *   "immortal" -> 不朽的 / 永生的
+
+    *   Final decision: "没有任何事物是不朽的。" or "世间万物皆非不朽。"
+    *   "没有任何事物是不朽的" is safer and accurate.
+    *   However, in philosophical contexts, "无常" (impermanence) is the Buddhist equivalent, but that's a cultural translation, not literal.
+    *   Let's stick to the direct meaning using the provided word list context (immortal/eternal).
+    *   "Nothing is immortal" -> 没有任何东西是永恒的 / 不朽的。
+    *   Let's use "不朽" as it matches "immortal" directly.
+
+    *   Wait, is there a more idiomatic way? "万物流逝"? No.
+    *   Let's provide the most standard translation.
+    *   Input: Nothing is immortal
+    *   Output: 没有任何事物是不朽的。
+
+    *   Re-evaluating based on potential poetic/literary tone often associated with these words.
+    *   Maybe "万物皆非永生" (All things are not eternal life).
+    *   Let's combine for clarity. "没有任何东西是永生的/不朽的".
+    *   I will choose "没有任何事物是不朽的。" as it is precise. Or perhaps "世间万物皆无永生".
+    *   Actually, a very common translation for this specific phrase in English-Chinese contexts (often found in philosophical texts) is "万物皆非不朽".
+    *   But to be safe and clear: "没有任何东西是不朽的。"
+
+    *   Wait, looking at the keywords list: permanent, eternal, everlasting... These suggest the definition.
+    *   If I translate "immortal" as "永恒的生命", it might be too long.
+    *   Let's go with "不朽".
+
+    *   Final check:
+    *   Input: Nothing is immortal
+    *   Output: 没有任何事物是不朽的。 (There is no thing that is immortal.)
+    *   Or more natural: 世间万物皆非不朽。
+    *   I will provide the straightforward one. "没有任何东西是永生不灭的" is also good but long.
+    *   Let's pick "没有任何事物是不朽的".
+
+    *   Wait, one more consideration. Is this a statement about death? Yes.
+    *   Translation: 没有任何事物是永生的。 (Nothing is ever-living.)
+    *   Or: 没有什么是不朽的。 (Nothing is immortal.) - This captures "Nothing" well.
+    *   Let's combine: 世间万物皆非不朽。 (A bit more elegant).
+    *   But "没有任何事物是不朽的" is more faithful to the structure.
+
+    *   Let's consider the prompt's provided links are just context for dictionary lookups, implying I should know the definitions.
+    *   Okay, I will output: 没有任何事物是不朽的。
+
+    *   Wait, looking at common translations of similar phrases online. "Nothing is eternal" -> 万物皆非永恒。
+    *   So "Nothing is immortal" -> 万物皆非不朽。
+    *   Let's use that structure, it sounds better in Chinese philosophical context.
+    *   Actually, "没有任何东西是不朽的" is the most standard literal translation.
+    *   Let's go with that.
+
+    *   Refining for naturalness: "世间万物皆非不朽" implies a slight generalization ("Worldly things"), whereas "Nothing" covers everything including abstract concepts? Usually in this context, it refers to life/existence.
+    *   Let's stick to the literal meaning which is safer.
+    *   "没有任何事物是不朽的。"
+
+    *   Wait, I can also use "永恒" (eternal) as per the synonym list provided in the prompt header ("permanent eternal everlasting perpetual timeless enduring immortal"). The word "immortal" specifically links to life/death usually, but "eternal" links to time.
+    *   If the input says "immortal", I should translate "immortal".
+    *   Translation: 没有任何事物是不朽的。
+
+4.  **Final Polish:**
+    *   Make it concise.
+    *   "没有任何东西是不朽的。"
+
+    *   Wait, checking if there is a specific famous quote. Nietzsche? "Nothing is immortal."
+    *   In Chinese translations of such philosophy, "万物皆非不朽" is often used.
+    *   Let's provide a translation that balances literalness and flow.
+    *   "世间万物皆非不朽。" sounds very good.
+    *   But "没有任何事物是不朽的" is safer as a direct translation task.
+    *   I'll choose the slightly more formal/standard one: "没有任何事物是不朽的。"
+
+    *   Wait, looking at the synonyms again. They are just labels for the word "immortal".
+    *   Okay, final decision: 没有任何事物是不朽的。 (No things are immortal.)
+
+    *   Let's check if "永恒" is better than "不朽". "Immortal" usually = 不死/永生。But in abstract sense = 不朽. Given the list includes "timeless", "eternal", "permanent", maybe "永恒" covers the meaning of the state better?
+    *   However, dictionary definition for "immortal": 永生的；不朽的.
+    *   So both work. "不朽" is more common for the concept of things not decaying (ideas) or gods. "永生" is biological.
+    *   "Nothing is immortal" usually implies nothing lasts forever.
+    *   Let's use "不朽" as it pairs with the philosophical tone.
+
+    *   Final choice: 没有任何事物是不朽的。
+
+5.  **Output Formatting:** Just the translation string.
+
+    Wait, I should check if there is a more idiomatic way to say "Nothing is immortal".
+    Maybe "万物皆无永生"?
+    Let's stick to the most accurate one.
+    "没有任何东西是永恒的/不朽的".
+    Let's use "不朽" for "immortal".
+    Output: 没有任何事物是不朽的。
+
+    Wait, one nuance: "Nothing" as a pronoun vs noun.
+    "Nothing (pronoun) is immortal." -> "没有什么...是不朽的".
+    "There is nothing that is immortal." -> "不存在不朽之物".
+    The sentence is Subject-Verb-Adjective structure. "Nothing is..."
+    Chinese: 没有任何事物是不朽的。
+
+    Okay, ready.
+
+    Wait, I can also provide a slightly more literary version if it fits the dictionary context better (thesaurus suggests synonyms for eternity).
+    Maybe: 世间万物皆非永恒。
+    But strictly translating "immortal": 不朽.
+    Let's combine for best quality: 没有任何事物是永恒的/不朽的。No, pick one.
+    I will pick "不朽".
+
+    Wait, is there a standard translation like "无常"? (Pun: Nothing is immortal = All is impermanent).
+    No, don't overinterpret. Translate the words.
+
+    Final check:
+    Input: Nothing is immortal
+    Translation: 没有任何事物是不朽的。
+
+    Wait, maybe simpler: 没有什么是不朽的。
+    This captures "Nothing" well (没有什么).
+    Let's go with "没有任何事物是不朽的。" for completeness.
+
+    Wait, looking at the keywords again: permanent, eternal, everlasting, perpetual, timeless, enduring. These are all synonyms.
+    If I use "永恒", it covers "eternal".
+    But the word is "immortal".
+    So "不朽" or "永生".
+    Given the list, maybe "永恒" is better because it fits the "timeless/permanent" theme?
+    But dictionary says immortal = 不朽/永生.
+    Let's use "不朽".
+
+    Okay, final output generation.
+
+    Wait, I see the prompt includes a lot of links and keywords at the top. It looks like context for the model to understand the vocabulary depth. The task is simple translation.
+    I will provide a high-quality translation.
+
+    Decision: 没有任何事物是不朽的。
+    Or maybe more natural: 世间万物皆非不朽。
+    I'll go with the literal but formal one: 没有任何事物是不朽的。
+
+    Wait, actually, "Nothing" often translates to "没有什么".
+    "没有什么是不朽的" is very natural.
+    Let's use that. It sounds less stiff than "没有任何事物".
+    "没有什么东西是永恒的/不朽的".
+    Let's combine: 世间万物皆非不朽。 (Sounds more like a saying).
+    But I'll stick to standard translation.
+
+    Re-thinking: "Nothing is immortal" implies a universal negative.
+    Chinese: "万物皆无永生" or "没有任何东西是不朽的".
+    I will provide: 没有任何事物是不朽的。
+</think>
+
+没有任何事物是不朽的。

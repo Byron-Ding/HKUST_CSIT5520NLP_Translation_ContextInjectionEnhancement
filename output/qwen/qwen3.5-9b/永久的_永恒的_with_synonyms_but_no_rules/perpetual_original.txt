@@ -1,0 +1,238 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Input text: "Nothing is perpetual"
+    *   Input language: English (en)
+    *   Output language: Chinese (zh-CN)
+    *   Task: Translate
+    *   Context/Hints: The user provided a list of words related to time/endurance (permanent, eternal, everlasting, perpetual, timeless, enduring, immortal) and links to Collins Dictionary thesaurus entries for "Nothing", "is", and "perpetual". This suggests I should pay attention to the nuances of these words, but primarily the task is translation.
+
+2.  **Analyze the Input Sentence:**
+    *   "Nothing" (Subject): 没有事物 / 没有任何东西.
+    *   "is" (Verb): 是 / 有.
+    *   "perpetual" (Adjective): 永恒的 / 持续的 / 不断的 / 持久的.
+
+3.  **Determine the Meaning:**
+    *   The sentence is a philosophical statement or a definition-like assertion about time or existence.
+    *   It means there is no state that lasts forever/continuously without end.
+    *   Key nuance: "Perpetual" often implies something unending, continuous, or lasting for ever.
+
+4.  **Draft Translations:**
+    *   Literal: 没有什么事物是永久的。 (Too colloquial)
+    *   Philosophical/Formal: 万物皆非永恒。 (Poetic)
+    *   Common: 没有东西是永恒的。 / 没有任何事物是永久持续的。
+
+5.  **Select the Best Fit for zh-CN:**
+    *   "Nothing is perpetual" implies that no state or thing lasts forever.
+    *   Option 1: 没有任何东西是永恒的。(Nothing is eternal/perpetual) - Very natural.
+    *   Option 2: 没有事物是持久的。 (Nothing is enduring/perpetual)
+    *   Option 3: 凡物非永恒。 (Poetic classical style)
+    *   Given the dictionary context provided (Collins), a standard translation is expected, but accuracy regarding "perpetual" is key. "Perpetual" usually translates to "永恒的", "持续的", or "不断的".
+    *   In this philosophical context ("Nothing is perpetual"), "nothing is eternal/lasting forever" is the core meaning.
+    *   Common English quote equivalent: "Nothing is permanent." -> "没有什么是一成不变的" (Nietzsche/Heraclitus vibe). But here it says "perpetual".
+    *   Let's stick close to the text.
+    *   "没有任何事物是持续的。" (A bit technical)
+    *   "没有什么是永恒持久的。"
+    *   Most direct: "没有什么东西是永恒的。" or "没有什么是永久的。"
+
+    However, considering the provided words list (permanent, eternal, everlasting, perpetual...), the user seems to be exploring synonyms for "perpetual". The most standard translation for "Nothing is perpetual" in a general context is "没有任何事物是永恒的" or "没有东西是永续的".
+
+    Let's refine: "Perpetual" often maps to "永久", "连续不断".
+    Sentence: "Nothing is perpetual."
+    Translation: "没有任何事物是永恒持续的。" or simply "没有什么是一成不变的/持久的".
+    But since it's a translation task, fidelity is key.
+    "Nothing" = 没有东西 / 任何事物都不。
+    "Perpetual" = 永恒的 / 连续的 / 永久的.
+
+    Selection: "没有任何东西是永恒的。" (Captures the essence well).
+    Or slightly more formal: "没有任何事物是持久的。"
+    Let's choose a balanced, natural Chinese expression that captures "perpetual".
+    "没有什么是永恒持续的。"
+    Actually, often "perpetual" in this context is synonymous with "eternal" or "permanent".
+    Common translation: "没有任何东西是永续的。" (Perpetual -> 永续的).
+    But "永恒的" is more common for philosophical statements.
+
+    Let's look at the provided links/themsaurus words again. They are about time/endurance.
+    "Nothing" -> 没有事物 / 万物皆无 (maybe too poetic).
+    "Is" -> 是.
+    "Perpetual" -> 永恒的/持久的/不断的.
+
+    Best translation: "没有任何东西是永恒的。" or "没有什么是永久的。"
+    Let's go with a natural, standard phrasing.
+    "没有任何事物是永恒的。" (Nothing is eternal/perpetual).
+    Or closer to the exact adjectival use: "没有任何东西是持续的。"
+    Given the list of synonyms includes "eternal" and "everlasting", "永恒的" fits best for general comprehension.
+    However, "perpetual" specifically can mean "continuous".
+    If I say "Nothing is perpetual", it usually means "No thing exists forever".
+    Translation: "没有任何事物是永恒存在的。" (Adding 'exists' makes it clear).
+    But keeping it simple: "没有东西是永恒的。"
+
+    Let's check if there is a specific idiom. Not really.
+    I will provide a direct and natural translation.
+    "没有任何事物是永续的。" or "没有什么是一成不变的/永恒持久的".
+    Actually, looking at similar contexts (Sagan, philosophy), "Nothing is permanent" is common. "Nothing is perpetual" is less common but means similar.
+    Let's use: "没有任何东西是永恒的。"
+
+    Wait, I should check if there's a specific nuance intended by the list of words provided at the start. The user pasted synonyms for time-related concepts. They probably want an accurate translation that reflects the concept of "perpetual" (continuing without interruption).
+    "没有任何事物是永无止境的。"
+    "没有什么东西是持续不断的。"
+    "没有什么是永恒的。"
+
+    Let's settle on: "没有任何事物是永恒的。" (It sounds most natural for this sentence structure in Chinese).
+    Alternatively: "没有什么是持久的。"
+    Let's combine the nuance of "perpetual".
+    "没有任何东西是永续的。"
+    
+    Decision: "没有任何东西是永恒的。" is the safest and most understood equivalent in a general context. However, to be precise with "perpetual" (which implies continuous), maybe "没有任何事物是持续不断的。" But that sounds clunky.
+    Let's go with: "没有任何东西是永恒的。"
+    Wait, one more check: "Nothing is perpetual" could be a philosophical axiom.
+    Translation: "万物皆非永恒。" (Poetic)
+    Translation: "没有任何事物是永续的。"
+    
+    Let's provide the most standard translation.
+    Input: Nothing is perpetual
+    Output: 没有任何东西是永恒的。
+
+    Wait, looking at the synonyms list again... permanent, eternal, everlasting, perpetual...
+    These all roughly mean "forever".
+    So "Nothing is forever" -> "没有东西是永远的".
+    Let's use "没有任何事物是永恒的。"
+
+6.  **Final Polish:**
+    Make sure it sounds natural in zh-CN.
+    "没有任何东西是永续的。" (Perpetual = 永续).
+    "没有什么是永恒的。"
+    I will choose: "没有任何事物是永恒的。" (Nothing is eternal/perpetual).
+    Or slightly more literal to the adjective: "没有任何事物是持续的。"
+    Given the word list highlights "eternal" and "everlasting", the core meaning here is duration.
+    Let's use: "没有任何东西是永恒的。"
+
+    Wait, I see the prompt format: Input-Output-Task... Output:
+    So I just need to output the translation.
+
+    Refining based on "perpetual":
+    Collins defines perpetual as: 1. continuing for a long or indefinite period of time without stopping; lasting forever; enduring.
+    So "lasting forever" -> "永恒".
+    Translation: "没有任何东西是永恒的。"
+
+    Wait, is there a chance this is a quote? "Nothing is perpetual." - Less common than "Nothing is permanent".
+    I'll stick to standard translation.
+    "没有任何事物是持久的。" (Nothing is enduring).
+    "没有任何东西是永续的。" (Nothing is perpetual/continuous forever).
+
+    Let's pick the most idiomatic one that conveys the meaning of the synonyms provided.
+    "没有任何事物是永恒的。"
+
+    Wait, I can also translate it as: "没有什么是永久的。"
+    Let's go with "没有任何东西是永恒的。"
+
+    Actually, considering the word list includes "timeless", "enduring", etc.
+    Maybe: "没有任何事物是永恒持续的。"
+    But shorter is better.
+    "没有任何东西是永续的。" (Zh-CN specific for 'perpetual').
+    "没有什么是永恒的。"
+
+    Okay, I will output: 没有任何东西是永恒的。
+    Wait, "Nothing is perpetual" often appears in logical contexts or philosophical ones.
+    Let's try to match the tone.
+    Input: Nothing is perpetual
+    Output: 没有任何事物是永续的。 (A bit technical)
+    Output: 没有什么是一成不变的。(Meaning changes, not quite)
+    Output: 没有什么是永恒的。 (Most natural).
+
+    Let's finalize on "没有任何东西是永恒的。" or "没有任何事物是永恒的".
+    "Thing" vs "Nothing". "Nothing" covers things/people.
+    "没有任何事物是永恒的。" sounds slightly more formal and fits the synonym list context.
+
+    One more consideration: The user provided dictionary links for Nothing, is, perpetual. They want me to use that knowledge? Maybe not explicitly, but ensure accuracy.
+    Collins definition of perpetual: lasting forever / unending.
+    So "永恒" (eternal/forever) or "连续不断" (continuous). In this context, it means unending time.
+    So "没有任何事物是永恒的。" is best.
+
+    Wait, looking at the provided words again... "permanent eternal everlasting perpetual timeless enduring immortal".
+    They are all about duration/timelessness.
+    Translation should reflect that aspect.
+    "没有任何事物是永恒的。" covers this perfectly.
+
+    Final check:
+    Input: Nothing is perpetual
+    Output: 没有任何事物是永恒的。
+
+    Wait, one nuance: "Perpetual" can mean "never ceasing". "Everything changes, nothing stays perpetual."
+    So "没有什么是永久持续的。"
+    Let's go with the most concise natural Chinese.
+    "没有任何东西是永恒的。"
+
+    Wait, I should check if there is a more literal translation preferred for translation tasks.
+    "Nothing" -> 没有任何事物
+    "is" -> 是
+    "perpetual" -> 永续的 / 永恒持续的
+    Combined: "没有任何事物是永续的。" or "没有任何事物是永恒的。"
+    I think "永恒" captures the synonym list better than "永续".
+
+    Okay, final decision: "没有任何东西是永恒的。" (Slightly more colloquial) or "没有任何事物是永恒的。" (More formal/philosophical). Given the word list is formal/philosophical synonyms, "事物" fits well.
+    Actually, just "没有任何东西是永恒的" is very common.
+    Let's write: 没有任何东西是永恒的。
+
+    Wait, looking at the prompt structure again.
+    Input-Output-Task...
+    Output: [My translation]
+
+    Okay.
+
+    Wait, I can also interpret "Nothing is perpetual" as "There is no perpetual thing".
+    "没有永恒之物存在。" (Existential)
+    But literal structure is preferred.
+    "没有任何事物是永恒的。"
+
+    Let's stick with: 没有任何东西是永恒的。 (Simple and accurate).
+    Actually, I'll use "事物" to match the formal tone of the dictionary lookup context.
+    "没有任何事物是永恒的。"
+
+    Wait, one more thing. The prompt includes a list of words at the very top, but they are not part of the sentence. They are context.
+    The task is strictly translation.
+    Okay.
+
+    Let's consider if "perpetual" in Chinese could be "周而复始的"? No, that's periodic.
+    "永久的".
+    "不间断的".
+    "永恒的".
+
+    I will use: 没有任何事物是永恒的。
+
+    Re-evaluating based on common usage. "Nothing is permanent" -> "没有什么是一成不变的" (Philosophical).
+    But "perpetual" -> "永恒" or "持续".
+    "没有任何东西是持续的。" sounds a bit like "nothing is ongoing".
+    "没有任何东西是永恒的。" is the standard equivalent for this type of statement.
+
+    Okay, ready to output.
+
+    Wait, I should check if there's any hidden instruction in the prompt text provided by the user (the dictionary links). It seems they want me to know the definitions.
+    The sentence "Nothing is perpetual" implies change/impermanence.
+    Chinese equivalent: "万物皆流，无物常驻". But that's too much adaptation.
+    Direct translation: "没有任何事物是永恒的。"
+
+    Okay, final choice.
+    "没有任何事物是永恒的。"
+
+    Wait, maybe "没有什么是永续的。" is closer to the specific word "perpetual".
+    But "永恒" is the core meaning in this list (eternal, everlasting).
+    I will use "永恒".
+
+    Let's write: 没有任何事物是永恒的。
+    Or slightly more smooth: 没有什么东西是永恒的。
+    I'll go with "没有任何事物是永恒的。" to match the formality.
+
+    Wait, checking again. "Nothing" can be "万物皆无"? No.
+    "没有任何东西".
+    Okay.
+
+    Final check on constraints:
+    Input-language: en
+    Output-language: zh-CN
+    Task: Translate
+
+    Output: 没有任何事物是永恒的。
+</think>
+
+没有任何事物是永恒的。

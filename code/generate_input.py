@@ -5,12 +5,13 @@ import yaml
 import regex
 from typing import Optional
 import aiofiles
+import sys
 
 # set the root path and chdir to the root path
-project_root_path: pathlib.Path = pathlib.Path(__file__).parent.parent
-os.chdir(project_root_path)
+project_root = pathlib.Path(__file__).parent.parent
+sys.path.append(str(project_root))
 
-import data.dataclass.template.general_translate as general_translate_module
+from data.dataclass.template import general_translate as general_translate_module
 
 # regex.DOTALL with \n
 result_format_regex: regex.Pattern[str] = regex.compile(r"<output>(.*?)</output>", regex.DOTALL)
@@ -139,7 +140,7 @@ async def generate_input(
                 result = await model.respond_stream(
                     full_template
                 )
-                
+                print(f"[Debug] File path for original output: {current_output_original_data_path}")
                 with open(current_output_original_data_path, "w", encoding="utf-8") as f:
                     # Stream the response
                     async for fragment in result:

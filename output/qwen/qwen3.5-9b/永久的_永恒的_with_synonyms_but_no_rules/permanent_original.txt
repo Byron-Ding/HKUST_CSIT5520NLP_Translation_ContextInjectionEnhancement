@@ -1,0 +1,181 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Input text: "Nothing is permanent"
+    *   Input language: English (en)
+    *   Output language: Chinese (zh-CN)
+    *   Task: Translate.
+    *   Provided context/links: The user provided a list of synonyms for "permanent" (eternal, everlasting, perpetual, timeless, enduring, immortal) and links to Collins Dictionary thesaurus entries for "Nothing", "is", and "permanent". This suggests a focus on the nuances of the word "permanent," but the task is simply translation.
+    *   Output format: Just the translation string (based on typical completion behavior), or possibly including a brief explanation if implied, but usually "Output:" implies just the result.
+
+2.  **Analyze the Input Sentence:**
+    *   "Nothing is permanent"
+    *   Meaning: Nothing lasts forever; all things change eventually.
+    *   Key word: "permanent" (lasting for an indefinitely long time). The synonyms provided (eternal, everlasting, etc.) reinforce the concept of duration.
+
+3.  **Determine the Translation:**
+    *   Standard translation: "没有什么是一成不变的" or "没有什么是永恒的" or "万物皆流，无物常驻".
+    *   Common idiomatic translations for this specific phrase (often associated with Heraclitus or general philosophical thought):
+        *   "没有什么是永恒的" (Nothing is eternal) - matches "everlasting/permanent".
+        *   "没有什么是一成不变的" (Nothing is unchangeable/constant) - captures the essence of impermanence better in Chinese cultural context, though "permanent" maps closer to "永恒".
+        *   "万物无常" (All things are impermanent) - Buddhist influence.
+    *   Given the synonyms provided (eternal, everlasting, etc.), the translation should reflect the concept of timelessness/lastingness.
+    *   Most direct and natural translation: "没有什么是永恒的" or simply "没有什么是一成不变的".
+    *   Let's check Collins Dictionary for "permanent": /ˈpɜːmənənt/ adjective - lasting over a long period; not temporary. Synonyms: enduring, lasting.
+    *   Chinese equivalent: 永恒 (eternal/permanent), 持久 (lasting).
+    *   Sentence structure: Nothing (没有什么) + is (是) + permanent (永恒的/长久的).
+    *   Option 1: 没有什么是永恒的。 (Direct)
+    *   Option 2: 没有什么是一成不变的。 (Idiomatic, implies change)
+    *   Option 3: 万事皆无常。 (More philosophical)
+
+    Considering the provided synonyms (eternal, everlasting, etc.), "永恒" (eternal/permanent) is the closest semantic match for the list provided. However, in common usage regarding "Nothing is permanent", "没有什么是永恒的" is a very strong candidate. Another very common translation for this specific aphorism is "没有什么是一成不变的".
+    Let's look at the synonyms again: eternal, everlasting, perpetual, timeless, enduring, immortal. These all point towards "永恒" (eternal) or "长久" (lasting).
+    If I use "永恒", it covers "eternal/permanent/timeless".
+    If I use "一成不变", it covers the concept of change vs permanence but is more idiomatic.
+
+    Let's stick to a faithful translation that captures the meaning of "permanent" as per the synonym context provided (focusing on timelessness/endurance).
+    Translation: 没有什么是永恒的。
+
+    Wait, I should check if there are specific nuances expected based on the links. The links are just thesaurus entries. They don't change the translation task itself, they just highlight that "permanent" has many synonyms. The user probably wants to see how "Nothing is permanent" translates given the semantic field of "permanent".
+
+    Most standard Chinese translation for "Nothing is permanent":
+    没有什么是永恒的。
+    (Alternatively: 万物皆非永恒。)
+    (Or: 没有什么能长久。)
+
+    Let's go with the most common and accurate one.
+    "没有什么是永恒的" fits best with "eternal, everlasting".
+    "没有什么是一成不变的" is also very good but focuses on change.
+    Given the synonyms emphasize time duration ("everlasting", "eternal"), "永恒" is appropriate.
+
+    Refined choice: 没有什么是永恒的。
+
+4.  **Final Verification:**
+    *   Input: Nothing is permanent
+    *   Output: 没有什么是永恒的
+    *   Does it match zh-CN? Yes.
+    *   Is it natural? Yes.
+
+5.  **Drafting the Output:**
+    *   Just the translation string as per "Output:" in the prompt structure.
+
+    *Wait, looking at the prompt structure:*
+    Input-Output-Task: Translate
+    Input: Nothing is permanent
+    Input-language: en
+    Output-language: zh-CN
+    Output:
+
+    I need to provide the text that goes after "Output: ".
+
+    Decision: "没有什么是永恒的" (Nothing is eternal/permanent). This aligns well with the provided synonyms like 'eternal' and 'everlasting'. Another very common version is "没有什么是一成不变的". Both are correct. "永恒" directly maps to 'eternal' which is in the synonym list. I will use that.
+
+    Actually, "没有什么是一成不变的" is slightly more idiomatic for the general concept of impermanence, but "没有什么是永恒的" is a literal translation of "Nothing is [permanent/eternal]". Given the synonyms include 'eternal', I'll prioritize accuracy to the adjective provided in the input.
+
+    Let's consider if "不朽" (immortal) or "持久" (enduring) fits better. "Immortal" usually refers to life, "Enduring" implies lasting over time. "永恒" is the best match for the state of being permanent in time.
+
+    Final choice: 没有什么是永恒的。
+
+    Wait, one more consideration: Is there a specific context? No.
+    Is there a preference for brevity? Yes.
+    "万事无常" is too Buddhist-specific unless context implies it.
+    "没有什么是一成不变的" captures the *feeling* of impermanence well in Chinese.
+    However, strict translation: 没有什么是永恒的。
+
+    Let's provide the most natural one that respects the synonyms provided (eternal/everlasting).
+    Output: 没有什么是永恒的
+
+    Or maybe "没有什么能永恒存在" (Nothing can exist eternally) - a bit longer.
+    "没有什么是长久的" (Nothing is lasting) - simpler.
+    "没有什么是永恒的" (Nothing is eternal) - best fit with synonyms.
+
+    Let's finalize on: 没有什么是永恒的。
+
+    Wait, I see the links. Maybe the user wants to see the translation that acknowledges these synonyms? No, it's a standard translation task. The links are likely training data or context hints showing semantic relationships.
+
+    Okay, I will output the translation.
+
+    One more check: "Nothing" in Chinese can be translated as "没有什么" (nothing/there is nothing) or "万事万物皆无". "Nothing is permanent" -> "没有什么是永恒的".
+    Another option: "无物常驻" (Nothing stays). But that's poetic.
+    Let's stick to the modern standard: 没有什么是永恒的。
+
+    Wait, looking at similar tasks online or common datasets (like WMT), "Nothing is permanent" is often translated as "没有什么是永恒的".
+
+    Okay, ready.
+
+    Wait, I should check if the user expects me to list the synonyms too? The prompt says "Input-Output-Task: Translate". So just the translation.
+
+    Final decision: 没有什么是永恒的。
+    (Self-correction: Sometimes "没有什么是一成不变的" is preferred because "permanent" in this context implies "unchanging", but given the synonym list explicitly has "eternal/everlasting", I will stick with "永恒".)
+
+    Actually, looking at the provided synonyms: eternal, everlasting, perpetual, timeless, enduring, immortal.
+    "永恒" covers eternal, everlasting, timeless.
+    So "没有什么是永恒的" is the most lexically consistent translation with the provided context.
+
+    Wait, one nuance: In English, "Nothing is permanent" implies "Nothing lasts". In Chinese, "没有什么是永恒的" sounds a bit philosophical/stating fact. "没有什么是一成不变的" sounds like advice/observation.
+    But since I have to translate based on the input text, literal accuracy with synonyms suggests "永恒".
+
+    Okay, outputting: 没有什么是永恒的。
+    Wait, punctuation? The input sentence doesn't have a period explicitly shown as part of the text string, but sentences usually end with punctuation. I will add it for completeness or leave it off if strictly following the string. Usually translation includes punctuation. I'll add a period. Or just the phrase.
+    Input: Nothing is permanent (No period at end in input).
+    Output: 没有什么是永恒的 (Or with period). I'll include the period as it's a complete sentence.
+    Actually, looking at the input "Nothing is permanent", no period.
+    But standard translation usually normalizes punctuation. I will add it for grammatical correctness in Chinese.
+
+    Wait, I'll provide: 没有什么是永恒的
+    (Without period to match input exactly? No, Chinese sentences look incomplete without punctuation if intended as a full statement). I'll add the period.
+
+    Re-evaluating based on common idiomatic usage. "没有什么是永恒的" is very common.
+    Let's go with that.
+
+    Wait, I need to make sure I don't output markdown code blocks unless necessary. Just the text.
+    The prompt ends with "Output: ", so I just continue the text.
+
+    Wait, one detail from the prompt structure:
+    Input-Output-Task: Translate
+    ...
+    Output:
+
+    So I should just provide the translation string.
+
+    Let's pick: 没有什么是永恒的。
+    Or: 没有什么是一成不变的。
+    Given the synonyms provided (eternal, everlasting), "永恒" is the direct cognate.
+    So: 没有什么是永恒的。
+
+    Wait, I notice the input has no period. I will output without period to be safe, or with?
+    Usually, translators normalize. But strict mapping...
+    Let's add the period because it's a full sentence.
+    Actually, checking similar examples, often punctuation is preserved or added if needed for grammar. "Nothing is permanent" -> "没有什么是永恒的。"
+
+    Okay, I will output: 没有什么是永恒的
+    (I'll omit the period to match input style strictly? No, Chinese sentences usually have punctuation).
+    Let's add it. It looks better.
+
+    Wait, looking at the synonyms again. "Immortal" is also there. "永恒" covers immortal in a temporal sense.
+    Okay, final choice: 没有什么是永恒的。
+
+    One more thought: Is there a more poetic version? "万物皆流". No, that's changing the meaning too much.
+    Okay, sticking to "没有什么是永恒的".
+
+    Wait, I'll check if I should output the synonyms analysis. No, task is Translate.
+    So just the translation.
+
+    Final check:
+    Input: Nothing is permanent
+    Output: 没有什么是永恒的。
+
+    Wait, I should check if the prompt implies a multi-turn or just completion. It looks like a completion task.
+    I will provide the translation directly.
+
+    One nuance: "Nothing" can be "万物". "没有什么" is better for the general concept of "nothing".
+    Okay.
+
+    Let's consider if "没有什么是长久" (Nothing is long-lasting). "永恒" matches "eternal/everlasting/timeless" better than "长久".
+    So "永恒" is best.
+
+    Final Output: 没有什么是永恒的。
+    (I will include the period for standard Chinese sentence structure).
+</think>
+
+没有什么是永恒的。

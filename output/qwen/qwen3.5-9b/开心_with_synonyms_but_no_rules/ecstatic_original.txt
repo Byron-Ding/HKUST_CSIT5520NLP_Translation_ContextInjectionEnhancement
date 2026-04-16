@@ -1,0 +1,171 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Input sentence: "I am ecstatic to hear the good news."
+    *   Source language: English (en)
+    *   Target language: Chinese (zh-CN)
+    *   Context: The user provided a list of words related to positive emotions (happy, glad, joyful, delighted, pleased, content, satisfied, cheerful, ecstatic) and several URLs from Collins Dictionary thesaurus. This suggests the task might be about synonyms or nuances, but the specific instruction is "Translate".
+    *   Task: Translate the input sentence into Chinese.
+
+2.  **Analyze the Input Sentence:**
+    *   "I am ecstatic": Subject + Copula + Adjective (very strong happiness/excitement).
+    *   "to hear": Infinitive phrase indicating the cause/reason.
+    *   "the good news": Object (information received that is positive).
+
+3.  **Determine the Meaning:**
+    *   The speaker is extremely happy/excited about receiving good news.
+    *   "Ecstatic" implies a high level of joy, stronger than just "happy" or "glad". It often translates to words like 欣喜若狂 (xīn xǐ ruò kuáng), 激动不已 (jī dòng bù yǐ), or simply expressing extreme delight.
+
+4.  **Draft Translations:**
+    *   Literal: 我很兴奋听到这个好消息。(I am excited to hear this good news.) - "Ecstatic" is stronger than just "兴奋".
+    *   Stronger emotion: 我听到这个好消息欣喜若狂。(I am ecstatic about hearing this good news.)
+    *   Natural Chinese expression: 一听到这个好消息我就高兴极了。(I was very happy as soon as I heard the good news.)
+    *   Idiomatic for "ecstatic": 我太激动了/太开心了，得知了这个好消息。(I'm so excited/happy knowing this good news.)
+
+5.  **Select the Best Translation:**
+    *   To convey "ecstatic", idioms like 欣喜若狂 are excellent, but sometimes in conversational contexts, 非常高兴 (very happy) or 激动不已 (extremely moved/excited) works well.
+    *   "I am ecstatic to hear..." structure often maps to "听到...我..." (Upon hearing..., I...).
+    *   Option 1: 得知这个好消息时，我欣喜若狂。 (When I learned this good news, I was ecstatic.)
+    *   Option 2: 一听到这个消息，我就高兴得不得了。 (Colloquial)
+    *   Option 3: 听到这个好消息，我激动极了。
+
+    Let's aim for a standard, accurate translation that captures the intensity of "ecstatic".
+    "欣喜若狂" is the classic equivalent to ecstatic in Chinese.
+    However, a natural sentence structure might be: "收到这个好消息时，我非常高兴/欣喜若狂。" Or simply "一听到这个好消息，我就欣喜若狂。"
+
+    Let's refine based on common usage for "ecstatic":
+    1.  **Standard:** 我听到这个好消息欣喜若狂。 (A bit literal but accurate).
+    2.  **Natural:** 得知这个好消息，我高兴极了。 (Very happy).
+    3.  **Emphasizing 'ecstatic':** 我听说这个好消息简直太兴奋了 / 欣喜欲狂。
+
+    Let's choose a balanced, natural translation that captures the intensity.
+    "I am ecstatic to hear the good news." -> "得知这个消息时，我欣喜若狂。" or "一听到这个好消息，我就高兴极了。"
+    Actually, "欣喜若狂" is often used for "ecstatic".
+    Another common way: "收到这个好消息，我激动不已。"
+
+    Let's go with a clear, slightly formal but accurate translation.
+    "一听到这个好消息，我就欣喜若狂。" (Upon hearing the good news, I was ecstatic.)
+    Or closer to the original structure: "听到这个好消息，我高兴极了。" (But this loses the 'ecstatic' nuance).
+    To match 'ecstatic': "得知这个好消息，我真是欣喜若狂。"
+
+    Let's check the provided vocabulary list. It includes "ecstatic". The user wants to translate using that sentiment.
+    Translation: 得知这个消息时，我欣喜若狂。 (Upon hearing this news, I was ecstatic.)
+    Or simpler: 一听到这个好消息，我就高兴极了。
+
+    Let's pick a standard translation often found in dictionaries for "ecstatic".
+    Collins Dictionary translates "ecstatic" to "欣喜若狂的".
+    So: "听到这个好消息，我欣喜若狂。"
+
+6.  **Final Polish:**
+    Input: I am ecstatic to hear the good news.
+    Output: 一听到这个好消息，我就欣喜若狂。 (Upon hearing this good news, I was ecstatic.)
+    Or: 得知这个好消息，我激动不已。
+    Let's stick to a direct and natural translation.
+    "收到这个好消息，我欣喜若狂。"
+
+    Wait, looking at the list of words provided at the top (happy glad joyful delighted pleased content satisfied cheerful ecstatic), it seems like context for synonyms, but the instruction is just "Translate".
+    So I need to output the translation.
+
+    Proposed Translation: 一听到这个好消息，我就欣喜若狂。
+    Alternative: 得知这个好消息，我高兴极了。（"Ecstatic" is stronger than just "very happy", so "欣喜若狂" or "激动不已" is better).
+    Let's use "欣喜若狂" to capture the degree.
+
+    Refined: 一听到这个好消息，我就欣喜若狂。
+
+7.  **Format Output:**
+    The user provided a template: Input-Output-Task... Output:. I need to complete it or just provide the translation?
+    Looking at the prompt structure:
+    "Input: ...
+    Output-language: ...
+    Output:"
+    It expects me to fill in the "Output:" part.
+
+    So I will output just the Chinese text.
+
+    Wait, checking if there are specific constraints. No explicit length constraints.
+    Let's provide a natural sentence.
+    "一听到这个好消息，我就高兴得不得了。" (A bit colloquial).
+    "得知这个消息时，我欣喜若狂。" (More formal/accurate to 'ecstatic').
+
+    Let's go with: 一听到这个好消息，我就欣喜若狂。
+
+    Wait, I should check if the user wants me to use the provided vocabulary list? The prompt starts with a list of synonyms and URLs. This looks like few-shot prompting or context setting for a translation task involving these specific words. However, the instruction at the bottom says "Translate".
+    If I strictly translate "I am ecstatic...", using "ecstatic" (欣喜若狂).
+    If I consider the vocabulary list, maybe they want me to show equivalents? No, the instruction is "Translate". The vocabulary list might be context for word choice or a distraction. Given the explicit instruction "Translate", I should focus on translating the sentence accurately.
+
+    Final decision: 一听到这个好消息，我就欣喜若狂。 (Matches the intensity of "ecstatic").
+    Or simpler: 得知这个消息，我高兴极了。
+    Let's aim for standard translation quality.
+    "听到这个好消息，我感到无比激动/欣喜若狂。"
+    Let's use "欣喜若狂".
+
+    Wait, one more check: Is there a specific constraint about the URLs? They are Collins Thesaurus links. Probably irrelevant for the actual translation task other than context that these are synonyms.
+    Okay, simple translation.
+
+    "一听到这个好消息，我就欣喜若狂。"
+
+    Let's try to make it slightly smoother.
+    "得知这个好消息时，我欣喜若狂。"
+    Or: "收到这个好消息，我高兴极了。" (Less intense).
+    "ecstatic" = 欣喜若狂 / 大喜过望 (too specific) / 激动不已.
+    Let's use "欣喜若狂".
+
+    Final Output String: 一听到这个好消息，我就欣喜若狂。
+
+    Wait, looking at the prompt again. It ends with "Output:". I should just provide the translation text.
+
+    Let's consider if a more natural Chinese idiom is better.
+    "I am ecstatic to hear the good news." -> "得知这个消息，我简直高兴死了！" (Colloquial)
+    "得知这个好消息，我欣喜若狂。" (Written/Standard).
+    Since it's a dictionary context, standard language is safer.
+
+    Let's finalize: 一听到这个好消息，我就欣喜若狂。
+
+    Wait, I should check if I need to output the URL links or something? No, just the translation.
+    The prompt structure shows "Output:" at the very end. I will provide the translation text.
+
+    Wait, looking at the input block again:
+    Input-Output-Task: Translate
+    Input: I am ecstatic to hear the good news.
+    Input-language: en
+    Output-language: zh-CN
+    Output:
+
+    I need to complete the "Output:" line.
+
+    Translation: 一听到这个好消息，我就欣喜若狂。
+    Or: 得知这个消息时，我高兴极了。(Maybe too weak).
+    Let's stick with "欣喜若狂" for "ecstatic".
+
+    Wait, one more consideration: Sometimes "ecstatic" is translated as "激动的" (excited) in some contexts. But "欣喜若狂" is the direct synonym for ecstatic joy.
+    So: 一听到这个好消息，我就欣喜若狂。
+
+    Let's check character count or style. No specific constraint.
+    I will provide a natural, accurate translation.
+
+    Translation: 一听到这个好消息，我就欣喜若狂。
+
+    Wait, is there any chance the user wants me to output the list of synonyms provided at the beginning? No, the task is "Translate". The text before looks like training data or context for an API call (like few-shot examples), but it's a single prompt.
+    Okay, just translate.
+
+    Final check:
+    Input: I am ecstatic to hear the good news.
+    Translation: 一听到这个好消息，我就欣喜若狂。
+
+    Maybe "得知" (learned/knew) fits better than "hear" literally? "Hear" implies receiving info. "收到...消息" or "得知". "I am ecstatic to hear" -> "听到...时我..."
+    "I am ecstatic to hear the good news." -> "得知这个好消息时，我欣喜若狂。"
+    This sounds slightly more formal/accurate for a translation task.
+
+    Let's go with: 一听到这个好消息，我就欣喜若狂。 (It keeps the "hear" aspect).
+
+    Actually, looking at similar translations online:
+    "I am ecstatic to hear the news." -> "听说这个消息时，我激动极了。"
+    Let's use "激动不已" or "欣喜若狂". "Ecstatic" is stronger. "欣喜若狂".
+    Okay.
+
+    One more thing: The prompt includes URLs. They might be part of a few-shot pattern where the model is expected to learn from them, but here they are just text provided in the prompt context. I should ignore them for the translation itself unless asked to explain. The task is just "Translate".
+
+    Final choice: 一听到这个好消息，我就欣喜若狂。
+</think>
+
+一听到这个好消息，我就欣喜若狂。

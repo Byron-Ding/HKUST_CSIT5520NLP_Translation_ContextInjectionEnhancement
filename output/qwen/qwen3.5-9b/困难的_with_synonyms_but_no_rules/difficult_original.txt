@@ -1,0 +1,155 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Input sentence: "The task is difficult"
+    *   Input language: English (en)
+    *   Output language: Chinese (zh-CN)
+    *   Context/Tags: The user provides a list of synonyms for "difficult/hard/challenging/tough/demanding/arduous/strenuous" and links to Collins Dictionary thesaurus pages. This suggests the goal is to translate the sentence, potentially exploring nuances of these synonyms, but the immediate instruction is simply "Translate".
+    *   Output format: Just the translation (based on the "Output:" label).
+
+2.  **Analyze the Input Sentence:**
+    *   "The task is difficult"
+    *   Meaning: The work or assignment requires significant effort, skill, or time; it's not easy.
+    *   Key word: "difficult". The provided list includes synonyms like hard, challenging, tough, demanding, arduous, strenuous. While the prompt shows these words, the input sentence specifically uses "difficult". I should translate the sentence accurately.
+
+3.  **Determine the Translation:**
+    *   Literal translation: 任务 (task) 是 (is) 困难的 (difficult).
+    *   Common Chinese expressions for this concept:
+        *   这个任务很困难。 (Zhège rènwù hěn kùnnán.)
+        *   这项任务很有挑战性。 (Zhè xiàng rènwù hěn yǒu tiáozhìxìng。) - More specific to "challenging".
+        *   这个任务很难。 (Zhège rènwù hěn nán.) - Colloquial.
+    *   Standard formal translation: "这项任务很困难" or simply "任务很困难".
+    *   Considering the provided synonyms in the prompt context (difficult, hard, challenging...), the most direct and natural translation for "difficult" is "困难".
+
+4.  **Refine the Translation:**
+    *   Input: "The task is difficult"
+    *   Output: "这项任务很困难。" or "这个任务很难。"
+    *   Since this looks like a simple NLP translation task, I should provide a standard, natural-sounding Chinese sentence.
+    *   Option 1: 任务很困难。 (Neutral)
+    *   Option 2: 这项任务具有挑战性。 (If implying "challenging")
+    *   Option 3: 这个任务很难。 (Casual)
+    *   Best standard translation: "这项任务很困难。" or "任务很困难。" Let's go with a complete sentence structure.
+
+5.  **Check Constraints:**
+    *   The prompt ends with "Output:". I need to complete that line.
+    *   The prompt includes synonym links, which might suggest testing translation variations, but the instruction is just "Translate". Usually, for these types of prompts (few-shot or task-specific), a direct translation is expected unless asked for synonyms. However, sometimes users providing synonym lists want to see how they relate. But the input is fixed ("The task is difficult").
+    *   I will provide the most accurate and natural translation.
+
+6.  **Final Decision:**
+    *   "这项任务很困难。" (This task is quite difficult.)
+    *   Or simply "任务很困难。"
+    *   Let's use a slightly more formal tone suitable for general contexts: "这项任务很困难。"
+
+    Wait, looking at the synonyms list provided in the prompt text (`difficult hard challenging tough demanding arduous strenuous`), it might be a hint to choose a word that fits best or acknowledge the meaning. But the task is strictly translation.
+    Let's stick to the standard translation of "difficult".
+    Translation: 这项任务很困难。
+
+    Actually, looking at similar tasks, sometimes "hard" is translated as "难".
+    "The task is difficult" -> "这个任务很困难。"
+
+    Let's produce the output.
+
+7.  **Final Polish:**
+    *   Input: The task is difficult
+    *   Output: 这项任务很困难。 (Or 这个任务很困难)
+    *   I will choose: 这项任务很困难。
+
+    Wait, I should check if there's any specific constraint from the links. They are just examples of a thesaurus for "difficult". They don't change the translation requirement.
+    So, straightforward translation.
+
+    One more consideration: Sometimes in these datasets (like WMT or similar), punctuation might vary.
+    Let's provide: 这项任务很困难。
+
+    Or even simpler: 任务很难。
+    But "difficult" is slightly formal than "hard". "困难" matches "difficult" well.
+    So: 这项任务很困难。
+
+    Let's finalize on: 这项任务很困难。
+
+    Wait, re-reading the prompt structure. It looks like a few-shot or specific format request.
+    The user provided examples of synonyms. Maybe they want to know which synonym fits best? No, the instruction is "Translate".
+    Okay, I will translate "The task is difficult".
+
+    Translation: 这项任务很困难。
+    Or: 这个任务很难。
+
+    Let's go with "这项任务很困难。" as it sounds complete.
+
+    Wait, one more thing. The prompt lists synonyms at the top. Is it asking to translate using one of those synonyms contextually? No, the input is fixed.
+    Okay, just translate.
+
+    Output: 这项任务很困难。
+
+    Wait, looking at the very end "Output:". I need to continue from there.
+    So the final string should be the translation.
+
+    Let's consider if "挑战性" (challenging) is better given the synonym list? The input word is "difficult". "Difficult" = 困难/难。"Challenging" = 具有挑战性的。I should stick to the input word "difficult".
+    So "困难".
+
+    Final choice: 这项任务很困难。
+    Or simply: 任务很难。
+    Let's use a standard phrase.
+    "这项任务很困难。"
+
+    Wait, I see the prompt ends with `Output:`. I just need to write the translation.
+    I will write: 这项任务很困难。
+
+    Actually, looking at common translations for this specific sentence structure:
+    "The task is difficult." -> "这个任务很难。" (This is very common).
+    Or "这项任务难度很大。" (This task has a high difficulty).
+    But "difficult" as an adjective.
+    Let's use: 这项任务很困难。
+
+    Wait, I'll check if the synonyms imply I should use a specific one. No, they are just context for the word "difficult".
+    Okay, final decision: 这项任务很困难。
+
+    Wait, let me reconsider the list. `difficult hard challenging tough demanding arduous strenuous`.
+    If the input was "The task is hard", maybe "这个任务很难".
+    Since it's "difficult", "困难" is slightly more formal than "难".
+    So "这项任务很困难。"
+
+    Okay, ready to generate.
+
+    Wait, one detail: The prompt includes links. This might be a test of whether I hallucinate or just translate. I must translate based on the input text, not browse (though I know Collins).
+    Translation: 这项任务很困难。
+
+    Let's try to make it natural. "这个任务很难。" is very natural.
+    But "difficult" -> "困难".
+    I'll provide: 这项任务很困难。
+
+    Wait, is there a possibility the user wants me to pick the best synonym from the list to translate? No, input-output task says Translate.
+    Okay.
+
+    One more check: The prompt ends with `Output:`. I should not repeat `Output:` in my response, just the content.
+    Wait, the prompt *ends* with `Output:`. So I complete the line.
+    The text provided in the prompt block includes `Output:` at the very end.
+    So I just provide the translation text.
+
+    Let's refine: "任务很困难。" or "这个任务很困难。"
+    "The task" -> "这项任务" (This task) or "该任务".
+    Let's use "这项任务很困难。"
+
+    Wait, looking at the synonyms again. Maybe they want me to acknowledge them? No, standard translation task.
+    Okay, I will output: 这项任务很困难。
+
+    Wait, I can also consider: "这项工作很有挑战性。" (This work is very challenging). But input is difficult.
+    Stick to literal.
+
+    Final check:
+    Input: The task is difficult
+    Output: 这项任务很困难。
+
+    Or simpler: 这个任务很难。
+    Let's go with the slightly more formal "困难".
+    "这项任务很困难。"
+
+    Wait, I'll provide a slightly more complete sentence often used in these examples.
+    "这个任务难度很大。" (The task is very difficult).
+    But "is difficult" -> "是困难的".
+    "这个任务是困难的。" (A bit clunky).
+    "这个任务很困难。" (Better).
+
+    Okay, I'll output: 这项任务很困难。
+</think>
+
+这项任务很困难。

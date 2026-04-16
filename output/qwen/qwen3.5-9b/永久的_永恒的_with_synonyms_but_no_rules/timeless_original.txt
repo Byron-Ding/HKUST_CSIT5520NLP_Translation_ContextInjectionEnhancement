@@ -1,0 +1,178 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Input: "Nothing is timeless" (English sentence).
+    *   Input Language: English (en).
+    *   Output Language: Chinese (zh-CN).
+    *   Task: Translate.
+    *   Context/Constraints: The user provided a list of words related to eternity/time ("permanent", "eternal", "everlasting", "perpetual", "timeless", "enduring", "immortal") and links to Collins Dictionary thesaurus pages for "Nothing", "is", and "timeless". This suggests a focus on vocabulary, specifically around the concept of timelessness vs. nothingness. However, the core task is simply translation based on the "Input-Output-Task" format.
+
+2.  **Analyze the Input Sentence:**
+    *   "Nothing is timeless"
+    *   Subject: "Nothing" (虚无，无物，没有东西).
+    *   Verb: "is" (是).
+    *   Adjective: "timeless" (永恒的，不朽的，超越时间的).
+    *   Meaning: There is nothing that remains the same regardless of time passing, or there is no existence that transcends time. Alternatively, it could be interpreted philosophically as "Nothingness itself is timeless" depending on context, but a direct translation focuses on the literal meaning first.
+    *   Literal interpretation: 虚无是不朽的 / 没有任何事物是超越时间的。
+
+3.  **Determine the Best Translation:**
+    *   Option 1 (Literal): 没有什么东西是永恒的。 (There is nothing that is eternal/timeless.) - This captures the common existential meaning.
+    *   Option 2 (Subjective "Nothing"): 虚无本身是无时间的。 (Nothingness itself is timeless.) - Less common without philosophical context.
+    *   Option 3 (Direct adjective usage): 没有什么是不朽的。
+    *   Considering the provided vocabulary list ("permanent", "eternal", "everlasting", "perpetual", "timeless", etc.), the user might be interested in nuances. However, the task is just translation.
+    *   "Nothing" usually translates to "没有东西" (there is no thing) or "虚无" (in a philosophical sense).
+    *   "Timeless" translates to "永恒的" (eternal), "超越时间的", "不朽的".
+    *   Standard translation: 没有什么事物是永恒的 / 没有什么是超越时间的。
+    *   Let's check the Collins links context. The user listed words like "immortal", "enduring". "Nothing is timeless" often implies "Everything fades away, nothing lasts forever."
+    *   Most natural Chinese phrasing for this specific sentence: "没有什么东西是永恒的" or "没有什么是永恒的".
+
+4.  **Refine the Translation:**
+    *   "Nothing" -> 什么都没有 (There is nothing) / 没有任何事物 (No thing).
+    *   "is timeless" -> 是永恒的 / 超越了时间。
+    *   Combined: "没有什么东西是永恒的" or simply "没有什么是永恒的".
+    *   Another nuance: If taken as a title or philosophical statement, "虚无即是永恒" (Nothingness is timelessness) might be too interpretative.
+    *   Let's stick to the standard translation for general English-Chinese translation tasks unless specified otherwise.
+    *   "Nothing is timeless" -> 没有任何事物是永恒的。
+
+5.  **Final Decision:**
+    *   "没有什么东西是永恒的" (There is nothing that is eternal/timeless).
+    *   Or slightly more literary: "世间没有永恒之物" (The world has no eternal thing) - but too interpretative.
+    *   Direct translation: "没有任何事物是不朽的/超越时间的".
+    *   Given the vocabulary list provided in the prompt, the user might want to see how these synonyms relate, but the instruction is just "Translate".
+    *   Let's choose the most accurate and natural Chinese equivalent.
+    *   "Nothing" = 没有任何事物 / 没有什么。
+    *   "timeless" = 永恒的 / 无时间的 (rarely used) / 不朽的.
+    *   Translation: 没有任何事物是永恒的。or 没有什么是不朽的。
+
+    Let's go with a balanced, standard translation.
+    "没有什么东西是永恒的。" or "没有任何事物是超越时间的。"
+    Given the word list emphasizes synonyms of "timeless", I should ensure the translation captures the essence of "timeless".
+    "永恒" (eternal) covers timeless well in this context.
+
+    Let's check if there's a specific quote this comes from. It looks like a sentence used to contrast with "immortal" or "perpetual".
+    Common phrase: "Nothing lasts forever."
+    But the input is specifically "Nothing is timeless".
+    So, "没有什么是不朽的" or "没有什么是永恒的".
+
+    Let's select: 没有任何事物是永恒的。 (No thing is eternal.)
+
+6.  **Formatting:**
+    *   The prompt asks for "Output:". I need to provide the translation after that label or just the translation text?
+    *   Looking at the prompt structure:
+        Input-Output-Task: Translate
+        Input: Nothing is timeless
+        ...
+        Output:
+    *   I should provide the Chinese text immediately.
+
+    Refined choice: 没有任何事物是永恒的。 (No thing is eternal) - This matches "timeless" well in a philosophical context.
+    Or: 没有什么东西是超越时间的。
+
+    Let's pick the most direct one: 没有任何事物是永恒的。
+
+7.  **Final Check:**
+    *   Input: Nothing is timeless
+    *   Translation: 没有什么东西是永恒的。 (There is nothing that is eternal/timeless).
+    *   Does "Nothing" mean "no thing" or "nothingness"? Usually "no thing".
+    *   Does "timeless" mean "without time" or "lasting forever"? In Chinese context, usually "永恒的".
+    *   So: 没有任何事物是永恒的。
+
+    Wait, is there a chance the user wants me to use one of the provided words in Chinese gloss? No, it says "Translate".
+    Is there a specific style? Standard Mandarin.
+
+    Let's write: 没有什么东西是永恒的。or 没有任何事物是超越时间的。
+    I'll go with: 没有任何事物是永恒的。 (It sounds slightly more formal and accurate to the dictionary definition of timeless).
+
+    Actually, "Nothing is timeless" could also be interpreted as "Nothingness itself is timeless". But without context, the existential "There is no thing that is timeless" is safer.
+    However, often "Nothing is timeless" is a translation of philosophical quotes where "Nothing" refers to the concept of non-being or simply nothing exists.
+    Let's provide the most natural standard translation.
+    "没有什么是不朽的。" (Nothing is immortal/ageless).
+    "没有任何事物是永恒的。"
+
+    Let's use: 没有任何事物是永恒的。
+
+    Wait, looking at the provided word list again ("permanent", "eternal", ... "timeless"). This looks like a vocabulary exercise.
+    Maybe I should output the translation that best reflects the meaning of "timeless".
+    "永恒" is the standard equivalent for "timeless/eternal".
+    So: 没有任何事物是永恒的。
+
+    One more consideration: Is this from a specific text? Like "Nothing is timeless, everything changes."
+    Let's keep it simple.
+
+    Final selection: 没有任何事物是永恒的。
+
+    Wait, I should check if there is a more idiomatic way.
+    "万物皆有终，唯有虚无永恒"? No, that's an interpretation.
+    Input: Nothing is timeless.
+    Output: 没有什么东西是永恒的。
+
+    Okay, ready to generate.
+
+    Wait, I notice the prompt includes links. It might be expecting me to acknowledge them or just translate? The task is "Translate". The links are likely context for vocabulary selection but don't need to be cited in output unless it's a retrieval task. Since the task is explicitly "Translate", I will output the translation.
+
+    Let's ensure the tone matches "zh-CN".
+    "没有任何事物是永恒的。" sounds good.
+    Or slightly simpler: "没有什么是不朽的。"
+    But "timeless" specifically often maps to "永恒的" (eternal/unchanging) rather than just "不朽的" (immortal - usually for people/art). "Timeless beauty", "Timeless song".
+    So "没有任何事物是永恒的" is better.
+
+    Final check on constraints: Just provide the translation? Yes, under "Output:".
+
+    Wait, looking at the prompt structure again.
+    Input-Output-Task: Translate
+    ...
+    Output:
+
+    I will write the translation directly.
+
+    One more nuance: "Nothing" can be "虚空" in Taoist/philosophical contexts, but "没有什么" or "没有任何事物" is general Chinese. Given the English vocabulary list (dictionary style), general Mandarin is appropriate.
+
+    Decision: 没有任何事物是永恒的。
+    Alternative: 没有什么东西是超越时间的。
+    I will choose the first one as it's more direct for "timeless".
+
+    Wait, could it be "虚无是无时间的"? If "Nothing" refers to the concept. But usually "Nothing" = "Nothingness".
+    Let's stick to the standard existential translation. "没有任何事物是永恒的。"
+
+    Actually, searching for the phrase "Nothing is timeless", it often appears in contexts like "Love is timeless", so "Nothing is timeless" would mean "There is no love that lasts"? No, that's reading too much.
+    Literal: Nothing = 没有东西。Timeless = 永恒的。
+    Translation: 没有任何事物是永恒的。
+
+    Okay, I'll go with that.
+
+    Wait, one more thing. The user provided links to Collins Thesaurus for "Nothing", "is", and "timeless". This implies they might want the translation of the word "timeless" specifically highlighted or just the sentence? The task says "Translate [Input]". So translate the whole sentence.
+
+    Final Output: 没有任何事物是永恒的。
+    Or simpler: 没有什么东西是永恒的。
+    I'll use "没有任何事物是永恒的" as it sounds a bit more formal/literary matching dictionary examples.
+    Actually, "没有什么东西是永恒的" is very natural.
+    Let's combine for clarity: "没有任何事物是永恒的。"
+
+    Wait, looking at the prompt again, the user pasted links and vocabulary words first. This might be a context setting for me to use precise synonyms? But the task is just Translate.
+    I will output the translation.
+
+    Re-evaluating "Nothing": In philosophy, "Nothing" can be translated as "无".
+    If it's a philosophical statement: "无即永恒"? (Being is timelessness?)
+    But without context, standard English grammar rules apply: Nothing = 没有什么.
+    So: 没有什么东西是永恒的。
+
+    Let's try to match the tone of the vocabulary list (dictionary/thesaurus). Dictionary translations are usually literal but accurate.
+    Collins definition of timeless: "that exists in all time".
+    So "没有任何事物存在于所有时间之中" -> "没有任何事物是永恒的".
+
+    Okay, final decision: 没有任何事物是永恒的。
+    Or slightly more concise: 没有什么东西是永恒的。
+    I'll use the latter for natural flow.
+
+    Wait, looking at similar tasks, sometimes they want a specific format. But here it just says "Output:".
+    I will provide the text.
+
+    Wait, one nuance from the list: "permanent", "eternal", "everlasting".
+    Maybe the user wants to see if I pick the right Chinese word for "timeless".
+    Timeless = 永恒的 / 不朽的.
+    So "没有任何事物是永恒的" is correct.
+
+    Okay, writing the response.
+</think>
+
+没有任何事物是永恒的。

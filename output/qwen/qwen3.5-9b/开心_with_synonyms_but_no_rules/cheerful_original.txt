@@ -1,0 +1,169 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Input sentence: "I am cheerful to hear the good news."
+    *   Input language: English (en)
+    *   Output language: Chinese (zh-CN)
+    *   Task: Translate.
+    *   Context/Constraints: There's a list of words (happy glad joyful delighted pleased content satisfied cheerful ecstatic) and several URLs (mostly broken or irrelevant for the specific task, except they point to a Collins Dictionary Thesaurus page). The URLs seem like noise or context retrieval attempts but don't change the core task which is translation.
+    *   Key vocabulary from the input sentence matches the word list provided: "cheerful", "good".
+
+2.  **Determine the Meaning:**
+    *   "I am cheerful to hear the good news." means the speaker feels happy/glad because they have heard good news.
+    *   "Cheerful" here implies feeling happy/pleased, though it can sometimes mean generally optimistic or lighthearted. In this context ("to hear"), it's about emotional state resulting from an action.
+
+3.  **Draft Translations:**
+    *   Literal: 听到好消息，我很愉快。 (Hearing good news, I am cheerful.)
+    *   Natural: 听到这则好消息，我很高兴/很开心。
+    *   More formal/literary: 闻讯后倍感欣慰。 (Maybe too much.)
+    *   Standard: 听到这个消息我感到很高兴。
+
+4.  **Select the Best Translation:**
+    *   The sentence structure "I am [adjective] to [verb phrase]" is commonly translated as "听到...，我很..." or "...让我感到...".
+    *   "Cheerful" in this context is synonymous with "happy", "glad", "pleased".
+    *   "Good news" = 好消息.
+    *   Translation: 听到这则好消息，我感到很开心。or simply 听到好消息我很高兴。
+
+5.  **Refine for Naturalness:**
+    *   Input: "I am cheerful to hear the good news."
+    *   Direct translation: 听到好消息时我很愉快。
+    *   More natural Chinese expression: 听到这则好消息，我心情格外好 / 我很高兴听到这个好消息。
+    *   Let's stick close to the meaning but make it idiomatic. "I am glad to hear..." -> "很高兴听到...". Since "cheerful" is in the synonym list, using a general term like "高兴" (glad/happy) or "愉快" (pleasant/cheerful) works well.
+    *   Common translation: 听到这则好消息，我很高兴。
+
+6.  **Final Decision:**
+    *   "听到这则好消息，我感到很高兴。" (Hearing this good news, I feel very happy.)
+    *   Or simpler: "我听到这个好消息感到很高兴。"
+    *   Let's check the word list provided in the prompt ("happy glad joyful... cheerful"). The output doesn't need to use English words from the list, just translate.
+    *   Selected translation: 听到这则好消息，我很高兴。
+
+7.  **Format Output:**
+    *   Just the Chinese text.
+
+    *Self-Correction on "cheerful":* While "cheerful" often means generally happy/cheery, in the phrase "I am cheerful to hear...", it acts as an emotion equivalent to "glad". So translating as "高兴" or "愉快" is appropriate.
+    *Sentence:* 听到这个消息，我感到很开心。
+
+    Let's go with a standard, natural translation.
+    "听到这则好消息，我很高兴。"
+
+    Wait, looking at the provided URLs, they are broken/incomplete (ending in `I`, `am`, `cheerful`, etc.). This suggests the user might have copied a prompt designed for a specific retrieval-augmented generation task or just copy-pasted messy data. However, the core instruction is "Translate". I should ignore the broken URLs and focus on the translation task.
+
+    Translation: 听到这则好消息，我感到很高兴。
+    Or: 我听到这个消息感到很高兴。
+    Let's pick one that flows well.
+
+    "听到这则好消息，我很高兴。"
+
+    Actually, "cheerful" can be translated as "愉快" but in this specific construction ("am cheerful to hear"), it expresses relief or happiness similar to "glad".
+    So: 听到这个好消息，我心情很舒畅 / 我很开心。
+    Let's use a common one: 听到这则好消息，我很高兴。
+
+    Final check:
+    Input: I am cheerful to hear the good news.
+    Output: 听到这则好消息，我很高兴。
+
+    Wait, is there any specific nuance from the word list? The word list includes synonyms for happy/cheerful. It doesn't change the translation direction.
+    Okay, proceed with translation.
+
+    One more option: "我得知这个好消息后倍感开心。" (A bit formal).
+    Simple is better: "听到这则好消息，我很高兴。"
+
+    Let's refine slightly to capture the sentiment of "cheerful" which might imply a lighter mood than just "glad". But in Chinese, "高兴" covers it.
+    Maybe: 听到这个消息我感到很愉快。 (Matches "cheerful/pleasant").
+    Let's stick with the most natural equivalent.
+
+    Final Choice: 听到这则好消息，我很高兴。or 我听到这个好消息感到很开心。
+    I will provide a concise, natural translation.
+
+    Refined: 听到这则好消息，我感到很高兴。
+
+    Wait, looking at the instruction "Output-language: zh-CN", I should only output the translation text or just the text? Usually just the text.
+    The prompt ends with "Output:", so I need to complete that line.
+
+    Let's try to be precise.
+    "I am cheerful to hear..." -> 听到...我很开心/高兴。
+    "the good news" -> 这则好消息 / 这个好消息.
+
+    Final: 听到这则好消息，我感到很高兴。
+
+    Wait, one detail in the prompt word list: `happy glad joyful delighted pleased content satisfied cheerful ecstatic`. These are synonyms for happy.
+    The input sentence uses `cheerful`.
+    So translation should capture that positive emotion.
+    Translation: 听到这则好消息，我很开心。
+
+    Okay, ready.
+
+    Wait, I notice the URLs are broken/thumbnails of search terms like `https://www.collinsdictionary.com/dictionary/english-thesaurus/I`. This looks like some specific dataset prompt engineering (maybe related to a specific benchmark). But my task is simply translation.
+
+    Final Output: 听到这则好消息，我很高兴。
+    Or slightly more literal to "cheerful": 听到这个好消息我感到很愉快。
+    But "glad/happy" is the standard meaning here.
+    Let's go with "听到这则好消息，我很高兴。"
+
+    Wait, looking at similar tasks, sometimes they want a direct mapping if it's vocabulary learning. But this looks like a standard translation task.
+    I will output the Chinese sentence.
+
+    Let's make it natural: 听到这个好消息，我很开心。
+    Or: 我收到这个好消息后感到很愉快。
+    "hear" -> 得知 / 听到.
+
+    Decision: 听到这则好消息，我很高兴。
+    (This is concise and accurate).
+
+    Wait, I should check if there are any specific formatting requirements hidden. No.
+    Just translate.
+
+    One more thought: The prompt includes a lot of broken URLs that look like search queries for the words in the input sentence (I, am, cheerful, to, hear...). This might imply a context where I need to ensure accuracy regarding definitions provided by Collins.
+    Collins Thesaurus definition for cheerful: "in a happy mood; optimistic".
+    Definition for good news: "information that gives one reason for pleasure".
+    So "I am cheerful" -> 我感到高兴/愉快。
+    Translation: 听到这则好消息，我感到很高兴。
+
+    Let's finalize.
+    Output: 听到这则好消息，我很高兴。
+    Or maybe slightly more formal to match the sentence structure: 我听到这个好消息时感到心情愉快。
+    No, keep it natural. "听到这则好消息，我很高兴。"
+
+    Wait, I see the input format has `Output:` at the very end. I should continue from there or just provide the text? The prompt ends with `Output:`, implying I should write the content after that label. But since I am generating the response, I will provide the translation string directly.
+    Actually, usually in these prompts, the model output *is* the content after "Output:".
+    So I will just write the Chinese sentence.
+
+    Re-evaluating "cheerful" vs "glad".
+    Cheerful: 兴高采烈的 / 愉快 / 高兴.
+    In this context ("I am cheerful to hear"), it expresses a reaction. "Glad" is better than "Cheerful" (which is often an adjective describing personality or general mood).
+    However, since "cheerful" is explicitly in the word list provided in the prompt header, maybe I should ensure the translation reflects that specific nuance?
+    But "I am cheerful to hear" isn't a very common collocation compared to "I am happy/glad". It's essentially synonymous with "pleased" or "delighted".
+    So "很高兴" is safe.
+
+    Final check: 听到这则好消息，我很高兴。
+    Or: 我得知这个好消息后心情很好。
+    Let's stick to the first one.
+
+    Wait, I need to make sure I don't output anything else (like markdown explanations). Just the translation.
+
+    Wait, looking at the URLs again... they end abruptly. `.../thesaurus/I`, `.../thesaurus/am`. This suggests the URLs are parameters or search terms.
+    Okay, ignore URLs. Focus on translation.
+
+    Final choice: 听到这则好消息，我很高兴。
+    Or slightly more expressive: 听到这个好消息，我心情格外舒畅。 (A bit too poetic).
+    Let's go with standard: 听到这则好消息，我很高兴。
+
+    Actually, "I am cheerful" -> "我感到很愉快".
+    "to hear the good news" -> "得知这个好消息时".
+    Combined: 听到这则好消息，我感到很高兴。
+    This sounds natural.
+
+    Let's write it down.
+    听到这则好消息，我很高兴。
+    (Hearing this good news, I am very happy.)
+
+    One more variation: 我听到这个好消息感到很开心。
+    "cheerful" is closer to "愉快".
+    我听到这个好消息感到很愉快。
+    But "高兴" is more common for "glad/happy" in response to news.
+    Let's use "高兴".
+
+    Okay, ready to generate.cs
+</think>
+
+听到这则好消息，我很高兴。

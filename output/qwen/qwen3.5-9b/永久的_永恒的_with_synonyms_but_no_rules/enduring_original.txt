@@ -1,0 +1,230 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Input sentence: "Nothing is enduring"
+    *   Input language: English (en)
+    *   Output language: Chinese (zh-CN)
+    *   Task: Translate.
+    *   Context/References: The user provided a list of synonyms related to timelessness/permanence (permanent, eternal, everlasting, perpetual, timeless, enduring, immortal) and links to Collins Dictionary thesaurus entries for "Nothing", "is", and "enduring". This suggests the translation should be accurate, potentially reflecting the specific nuance of "enduring" in this context.
+
+2.  **Analyze the Input Sentence:**
+    *   "Nothing is enduring"
+    *   Literal meaning: There is no thing that lasts forever / everything ends eventually.
+    *   Nuance: It could be a philosophical statement, or a general observation about impermanence.
+    *   Word focus: "enduring" implies lasting for a long time or being durable/permanent over time. In this negative context ("Nothing is..."), it often means "nothing lasts forever".
+
+3.  **Determine the Target Translation (zh-CN):**
+    *   "Nothing" -> 没有什么 / 没有任何东西 / 万物皆无 (depending on tone)
+    *   "is" -> 是 / 存在
+    *   "enduring" -> 持久的 / 永久的 / 长存的 / 永恒的
+
+    *   Option 1 (Literal): 没有什么东西是持久的。 (Nothing is lasting/durable)
+    *   Option 2 (Philosophical/Poetic): 万物皆非永恒。 (Everything is not eternal)
+    *   Option 3 (Common Idiomatic): 没有什么是永存的。 / 没有一样东西能持久。
+
+    *   Considering the synonyms provided in the prompt (permanent, eternal, everlasting, perpetual, timeless, enduring, immortal), the word "enduring" here seems to align closely with "永恒的" (eternal/permanent) or "持久的" (lasting).
+    *   "Nothing is enduring" often translates to a philosophical statement like "万物皆流，无物常驻" (Heraclitus vibes) but strictly translating the sentence structure: "没有什么是长久的。"
+
+    *   Let's look at standard translations for similar phrases.
+    *   "Everything passes" -> 一切皆逝.
+    *   "Nothing is permanent" -> 没有什么是一成不变的 / 没有什么是永恒的.
+    *   "Nothing is enduring" -> 没有任何东西是持久的 / 万物无常.
+
+    *   However, keeping the sentence structure simple and accurate:
+    *   "Nothing" = 没有什么
+    *   "is" = 是 (copula)
+    *   "enduring" = 持久的 / 永恒的
+
+    *   Combination: 没有什么东西是持久的。or 没有什么是永存的。
+    *   Given the synonym list includes "eternal", "everlasting", etc., but the sentence specifically uses "enduring". "Enduring" usually means lasting over a long period.
+    *   Translation: 没有任何事物是持久的。 / 没有什么能持久。
+    *   Let's choose a natural, concise Chinese translation that captures the meaning well.
+    *   "没有什么是持久的。" (Nothing is lasting.)
+    *   Or slightly more philosophical: "万物皆非永恒。" (Everything is not eternal). But "Nothing is enduring" is specific.
+    *   Let's stick close to the text: "没有什么事物是长久的。"
+
+    *   Wait, looking at the provided links and synonyms might imply a context of permanence vs transience. The core meaning is "impermanence".
+    *   Common translation for "Nothing is permanent/enduring/eternal": 无常 (Anicca) in Buddhist terms, but literal translation is safer.
+    *   Let's go with: "没有什么东西是持久的。" or simply "没有什么是持久的。"
+
+    *   Refining based on common usage:
+    *   "Nothing is eternal" -> 没有任何事物是永恒的。
+    *   "Nothing is enduring" -> 没有任何事物是长存的。/ 万物终将逝去。 (But that's interpreting).
+    *   Strict translation: "没有什么是持久的。"
+
+    *   Let's check the Collins dictionary definitions. "Enduring": lasting for a long time; not easily forgotten; lasting or permanent.
+    *   So, "没有什么东西是长久的。" sounds natural.
+
+    *   Decision: "没有什么事物是持久的。" (Nothing is lasting/durable) or "没有任何东西能长久存在。"
+    *   Simpler: "没有什么是持久的。"
+
+    *   Let's consider the specific synonyms provided. They are all about timelessness. So "enduring" here likely leans towards "eternal/permanent".
+    *   Translation: 没有什么是永恒的。 (Nothing is eternal.) - But "enduring" isn't exactly "eternal" in all contexts, though here they are synonymous based on the input list.
+    *   Better balance: 没有什么东西是持久的。
+
+    *   Final check: Input "Nothing is enduring". Output "zh-CN".
+    *   Selected translation: 没有什么是持久的。 (Nothing is lasting.)
+    *   Or slightly more formal: 没有任何事物是长存的。
+    *   Let's pick the most natural expression of the concept. "万物无常" is an interpretation. "没有什么是永恒的" captures the synonym list vibe better than just "持久". But strictly, "enduring" -> "持久的".
+    *   However, in the context of philosophical synonyms (permanent, eternal, everlasting), "永恒" might be a strong fit for the *category* even if the specific word is "enduring".
+    *   Actually, "Nothing is enduring" often implies mortality/impermanence.
+    *   Let's go with: 没有任何事物是持久的。
+
+    *   Wait, I need to make sure I don't add too much interpretation.
+    *   "Nothing" -> 没有什么
+    *   "is" -> (can be omitted or kept as '是')
+    *   "enduring" -> 持久的 / 长久的
+    *   Result: 没有什么东西是持久的。
+
+    *   Let's try to match the style of a dictionary translation. Usually concise.
+    *   "没有什么是持久的。"
+
+4.  **Final Polish:**
+    "没有什么是持久的。" is clear and accurate.
+    "没有任何事物能持久。" is also good.
+    Let's choose: "没有什么东西是持久的。" or "万物皆无常。" (Too idiomatic).
+    Let's stick to literal + semantic accuracy regarding the provided synonyms which emphasize timelessness.
+    "没有任何事物是永恒的。" (Matches the synonym cluster).
+    But strictly translating "enduring": "持久的".
+    I will provide a standard, accurate translation.
+
+    Translation: 没有什么东西是持久的。
+
+    Wait, looking at the synonyms again: permanent, eternal, everlasting, perpetual, timeless, enduring, immortal. They are all near-synonyms in this context (timelessness). So translating "enduring" as "永恒" might be acceptable given the context provided by the user's list. However, usually, translation tasks should respect the source word unless it's a glossary task.
+    If I translate "enduring" as "持久", it's correct.
+    If I translate as "永恒", it captures the nuance of the synonym list better.
+    Given the prompt shows synonyms, maybe the user wants to see the equivalent concept.
+    But standard translation is best. "Enduring" = 持久的 / 长久的。
+    Let's use: "没有什么东西是持久的。"
+
+    Re-evaluating based on common English-Chinese literary translations for this specific sentence structure often used in philosophical contexts (e.g., from books like 'Nothing is permanent' vs 'Nothing is enduring').
+    Actually, a very common translation for "Nothing is eternal/permanent" is "无常". But "Nothing is enduring" is less idiomatic than "Nothing lasts forever".
+    Let's go with: 没有任何事物是持久的。
+
+    Wait, I should check if there is a specific expected output format. Just the translation.
+    Okay, I will output the Chinese sentence.
+
+    Refined thought: The provided synonyms suggest a theme of eternity/timelessness. "Enduring" in this context likely means "existing for an indefinite or infinite period". So "永恒的" (eternal) might actually be the intended nuance within that list's context. But "持久的" is safer for the word itself. Let's provide a translation that balances both: "没有什么东西是长久的。" or "没有任何事物是持久的。"
+    Let's select "没有任何事物是持久的。" as it is precise.
+
+    Actually, looking at similar tasks, often "Nothing is eternal" -> "万物流逝，无常". But I should not add extra words.
+    "没有什么东西能持久。"
+
+    Let's settle on: 没有什么东西是持久的。
+
+    Wait, one more check. "Enduring" implies resistance to change or time.
+    Translation: 没有任何事物是长久的。
+
+    Okay, final decision: 没有任何事物是持久的。 (Nothing is lasting.)
+    Or simpler: 没有什么是持久的。
+    Let's use the full sentence structure for clarity.
+    "没有什么东西是持久的。"
+
+    Wait, looking at the synonyms list again... "permanent eternal everlasting perpetual timeless enduring immortal". This looks like a tag list for a specific lemma or context of impermanence.
+    If I output: 没有任何事物是永恒的。 (Nothing is eternal). This captures the essence of the synonym cluster provided in the prompt header.
+    However, the input word is "enduring".
+    Okay, I will translate "enduring" accurately.
+    "Enduring" -> 持久的 / 长久的.
+    Translation: 没有什么东西是持久的。
+
+    Wait, I can combine for better flow: "万物皆无持久性。" No, that's adding words.
+    "没有什么是长存的。" (Nothing is long-standing).
+    Let's go with the most direct translation.
+    "没有任何事物是持久的。"
+
+    Wait, I need to make sure I don't output markdown unless necessary. Just the text.
+    Output: 没有任何事物是持久的。
+
+    Wait, let's look at the synonyms again. They are all about "never ending". So "enduring" here = "never ending".
+    Translation: 没有什么东西是永不终结的。 (Too wordy).
+    Translation: 没有什么是永恒的。 (Captures the synonym meaning best).
+    But strictly, enduring = lasting for a long time.
+    Let's provide: 没有任何事物是持久的。
+
+    Wait, I'll check if there's a specific "Nothing is enduring" phrase in literature. Not really common.
+    Okay, simple translation.
+    "没有什么东西是持久的。"
+
+    One more consideration: The prompt includes links to Collins dictionary thesaurus. This might imply looking up definitions.
+    Collins for Enduring: "lasting for a long time". Synonyms: permanent, eternal...
+    So translating as "持久的" is linguistically correct based on the primary definition, even if synonyms include eternal.
+    Okay, I will use "持久".
+
+    Final choice: 没有什么东西是持久的。 (Nothing is lasting.)
+    Or slightly more formal: 没有任何事物是持久的。
+    Let's go with "没有什么东西是持久的。" or "没有什么是持久的。"
+    I'll add "任何东西" to be complete.
+    "没有任何东西是持久的。"
+
+    Wait, checking the input again: "Input-Output-Task: Translate".
+    Okay, I will output just the translation string.
+
+    Final check on synonyms provided in prompt header: permanent eternal everlasting perpetual timeless enduring immortal.
+    These are all related to duration.
+    So "enduring" fits perfectly with "持久".
+    Translation: 没有任何事物是持久的。
+
+    Wait, is there a more poetic way? "万物皆非恒久。"
+    But usually translation tasks prefer literal unless specified otherwise.
+    I will stick to literal but natural.
+    "没有什么东西是持久的。"
+
+    Actually, "Nothing" can be "没有任何事物".
+    So: 没有任何事物是持久的。
+
+    Okay, ready.
+
+    Wait, I notice the prompt has "Input-language: en", "Output-language: zh-CN".
+    The expected output is just the translation.
+    I will write it clearly.
+
+    One nuance: "Nothing is enduring" vs "There is nothing that endures". Same meaning.
+    Translation: 没有什么是持久的。 (Most concise).
+    Let's use this one. It sounds natural.
+
+    Wait, I should check if the user wants me to acknowledge the synonyms? No, it's a translation task. The synonyms are likely context for model tuning or keyword association, but the task is just translate the sentence.
+    So, focus on the sentence "Nothing is enduring".
+    Translation: 没有什么是持久的。
+
+    Wait, maybe "永恒" is better given the synonym list which leans heavily towards eternity (eternal, everlasting, immortal). "Enduring" in this specific cluster implies timelessness rather than just durability of material.
+    If I say "持久", it might sound like "a durable battery".
+    If I say "永恒", it sounds like philosophy.
+    Given the synonym list (eternal, immortal, timeless), the semantic field is metaphysical timelessness.
+    So "没有什么是永恒的。" might be contextually better aligned with the provided keywords, even though strictly "enduring" is slightly weaker than "eternal".
+    However, as a translator, I should translate the word given.
+    Collins definition of enduring: "last for a long time or indefinitely; permanent."
+    So "permanent" (永恒/永久) is in the synonyms list provided by user.
+    Okay, I will use "持久" to be safe with the specific word, or "恒久".
+    Let's use "持久的" as it's the direct definition match for enduring.
+    Or "长存的".
+    Let's go with: 没有任何事物是持久的。
+
+    Wait, looking at similar high-quality translations for philosophical texts:
+    "Nothing is permanent" -> 无常 (Buddhist concept) or 没有什么是永恒的.
+    Given the synonyms list includes "immortal", "eternal", "timeless", the context is definitely metaphysical.
+    So "没有什么东西是永恒的。" might actually be the intended meaning within that cluster.
+    But to be precise: "没有任何事物是持久的。"
+    I'll choose "没有任何事物是持久的。" as it translates "enduring" directly while acknowledging the long duration aspect.
+
+    Wait, let's look at the example outputs in similar tasks. Usually concise.
+    "没有什么是持久的。"
+
+    Okay, final decision.
+    Input: Nothing is enduring
+    Output: 没有任何事物是持久的。 (Nothing is lasting/durable).
+    Or: 没有什么东西是长久的。
+    Let's go with "没有任何事物是持久的。" It sounds a bit more formal/accurate for "enduring".
+
+    Wait, I can also say "万物皆无常" if I want to capture the sentiment of the synonym list (impermanence). But that adds "everything". The subject is "Nothing".
+    So "没有任何事物是持久的。"
+
+    Okay, I will output this.
+    Actually, "没有什么是永恒的" flows better and aligns with the synonym list context. But strictly, "enduring" != "eternal".
+    Let's compromise: "没有什么东西是长久存在的。" (Nothing is long-standing/existing).
+    No, keep it simple. "没有任何事物是持久的。"
+
+    Wait, I'll check if I should add punctuation. Yes.
+    Final Output: 没有任何事物是持久的。
+</think>
+
+没有任何事物是持久的。
