@@ -29,33 +29,214 @@
 
 
 
-# 如何测试
-- sentence: "The meeting is {keyword} for the success of the project."
-  input_language: en
-  output_language: zh-CN
-  summary: 重要
-  keywords:
-    - vital
-    - important
-    - significant
-    - crucial
-    - critical
-    - essential
+# # 如何测试
+# - sentence: "The meeting is {keyword} for the success of the project."
+#   input_language: en
+#   output_language: zh-CN
+#   summary: 重要
+#   keywords:
+#     - vital
+#     - important
+#     - significant
+#     - crucial
+#     - critical
+#     - essential
 
-- sentence: "I am {keyword} to hear the good news."
+# - sentence: "I am {keyword} to hear the good news."
+#   input_language: en
+#   output_language: zh-CN
+#   summary: 开心
+#   keywords:
+#     - happy
+#     - glad
+#     - joyful
+#     - delighted
+#     - pleased
+#     - content
+#     - satisfied
+#     - cheerful
+#     - ecstatic
+
+- sentence: "I {keyword} this movie."
   input_language: en
   output_language: zh-CN
-  summary: 开心
+  summary: 喜欢
   keywords:
-    - happy
-    - glad
-    - joyful
-    - delighted
-    - pleased
-    - content
-    - satisfied
-    - cheerful
-    - ecstatic
+    - like
+    - love
+    - adore
+
+- sentence: "I am {keyword} for your help."
+  input_language: en
+  output_language: zh-CN
+  summary: 感谢
+  keywords:
+    - thankful
+    - grateful
+    - appreciative
+
+
+- sentence: "This building is {keyword}."
+  input_language: en
+  output_language: zh-CN
+  summary: 大
+  keywords:
+    - large
+    - huge
+    - enormous
+    - massive
+    - gigantic
+    - colossal
+    - immense
+
+
+- sentence: "Nothing is {keyword}"
+  input_language: en
+  output_language: zh-CN
+  summary: 永久的/永恒的
+  keywords:
+    - permanent
+    - eternal
+    - everlasting
+    - perpetual
+    - timeless
+    - enduring
+    - immortal
+
+- sentence: "The view is {keyword}"
+  input_language: en
+  output_language: zh-CN
+  summary: 美丽的
+  keywords:
+    - beautiful
+    - gorgeous
+    - stunning
+    - breathtaking
+    - magnificent
+    - splendid
+    - exquisite
+
+- sentence: "I have {keyword} it before."
+  input_language: en
+  output_language: zh-CN
+  summary: 学到
+  keywords:
+    - learned
+    - studied
+
+- sentence: "This result is {keyword}"
+  input_language: en
+  output_language: zh-CN
+  summary: 奇怪的
+  keywords:
+    - strange
+    - weird
+    - odd
+    - unusual
+    - bizarre
+    - peculiar
+    - abnormal
+
+- sentence: "The task is {keyword}"
+  input_language: en
+  output_language: zh-CN
+  summary: 困难的
+  keywords:
+    - difficult
+    - hard
+    - challenging
+    - tough
+    - demanding
+    - arduous
+    - strenuous
+
+- sentence: "I kind of feel {keyword} about this."
+  input_language: en
+  output_language: zh-CN
+  summary: 生气/恼人
+  keywords:
+    - angry
+    - mad
+    - furious
+    - irritated
+    - annoyed
+    - frustrated
+    - upset
+
+- sentence: "Give me another {keyword}."
+  input_language: en
+  output_language: zh-CN
+  summary: 角度
+  keywords:
+    - perspective
+    - angle
+    - viewpoint
+    - outlook
+    - stance
+    - position
+    - approach
+
+- sentence: "From my {keyword}, I think this is a good idea."
+  input_language: en
+  output_language: zh-CN
+  summary: 看法/观点
+  keywords:
+    - opinion
+    - view
+    - belief
+    - attitude
+    - stance
+    - perspective
+
+- sentence: "Just {keyword} the the website, and then refresh the page."
+  input_language: en
+  output_language: zh-CN
+  summary: 退出
+  keywords:
+    - log out
+    - sign out
+    - exit
+    - leave
+    - quit
+    - go out from
+    - get away from
+
+- sentence: "Here is a small {keyword} for you."
+  input_language: en
+  output_language: zh-CN
+  summary: 建议
+  keywords:
+    - suggestion
+    - advice
+    - recommendation
+    - tip
+    - guidance
+    - counsel
+
+
+- sentence: "Which kind of {keyword} happens in that accident?"
+  input_language: en
+  output_language: zh-CN
+  summary: 失误
+  keywords:
+    - mistake
+    - error
+    - blunder
+    - slip-up
+    - oversight
+    - misstep
+    - fault
+
+
+- sentence: "This {keyword} problem cannot be avoided in the experiment."
+  input_language: en
+  output_language: zh-CN
+  summary: 精确度/准确度
+  keywords:
+    - precision 
+    - accuracy 
+
+-
 
 
 - sentence: "我对这件事很{keyword}"

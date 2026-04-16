@@ -1,0 +1,169 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Input Sentence:** "I am ecstatic to hear the good news."
+    *   **Input Language:** English (en)
+    *   **Output Language:** Chinese (zh-CN)
+    *   **Task:** Translate the sentence, following specific formatting rules for comments.
+    *   **Word List Provided:** happy, glad, joyful, delighted, pleased, content, satisfied, cheerful, ecstatic (these seem to be synonyms related to the target word "ecstatic", possibly distractors or context for comparison).
+    *   **Links Provided:** Collins Dictionary thesaurus links for specific words (including 'ecstatic').
+    *   **Rules:**
+        1.  Allow optional comments after each word in the format `<output>input language (translation and output language comment)</output>`.
+        2.  Output format must be exactly:
+            `<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ...</output>`
+            `<output_without_comment>word1 word2 ...</output_without_comment>`
+        3.  Only allow one output block structure (but the prompt says "Note: Only allow one output." but also shows a template with two tags `<output>` and `<output_without_comment>` inside the example). I need to interpret "Only allow one output" as one response containing the required structure, not multiple responses.
+        4.  Comments must be in Output Language (zh-CN).
+        5.  Comments should distinguish original meaning from other synonyms based on characteristic/original meaning.
+        6.  Use `<output> </output>` to wrap the translation *with* comments. Wait, the example shows:
+            `<output>ori-word1 (word1-comment) ...</output>`
+            `<output_without_comment>word1 word2 ...</output_without_comment>`
+            I need to follow this structure exactly.
+        7.  Compare similar words provided in the input list (happy, glad, joyful, delighted, pleased, content, satisfied, cheerful, ecstatic). However, the sentence only contains "I", "am", "ecstatic", "to", "hear", "the", "good", "news". The other words from the list are synonyms of "ecstatic" or related adjectives. The instruction says "Compare the similar word of each word -> |point out> the key characteristic |of> each word". Since only specific words appear in the sentence ("I", "am", "ecstatic", "to", "hear", "the", "good", "news"), I should probably comment on the translated words present in the sentence. However, the provided list includes many synonyms for "ecstatic". The rule says "Compare the similar word of each word". This might mean I need to treat the target words as the ones appearing in the translation and annotate them distinguishing them from the synonyms listed in the prompt (like happy vs ecstatic).
+        *Correction*: The input sentence is fixed. I need to translate it. The comments should explain the meaning and distinguish it from synonyms if applicable, specifically focusing on the key characteristic of the original meaning.
+        *Crucial Rule Interpretation*: "Compare the similar word of each word -> |point out> the key characteristic |of> each word". This suggests I should compare the word in the sentence (e.g., 'ecstatic') with the synonyms provided in the header list (happy, glad, etc.) to highlight *why* 'ecstatic' is chosen or what specific nuance it holds compared to them.
+        *Formatting*: The example shows `<output>` containing the spaced text with comments like `I (我 (I 的注释)) am (是 (am 的注释)) ...`.
+        *Wait, looking closely at the format example:*
+        `<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ...</output>`
+        The "word1" inside the parentheses seems to be the translation or the original? The example says: `ori-word1 (word1-comment)`. But below it says `<output_without_comment>translation without comment</output_without_comment>`.
+        Let's look at the instruction: "Translate". Input-Output-Task.
+        Usually, in these tasks, "ori-word" means the original English word being translated.
+        So `I (我) am (是) ...`
+        But where does the comment go? `(translation-comment)`.
+        Let's re-read: `<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ....</output>`
+        Example: `<output>ori-word1 (word1-comment) ...</output>`
+        Wait, usually translation tasks require the *translated text* first.
+        Rule 6 says: "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language". This contradicts the example `<output>ori-word1 ...</output>` which keeps original words.
+        Let's look at the Example provided in the prompt text:
+        `example: "<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ori-word3 (word3-comment)..... ori-ordN (wordN-comment)</output>"`
+        This implies I should keep the original English words inside the `<output>` tag, followed by their translation and comment in parentheses?
+        OR does `ori-word1` mean "Original Word 1" and the content inside is `(translation-comment)`?
+        Let's parse: `word1 (word1-comment)`. If word1 is translated, it should be Chinese.
+        But the text says "Input-language: en", "Output-language: zh-CN".
+        Usually, for morphological/syntactic analysis tasks, you keep original words. For translation tasks, you give Chinese.
+        Given the instruction "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language", this suggests the text inside `<output>` should be Chinese (the translation) + comments.
+        However, the example shows `ori-word1`. This is ambiguous. Let's look at Rule 5: "Annotate the original meaning in the comment".
+        Let's look at the structure again: `word1 (word1-comment)`.
+        If `word1` is the translation (Chinese), then `I` becomes `(我)`? No, that would be empty.
+        Hypothesis A: `<output>I (我：表示... ) am (是：表示...) ...</output>` (Original English word + Translation + Comment).
+        Hypothesis B: `<output>我 (原词为 I，表示...) 是 (原词为 am，表示...) ...</output>` (Translation first).
+        
+        Let's check the rule text again carefully: "Output format: <output>input language (translation and output language comment) </output>". Wait, that text says `input language (translation and output language comment)`. This is confusing.
+        Let's look at the specific instruction line 6: "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language". This strongly suggests the main text inside `<output>` should be Chinese translation.
+        BUT, the example shows `ori-word1 (word1-comment)`. The term `ori` usually stands for Original.
+        Okay, let's look at the standard behavior for this specific template style often found in these datasets.
+        Usually: `Word1(Translation-Comment) Word2(Translation-Comment)`.
+        But wait, "translation and output language comment".
+        Let's assume the format inside `<output>` is: `EnglishWord (ChineseTranslation - ChineseComment)`.
+        Why? Because `ori-word` suggests keeping the original to compare.
+        Actually, re-reading Rule 1: "Allow optional comments, after Each word; ... <output>input language (translation and output language comment)</output>".
+        Okay, I will follow the Example structure strictly: `<output>original_word (translated_word-comment)</output>`.
+        Wait, the example says: `<output>ori-word1 (word1-comment) ori-word2 (word2-comment).....</output>`.
+        And "Note: each "(comment)" |is> optional".
+        Let's refine based on Rule 6: "wrap the output_translation_with_comment, which should be in the output language". This might mean the whole block is in zh-CN.
+        Okay, let's try to interpret "Translation and output language comment" inside the parentheses.
+        Maybe it means: `Chinese Translation (English Original - Meaning)`? No, Input Language is English.
+        Let's go with the most logical interpretation for a translation task with annotation:
+        `<output>I (我) am (是) ecstatic (狂喜的 / 极度激动的 - distinguish from happy etc)</output>`
+        But the prompt example says `ori-word1 (word1-comment)`.
+        If I write `I (我)` -> `word1` is `I`. `comment` is `我`.
+        Let's try to match the Example exactly regarding structure.
+        Example: `<output>ori-word1 (word1-comment) ...</output>`
+        This likely means: `EnglishWord (ChineseTranslation - Comment)`.
+        Wait, the example says `word1-comment`. It doesn't explicitly show translation inside the comment.
+        Let's look at Rule 1 again: "comments should |point out> the key characteristic".
+        
+        Okay, decision time: I will follow the structure `<English Word (Chinese Translation - Chinese Comment)>` because it allows identifying the word source and explaining the nuance.
+        Wait, if I strictly follow "Use <output> </output> to wrap the output_translation_with_comment", it might mean the *content* is the translation.
+        Let's look at `<output_without_comment>translation without comment</output_without_comment>`. This must be pure Chinese sentence.
+        So, the first block should probably also contain the Chinese sentence but split by original words for annotation? Or keep English with annotations?
+        Given "Translate", usually the result is Chinese.
+        However, the template `ori-word1` suggests keeping original words.
+        Let's assume the format is: `I (我：表示第一人称代词) am (是：系动词) ...`.
+        Actually, looking at similar tasks in this environment (often for LLM evaluation), the format usually expects:
+        `<output>I (我) am (是) ...</output>` where comments are optional.
+        But Rule 1 says "Allow optional comments". The prompt implies I *should* add them to distinguish meanings.
+        
+        Okay, I will output the translation with Chinese annotations in parentheses after each English word to explain the nuance (especially for 'ecstatic' vs 'happy', etc.).
+        Format: `<output>Word1(Translation-Comment) Word2(Translation-Comment)</output>`
+        And `<output_without_comment>I am ecstatic to hear the good news.</output_without_comment>` -> No, it should be Chinese translation without comments? "translation without comment". So `<output_without_comment>我听到好消息时非常狂喜。</output_without_comment>`.
+        
+        Wait, Rule 6 says: `Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language`.
+        This implies the text inside `<output>` should be Chinese translation + comments.
+        So `I` becomes `我 (I)`. Or `我 (原词：I，意思：...)`.
+        Let's stick to a clean format: `OriginalWord (Translation-Comment)`.
+        
+        Wait, I need to check the specific synonyms provided in the header. The user provided a list of words: happy, glad, joyful, delighted, pleased, content, satisfied, cheerful, ecstatic.
+        And links for them.
+        This implies I should comment on 'ecstatic' specifically, comparing it to the others (distinguishing the degree of emotion).
+        
+        Plan:
+        1. Translate sentence to Chinese: "我听到好消息时欣喜若狂。" or similar.
+        2. Split into tokens corresponding to input words: I, am, ecstatic, to, hear, the, good, news.
+        3. Format inside `<output>` as: `I (我：...) am (...) ecstatic (...) ...`.
+        4. Inside comment: Explain original meaning and distinguish from synonyms (happy vs ecstatic).
+        5. Format second tag `<output_without_comment>` with pure Chinese translation.
+        
+        Constraint Check: "Only allow one output." -> I need to produce the text containing both tags as per the example structure, but not literally two separate messages. One message block.
+        Wait, the prompt says "Note: Only allow one output." usually means don't provide explanations outside the tags or multiple attempts.
+        The example shows two tags `<output>` and `<output_without_comment>`. I should reproduce that structure.
+        
+        Specifics for 'ecstatic':
+        Original: 狂喜的 / 极度激动的.
+        Compare with happy (一般快乐), glad (高兴), joyful (快乐的).
+        Characteristic: Extreme joy.
+        
+        Let's draft the comments (in zh-CN):
+        I: 第一人称代词 (I)
+        am: 系动词 (am)
+        ecstatic: [狂喜的 - 极度强烈的喜悦，区别于 happy/glad 的普通快乐或 pleased 的被满足感]
+        to: 不定式标志 (to)
+        hear: 听/得知 (hear)
+        the: 定冠词 (the)
+        good: 好的 (good)
+        news: 消息 (news)
+        
+        Draft Translation: "我听到好消息时欣喜若狂。" or "我收到好消息感到非常高兴（极度）"。"Ecstatic" needs emphasis.
+        
+        Let's refine the format based on "input language (translation and output language comment)".
+        Maybe it means `I (我：第一人称代词)`?
+        Or `I(翻译 - 注释)`.
+        Example in prompt: `<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ...</output>`.
+        If `word1` is the comment? No, "translation and output language comment".
+        Okay, I will put Translation first in the main text if possible, or Original + Translation inside comment.
+        Re-reading Rule 6: `Use <output> </output> to wrap the output_translation_with_comment`. This suggests the content is the translation.
+        So maybe `<output>I am ecstatic ...</output>` is wrong because that's input language.
+        If it must be in Output Language, then `<output>我 (I) 是 (am) ...</output>`.
+        Let's combine: `Original Word (Translation-Comment)`.
+        
+        Okay, let's assemble.
+        
+        Input words: I, am, ecstatic, to, hear, the, good, news.
+        Translation: 我，是/感到，狂喜的，去听（不定式），听说/听见，消息。Wait "to hear" -> "听到". "the good news" -> "好消息".
+        
+        Sentence: I am ecstatic to hear the good news.
+        Chinese: 我得知好消息时欣喜若狂。
+        
+        Tags mapping:
+        I -> 我 (第一人称代词，表示说话者自己)
+        am -> 是 (系动词，连接主语和形容词)
+        ecstatic -> 欣喜若狂的 (程度极深，区别于 happy/glad 的普通喜悦)
+        to -> 去/表目的 (不定式标记，引出动作内容)
+        hear -> 听到 (感官动词，表示接收信息)
+        the -> 这 (定冠词，特指)
+        good -> 好的 (形容词，修饰消息性质)
+        news -> 消息 (名词，主要内容)
+        
+        Wait, "to" usually doesn't need a specific translation unless it's part of an infinitive structure translated as verb complement.
+        Let's keep the original order.
+        
+        Final check on formatting:
+        `<output>ori-word1 (word1-comment) ...</output>`
+        And `Note: Only allow one output.`
+        I will output the block exactly as requested with both tags.
+        
+        One detail: "Compare the similar word of each word".
+        For words like 'good', it has no specific synonyms in the list, but I can mention its basic meaning.
+        For 'ecstatic', I must compare with the provided list (happy, glad, etc.).
+        
+        Wait, looking at Rule 6 again: "Use <output> </
