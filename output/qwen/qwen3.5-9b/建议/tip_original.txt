@@ -1,0 +1,192 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Task:** Translate a specific English sentence into Chinese (zh-CN).
+    *   **Input Sentence:** "Here is a small tip for you."
+    *   **Input Language:** en (English)
+    *   **Output Language:** zh-CN (Chinese)
+    *   **Constraints & Rules:**
+        1.  Allow optional comments after each word pointing out key characteristics, especially original meaning.
+        2.  Output format must be:
+            ```xml
+            <output>ori-word1 (word1-comment) ori-word2 (word2-comment)...</output>
+            <output_without_comment>translation without comment</output_without_comment>
+            ```
+            *Note:* The example shows `<output>` and `<output_without_comment>` tags.
+            *Wait, looking closer at the rules:* "Only allow one output." vs the example showing two XML blocks.
+            Let's re-read Rule 1 & 2: "Output format: ... Note: Only allow one output." This is contradictory to the example which shows two distinct XML elements (`<output>` and `<output_without_comment>`).
+            Usually, in these types of prompts, the structure defined in the example takes precedence for formatting, but the "Only allow one output" might mean don't provide multiple translation variants (like formal/informal) or extra chatter. However, looking at the requested format:
+            ```
+            <output>ori-word1 (word1-comment)...</output>
+            <output_without_comment>translation without comment</output_without_comment>
+            ```
+            This looks like two separate XML tags. I need to follow the example structure provided in Rule 2's example, despite the "Only allow one output" note potentially conflicting with the presence of two tags (though they might be considered one logical response). I will interpret "One output" as one response block containing both required tags.
+            *Correction:* Often "Only allow one output" means don't wrap the whole thing in another container, just return the XML structure defined.
+        3.  Comments must be in the Output Language (zh-CN).
+        4.  Compare similar words -> point out key characteristics based on original meaning.
+        5.  Annotate original meaning in comments.
+        6.  Use `<output>` tags to wrap the translation with comment. (Wait, the example shows two tags: `<output>` and `<output_without_comment>`. I need to follow the example structure exactly).
+
+    *   **Specific Input-Output Task:** Translate "Here is a small tip for you."
+
+    *   **Dictionary/Thesaurus References:** The prompt provides Collins Dictionary thesaurus links. This implies I should consider nuances if there are synonyms, but since it's a direct translation task with word-by-word annotation, I need to translate the sentence while annotating each English word used in the source text with Chinese comments explaining its original meaning/context versus potential synonyms (implied by rule 3).
+
+    *   **Constraint Checklist:**
+        *   Translate "Here is a small tip for you." to zh-CN.
+        *   Format: XML-like structure with `<output>` and `<output_without_comment>`.
+        *   Comments inside parentheses after English words, in Chinese.
+        *   Content of comments: Point out key characteristics/original meaning vs synonyms.
+        *   Only one response block.
+
+    *   **Sentence Breakdown:**
+        *   Here (adv/here)
+        *   is (verb)
+        *   a (article)
+        *   small (adj)
+        *   tip (noun)
+        *   for (prep)
+        *   you (pronoun)
+
+    *   **Drafting Translation:**
+        *   Literal: 这里是给你的一个小小的建议。 (Here is a small suggestion for you.)
+        *   Common translation: 这是一个给你的一点小建议。 / 这里有一条给你的小提示。
+        *   "Tip" can be 建议 (advice), 提示 (hint/tip), 贴士 (tip). Given the context "small tip", "小贴士" or "小建议". Let's use a natural phrase.
+        *   Natural zh-CN: 这是一个给你的小小建议。 / 这里有一条给你的小贴士。
+        *   Let's stick closer to word-by-word mapping for annotation purposes but ensure natural flow in `<output>` tag? The example shows `ori-word1 (comment)...`. Usually, this means a space-separated translation corresponding to the source words.
+        *   Source: "Here is a small tip for you." (7 words).
+        *   Target structure: `here (comment) is (comment) a (comment) small (comment) tip (comment) for (comment) you (comment)` -> wait, Chinese doesn't map 1:1 perfectly.
+        *   Rule 2 Example: `<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ...</output>`
+        *   If I translate word-by-word into Chinese characters within the same structure, it might look like `here (这里是) is (是)...`. But standard practice for this format usually expects the translated text in that specific slot. However, looking at the instruction "Translate... Output: ", and the example `<output>ori-word1 (word1-comment)...</output>`.
+        *   Does `ori-word1` mean I must write the original English word or the translated Chinese word?
+        *   Example: `<output>word1 word2 word3..... wordN</output>` in `<output_without_comment>`.
+        *   So, inside `<output>`, it expects `(original-word (comment))...`. Wait, looking at the example provided in Rule 2:
+            `example: "<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ori-word3 (word3-comment)..... ori-ordN (wordN-comment)</output>"`
+            This implies I should keep the **Original Words** (English) in the first part, then add comments?
+            BUT the task is "Translate... Input-language: en Output-language: zh-CN".
+            Usually, this format requests the translation *and* the commentary.
+            If I look at `<output_without_comment>`, it says `word1 word2 word3..... wordN`. This usually implies the translated version without comments.
+            Let's re-read Rule 6: "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language"
+            Wait, Rule 6 says "wrap the output_translation_with_comment". It contradicts the example which shows `ori-word1`.
+            Let's look at the Example text again carefully:
+            `example: "<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ...</output>"`
+            Then `<output_without_comment>word1 word2 word3..... wordN</output_without_comment>`
+            
+            Interpretation A: The `<output>` block contains the original words with comments. The `<output_without_comment>` block contains the pure translation? No, that doesn't make sense if "output_translation" is inside `<output>`.
+            Interpretation B (Most likely for this specific prompt type): The `<output>` block should contain the **Translated Chinese text** with comments attached to each source word equivalent? Or just the Chinese translation where words are space-separated?
+            Actually, often in these tasks:
+            `<output>` contains: `这里 (这里是) 是 (表示存在) ...` (Mixed)
+            OR `<output>` contains the English source words with Chinese translations in parentheses?
+            Let's look at Rule 5: "Annotate the original meaning in the comment...".
+            
+            Let's try to match the format strictly based on the example provided in Rule 2, assuming the user wants the **Original English words** annotated with comments, OR they want the **Chinese Translation** annotated?
+            Rule 6 says: "wrap the output_translation_with_comment". This implies the text inside `<output>` should be the translation (Chinese).
+            However, the example shows `ori-word1`. `ori` likely means original.
+            If I write Chinese in `<output_without_comment>`, then `<output>` might be English + Comments? That contradicts "Output-language: zh-CN".
+            
+            Let's reconsider the standard pattern for this specific prompt template (often used for translation annotation tasks).
+            Usually:
+            `Here is a small tip` -> Translation: `这里有一个小建议`
+            Format:
+            `<output>here (这里的) is (是) ...</output>` -> This mixes source and target.
+            
+            Let's look at the instruction again: "Translate... Input-Language: en Output-Language: zh-CN".
+            Rule 2 Example: `"<output>ori-word1 (word1-comment)...`
+            If I output English words in `<output>`, it violates Output-language = zh-CN.
+            So likely, `ori-word1` is a placeholder in the example meaning "the first word of the translation".
+            Wait, `example: "<output>ori-word1 (word1-comment)..."` -> This strongly suggests keeping original text for annotation if not translating inside that slot.
+            BUT Rule 6 says "wrap the output_translation_with_comment".
+            Okay, let's assume the `<output>` tag should contain the Chinese translation where possible, but the example shows `ori-word`.
+            Actually, looking at the prompt's provided links (Collins Thesaurus), it seems to want semantic differentiation.
+            
+            Hypothesis: The user wants the **Chinese Translation** inside `<output_without_comment>`, and the detailed breakdown (Original Word + Chinese meaning/Comment) inside `<output>`? Or vice versa?
+            Rule 6: "Use <output> </output> to wrap the output_translation_with_comment".
+            Okay, I will put the Chinese translation with annotations inside `<output>`.
+            How to annotate Chinese? `ChineseWord (OriginalMeaningComment)`.
+            
+            Wait, looking at the Example again:
+            `<output>ori-word1 (word1-comment)</output>`
+            `<output_without_comment>word1 word2 word3.....</output_without_comment>`
+            
+            If `word1` in `<output_without_comment>` is the translation (Chinese), then `<output>` should probably be the same text with comments.
+            But the example says `ori-word1`. This suggests keeping original English in the annotated version?
+            Constraint 2 says: "Input-language: en Output-language: zh-CN".
+            
+            Let's try to find a consistent interpretation that satisfies all constraints including "Output-Language: zh-CN".
+            If `<output>` contains `EnglishWord (Comment)`, the content is English. This violates Output-Language.
+            So, `<output>` must contain `ChineseWord (Comment)` or just be formatted differently.
+            
+            Alternative interpretation (Common in NLP tasks):
+            `<output>` = Source text + Comments (for analysis).
+            `<output_without_comment>` = Target Translation (if the task is translation).
+            BUT Rule 6 says "wrap the output_translation_with_comment". This implies both are translation-based.
+            
+            Let's go with the safest bet for Translation Tasks:
+            `<output>` contains the Chinese translation words separated by spaces, with comments in parentheses explaining the original meaning/nuance (as requested: "comments should point out the key characteristic... of each word").
+            `<output_without_comment>` contains the clean Chinese translation.
+            
+            Wait, looking at the Example again: `ori-word1`. If I strictly follow the example format structure but change `ori` to `translated-word`?
+            Actually, maybe I should keep the English words in `<output>` for semantic comparison (Rule 3 "Compare the similar word of each word") but Rule 6 says "wrap the output_translation_with_comment".
+            
+            Okay, let's look at the instruction: "Translate... Output-language: zh-CN".
+            If I put English words inside `<output>`, it's not zh-CN.
+            So I will translate the text into Chinese within the XML tags.
+            Format: `这里 (指当前位置) 是 (系动词) ...` ?
+            No, that looks weird.
+            Maybe the example means: `here (翻译：这里是)`?
+            
+            Let's check Rule 5: "Annotate the original meaning in the comment".
+            So: `这里 (表示‘在此处’的指示代词)`.
+            
+            Okay, Decision:
+            `<output>` will contain: `词语1 (中文注释解释原意及特征) 词语2...`
+            `<output_without_comment>` will contain: `词语1 词语2...` (The clean Chinese translation).
+            
+            Let's refine the translation of "Here is a small tip for you." to Chinese.
+            Common translation: "这里有一个给你的小建议。" or "这是一个给你的小贴士。"
+            Word count: Here, is, a, small, tip, for, you (7 words).
+            Chinese characters might not match 1:1.
+            Mapping:
+            Here -> 这里 (or implied)
+            is -> 是 (or implied)
+            a -> 一个 (量词)
+            small -> 小小的 (小)
+            tip -> 建议/提示 (tips)
+            for -> 给...的 (preposition)
+            you -> 你 (pronoun)
+            
+            If I must output space-separated words matching the source structure:
+            `这里 是 一个 小小 的建议 给 你`
+            But "a" and "for" are often merged.
+            To maintain the format, I will split the sentence into logical word units similar to English segmentation but translated.
+            
+            Let's try: `Here (在此) is (存在) a (一) small (小) tip (建议) for (为了) you (你)` -> This puts English words inside `<output>` which violates Output-Language rule.
+            
+            Re-reading Rule 6 carefully: "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language"
+            So the text INSIDE `<output>` must be Chinese.
+            Example in Rule 2 shows `ori-word1`. This is confusing given the conflict with Output-language. I will prioritize the "Output-language: zh-CN" and Rule 6 over the example's literal `ori` string, interpreting `ori-word` as "source word equivalent in translation".
+            Wait, no. The instruction says "Translate... Input en Output zh-CN".
+            If I put Chinese words with comments, it satisfies Rule 6.
+            
+            Let's draft the content:
+            Source: Here is a small tip for you.
+            Translation: 这里有一条给你的小建议。
+            Segmentation: 这里 (指代当前位置) 是 (动词，表示存在或判断) 一 (数词，相当于 'a') 个 (量词) 小 (形容词，small 的原意) 的 (助词) 建议 (名词，tip 的建议义) 给 (介词，for 的功能) 你 (代词，you).
+            Too many words?
+            Let's keep it closer to source word count if possible.
+            `这里` (Here) `是` (is) `一个` (a) `小小` (small) `的` (implied article/structure) `提示` (tip) `给` (for) `你` (you).
+            
+            Better Chinese natural flow: `这是一个给你的小贴士。`
+            Let's try to map source words:
+            Here -> 此处 (or 这里)
+            is -> 有 (exist) or 是 (be)
+            a -> 一 (量词 included)
+            small -> 小 (原意)
+            tip -> 建议 (advice) vs 提示 (hint). Original meaning of 'tip' can be advice, hint, or trick. Context suggests advice/hint.
+            for -> 给
+            you -> 你
+            
+            Wait, Rule 3: "Compare the similar word of each word". This implies I should mention in the comment why this word is chosen (e.g., tip vs advice).
+            
+            Let's construct the output string.
+            `<output>`: `这里 (表示“在此处”，指示地点) 是 (系动词，表明存在或判断) 一个 (量词组合 'a' 的翻译) 小 (形容词 small 的核心语义，区别于 big) 提示 (名词 tip 的主要含义之一，侧重于建议或信息，区别于 trick 或 trickery) 的 (结构助词) 给 (介词 for 的功能，表示对象) 你 (代词 you，第二人称单数)`
+           

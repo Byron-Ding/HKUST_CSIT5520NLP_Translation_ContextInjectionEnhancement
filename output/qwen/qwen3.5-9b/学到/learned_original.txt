@@ -1,0 +1,175 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Input:** "I have learned it before."
+    *   **Input Language:** English (en)
+    *   **Output Language:** Chinese (zh-CN)
+    *   **Task:** Translate with annotations (comments).
+    *   **Rules:**
+        1.  Allow optional comments after each word pointing out the key characteristic/original meaning.
+        2.  Output format:
+            `<output>ori-word1 (comment) ori-word2 (comment)...</output>`
+            `<output_without_comment>translation without comment</output_without_comment>`
+        3.  Only allow one output block (but the example shows two tags: `<output>` and `<output_without_comment>` within a single response structure, likely meaning the final JSON-like or text structure must contain both, but the prompt says "Only allow one output". Looking closely at the example:
+            `example: "<output>ori-word1 (word1-comment)...</output><output_without_comment>word1 word2...</output_without_comment>"`
+            This implies the response should contain *both* tags combined in one block, or the user wants me to follow that structure strictly. The instruction "Only allow one output" usually means don't provide multiple variations like JSON vs plain text, but follow the specific format requested which includes both versions inside the single response payload.
+        4.  Comments must be in Output Language (zh-CN).
+        5.  Compare similar words/characteristics to point out key features based on original meaning.
+        6.  Annotate the original meaning in the comment.
+        7.  Use `<output>` and `<output_without_comment>` tags.
+
+2.  **Analyze the Input Sentence:** "I have learned it before."
+    *   Words: I, have, learned, it, before.
+    *   Target Translation (zh-CN): 我之前已经学过它了。 / 我以前学过那个了。 (Need to choose appropriate phrasing).
+
+3.  **Analyze the Rules for Comments:**
+    *   Comments need to highlight key characteristics/original meanings, especially distinguishing from synonyms.
+    *   Reference provided Collins links suggest looking up nuances for specific words like "learned", "have", "before", "it".
+    *   Format: `Word (comment)` where Word is the target translation and comment is in Chinese explaining the original meaning/nuance.
+
+4.  **Drafting Translation & Comments:**
+
+    *   **I**: 我。(Self-reference). Comment: 第一人称单数代词，指说话者自己。
+    *   **have**: 已经。(Auxiliary verb indicating perfect aspect). Comment: 助动词完成时态，强调动作已完成，区别于过去时 have done vs present simple。
+    *   **learned**: 学 / 学会。(Verb, past participle). Comment: 表示“学习/掌握”的动作，原意侧重于通过教导或经验获取知识/技能 (acquire knowledge/skill)，区别于 study (study) 侧重学习过程。
+    *   **it**: 它 / 那个。(Pronoun). Comment: 代词，指代前文或特定事物，此处无实义指向具体对象，仅作语法连接。
+    *   **before**: 以前 / 之前。(Adverb/Preposition). Comment: 表示时间上在现在或说话时刻之前 (prior to now)，区别于 after 或在过去某时间点之前。
+
+    *   Refining "learned": The input prompt lists "learned studied". Collins links include thesaurus for learned. Need to emphasize original meaning vs synonyms (like study).
+    *   Refining "have": Focus on perfect aspect marker.
+    *   Refining "before": Focus on time relation.
+
+5.  **Addressing the "Only allow one output" Rule:**
+    The example shows two tags: `<output>` and `<output_without_comment>`.
+    Instruction says: "Use <output> </output> to wrap the output_translation_with_comment".
+    It also shows the example containing `<output_without_comment>` as well.
+    So the final structure should be:
+    `<output>I (我) have (已经) learned (学/学会) it (它) before (之前)</output>`
+    `<output_without_comment>我已经学过它了</output_without_comment>` (Wait, the example format shows "word1 word2..." but for Chinese output, should I keep the segmentation? The input is segmented by spaces in the instruction "ori-word1...". Let's look at the example again: `"<output>ori-word1 (word1-comment) ori-word2 (word2-comment)...</output>"`.
+    So I need to map the English words to Chinese translation with comments.
+    Format: `I (我) have (已) learned (学) it (它) before (前)` roughly.
+    But standard translation usually doesn't keep word-for-word if grammar changes (e.g., "have" becomes part of the aspect). However, the instruction says "Translate Input-Output-Task". And the format example shows `ori-word1`. Since input is English, `ori-word` should be the Chinese translation corresponding to that English word.
+    Actually, looking at `example: "<output>ori-word1 (word1-comment) ori-word2 (word2-comment)...</output>"`.
+    The `ori-word` part usually implies the target word in the output language.
+    Let's structure it: `I (我) have (已) learned (学/学会) it (那) before (之前)` or just space separated Chinese words?
+    Usually, for word-aligned translation tasks with comments, keeping the segmentation is expected.
+    Translation: "我之前已经学过它了" -> 按词对齐：I (我) have (已) learned (学过) it (它) before (以前).
+    Without comment version needs to be natural Chinese sentence.
+
+6.  **Developing Specific Comments based on Rules (3 & 4 & 5):**
+    *   **learned**: Key characteristic: acquisition of knowledge/skill. Original meaning: past participle, indicates completion of learning process. Distinction from 'studied' (study). Collins thesaurus links suggest synonyms like knowledgeable, acquired. I will note it means "acquired knowledge" specifically.
+    *   **have**: Key characteristic: perfect aspect auxiliary. Original meaning: indicate state resulting from past action.
+    *   **before**: Key characteristic: time reference relative to present/past moment.
+    *   **it**: Key characteristic: neutral pronoun for object.
+    *   **I**: Key characteristic: first person subject.
+
+7.  **Finalizing the Output Structure:**
+    Must contain `<output>` and `<output_without_comment>`.
+    Comments in zh-CN.
+    Only one output block (containing both tags).
+
+    Let's draft the content.
+    Input: I have learned it before.
+    
+    Word | Translation | Comment (Original Meaning/Characteristic)
+    --- | --- | ---
+    I | 我 | 第一人称单数代词，指说话者本人。
+    have | 已 | 助动词构成完成时，强调动作已完成并影响现在。
+    learned | 学过 | 及物动词过去分词，原意为获取知识或技能，区别于 study 强调过程，此处侧重掌握结果。
+    it | 它 | 宾格代词，指代前面提到的事物或概念，无具体实义指向。
+    before | 以前 | 时间副词/介词，表示动作发生在当前时刻之前的时间点。
+
+    Combined for `<output>`: I (我) have (已) learned (学过) it (它) before (以前)
+    Wait, standard Chinese translation flow might merge "have learned". But the rule says `ori-word1...`. I should stick to word alignment if possible to match the instruction style, or provide a natural segmentation that maps back. Given the example `word1 word2 word3`, I will use space-separated Chinese translations for each English word.
+    Sentence: "我之前已经学过它了" -> I(我) have(已) learned(学过) it(它) before(以前).
+    Or strictly: 我 (我) 已经 (已) ...
+    Let's stick to the words provided in input sentence split by spaces: I, have, learned, it, before.
+    
+    `<output_without_comment>` should be natural Chinese: "我之前学过那个了" or "我已经学过它了". Since it's a translation task, "我之前已经学过它了" is closer word-for-word order but "我已经学过它之前" makes no sense. "I have learned it before" usually translates to "我以前学过它了" or "我已经学过这个了". Let's go with "我之前已经学过它了" to match the temporal marker clearly. Or simpler: "我之前学过它了".
+    Better: "我已经学过它之前" (No). "我在此之前已学过它" (Too formal).
+    Common translation: "我以前学过这个。" or "我已经学过它了。"
+    Let's choose: "我之前已经学过它了。"
+
+    Wait, check Rule 1 & 6 again. `Output format: <output>input language (translation and output language comment)</output>`. Wait, the example says `<output>ori-word1 (word1-comment)...</output>`.
+    The instruction text says "Use <output> </output> to wrap the output_translation_with_comment".
+    So the content inside `<output>` should be the translation *with* comments.
+    Inside `<output_without_comment>`, just the translation.
+
+    Let's refine the comments to be specific about original meaning and synonyms (Rule 3).
+    learned: 强调掌握知识/技能（区别于 study 仅指学习过程）。
+    have: 完成时态标记（区别于单纯过去时 did）。
+    before: 相对于现在的时间点（区别于 ago 具体时长）。
+
+    Wait, the prompt asks for `Output-language: zh-CN`.
+    The example shows `word1 (word1-comment)`.
+    So inside `<output>`, I should write: `I (我 - 第一人称代词，指说话者本人) have (已 - 助动词完成时，强调动作已完成) learned (学过 - 获取知识技能，区别于 study) it (它 - 宾格代词指代对象) before (以前 - 表示当前时刻之前)`
+    Inside `<output_without_comment>`: `我之前已经学过它了` (Wait, if I use single characters for translation to match word count? Or full words? Usually natural segmentation is better. But if the format implies word-for-word mapping, I should keep space separation.)
+    Let's look at the example again: `<output>ori-word1 (word1-comment) ori-word2 (word2-comment)...</output>`. This suggests `ori-word` refers to the *source* word or the *target* word? "input language (translation and output language comment)" in the description is confusing. But the example shows `ori-word1`. Usually, this means SourceWord (TargetTranslation). But since I need to display the translation with comments, and it's Chinese output...
+    Actually, looking at "Input-language: en", "Output-language: zh-CN". The `<output>` string inside should probably look like `I (我-comment) ...`? No, that mixes languages.
+    Re-reading Rule 1: "comments should |point out> the key characteristic...".
+    Example: `"<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ori-word3 (word3-comment)..... ori-ordN (wordN-comment)</output>"`
+    This implies the text inside `<output>` contains the *target language words* plus comments? Or source words plus translation/comments?
+    Given "Output-language: zh-CN", the visible characters should likely be Chinese. But if I write `I (我...)`, it mixes en/zh.
+    Standard practice for this type of prompt ("Translate"): Output is usually in Target Language.
+    If I put `I` inside, it's Source.
+    Let's assume the `<output>` field needs to contain the *Translated Words* followed by comments about their original meaning.
+    So: `(我) (已) ...`? No, the example shows `ori-word1`. This might mean the literal translation text acts as `ori-word`.
+    Actually, if the output language is Chinese, writing "I" inside the translation block is wrong for a translation task unless it's a glossing task.
+    However, the prompt says "Translate". So `<output>` should contain the Chinese translation with comments attached to the semantic units.
+    Format: `我 (我 - 第一人称) ...`
+    Wait, if I use `I (我...)`, the viewer sees English words. If I use `(我...)` without 'I', it's not aligned.
+    Let's interpret `<output>` as `TargetWord1 (Comment on OriginalMeaning) TargetWord2...`.
+    So: `我 (第一人称代词，指说话者本人) 已 (助动词构成完成时，强调动作已完成) 学过 (及物动词过去分词，获取知识技能，区别于 study) 它 (宾格代词，指代事物对象) 以前 (时间副词，表示现在之前)`
+    
+    Wait, checking the example again: `<output>ori-word1 (word1-comment)...</output>`.
+    If Input is "I have learned...", Output language is zh-CN.
+    Maybe the instruction implies keeping the original English word in the comment section? No, comments are in output language.
+    Okay, let's assume the structure `Word_Translation (Comment)`.
+    
+    Refined Plan:
+    `<output>` contains Chinese words separated by spaces, with comments in parentheses explaining the original meaning/nuance of that word (in Chinese).
+    `<output_without_comment>` contains the clean Chinese sentence.
+
+    Sentence: "I have learned it before."
+    Translation: "我之前已经学过它了。" (Or split: 我 已 学过 它 以前)
+    Let's align to English words for granularity as per the example style, but ensure naturalness in comments.
+    Actually, "have" is auxiliary, usually merged or translated as aspect. "Learned" is participle.
+    To respect word alignment strictly based on input split:
+    I (我)
+    have (已/了 - 完成时标记，强调动作已完成) -> Comment needs to be concise. Let's say "(已 - 助动词构成完成时，表示状态)。"
+    learned (学过 - 获取知识或技能，区别于 study 的过程)
+    it (它 - 代词，指代特定对象)
+    before (之前 - 时间状语，指现在之前的某个时间点)
+    
+    Clean output: "我之前已经学过它了。" or "我学过它之前。" -> No, "以前". "我之前学过它了".
+
+    Let's finalize the text.
+
+    Wait, Rule 6: "Use <output> </output> to wrap the output_translation_with_comment".
+    It implies I might not need `<output_without_comment>`?
+    But the example shows both tags in one string block. `example: "<output>...</output><output_without_comment>...</output_without_comment>"`.
+    And Rule 2 says: "Output format: Note: each "(comment)" |is> optional ... Format is: <output>...<output_without_comment>...</output_without_comment>".
+    Okay, I must include both tags.
+
+    Wait, the example text `"<output>ori-word1 (word1-comment)...</output>"` shows that `ori-word` might just be a placeholder for "The translated word".
+    Let's write: `我 (第一人称代词) 已 (完成时助动词) ...`.
+    
+    Wait, rule 6 says "Use <output> </output> to wrap the output_translation_with_comment".
+    Does it mean I should NOT use `<output_without_comment>`?
+    Looking at Rule 2: `Format is: <output>...<output_without_comment>...</output_without_comment>`.
+    Okay, I will follow Rule 2's format structure.
+
+    Comments need to point out key characteristic based on original meaning (Rule 3 & 4).
+    learned: Original meaning acquire knowledge. Synonym distinction (study vs learn).
+    before: Original meaning prior to present moment.
+
+    Final check on constraints:
+    - zh-CN comments.
+    - One output block.
+    - Tags `<output>` and `<output_without_comment>`.
+    - Comments explain original meaning and distinguish synonyms.
+
+    Let's draft the content carefully.
+
+    `I` -> 我 (第一人称代词，指说话者本人，区别于 he/she)
+    `

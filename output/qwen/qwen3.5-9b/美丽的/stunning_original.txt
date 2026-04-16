@@ -1,0 +1,97 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Input Words:** beautiful, gorgeous, stunning, breathtaking, magnificent, splendid, exquisite.
+    *   **Input Sentence:** "The view is stunning"
+    *   **Target Language:** zh-CN (Chinese).
+    *   **Task:** Translate the input sentence using the provided list of words (or select the best one based on context, but the task implies translating the concept using these synonyms with annotations, or simply translating the specific input sentence while incorporating the word "stunning" from the list? Let's look at the Input-Output-Task description again).
+    *   **Input-Output-Task:** Translate.
+    *   **Input:** "The view is stunning"
+    *   **Input-language:** en
+    *   **Output-language:** zh-CN
+    *   **Rules:**
+        1.  Allow optional comments after each word (distinguishing original meaning from synonyms, in Output Language/zh-CN).
+        2.  Format: `<output>input language (translation and output language comment)</output>` -> Wait, the example shows: `"<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ...</output>"`. But the Input is a sentence "The view is stunning". The prompt lists several adjectives. Usually, in such tasks, the model should translate the specific input sentence using the relevant word from the list, OR translate the entire list as options?
+        *   Looking at the example: `<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ...</output>`. This suggests translating a string where multiple words might be involved. However, the Input is a single sentence "The view is stunning".
+        *   Re-reading Rule 6: "Use <output> </output> to wrap the output_translation_with_comment...".
+        *   Looking at the input list: `beautiful gorgeous stunning breathtaking magnificent splendid exquisite`. These are synonyms. The input sentence uses "stunning".
+        *   Hypothesis 1: Translate the sentence, highlighting "stunning" with a comment, and perhaps mention the other words as related vocabulary options?
+        *   Hypothesis 2: Translate each word in the list separately? No, the Input is a sentence.
+        *   Hypothesis 3: The user wants the translation of the input sentence, but specifically annotating the word "stunning" and its synonyms from the provided list to distinguish meanings (Rule 3: Compare similar words).
+        *   Let's look at the example format again: `"<output>ori-word1 (word1-comment) ori-word2 (word2-comment)...</output>"`. This implies a space-separated sequence. But the input is a sentence.
+        *   Maybe the task is to translate the word "stunning" using the other words as comparisons? No, Input is "The view is stunning".
+        *   Okay, let's interpret Rule 6 closely: "wrap the output_translation_with_comment". If I just translate the sentence, where do I put the comments for the other synonyms (beautiful, gorgeous...) which are not in the sentence?
+        *   Perhaps the instruction implies translating the *list* of words provided in the first line? But the Input-Output section says "Input: The view is stunning".
+        *   Actually, usually in these types of prompts (translation with vocabulary annotation), the expectation is often to translate the target word ("stunning") and annotate it against its synonyms, OR translate the whole sentence and annotate the key adjective.
+        *   However, Rule 1 says: "Allow optional comments, after Each word". Example shows `ori-word1 (comment)`. This suggests translating words individually. But the Input is a sentence.
+        *   Let's assume the task is to translate the sentence "The view is stunning" but because the prompt provided a list of synonyms, I should probably annotate the specific translation of "stunning" and perhaps note the nuances compared to the other provided synonyms in the comment section, OR simply translate the words in the list provided at the top as if they were the input?
+        *   Wait, the Input section says: `Input: The view is stunning`. It doesn't say translate the list. It says Translate the Input.
+        *   But Rule 3 says "Compare the similar word of each word -> point out the key characteristic". This implies I should use the context of the provided list to annotate "stunning".
+        *   Let's look at the format example again: `"<output>ori-word1 (word1-comment) ..."</output>`. This looks like a glossary format. But the input is a sentence.
+        *   Maybe the intention is: Translate the word "stunning" from the sentence, but include the other synonyms in the comparison within the comment?
+        *   Actually, looking at the first line of the prompt: `beautiful gorgeous stunning breathtaking magnificent splendid exquisite`. This looks like a vocabulary list provided for context.
+        *   Decision: I will translate the input sentence "The view is stunning". In the translation part ("stunning"), I will add comments that explain its specific nuance compared to the other synonyms provided in the prompt list (as per Rule 3). I will also include the other translations? No, that makes no sense for a sentence translation.
+        *   Alternative Decision: The user wants me to translate the specific word "stunning" using the format, but maybe they want the whole list translated with comments?
+        *   Let's re-read the Input-Output-Task section carefully. `Input: The view is stunning`. `Output: `. This explicitly asks for the translation of the input sentence.
+        *   However, Rule 1 says "after Each word". Example: `ori-word1 (word1-comment)`. This format suggests a space-separated list of words. If I translate the sentence as "The view is stunning", that's one phrase.
+        *   Maybe I should translate the synonyms provided in the header as well? No, Input says "Input: The view is stunning".
+        *   Okay, let's look at Rule 6 again: "Use <output> </output> to wrap the output_translation_with_comment".
+        *   Maybe the expectation is to translate each word in the vocabulary list provided at the top, because the prompt starts with that list? But the Input block explicitly says `Input: The view is stunning`.
+        *   Let's compromise based on standard "translation with nuance" tasks. I will translate the input sentence. For the specific adjective "stunning", I will provide a comment that distinguishes it from the other words in the provided list (beautiful, gorgeous, etc.), as per Rule 3 ("Compare the similar word of each word").
+        *   But the format example shows multiple words: `ori-word1 (comment) ori-word2...`. This implies translating a sequence of words. If I only output one sentence, does it fit?
+        *   Maybe I should translate the input sentence into Chinese, but split it into tokens and annotate the key word "stunning" while listing the other synonyms in the comment for comparison?
+        *   Actually, looking at the prompt structure, it looks like a dataset sample where the Input is a sentence containing a target vocabulary item ("stunning"), and the model needs to translate that specific item or the sentence while annotating.
+        *   Given the strict format rule: `<output>input language (translation and output language comment)</output>` ... wait, the example says `"<output>ori-word1 (word1-comment) ori-word2 (word2-comment)...</output>"`. It says `input language` in Rule 6 description but then shows English words in the example inside `<output>`. Wait, Rule 6 says "wrap the output_translation_with_comment, which should be in the output language". So the text inside `<output>` should be Chinese (zh-CN), not English.
+        *   Example: `"<output>beautiful (形容词：美丽) gorgeous (形容词：华丽)...</output>"`.
+        *   But my Input is "The view is stunning". This is a sentence, not a list of words.
+        *   If I must follow the format `word1 (comment) word2 (comment)...`, how do I translate a sentence?
+        *   Maybe I should treat the key word "stunning" as the primary focus and translate the rest normally? Or perhaps the user actually wants me to translate the list of synonyms provided in the very first line, despite the Input block saying "The view is stunning"?
+        *   Let's look at the input text provided: `beautiful gorgeous stunning breathtaking magnificent splendid exquisite` followed by links. Then `Input-Output-Task`.
+        *   If I only translate "The view is stunning", it becomes "景色令人惊叹". Where do the other words go?
+        *   Rule 3 says "Compare the similar word of each word -> point out the key characteristic". This implies I should treat the synonyms provided in the first line as the set to compare.
+        *   Okay, most likely, the task is: Translate the word "stunning" (from the sentence) but acknowledge the other words in the comment to distinguish meanings, OR translate all the words in the list with comments because that's what the header looks like (a vocabulary list).
+        *   However, usually "Input-Output-Task: Translate" with `Input: The view is stunning` means translate that sentence.
+        *   Let's try to adapt the format to a sentence translation where the key adjective is annotated against its synonyms from the list.
+        *   Actually, there is another interpretation: The prompt lists words, then asks to translate "The view is stunning". But Rule 1 says "Allow optional comments, after Each word". Example shows a space separated list of translated words. This suggests the Output should be a glossary or a translation of the vocabulary list itself?
+        *   No, Input is clearly a sentence.
+        *   Okay, I will translate the input sentence `The view is stunning` into Chinese. For the word "stunning", I will add a comment distinguishing it from the other synonyms provided in the prompt header (beautiful, gorgeous, etc.).
+        *   But the format example `ori-word1 (comment) ori-word2...` suggests multiple words. If I translate the sentence as `景色令人惊叹 (stunning: 惊艳的，比beautiful更强烈...)`, it doesn't fit the `word word` pattern perfectly.
+        *   Let's look at Rule 6 again: "Use <output> </output> to wrap the output_translation_with_comment". It doesn't explicitly force the exact format of the example if the input isn't a list of words, but Rule 1 defines the format for comments.
+        *   I will prioritize translating the sentence accurately. To satisfy the "Each word" rule and the comparison rule, I might break down the sentence into significant words? No, that's unnatural.
+        *   Better approach: Translate the sentence, and in the comment attached to "stunning", reference the other words from the list to define the nuance.
+        *   Wait, looking at the example again: `"<output>ori-word1 (word1-comment) ...</output>"`. This looks like it expects a sequence of translated English words? Or Chinese words representing them? Rule 6 says "which should be in the output language". So Chinese.
+        *   If I translate the list of words provided at the top, that fits the format perfectly. But the Input section says `Input: The view is stunning`.
+        *   Okay, there is a contradiction between the Vocabulary List (Header) and the Task (Translate Sentence).
+        *   Usually, in these specific prompt engineering tasks, if there's an "Input" block, you translate the Input. If there's a "Vocabulary List", sometimes that dictates the content to annotate.
+        *   Given Rule 3: "Compare the similar word of each word -> point out the key characteristic". This strongly suggests I should discuss the synonyms provided in the header (beautiful, gorgeous, etc.).
+        *   Maybe the Output should translate the vocabulary list AND include the sentence translation? No.
+        *   Okay, let's assume the Input is the source text to be translated. The Header is context for nuance.
+        *   So: Translate "The view is stunning". Format: `the view (view-comment) is (is-comment) stunning (stunning-comment with comparison)`.
+        *   But the example uses English words as placeholders `ori-word1`. Rule 6 says output should be in output language (zh-CN).
+        *   So: `景色令人惊叹 (stunning：惊艳/壮丽，区别于beautiful等)`?
+        *   Let's refine the comment content based on Rules: "point out > the key characteristic, especially the original meaning". "Compare the similar word... point out the key characteristic".
+        *   Okay, I will translate the sentence. For the word "stunning", I will insert a comment explaining its position in the spectrum of words provided (beautiful -> gorgeous -> stunning/breathtaking...).
+        *   Wait, if I follow the Example strictly: `word1 (comment) word2 (comment)`.
+        *   If I translate the sentence as a single phrase "The view is stunning", it's one unit.
+        *   Let's try to map the example structure to the translation of the input words. Input: "The view is stunning". Words: The, view, is, stunning.
+        *   Output: `the (无) view (景象) is (是) stunning (stunning-惊艳的/壮观的，比beautiful更强调视觉冲击力，类似breathtaking)`?
+        *   This fits Rule 1 ("Allow optional comments, after Each word"). It fits Rule 6 ("wrap the output... in <output>"). It fits Rule 3 (Compare similar words).
+        *   Wait, "The", "is" are usually not commented on.
+        *   Okay, Plan:
+            1. Translate sentence to zh-CN.
+            2. Break into key lexical items? Or just translate the whole thing and add one comment at the end? Rule 1 says "after Each word". Example shows `ori-word1 (word1-comment)`. This implies separating by spaces.
+            3. If I treat it as a sequence of English words translated to Chinese with comments, it's very granular.
+            4. However, usually for translation tasks in this specific format (likely from a dataset like "Translation with Vocabulary Explanation"), the goal is often to translate the list of synonyms provided in the first line *OR* translate the input sentence while highlighting the vocabulary words.
+            5. Given the explicit `Input: The view is stunning`, I will focus on translating this sentence. But since the Header lists specific synonyms, I need to use them in the comment.
+            6. Let's look at the instruction "Output: ". Then Rules.
+            7. Okay, I will translate the words in the input sentence ("The", "view", "is", "stunning") into Chinese with comments for the adjectives specifically comparing against the list. For functional words (The, is), optional comments or no comments.
+            8. Wait, Rule 1 says "Allow optional comments". So `the` can be `(无)`. But to make it look like the example `word (comment)`, I should probably just output the Chinese translation of the significant words and annotate the key adjectives from the header list if they appear?
+            9. No, "input language" inside `<output>` in Rule 6 description might be a typo or generic. Rule 2 says "Comment are in Output-Language". Rule 6 says "wrap the output_translation_with_comment". So Chinese inside `<output>`.
+            10. Okay, I will translate the sentence word-by-word roughly to match the `word (comment)` format.
+            11. Wait, looking at the first line again: `beautiful gorgeous stunning breathtaking magnificent splendid exquisite`. These are the vocabulary set. The input sentence uses one of them ("stunning").
+            12. Maybe I should translate *all* the words in the header list with comments to show the nuance, as per Rule 3? No, that ignores the Input sentence "The view is stunning".
+            13. Let's stick to translating the Input Sentence but enriching the comment of "stunning" with the comparison. To satisfy "After Each word", I will separate the translated components.
+            14. Wait, standard Chinese translation of a sentence doesn't have spaces between words usually. But Rule 6 Example shows `word1 (comment) word2`. This implies a space-separated string where each element is a translated concept + comment.
+            15. Okay, I will treat "The view is stunning" as the sequence.
+            16. Words: The -> (无), view -> (景色), is -> (是), stunning -> (stunning - 惊艳的/震撼的，比beautiful更强烈，类似breathtaking).
+            17. Actually, to make it cleaner and more useful for the prompt

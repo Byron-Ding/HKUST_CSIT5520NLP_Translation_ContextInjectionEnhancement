@@ -1,0 +1,140 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Task:** Translate a given input sentence ("Nothing is immortal") from English (en) to Chinese (zh-CN).
+    *   **Input Words:** The prompt lists several words at the beginning: "permanent eternal everlasting perpetual timeless enduring immortal". These seem to be potential synonyms or related concepts, but the actual input sentence contains only "Nothing" and "is" and "immortal". However, looking at the provided dictionary links (Collins Thesaurus), it seems the user wants me to treat the list of words ("permanent", "eternal", etc.) as the vocabulary pool to choose from or annotate against, OR they are simply providing context for translation/annotation tasks related to "immortal" specifically.
+    *   **Wait, re-reading the Input-Output-Task section:**
+        *   Input: `Nothing is immortal`
+        *   Input-language: `en`
+        *   Output-language: `zh-CN`
+        *   The preamble lists words like "permanent", "eternal", etc., and links to Collins Thesaurus for "Nothing", "is", "immortal".
+        *   This suggests I need to translate the sentence, but potentially focus on the word choices. However, the translation task is straightforward: Translate "Nothing is immortal" to Chinese.
+        *   The Rules specify a specific output format involving comments for each translated word (synonym distinction).
+        *   **Crucial Observation:** The preamble lists synonyms for "immortal" (permanent, eternal, etc.). The input sentence uses "immortal". The rules ask to compare similar words of *each word* in the input to distinguish original meaning. But the input sentence is short. Usually, in these tasks, I need to translate the words present in the input sentence.
+        *   However, looking at the preamble list: `permanent eternal everlasting perpetual timeless enduring immortal`. These are all related to "timelessness/undead". The input sentence contains "immortal". The other words (Nothing, is) are function words/content words too.
+        *   Rule 3: Compare the similar word of each word -> |point out> the key characteristic of each word.
+        *   Rule 4: Characteristic based on original meaning; optional for extension.
+        *   Rule 5: Annotate the original meaning in the comment, which shown as/in the output language.
+        *   This implies I should select the best translation for each word and add comments explaining why or distinguishing it from synonyms like "permanent", "eternal", etc., especially for "immortal".
+        *   Let's look at the structure: `<output>ori-word1 (word1-comment) ... </output>`
+        *   Input words to translate: `Nothing`, `is`, `immortal`.
+        *   Wait, the preamble lists "permanent eternal everlasting perpetual timeless enduring immortal". Is the task to translate the *list*? No, the Input-Output-Task section says: "Input: Nothing is immortal". So I must translate that sentence.
+        *   The preamble list likely serves as a pool of synonyms for "immortal" or context from the Collins Thesaurus links provided (though the URLs are generic placeholder-like). The rules say "Compare the similar word of each word". For "Nothing", synonyms might be "Zero", "None", etc. For "is", "exists". For "immortal", the preamble list is relevant ("permanent", "eternal", etc.).
+        *   So, for each word in the input sentence (`Nothing`, `is`, `immortal`), I need to provide a translation and a comment distinguishing it from synonyms (like the ones listed in the preamble for "immortal").
+
+    *   **Constraint:** The output must be wrapped in `<output> </output>` tags? No, looking at Rule 6: "Use <output> </output> to wrap the output_translation_with_comment".
+    *   Wait, the example shows:
+        ```
+        <output>ori-word1 (word1-comment) ...</output>
+        <output_without_comment>word1 word2 ...</output_without_comment>
+        ```
+        BUT Rule 6 says: "Use <output> </output> to wrap the output_translation_with_comment".
+        However, the Rules section 1 says "Output format: Note: each "(comment)" |is> optional Format is: <output>...<output_without_comment>...</output_without_comment>".
+        And Rule 6 says "Use <output> </output> to wrap the output_translation_with_comment". This contradicts the example which has both tags. Let's look at the example structure provided in Rules 1 again:
+        ```
+        <output>ori-word1 (word1-comment) ori-word2 (word2-comment) ori-word3 (word3-comment)..... ori-ordN (wordN-comment)</output>
+        <output_without_comment>word1 word2 word3..... wordN</output_without_comment>
+        ```
+        The instruction "Use <output> </output> to wrap the output_translation_with_comment" might mean only the first part needs tags, or the whole block. Usually, these prompt engineering tasks follow the example format strictly. I will follow the Example Format structure provided in Rules 1 ("Format is: ...").
+        Wait, looking closely at Rule 6: "Use <output> </output> to wrap the output_translation_with_comment". This might imply only the first block is required by Rule 6, but Rule 1's example shows two blocks. I will follow the Example Format in Rule 1 as it is more detailed (shows both with/without comment), but I must ensure the comments distinguish original meanings as per Rule 3 & 5.
+        Actually, re-reading Rule 6 vs Rule 1 "Output format". Rule 1 explicitly gives an example structure with `<output>` and `<output_without_comment>`. Rule 6 adds a specific instruction about wrapping. To be safe and compliant with the "Format is" section which usually dictates the schema, I will produce both blocks as shown in the example within Rules 1.
+        Wait, looking at the very last line: "Note: Only allow one output." This conflicts with the two-block format if they are considered separate outputs. However, usually "one output" means one response block containing the required data structures. I will include both tags as per the Example.
+
+    *   **Wait, a critical check:** The preamble lists words `permanent eternal everlasting perpetual timeless enduring immortal`. These are not in the input sentence "Nothing is immortal". But Rule 3 says "Compare the similar word of each word". For "immortal", I should compare it with the others in the preamble (permanent, eternal, etc.) to highlight the specific meaning (spiritual/undead vs general permanence).
+    *   For "Nothing": Compare with None, Zero, Nobody.
+    *   For "is": It's a verb, but often translation is just 是。Comparison might be less needed unless context-specific (exists vs is). I will translate as "是" or omit if nominalized. "Nothing is immortal" -> "什么也没有是永生的" or simply "万物皆死". But literal translation is better.
+    *   Let's refine translations:
+        *   Nothing: 没有什么 / 任何事物 (None) vs Nobody, Zero. Key characteristic: Noun/Pro-noun referring to emptiness/absence.
+        *   is: 是。Verb of being.
+        *   immortal: 不死的 / 永恒的. Distinction from permanent/enduring (physical) -> spiritual/biological deathlessness or timeless existence.
+
+    *   **Comment Language:** zh-CN.
+    *   **Output Format:**
+        ```
+        <output>Nothing(注释) is(注释) immortal(注释)</output>
+        <output_without_comment>翻译 without 注释</output_without_comment>
+        ```
+        Wait, the example says: `<output>ori-word1 (word1-comment) ... </output>` and `ori` usually means "original word". So `Nothing` in English.
+        Let's check Rule 1 again: `Format is: <output>ori-word1 (word1-comment) ori-word2 (word2-comment) ...</output>`.
+        And `Note: each "(comment)" |is> optional`.
+        And `Note: Comment |are> in Output-Language, in zh-CN`.
+        So inside the comment I should write Chinese.
+
+    *   **Refining the "Comparison" aspect (Rule 3):** "Compare the similar word of each word -> |point out> the key characteristic".
+        *   For "immortal", compare with "permanent" (stable state), "eternal" (religion/time), "enduring" (resist damage). "Immortal" specifically means not subject to death, often living forever.
+        *   For "Nothing", compare with "None" (quantifier) or "Netherland"? No. Compare with similar negatives. Key characteristic: lack of existence or object.
+        *   For "is", compare with "exist". Key characteristic: copula/identity.
+
+    *   **Drafting Content:**
+        *   Word: Nothing. Translation: 无物 / 没有任何东西。Comment: (区别于"none"或"zero"，强调指代完全空无而非单纯的零)
+        *   Word: is. Translation: 是。Comment: (系动词表存在或等同，区别于具体动作)
+        *   Word: immortal. Translation: 不朽的 / 永恒的 (侧重生命不死). Comment: (区别于"permanent"物质持久，"enduring"持久忍耐，特指生命不逝或精神永恒).
+
+    *   **Wait, Input Sentence:** "Nothing is immortal".
+    *   **Translation:** "没有任何东西是不朽的" or "万物皆非不朽". Standard translation: "没有什么是不朽的"。
+    *   Let's check the preamble words again. They are all related to "immortal/eternity". The prompt asks me to translate the input sentence using the rules provided which mention comparing similar words (especially those listed in the preamble implicitly via Rule 3). I need to make sure the comment reflects the distinction from the preamble list words like "permanent", "eternal" etc. specifically for "immortal".
+
+    *   **Format Check:**
+        `<output>Nothing(注释) is(注释) immortal(注释)</output>`
+        `<output_without_comment>没有任何东西是不朽的</output_without_comment>` (Or word-for-word translation? The example `word1 word2` usually implies the translated words separated by spaces or the full sentence. Since input is a sentence, output should be the translated sentence). Example: `ori-ordN` suggests words. But input is a sentence. I will translate the sentence in the second block.
+        Wait, Example: `<output>word1 word2 ...</output>`. Input was a sentence? The example text doesn't show a sentence input, just generic `word1`.
+        However, usually, in translation tasks within this format, the output string should be the translated sentence for the second block.
+        For the first block (with comments), it shows space-separated words. If input is "Nothing is immortal", I will put "Nothing" then comment, etc. inside `<output>`. But if the translation is Chinese, usually `<output>` contains the source word and translation?
+        Rule 1: `Format is: <output>ori-word1 (word1-comment) ...</output>`. "ori-word" likely means "Original Word".
+        So: `<output>Nothing(无物 - [comment]) is(是 - [comment]) immortal(不朽 - [comment])</output>`?
+        Or does it want the Chinese translation in place of "ori-word1"?
+        Rule 1 says: `example: "<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ..."</output>`. This implies keeping the source text for the first part with comments, or translating? Usually, these tasks want to show the mapping. Given "Output-language: zh-CN", the `<output>` block is often a mix (Source + Translation?) or just the translation structure.
+        Re-reading Rule 1: `Format is: <output>ori-word1 (word1-comment) ...</output>`. It explicitly says `ori-word` and `wordN`. This implies keeping the original text in the comment block but showing the translation?
+        Wait, if Output-Language is zh-CN, then `<output>` content should probably be readable or contain the mapping.
+        Let's look at standard interpretation for this specific prompt style (often from a dataset). Usually: `<output>Word1(Trans1-Comment) Word2(Trans2-Comment)...</output>`.
+        But Rule 1 says `ori-word1`. I will interpret `ori-word` as "The word to be translated". So I will keep English in the first part inside the comment block for clarity, or translate it?
+        Given Output-Language is zh-CN, the user expects Chinese.
+        However, Rule 5: `Annotate the original meaning`.
+        Let's look at the instruction: "Output-language: zh-CN".
+        If I put "Nothing (无物 - ...)" inside `<output>`, it mixes languages.
+        Strict adherence to "Format is: <output>ori-word1 (word1-comment)...": `ori` = Original Word.
+        So: `Nothing (无物，[comment in Chinese])`.
+        And `<output_without_comment>`: The full translated sentence? Or words separated by spaces? Since the input is a sentence, usually output is the sentence.
+        Example: `word1 word2 word3.....` implies a list of words. But if input is a sentence, I'll join with spaces or keep structure? "Nothing is immortal" -> "无物 是 不朽". Or full sentence "没有任何东西是不朽的".
+        Let's assume standard translation task output: Sentence in `<output_without_comment>`.
+        For `<output>` block, it seems to be a glossary format based on `ori-word`. I will keep the original words and put translation+comment.
+        Actually, looking at Rule 6: "Use <output> </output> to wrap the output_translation_with_comment". This suggests inside `<output>` I should write the translation with comments? But the format example shows `ori-word`. This is contradictory.
+        "Format is: ... ori-word1 ..." vs Rule 6 "wrap the output_translation_with_comment".
+        Hypothesis: The user wants the English word + Chinese Translation (comment) for the first block, to distinguish meaning.
+        Example: `Nothing(无物 - [comment])`.
+        Let's follow the Format in Rules 1 strictly regarding the string inside `<output>`, assuming "ori-word" is the placeholder for the text (English word).
+        So: `Nothing(无物（区分于permanent等，原意为指代空无）) is(是 - [comment]) immortal(不朽（区别于permanent/eternal, 特指不死）)</output>`
+        Wait, the example shows space separation.
+        Also Rule 5: "Annotate the original meaning in the comment".
+        And Rule 1 Example: `ori-word1 (word1-comment)`.
+        I will use English words with Chinese translation and comments inside the tags.
+
+    *   **Specific Distinctions for "immortal" vs preamble list:**
+        *   Permanent: Physical stability, lasting condition.
+        *   Eternal: Infinite time, religious/metaphysical.
+        *   Enduring: Withstanding hardship/time.
+        *   Immortal: Not dying, living forever. Often biological or spiritual status.
+    *   **Specific Distinctions for "Nothing":**
+        *   None/Zero vs Nothing (Concept of non-existence).
+
+    *   **Refining Output:**
+        Block 1: `<output>` containing `Word(Translation-Comment)`.
+        Block 2: `<output_without_comment>` containing the translated sentence.
+
+    *   **Wait, one output constraint:** "Note: Only allow one output." The example has two blocks (`<output>` and `<output_without_comment>`). I must include both inside my single response message.
+
+    *   **Formatting Details:**
+        Comments in Chinese.
+        Distinguish original meaning from synonyms (preamble list).
+        Key characteristic based on original meaning.
+        Wrap with `<output>` tags? Wait, the example shows:
+        ```
+        <output>... </output>
+        <output_without_comment>...</output_without_comment>
+        ```
+        Rule 6 says "Use <output> </output> to wrap the output_translation_with_comment". It doesn't explicitly forbid the second block, but emphasizes the first. The Example clearly shows both. I will include both.
+
+    *   **Final check on content:**
+        Input: `Nothing is immortal`
+        Word 1: Nothing. Trans: 无物。Comment: (区别于 permanent/eternal 等，原意为指“没有任何东西”的空无概念)
+        Wait, comparing with preamble words "

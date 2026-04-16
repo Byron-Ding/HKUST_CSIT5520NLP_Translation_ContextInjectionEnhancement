@@ -1,0 +1,115 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Task: Translate.
+    *   Input: "Nothing is everlasting".
+    *   Input Language: English (en).
+    *   Output Language: Chinese (zh-CN).
+    *   Constraint/Context: The user provided "Input-Output-Task", "Input", "Input-language", "Output-language", and wants the "Output".
+
+2.  **Analyze the Input Sentence:**
+    *   Sentence: "Nothing is everlasting".
+    *   Meaning: Everything eventually ends or dies; there is no permanent state of existence that lasts forever. It's a philosophical or observational statement about impermanence.
+    *   Tone: Philosophical, solemn, definitive.
+
+3.  **Determine the Translation:**
+    *   Literal translation: "没有什么是不朽的" or "没有东西是永恒的".
+    *   Common idiomatic expressions in Chinese for this concept:
+        *   "万物皆无常" (Buddhist/philosophical) - Focuses on impermanence.
+        *   "没有什么永恒不变" (Nothing is permanent).
+        *   "万事万物终将消逝" (All things will eventually pass away).
+    *   Direct translation preserving the structure: "没有任何事物是永恒的".
+    *   Concise/Poetic: "没有什么是永恒的".
+
+    *   Selection: "没有什么是永恒的" or "万物皆非永恒".
+    *   Let's check standard translations for "Nothing is everlasting".
+        *   Option 1: 没有什么是永恒的。 (Natural, accurate)
+        *   Option 2: 没有什么是不朽的。 ("Everlasting" implies timelessness, but usually applied to states/existences. "永恒" fits better than "不朽" unless referring to fame/legacy specifically).
+        *   Option 3: 凡事皆有终。 (More idiomatic Chinese saying "There's an end to everything", but changes the structure).
+
+    *   Decision: "没有什么是永恒的" is a clear, accurate translation that captures the meaning well in modern standard Chinese. Another very common phrasing for this specific sentiment is "万物皆无常" (Impermanence) or simply "没有永恒的东西".
+    *   Let's stick to a direct yet natural translation: "没有什么是永恒的。" or "没有任何事物是永恒的。"
+    *   To make it slightly more profound/philosophical matching the tone: "一切皆非永恒" (Everything is not everlasting) or "没有什么是不朽的".
+    *   Actually, the most standard translation for "Nothing is everlasting" in a general context is "没有什么是永恒的".
+
+4.  **Final Polish:**
+    *   Input: Nothing is everlasting
+    *   Output: 没有什么是永恒的
+
+5.  **Format:** The prompt asks for just the output after "Output:". I should provide the translation directly.
+
+    *   Refined choice: "没有什么是永恒的" (No thing is everlasting).
+    *   Alternative: "万物皆无永恒"。
+    *   Let's go with the most natural modern Chinese: "没有什么是永恒的。"
+
+6.  **Double Check:** Does "everlasting" imply something specific like a song or life? Usually general existence. "永恒" is the best word for "everlasting/eternal". "Nothing" -> "没有什么".
+    *   Translation: 没有什么是不朽的 / 没有什么是永恒的.
+    *   Let's choose: 没有什么是永恒的。
+
+7.  **Final Output Construction:** Just the translation text.
+
+    Wait, looking at similar tasks, sometimes they prefer a slightly more philosophical tone like "万事万物皆有终" but that changes "Nothing is everlasting" to "Everything ends". The original sentence says there is no thing that *is* everlasting (state), not necessarily that everything *ends* actively, though implied.
+    Let's stick to the direct meaning.
+    "没有什么是永恒的。"
+
+    Or: "没有任何事物是永恒的。" (A bit more formal).
+    Let's keep it concise. "没有什么是永恒的。"
+
+    Wait, there is a famous quote "Nothing is everlasting" often translated as "没有永恒的东西".
+    Let's use: "没有什么是永恒的。"
+
+    One more consideration: Is there a specific cultural equivalent?
+    In Buddhist context: "诸行无常" (All conditioned things are impermanent).
+    But for a direct translation task, literal but natural is best.
+    "没有什么是不朽的" (Nothing is immortal).
+    "没有什么是永恒的" (Nothing is eternal/everlasting).
+
+    I will use "没有什么是永恒的。" as it's the most accurate equivalent.
+
+    Wait, checking common translations online for this specific phrase.
+    "Nothing is everlasting" -> "没有什么是不朽的" or "没有永恒的事物".
+    Let's go with: 没有什么是永恒的。
+
+    Actually, a very common translation for this sentiment in literature is "万物皆非永恒" (Everything is not eternal) but that changes grammar slightly.
+    "没有任何事物是永恒的" is very clear.
+    Let's provide: 没有什么是不朽的 (Nothing is immortal/everlasting).
+    Wait, "everlasting" = 永恒。
+    So: 没有什么是永恒的。
+
+    Final decision: 没有什么是永恒的。 (Add period for sentence completion).
+
+    Re-evaluating based on common translation styles for this specific short phrase:
+    "没有什么是不朽的" sounds like a song title or poetic line.
+    "没有什么是永恒的" is more general.
+    Let's provide the latter.
+
+    Wait, I should check if I need to include any explanation. The prompt format shows "Input:", "Output:" etc., implying I should complete the text after "Output:". The prompt ends with "Output: ", so I just write the translation.
+
+    Translation: 没有什么是永恒的。
+    Or: 没有任何事物是永恒的。
+    Let's choose the most fluent one.
+    "没有什么是不朽的" is also good.
+    But "everlasting" maps best to "永恒".
+    So: 没有什么是永恒的。
+
+    Wait, let's look for a slightly more literary version often used.
+    "万物皆非永恒" (Everything is not eternal).
+    But the input says "Nothing is everlasting".
+    Okay, I'll go with: 没有什么是永恒的。
+
+    Actually, looking at high-quality translations (like Google Translate or DeepL):
+    Input: Nothing is everlasting
+    Output: 没有任何事物是永恒的。 / 没有什么是不朽的。
+    Let's pick "没有什么是永恒的" for brevity and accuracy.
+
+    Wait, one nuance: "Nothing" can be "没有任何东西".
+    "没有什么是永恒的" captures it well.
+
+    Final check:
+    Input: Nothing is everlasting
+    Output: 没有什么是永恒的。
+
+    Let's write it.cw
+</think>
+
+没有什么是永恒的。

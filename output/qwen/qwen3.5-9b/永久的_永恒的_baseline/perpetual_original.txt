@@ -1,0 +1,135 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Input: "Nothing is perpetual"
+    *   Input Language: English (en)
+    *   Output Language: Chinese (zh-CN)
+    *   Task: Translation
+
+2.  **Translate the Sentence:**
+    *   Source text: "Nothing is perpetual"
+    *   Meaning: There is no thing or state that lasts forever; everything changes eventually. It's a philosophical or proverbial statement.
+    *   Key word analysis:
+        *   "Nothing": 没有事物 (méiyǒu shìwù) / 无物 (wú wù) / 没什么 (méishénme - colloquial, not suitable here).
+        *   "is": 是 (shì) - often omitted in Chinese for abstract concepts.
+        *   "perpetual": 永恒的 (héngcháng de) / 永久的 (yǒujiǔ de) / 持续不断的 (chíxù bùduàn de). "永恒" carries a philosophical weight better here.
+    *   Draft 1: 没有什么东西是永恒的。 (Meiyou shenme dongxi shi yongcheng de.) - Grammatically correct, but maybe too literal.
+    *   Draft 2: 万物皆不永存。 (Wàn wù jiē bù yǒng cún.) - More literary/philosophical. "Nothing" here implies everything changes.
+    *   Draft 3: 没有什么能永远持续下去。 (Meiyou shenme neng yongyuan chíxù xiàqù.) - Focuses on the action.
+    *   Common Chinese equivalents for this sentiment:
+        *   "没有什么是永恒的" (No thing is eternal) - Most direct.
+        *   "一切皆流，无物常驻" (From Heraclitus/Buddhism context, but too long).
+        *   "无物长存" (Nothing lasts forever).
+    *   Considering standard translation for general contexts vs. literary contexts:
+        *   Simple/Direct: "没有什么东西是永恒的。"
+        *   Concise/Proverbial: "没有什么是永恒的。"
+        *   Classical/Literary feel: "万物皆无常。" (Everything is impermanent - Buddhist term 'Anitya'). But the input is modern English.
+    *   Let's stick to a natural, standard Chinese translation that captures the meaning accurately.
+    *   Selection: "没有什么是永恒的" or "没有任何事物是永恒的".
+    *   Refining for brevity and impact: "没有什么能永远持久。" (Nothing can last forever).
+    *   Best balance: "没有什么是永恒的。" (No thing is eternal). Or slightly more explicit: "没有什么东西是永恒的。"
+
+    Let's check common translations for similar quotes (e.g., from literature or philosophy).
+    Quote: "Nothing is perpetual."
+    Common translation: "没有什么能永存。" or "没有什么是永恒的。"
+    "Perpetual" implies something continuing without interruption.
+    "永恒" (eternal/perpetual) fits best.
+
+    Final choice: "没有什么是永恒的。" (Natural, concise).
+    Alternatively: "没有任何事物是永恒的。" (More formal).
+    Let's go with a standard, natural translation: "没有什么东西是永恒的。"
+
+    Wait, checking if there is a famous quote origin. If it's from Shakespeare or similar, the phrasing might need to match. But without context, a literal yet idiomatic translation is best.
+
+    Translation options:
+    1. 没有什么是永恒的。 (Simple)
+    2. 没有什么能永远持续。 (Focus on action)
+    3. 万物皆无常。 (Too Buddhist/philosophical specific)
+
+    Let's choose "没有什么东西是永恒的。" or simply "没有什么是永恒的。". The latter is punchier.
+    Actually, "Nothing" often translates as "没有什么" in this context. "Perpetual" -> "永恒" or "永久的".
+    "Nothing is perpetual" -> "没有什么事物是永恒的。"
+
+    Let's refine to the most natural sounding Chinese sentence.
+    "没有什么是永恒的。" sounds very idiomatic for this sentiment.
+
+3.  **Final Polish:**
+    Input: Nothing is perpetual
+    Output: 没有什么是永恒的。 (Adding a period makes it complete, though sometimes omitted in tasks).
+    Let's provide just the translation text.
+
+    Decision: "没有什么东西是永恒的。" or "没有什么是永恒的。". I will use "没有什么东西是永恒的" to be slightly more explicit about the subject, but "没有什么是永恒的" flows better. Let's go with the most standard one.
+    Actually, "无物永存" is very poetic.
+    Let's stick to modern standard Chinese: "没有什么能永远持久。" or "没有什么是永恒的".
+    Let's pick "没有什么东西是永恒的。" as it is clear and accurate.
+
+    Re-evaluating "perpetual". It means continuing forever without end.
+    Translation: "没有任何事物是永恒存在的。" -> A bit long.
+    "没有什么是永恒的。" -> Good.
+
+    Let's finalize on: 没有什么是永恒的。
+
+4.  **Formatting:**
+    The prompt asks for Output: [Translation]. I should provide just the translation text usually, but following the pattern of the prompt which ends with "Output:", I need to complete that line. Wait, the prompt includes "Output:" at the end. I need to provide the content after "Output:".
+    Actually, looking at the user message structure:
+    Input: ...
+    Output: ...
+    It seems I should output *only* the translation text, or the full block?
+    Usually, for these tasks, I just output the translation string.
+
+    Let's check the instruction again: "Input-Output-Task: Translate".
+    The user provided the input and expects me to complete the output.
+    So I will write the Chinese sentence.
+
+    Text: 没有什么东西是永恒的。 (Or similar)
+    Let's make it concise: 没有什么是永恒的。
+
+    One more check: "Nothing is perpetual" could also be translated as "万物皆流无物常驻" if referencing Heraclitus, but that changes the words significantly.
+    Literal: 没有什么事物是永久的。
+    Idiomatic: 没有什么是永恒的。
+
+    I'll go with: 没有什么东西是永恒的。 (Clear and standard)
+    Or even simpler: 没有什么是永恒的。
+    Let's choose "没有什么东西是永恒的" for clarity on the subject.
+    Actually, searching similar translations online for this specific sentence structure often yields: "没有什么是永恒的。"
+
+    Okay, ready to generate.
+
+    Wait, I should check if I need to include the "Output:" label in my response. The prompt ends with "Output:", implying I continue from there. However, usually in these API-style prompts, I should output the content that belongs in the Output field.
+    If I look at the last line "Output:", my response should be the text immediately following it.
+    But often the model just outputs the text.
+    Let's output just the translation.
+
+    Refined Translation: 没有什么能永远持续下去。 (Nothing can continue forever)
+    Refined Translation 2: 没有什么是永恒的。 (Nothing is eternal)
+    "Perpetual" = 永恒 (Eternal).
+    I will use "没有什么东西是永恒的。"
+
+    Wait, let's look at the instruction again. "Input-Output-Task: Translate".
+    Okay, I will provide the translation.
+
+    Final decision: 没有什么东西是永恒的。
+    Or slightly more poetic/concise: 无物永存。 (Too classical)
+    Let's stick to modern standard Mandarin: 没有什么是永恒的。
+
+    Wait, is there a specific context? No.
+    Let's provide the most natural one.
+    "没有什么东西是永恒的。"
+
+    Actually, thinking about it, "Nothing is perpetual" sounds like a proverb.
+    "万物无常" (Everything is impermanent) captures the meaning well but changes words.
+    Direct translation: "没有任何事物是永恒的。"
+    Concise: "没有什么是永恒的。"
+
+    I'll output: 没有什么是永恒的。 (It's punchy and accurate).
+    Or: 没有什么东西能永远持续下去。 (A bit clunky).
+
+    Let's go with: 没有什么东西是永恒的。
+
+    Wait, one more thought. In Chinese philosophy/translation contexts, "Nothing is perpetual" is often translated as "无物长存".
+    But for general English-Chinese translation tasks, "没有什么是永恒的" is safer and more understandable.
+
+    Let's finalize on: 没有什么东西是永恒的。
+</think>
+
+没有什么东西是永恒的。

@@ -1,0 +1,109 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Input Text:** "Nothing is eternal"
+    *   **Source Language (en):** English
+    *   **Target Language (zh-CN):** Chinese
+    *   **Task:** Translate the input sentence while processing a list of specific words: `permanent`, `eternal`, `everlasting`, `perpetual`, `timeless`, `enduring`, `immortal`.
+    *   **Constraint 1 (Output Format):** The user provides an example format involving `<output>` and `<output_without_comment>`. However, looking closely at the "Input-Output-Task" section vs the "Rules" section:
+        *   Input-Output-Task says: `Output:` (implies just the translation).
+        *   Rules section says: `Note: Only allow one output.` and gives a specific XML-like structure example: `<output>ori-word1 (word1-comment)...</output><output_without_comment>...</output_without_comment>`.
+        *   Wait, the prompt says "Input-Output-Task: Translate ... Output:". Usually, this means I should provide the translation. But Rule 6 says: `Use <output> </output> to wrap the output_translation_with_comment`. And the example shows both commented and uncommented versions within a single response block structure, but often these prompts want *just* the requested format.
+        *   Let's re-read Rule 1 & 2 carefully.
+            *   Rule 1: "Allow optional comments, after Each word; comments should |point out> the key characteristic... Output format: <output>input language (translation and output language comment)</output>..." Wait, the example shows `<output>ori-word1 (word1-comment) ...` but also includes `<output_without_comment>`.
+            *   Rule 2 says "Only allow one output." This contradicts the example which has two tags (`<output>` and `<output_without_comment>`).
+            *   Let's look at the instruction: "Translate". The specific words provided at the top (`permanent`, `eternal`...) seem to be the vocabulary I need to translate/annotate if they appear, OR are synonyms I need to use?
+            *   Actually, looking at the pattern of these prompts, it seems like a synonym annotation task where the input sentence contains one of these words (or is a general statement), and I need to provide translations for the specific list provided in the header?
+            *   NO, the Input Text is specifically: "Nothing is eternal".
+            *   The header lists synonyms: `permanent eternal everlasting perpetual timeless enduring immortal`.
+            *   Usually, this means I need to translate the sentence "Nothing is eternal" using these words (specifically 'eternal' is in the input). Or does it mean I need to provide translations for *all* the words listed in the header as well?
+            *   Let's look at the Input-Output-Task again: `Input: Nothing is eternal`. This implies translating this specific sentence.
+            *   However, Rule 1 says: "Allow optional comments, after Each word". The example shows `<output>ori-word1 (word1-comment) ori-word2 (word2-comment)...`. This suggests translating a sequence of words, not just a sentence?
+            *   Or does it mean translate the input sentence, but annotate the specific words from the header list that appear in the input?
+            *   Input contains: "Nothing", "is", "eternal".
+            *   Header list contains: `permanent`, `eternal`, `everlasting`, `perpetual`, `timeless`, `enduring`, `immortal`.
+            *   Only `eternal` appears in the input.
+            *   Rule 3: "Compare the similar word of each word -> |point out> the key characteristic". This implies I need to discuss the nuances between synonyms.
+            *   Hypothesis A: Translate the sentence "Nothing is eternal" into Chinese, and for the word "eternal", provide a comment distinguishing it from the other header words (permanent, everlasting, etc.).
+            *   Hypothesis B: The prompt expects me to translate *each* word in the header list separately, using the input sentence as context? No, Input is just "Nothing is eternal".
+            *   Hypothesis C: The user wants the translation of the sentence, but formatted with comments explaining the nuances of "eternal" compared to its synonyms provided in the header.
+            *   Let's look at the Example format again: `<output>ori-word1 (word1-comment) ...</output>`. This looks like a list of words being translated. But the Input is a sentence.
+            *   If I follow the "Input-Output-Task: Translate" strictly, I should output the translation of the input sentence.
+            *   However, the Rules say: "Note: each "(comment)" |is> optional". And "Format is: <output>ori-word1 (word1-comment)...".
+            *   If I treat the input sentence as a sequence of words to be translated with comments for the specific vocabulary listed in the header?
+            *   Actually, looking at similar tasks, often when a list of synonyms is provided above the task, the goal is to translate the input using one of them or annotate the usage.
+            *   Given "Input: Nothing is eternal", and the header lists `eternal` as the second word.
+            *   Maybe the task is to translate the sentence, but specifically annotate the word "eternal" with comparisons to `permanent`, `everlasting`, etc., in the comment section.
+            *   Wait, the Rule 1 example: `ori-word1 (word1-comment) ori-word2 (word2-comment)...`. This implies a sequence of words. If I translate the sentence "Nothing is eternal", should it be `nothing (comment) is (comment) eternal (comment)`?
+            *   But only `eternal` is in the synonym list provided at the top.
+            *   Let's check the Rules again. Rule 3: "Compare the similar word of each word". This suggests comparing the translated words to their synonyms.
+            *   The most logical interpretation for this specific prompt structure (Synonym List + Input Sentence) is: Translate the input sentence, but specifically annotate the key vocabulary word ("eternal") with comments that distinguish it from the other synonym candidates provided in the header (`permanent`, `everlasting`, etc.).
+            *   However, the output format example shows a sequence of translated words. If I translate the whole sentence as words: `nothing (comment) is (comment) eternal (comment)`.
+            *   For "Nothing", "is", they don't have synonyms listed. For "eternal", it does.
+            *   So for "eternal", I must add a comment comparing it to `permanent`, `everlasting`, etc., based on Rule 3 & 4.
+            *   Rule 6: "Use <output> </output> to wrap the output_translation_with_comment". It also shows an `<output_without_comment>` block in the example.
+            *   Okay, I will follow the structure: `<output>word1 (comment) word2 (comment) ...</output>` and `<output_without_comment>word1 word2 ...</output_without_comment>`.
+            *   Wait, Rule 1 says "Allow optional comments...". But Example shows them included.
+            *   Rule 2: "Only allow one output." This is confusing because the example has two tags (`<output>` and `<output_without_comment>`). I will follow the example structure provided in Rule 1/Example, as it's more specific about format. Wait, Rule 2 says "Only allow one output". Does that mean one block containing both? Or just one block of text? The Example shows two XML tags inside the response. I will produce exactly what the Example Format dictates: One `<output>` tag and one `<output_without_comment>` tag.
+            *   Wait, looking closely at Rule 2 vs Example. Example has `<output>...</output><output_without_comment>...</output_without_comment>`. This is technically two outputs if parsed strictly, but usually considered one "response". I will follow the format string in Rule 1's example section.
+            *   Crucially, for the word "eternal" in the input sentence, the comment must explain its meaning vs `permanent`, `everlasting` etc., as per Rule 3 & 4 (Compare similar words).
+            *   For "Nothing" and "is", I can omit comments or keep them simple if they don't belong to the synonym list. But usually, these prompts want annotations on the specific vocabulary listed at the top. Since `permanent`, `everlasting`... etc are not in the sentence except `eternal`.
+            *   So:
+                *   `nothing`: Translate (e.g., 万物 / 一切皆无). Comment might be simple.
+                *   `is`: Translate (e.g., 是).
+                *   `eternal`: Translate (e.g., 永恒的). Comment must distinguish from permanent/everlasting/etc based on the header list.
+
+            *   Wait, looking at the prompt's input list: `permanent eternal everlasting perpetual timeless enduring immortal`. These are all synonyms for "eternal". The input sentence uses "eternal".
+            *   So the task is likely to translate the sentence, but annotate "eternal" specifically with the nuance of why it means this vs "immortal", "permanent", etc.
+            *   Actually, re-reading Rule 3: "Compare the similar word of each word -> |point out> the key characteristic". This applies to each word in the output translation.
+            *   Since I am translating the input sentence ("Nothing is eternal"), I will translate each word of the sentence. For "eternal", I will include a rich comment distinguishing it from the list `permanent`, `everlasting` etc., as they are the context provided at the very top. For `nothing` and `is`, comments might be generic or omitted if not in the synonym list, but the format says `(word1-comment)`. I'll keep them consistent with the requested structure (Word + Comment).
+            *   Actually, usually in these tasks, only the target synonyms get detailed comparison comments. But to follow the format strictly `ori-word1 (word1-comment)...`, I should probably include comments for all words or at least mark them as distinct. However, Rule 4 says "Characteristic based on the original meaning".
+            *   Let's refine: I will translate the sentence word-by-word. For "eternal", I will provide a detailed comparison comment because it matches the header list. For the others, I can keep comments brief or focus on the meaning itself.
+            *   Wait, checking the constraint "Only allow one output." This might mean do not repeat the `<output>` tag multiple times (which would happen if I output per word). No, looking at the example: `<output>...</output><output_without_comment>...</output_without_comment>`. This is a single block containing both tags.
+            *   Okay, Plan:
+                1.  Translate sentence: "Nothing is eternal" -> Chinese.
+                2.  Word-by-word translation with comments inside `<output>` tag.
+                3.  Clean translation inside `<output_without_comment>` tag.
+                4.  Comments must be in zh-CN (Rule 6).
+                5.  Comment for "eternal" must reference the synonyms from the header (`permanent`, `everlasting`, etc.) and point out key characteristics (e.g., time vs state, life vs non-life, finite vs infinite).
+
+            *   Specific nuance check:
+                *   `eternal`: Timeless duration of existence (often cosmic/spiritual), distinct from `immortal` (life not dying) or `permanent` (structural/physical permanence).
+                *   Input: "Nothing is eternal".
+                *   Translation part 1: `nothing`. Meaning: 没有任何事物。Comment: 指不存在或无所有的事物，非指虚无主义概念。
+                *   Translation part 2: `is`. Comment: 系动词，表示状态。
+                *   Translation part 3: `eternal`. Meaning: 永恒的，超时间的。Comment: 强调超越时间的持续存在，与 permanent（持久/坚固）、everlasting（无始无终）、perpetual（连续不断）、immortal（不朽/不死）相比，侧重形而上或宇宙的无限时间维度，常用于精神或法则层面而非单纯物理属性。
+
+            *   Wait, the instruction says "Allow optional comments...". But the Example shows comments included. I will include them for consistency with the Example.
+            *   One more check: The header lists synonyms. The input uses `eternal`. The task is to translate the input. The comment for `eternal` should distinguish it from the others in the header list (as per Rule 3 "Compare the similar word of each word").
+            *   For `nothing`, do I need to compare with other words? No, not listed. Just original meaning.
+            *   Okay, let's draft the content.
+
+            *   Word 1: Nothing -> 万物皆无 (or 没有任何事物). Comment: 强调非存在的状态或泛指一切事物的否定。
+            *   Word 2: is -> 是。Comment: 连接主语与表语。
+            *   Word 3: eternal -> 永恒。Comment: 核心词，指超越时间的无限延续；区别于 permanent (持久性/稳定性)、everlasting (无始无终的连续)、perpetual (反复不断的)、immortal (不死/长生), timeless (无时间的/经典的) 等近义词，更侧重于形而上学或宇宙层面的终极时间属性。
+
+            *   Wait, the format requirement: `<output>ori-word1 (word1-comment)...</output>`. `ori-word` usually means "original word". So `<output>nothing (comment)...</output>`.
+            *   Language of comment: zh-CN.
+            *   Structure check: `<output>input language (translation and output language comment)</output>` vs example `<output>ori-word1 (word1-comment)...`. The text says "Format is: <output>ori-word1 (word1-comment)..." so I should use the original English word followed by Chinese translation and comment?
+            *   Let's check the example again: `"<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ori-word3 (word3-comment)..... ori-ordN (wordN-comment)</output>"`.
+            *   Does `ori-word1` mean "Nothing" or "Nothing(translation)"? The example text says `(input language (translation and output language comment))`. Wait, the Rule 2/Example text is a bit garbled: `<output>input language (translation and output language comment)</output>`.
+            *   But the specific Example line says: `"<output>ori-word1 (word1-comment) ori-word2 (word2-comment)...`".
+            *   Usually, this means: Original English Word + Space + Chinese Translation + Comment.
+            *   Or just Chinese Translation in the comment? No, "input language (translation...)".
+            *   Let's interpret `ori-word1 (word1-comment)` as `OriginalWord(ChineseTranslation (Comment))`.
+            *   Wait, looking at Rule 1: "comments should |point out> the key characteristic... especially the original meaning |of> each word."
+            *   Example: `ori-word1 (word1-comment)`. This looks like `nothing (万物皆无，指非存在)` style.
+            *   Let's look at the example structure again carefully: `<output>input language (translation and output language comment)</output>`.
+            *   Wait, there is a conflict in the rules description vs the example text.
+            *   Example text: `"<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ..."</output>`.
+            *   This implies: `original_word (translation (comment))` or `original_word (translation-comment combined)`.
+            *   Usually, for translation tasks with comments: `OriginalWord(ChineseTranslation (NuanceComment))`.
+            *   I will adopt the format: `Word (Translation (Comment))`.
+
+            *   Wait, Rule 6 says "Use <output> </output> to wrap the output_translation_with_comment". It does not explicitly mention `<output_without_comment>` in Rule 6, but the Example Format includes it. The Rules section says "Output format:" then shows both tags in the example block. I should include both blocks as shown in the example block to be safe, even though Rule 2 says "Only allow one output" (which might refer to not giving two separate responses). I'll provide the XML structure requested.
+
+            *   Let's refine the comment for "eternal". It needs to distinguish it from `permanent`, `everlasting` etc. listed in the header.
+            *   Header List: `permanent eternal everlasting perpetual timeless enduring immortal`.
+            *   Meaning distinction:
+                *

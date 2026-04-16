@@ -2,17 +2,20 @@ import lmstudio as lms
 import pathlib
 import os
 import yaml
-import importlib.util
-import importlib.machinery
-import re
 import regex
 from typing import Optional
 import aiofiles
 
+# set the root path and chdir to the root path
+project_root_path: pathlib.Path = pathlib.Path(__file__).parent.parent
+os.chdir(project_root_path)
+
+import data.dataclass.template.general_translate as general_translate_module
+
 # regex.DOTALL with \n
 result_format_regex: regex.Pattern[str] = regex.compile(r"<output>(.*?)</output>", regex.DOTALL)
-# 匹配所有汉字（基本区块 + 扩展区 + 兼容汉字）
-all_chinese_characters: regex.Pattern[str] = regex.compile(r'[\u4e00-\u9fff\u3400-\u4dbf\uf900-\ufaff\u20000-\u2a6df\u2a700-\u2b73f\u2b740-\u2b81f\u2b820-\u2ceaf\u2ceb0-\u2ebef]')
+# 匹配所有非汉字字符
+all_non_chinese_characters: regex.Pattern[str] = regex.compile(r"[^\p{Han}]")
 
 # A JSON schema for a book
 schema: dict[str, dict[str, dict[str, str]] | str] = {
@@ -61,14 +64,14 @@ with open(data_path, "r", encoding="utf-8") as f:
     data = yaml.safe_load(f)
 
 # ------------------------------------------------ Load General Template ------------------------------------------------
-spec: Optional[importlib.machinery.ModuleSpec] = importlib.util.spec_from_file_location("general_translate", general_translate_module_path)
+# spec: Optional[importlib.machinery.ModuleSpec] = importlib.util.spec_from_file_location("general_translate", general_translate_module_path)
 
-if spec is not None and spec.loader is not None:
-    general_template_module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(general_template_module)
+# if spec is not None and spec.loader is not None:
+#     general_template_module = importlib.util.module_from_spec(spec)
+#     spec.loader.exec_module(general_template_module)
 
     
-general_template: general_translate_module.GeneralTemplate = general_template_module.GeneralTemplate()
+general_template: general_translate_module.GeneralTemplate = general_translate_module.GeneralTemplate()
 
 
 
@@ -77,10 +80,12 @@ general_template: general_translate_module.GeneralTemplate = general_template_mo
 async def generate_input(
     model_path: str = qwen_path
 ):
+    # ------------------------ Initialize client and model -----------------------
     async with lms.AsyncClient() as client:
         model = await client.llm.model(
             model_path
         )
+        # ------------------------ Iterate through data and generate input -----------------------
         for each_sentence_config in data:
             each_sentence_template: str = each_sentence_config["sentence"]
             each_sentence_keywords: str = each_sentence_config["keywords"]
@@ -88,19 +93,22 @@ async def generate_input(
             each_sentence_input_language: str = each_sentence_config["input_language"]
             each_sentence_output_language: str = each_sentence_config["output_language"]
             
+            
+            # ---------------- Currently only Test English input ----------------
             if each_sentence_input_language != "en":
                 # print(f"Input language {each_sentence_input_language} is not supported yet.")
                 continue
                 
             for each_keyword in each_sentence_keywords:
                 # ---------------- Output path ----------------
+                each_sentence_summary_without_synonyms = each_sentence_summary + r"_with_synonyms_but_no_rules"
                 current_output_original_data_path: pathlib.Path = output_data_base_path / \
                     model_path / \
-                    each_sentence_summary / \
+                    each_sentence_summary_without_synonyms / \
                     f"{each_keyword}_original.txt"
                 current_output_data_path: pathlib.Path = output_data_base_path / \
                     model_path / \
-                    each_sentence_summary / \
+                    each_sentence_summary_without_synonyms / \
                     f"{each_keyword}.txt"
                 current_output_data_path.parent.mkdir(parents=True, exist_ok=True)
                 
@@ -116,7 +124,7 @@ async def generate_input(
                         for each_keyword in each_sentence.split()
                     ])
                 
-                full_template: str = general_template.format_translate_template(
+                full_template: str = general_template.format_translate_template_with_synonyms_but_no_rules(
                     input_text=each_sentence,
                     input_language=each_sentence_input_language,
                     output_language=each_sentence_output_language,
@@ -137,6 +145,7 @@ async def generate_input(
                     async for fragment in result:
                         f.write(fragment.content)
                         print(fragment.content, end="", flush=True)
+                
                 print()
                 print()
                 # Note that even for structured responses, the *fragment* contents are still only text
@@ -159,14 +168,15 @@ def extract_translate_with_comment_from_result(
 ) -> Optional[str]:
     # get all chinese characters in result
     # remove all english characters, punctuation and numbers
-    chinese_characters = regex.findall(all_chinese_characters, result)
-    chinese_characters_str = " ".join(chinese_characters)
+    chinese_characters = regex.sub(all_non_chinese_characters, r" ", result)
     
-    return chinese_characters_str if chinese_characters_str else None
+    chinese_characters = regex.sub(r"\s+", " ", chinese_characters).strip()
+    
+    return chinese_characters if chinese_characters else None
+        
         
 if __name__ == "__main__":
     import asyncio
     asyncio.run(generate_input(
         model_path=qwen_path
-        
     ))

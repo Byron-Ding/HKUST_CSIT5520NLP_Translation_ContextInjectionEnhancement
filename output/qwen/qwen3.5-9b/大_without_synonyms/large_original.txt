@@ -1,0 +1,190 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Input:** "This building is large."
+    *   **Input Language:** en (English)
+    *   **Output Language:** zh-CN (Chinese)
+    *   **Task:** Translate the input sentence into the output language.
+    *   **Rules:**
+        1.  Allow optional comments after each word in the translation string inside `<output>` tags.
+        2.  Format: `<output>ori-word1 (word1-comment) ...</output>` followed by `<output_without_comment>translation</output_without_comment>`.
+        3.  Comments must point out the key characteristic/original meaning of each word.
+        4.  Comments should be in the Output Language (zh-CN).
+        5.  Use `<output>` and `</output>` tags around the translation with comments.
+        6.  Only allow one output block structure as specified (though the example shows two tags, I need to follow the format strictly: `<output>...</output>` and `<output_without_comment>...</output_without_comment>`). Wait, looking at the example provided in the rules:
+            `"<output>ori-word1 (word1-comment) ...</output>"`
+            AND
+            `"<output_without_comment>word1 word2 ...</output_without_comment>"`
+        7.  Note 6 says: "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language". It seems the instruction implies two tags based on the example structure provided in Rule 1/Format description.
+        8.  Wait, the prompt says "Only allow one output." but the example format shows two blocks (one with comments, one without). Usually, this means the whole response should follow that structure.
+        9.  Constraints: Comments are in zh-CN. They explain original meaning/characteristic to distinguish from synonyms.
+
+2.  **Translate the Input:**
+    *   Input: "This building is large."
+    *   Translation (zh-CN): "这座建筑很大。" or "这栋大楼很宽敞。"
+    *   Standard translation: "这座建筑物很大。"
+
+3.  **Break Down by Word/Segment:**
+    *   This -> 这座 / 这
+    *   building -> 建筑 / 建筑物 / 楼
+    *   is -> (copula, often omitted or implied in Chinese)
+    *   large -> 大 / 宽敞
+
+    Let's use: "这座建筑很大。"
+
+    Word segments for annotation:
+    *   This -> 这座 (This characteristic noun phrase marker + demonstrative pronoun)
+    *   building -> 建筑 (Noun, structure/edifice)
+    *   is -> (omitted in Chinese usually, but for strict word-for-word mapping with comments, I should focus on the semantic units. However, the instruction says "After Each word". If Chinese omits 'is', how to handle? Usually, in translation tasks like this, we map meaningful units. Let's try to keep it faithful to the structure where possible or translate conceptually.)
+    *   Actually, looking at the example: `ori-word1 (word1-comment)`. The `ori-word` implies the original English word. So I need to show the English word followed by its Chinese translation and comment? Or just the Chinese translation with comments about the meaning?
+    *   Re-reading Rule 1: "comments should |point out> the key characteristic, especially the original meaning |of> each word."
+    *   Re-reading Format example: `"<output>ori-word1 (word1-comment) ori-word2 (word2-comment)...</output>"` where `word1` seems to be the translated word? Or the original word? The text says "ori-word1". This suggests I should print the original English word, then a comment explaining it in Chinese.
+    *   Wait, look at the example format closely: `"<output>ori-word1 (word1-comment) ...</output>"`.
+    *   Usually, translation output is in the target language. But the instruction says "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language".
+    *   If the output translation is in zh-CN, then inside `<output>`, do I write Chinese characters or English words with comments?
+    *   Example text: `ori-word1 (word1-comment)`. This suggests keeping the original word reference.
+    *   Let's interpret "output_translation_with_comment" as: [Translated Word] (Comment on Meaning/Original Word).
+    *   Actually, looking at the instruction: "Use <output> </output> to wrap the output_translation_with_comment".
+    *   If I write `<output>This building...`, that's not zh-CN.
+    *   Let's look at the example again: `ori-word1 (word1-comment)`. `ori` likely stands for "original word" or just a placeholder for the token.
+    *   However, since the Output Language is zh-CN, the translation inside should be Chinese characters. The comments explain the original meaning.
+    *   Let's assume the format: `<ChineseWord> (EnglishMeaning/OriginalExplanation)` OR `<EnglishWord>(ChineseComment)`.
+    *   Re-reading Rule 6: "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language". This implies the content inside is zh-CN.
+    *   The example shows `ori-word1 (word1-comment)`. This might mean `<ChineseWord> (Comment)`.
+    *   But comments point out original meaning.
+    *   Let's try: `这座建筑 (building-名词 建筑物)` -> No, comments are in output language (zh-CN).
+    *   Let's refine: `这 (指示代词) 座 (量词) 建筑 (noun building) 是 (verb to be) 大 (adjective large) 。`
+    *   Wait, standard translation "这座建筑很大". "is" is often dropped. I will map the words roughly corresponding to English units.
+    *   Word 1: This -> 这 (指示代词 this)
+    *   Word 2: building -> 建筑 (名词 建筑物)
+    *   Word 3: is -> (omitted/隐含 copula 是) -> Maybe combine or skip? Let's keep it strict to words provided. "这座" covers "This". "建筑" covers "building". "很大" covers "is large".
+    *   Better segmentation for comparison:
+        *   This -> 这
+        *   building -> 建筑
+        *   is -> (implied) or skip
+        *   large -> 大
+    *   Let's try to map English words to Chinese segments.
+    *   This -> 这 (zhè)
+    *   building -> 建筑 (jiàn zhù)
+    *   is -> (omitted in Chinese typically, but semantically present). I will translate the sentence naturally: "这座建筑很大".
+    *   Segments: 这座 (This + Measure), 建筑 (building), 很 (very/degree), 大 (large).
+    *   Wait, to satisfy "After Each word" based on input words:
+        *   This -> 这
+        *   building -> 建筑
+        *   is -> (omitted)
+        *   large -> 大
+    *   Input: "This building is large."
+    *   Output Translation: "这座建筑很大。"
+    *   Comments must distinguish original meaning.
+
+    Let's interpret the Format Example strictly:
+    `<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ...</output>`
+    If `ori-word1` represents the translation content.
+    And comments are in zh-CN.
+    And comments explain original meaning/characteristic.
+
+    Draft:
+    `<output>这 (指示词 this) 座 (量词 measure word) 建筑 (名词 building) 是 (动词 is) 大 (形容词 large) 。</output>` -> This breaks the flow too much for natural Chinese.
+    Let's stick to the natural translation and annotate the words that exist in the input.
+    Actually, usually in these tasks, `<output>` contains the translated sentence with annotations.
+    Example: `This (指示代词 this) building (建筑物 building) is (系动词 be) large (尺寸大的形容词) 。` -> Translated as Chinese.
+    Let's try: `这 (this) 座 (measure) 建筑 (building) 是 (is) 大 (large)`.
+    But "This" corresponds to "这座". "Building" corresponds to "建筑". "Is" is implicit but "很大" handles the predicate.
+    To align strictly with words:
+    This -> 这
+    building -> 建筑
+    is -> (omitted usually, maybe map to 是 in annotation for clarity)
+    large -> 大
+
+    Let's try a balanced approach. Translate the sentence fully, then annotate key semantic units corresponding to input words.
+    Sentence: "这座建筑很大。"
+    Correspondence:
+    This -> 这 (this pointer)
+    building -> 建筑 (noun structure)
+    is -> (omitted in Chinese natural speech, but semantically links subject and predicate). I will include 是 or just map large. Let's use the natural translation.
+    Wait, "Output language: zh-CN". The text inside `<output>` must be zh-CN.
+    Does `<output>ori-word1` mean "EnglishWord (ChineseTranslationComment)"? Or "ChineseTranslation (Comment)"?
+    Given "Output-language: zh-CN", the text should be Chinese.
+    Example provided in prompt: `"<output>ori-word1 (word1-comment) ...</output>"`.
+    This looks like a template where `ori-word1` is a placeholder for the actual content.
+    If I write `<output>这(指示代词 this) 建筑(名词 building) 是(系动词 be) 大(形容词 large)</output>`, it mixes English and Chinese in comments. Rule 4 says "Characteristic |based on> the original meaning; optional for evolute to the extension |of> each word". Rule 5: "Annotate the original meaning in the comment, which shown |as/in> the output language". This means the comment text itself must be in zh-CN.
+    So: `<output>这 (指示代词) 建筑 (建筑物) 是 (存在/系动词) 大 (尺寸)</output>`?
+    Actually, looking at Rule 5 again: "Annotate the original meaning...".
+    Okay, let's construct the string:
+    `这座 (This + measure word) 建筑 (building noun) 是 (copula) 很大 (is large combination)` -> This is one word per input word.
+    Input: This building is large.
+    Segments:
+    1. This -> 这
+    2. building -> 建筑
+    3. is -> (implicit/omitted in translation, but often rendered as "很" for adjective emphasis or just "是"). Let's keep it simple.
+    4. large -> 大
+
+    Better structure to match the input words strictly for comment alignment:
+    `这 (指示代词 this) 建筑 (建筑物 building) 很大 (is very large is-l-large)`
+    But I need to translate "is". Usually "是" or just drop it.
+    Let's go with: `这座 (This-这个) 建筑 (building-建筑物) 是 (is-be) 大 (large-big) 。`
+    Wait, natural Chinese is "这座建筑很大". "是" is often optional unless for emphasis or definition ("这栋楼是大的"). The input has "is". I should probably include it to respect the word count mapping or note its omission.
+    To follow "After Each word", I will align with the input tokens.
+    Input Token 1: This -> Output: 这 (注释：指示词)
+    Input Token 2: building -> Output: 建筑 (注释：名词，建筑物)
+    Input Token 3: is -> Output: (omitted) or ? -> If I omit it, the mapping breaks.
+    Standard practice for these prompts usually prefers semantic equivalence per segment.
+    Let's combine "is large" or keep them separate? "This building is large."
+    Maybe: `这 (指示词 this) 座 (量词 measure word) 建筑 (名词 building) 是 (系动词 is) 大 (形容词 large)`
+    Translation with comments inside the tag.
+    
+    Wait, the instruction says "Output-format: ... <output>... </output> <output_without_comment>...</output_without_comment>".
+    So I need to produce both tags.
+
+    Let's finalize the translation text for `<output>`: `这 (指示代词 this) 座 (量词 measure word) 建筑 (建筑物 building) 是 (系动词 is) 大 (形容词 large) 。`
+    And `<output_without_comment>`: `这座建筑很大。`
+    
+    Wait, checking Rule 1: "comments should |point out> the key characteristic, especially the original meaning |of> each word."
+    Rule 5: "Annotate the original meaning in the comment".
+    So if input is English, comment describes English meaning.
+    Example: `建筑 (building-建筑物)` vs `建筑 (noun building)`.
+    The prompt example shows `(word1-comment)`.
+    Let's use format: `Word_Translated (Comment_in_Chinese_Explaining_Original_Meaning)`.
+    
+    Input: This building is large.
+    Words: This, building, is, large.
+    
+    Translation with comments:
+    这 (指示代词 this-指向事物) 座 (量词 measure word for buildings) 建筑 (名词 noun - 建筑物) 是 (系动词 verb - 表示状态/存在) 大 (形容词 adjective - 尺寸大/体积大) 。
+    
+    Wait, I should check if "is" needs a translation character. In Chinese "这座建筑很大", the "is" is implied by the structure or represented by `很` or just omitted. If I must respect word boundaries: `这 座 建筑 是 大`.
+    To make it natural but annotated: `这 (指示词) 座 (量词) 建筑 (名词) 是 (系动词) 大 (形容词)` -> But "这座" is usually written together. "这座建筑".
+    Let's try to map strictly:
+    This -> 这
+    building -> 建筑
+    is -> (omitted in natural Chinese but semantically there). I will translate it as `是` or merge with `大` as `很大`.
+    If I write `这座建筑很大。` and annotate segments.
+    Maybe: `这 (指示代词 this) 座 (量词 measure) 建筑 (名词 building) 是 (系动词 is) 很 (副词 very - optional extension) 大 (形容词 large)`
+    
+    Wait, I need to check the instruction "Use <output> </output> to wrap the output_translation_with_comment".
+    So:
+    `<output>`...`</output>`
+    `<output_without_comment>`...`</output_without_comment>`
+
+    Decision:
+    1. Translate naturally: "这座建筑很大。"
+    2. For the comment block, I will split it to match the English words roughly or by semantic units for clarity.
+    Let's map:
+    This -> 这 (指示代词 this)
+    building -> 建筑 (名词 building)
+    is -> (omitted in natural translation but implied copula, I'll use 是 or merge). To be accurate to "After Each word", I will include `是` for `is`.
+    large -> 大 (形容词 large)
+    
+    Refined Translation: "这 (指示代词 this) 座 (量词 measure word) 建筑 (名词 building) 是 (系动词 is) 很大 (副词 very + 形容词 large)."
+    Wait, `large` in input. Input says `large`. I should translate `large` -> `大`.
+    So: `这 (指示代词 this) 座 (量词 measure word) 建筑 (名词 building) 是 (系动词 is) 大 (形容词 large)。`
+    Or natural: `这座建筑很大。`
+    If I use `<output>` with comments, it becomes a long string like the example.
+    
+    Let's check Rule 1 again: "Allow optional comments, after Each word".
+    And Format Example: `"<output>ori-word1 (word1-comment) ...</output>"`.
+    This implies: `[TranslatedWord] ([Comment])`.
+    So I will write the Chinese translation for each word inside the brackets of the comment.
+    
+    Let's finalize the content for `<output>`:
+    `这 (指示代词 this-指向单复数) 座 (量词 measure-用于建筑物

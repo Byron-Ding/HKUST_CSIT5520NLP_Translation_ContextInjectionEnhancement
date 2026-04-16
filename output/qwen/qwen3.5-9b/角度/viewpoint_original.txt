@@ -1,0 +1,215 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Input Task:** Translate "Give me another viewpoint." from English (en) to Chinese (zh-CN).
+    *   **Input Sentence:** "Give me another viewpoint."
+    *   **Keywords/Thesaurus Context:** The prompt provides a list of synonyms for "perspective/viewpoint/outlook/etc." and links to Collins Dictionary thesaurus entries for "Give", "me", "another", "viewpoint". This suggests I should focus on providing nuanced translations or annotations based on these synonyms, specifically highlighting the original meaning vs. extensions.
+    *   **Output Format:** Strict format required:
+        ```xml
+        <output>en-word1 (comment1) en-word2 (comment2) ... zh-result</output>
+        <output_without_comment>zh-result</output_without_comment>
+        ```
+    *   **Constraints:**
+        *   Only one output block.
+        *   Comments must be in Chinese (zh-CN).
+        *   Comments should point out the key characteristic, original meaning, and distinguish from synonyms (based on Collins thesaurus context).
+        *   Use `<output>` tags to wrap the translated sentence with comments.
+        *   Wait, looking closely at the example provided in the Rules:
+            `"<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ...</output>"`
+            This implies I should list the original English words separated by their comments, then provide the full Chinese translation.
+            Actually, re-reading the format instruction:
+            `Format is: <output>input language (translation and output language comment)</output>` -> This looks like it wants a line where each original word is followed by its translation+comment?
+            Let's look at the example again:
+            `"<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ...</output>"`
+            `<output_without_comment>word1 word2 word3..... wordN</output_without_comment>`
+            
+            Wait, the example shows:
+            `<output>en-word (zh-comment) en-word... </output>` (This seems to imply listing the original words with comments).
+            But usually, translation tasks output the target language string.
+            Let's interpret the example strictly:
+            `<output>input language (comment) input language...` -> No, that doesn't make sense for a translation task unless it's word-for-word annotation.
+            However, the prompt says "Translate". Usually, the final result should be readable Chinese.
+            The format example says: `<output>ori-word1 (word1-comment) ...</output>`
+            And `<output_without_comment>word1 word2 word3..... wordN</output_without_comment>` (Here wordN seems to imply the translated words?).
+            
+            Let's look at the instruction again: "Format is: <output>input language (translation and output language comment)</output>" -> This suggests: `EnglishWord (ChineseTranslation (Comment))`.
+            Actually, looking at the example: `"<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ...</output>"`.
+            This implies the structure inside `<output>` is a sequence of original words with comments. But where is the final Chinese sentence?
+            Wait, the instruction says "Output-language: zh-CN". The example shows `ori-wordN` (original word).
+            Maybe it means: `<output>Give (give-me) me (another-viewpoint)...</output>`? No, that's confusing.
+            
+            Let's re-read carefully:
+            "Format is: <output>input language (translation and output language comment)</output>" -> This might mean `EnglishWord (ChineseTranslation (Comment))`.
+            But the example shows `ori-word1 (word1-comment)`.
+            And `<output_without_comment>word1 word2 word3..... wordN</output_without_comment>`.
+            
+            Actually, looking at previous similar tasks or standard formats for this specific prompt style (often found in LLM evaluation datasets):
+            It usually expects:
+            1. A breakdown of the key words with translations and comments.
+            2. A clean translation.
+            
+            Let's try to map the example structure strictly but applied to translation.
+            If the input is "Give me another viewpoint.", the output might be:
+            `<output>Give (给 - 给予动作) me (我 - 宾语代词) ...</output>`?
+            
+            However, the instruction says "Translate". Usually, the main payload is the Chinese text.
+            The rule says: "Annotate the original meaning in the comment, which shown as/in the output language".
+            And "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language".
+            
+            Okay, let's look at the example again:
+            `<output>ori-word1 (word1-comment) ...</output>`
+            This suggests the content *inside* the tag is original words + comments.
+            But rule 6 says "wrap the output_translation_with_comment". This contradicts the example if `ori-word` means English word.
+            
+            Hypothesis: The user wants a morphological breakdown with Chinese translations and explanations, followed by a clean translation.
+            Format interpretation based on `<output>input language (translation and output language comment)</output>`:
+            It might mean: `Give(me - 我) ...`?
+            
+            Let's look at the "example" provided in Rule 2 again:
+            Example:
+            "<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ori-word3 (word3-comment)..... ori-ordN (wordN-comment)</output>
+            <output_without_comment>word1 word2 word3..... wordN</output_without_comment>"
+            
+            If `ori-word` is English, and `word1-comment` is Chinese, then the first tag contains mixed text.
+            If `<output>` should contain the "translation with comment", maybe it means:
+            `Give (给予) me (我) ...`?
+            
+            Actually, looking at the instruction "Note: each "(comment)" |is> optional".
+            And "Output-format: <output>input language (translation and output language comment)</output>" -> This is slightly ambiguous. Does it mean `EnglishWord (ChineseTranslation)`? Or `EnglishWord (ChineseExplanation)`?
+            
+            Let's assume the standard interpretation for this specific type of constraint-heavy prompt:
+            1. Break down key words.
+            2. Provide Chinese translation for each word with a comment distinguishing meaning.
+            3. Provide clean Chinese sentence.
+            
+            Key Words to translate/analyze: Give, me, another, viewpoint.
+            
+            Sentence: "Give me another viewpoint."
+            
+            Drafting the content:
+            Give -> 给 / 给予 (provide)
+            me -> 我 (me)
+            another -> 另一个 (different/additional)
+            viewpoint -> 观点 (opinion/perspective)
+            
+            Constraint Checklist & Confidence Score:
+            1. Allow optional comments after each word? Yes, but rule 6 says "wrap the output_translation_with_comment".
+            2. Comments in zh-CN? Yes.
+            3. Point out key characteristic/original meaning? Yes.
+            4. Compare similar words? Yes (in comment).
+            5. Use <output> tags? Yes.
+            
+            Wait, Rule 1 says: "Allow optional comments, after Each word; comments should |point out> the key characteristic...".
+            Format example: `"<output>ori-word1 (word1-comment) ...</output>"`.
+            This implies the structure inside `<output>` is `EnglishWord (ChineseTranslation (Comment))` or `EnglishWord (ChineseTranslation + Comment)`.
+            Given "Input-language: en" and "Output-language: zh-CN", usually `<output_without_comment>` contains the target language translation string.
+            
+            So, likely structure:
+            <output>Give (给予 - 提供动作，区别于 show/show/ask) me (我 - 接受者) another (另一个 - 不同而非完全相同) viewpoint (观点 - 看法立场)</output>
+            <output_without_comment>给我一个不同的观点</output_without_comment> (This needs to be the actual sentence).
+            
+            Wait, Rule 6: "Use <output> </output> to wrap the output_translation_with_comment".
+            This might mean the first tag contains the annotated translation.
+            
+            Let's refine the comment content based on "Compare the similar word of each word -> |point out> the key characteristic -> |Annotate> the original meaning".
+            Keywords from the top list: perspective, angle, viewpoint, outlook, stance, approach.
+            Focus on 'viewpoint'.
+            
+            Structure Plan:
+            1. `<output>` block containing: `Give (翻译：给 - 评论) me (翻译：我 - 评论)...`
+            2. `<output_without_comment>` block containing the pure Chinese sentence.
+            
+            Wait, looking at the example in Rule 2 again:
+            Example: "<output>ori-word1 (word1-comment) ...</output>"
+            This implies I should keep the original words and append comments? Or replace with translation?
+            "Input-language: en Output-language: zh-CN".
+            If `<output>` wraps `output_translation_with_comment`, it probably means the Chinese translation is the primary payload.
+            But the example shows `ori-word1`.
+            Let's look at "Note 6": "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language".
+            This implies `<output>` content is mostly Chinese (translation).
+            So `Give` becomes `(翻译词) (Comment)`.
+            
+            Refined Plan:
+            Word 1: Give -> 给 / 提供. Comment: Distinguish from 'offer' or 'show'.
+            Word 2: me -> 我。Comment: Objective pronoun.
+            Word 3: another -> 另一个/另外的。Comment: Emphasizes 'different' vs 'another one'.
+            Word 4: viewpoint -> 观点/看法. Comment: Distinguish from opinion (opinion is more general, viewpoint implies perspective/stance). Use the provided list (perspective, angle...) context.
+            
+            Chinese Sentence Translation: "给我一个不同的角度" or "让我换个角度看问题".
+            Literal: "Give me another viewpoint." -> "请给我另一个观点。"
+            Natural: "我想看看你的另一个观点。" / "请提供另一种看法。"
+            Let's stick close to literal but natural: "请给我提供一个新的视角/观点。" -> "给我一个不同的观点。"
+            
+            Wait, checking the `<output_without_comment>` format in example: `word1 word2 ...`. Since output language is zh-CN, it should be Chinese words there.
+            
+            Final check on constraints:
+            - Only one output block (Wait, Rule 6 says "Use <output> </output>". Example has two tags inside the response? No, the Example shows `<output>` then `<output_without_comment>`. The Rules say "Only allow one output." but the format example clearly shows two XML-like tags. I should follow the Format Example structure as it defines the content).
+            - Wait, Rule 3 "Only allow one output". Does it mean one XML block? Or one response? The prompt usually wants a single valid JSON/XML structure or just text. Given the instruction "Use <output> </output>", I will provide the two blocks requested in the format example because that is the specific formatting rule.
+            - Wait, "Only allow one output." might mean don't add extra text outside these tags.
+            
+            Let's finalize the content for the comments based on Rule 1 & 4: Point out key characteristic, original meaning, distinguish from synonyms (perspective, angle, outlook...).
+            
+            Word breakdown:
+            Give: 给 / 提供。Comment: 给予/传递，区别于 show or offer.
+            me: 我。Comment: 直接宾语，接受方。
+            another: 另一个。Comment: 不同的，区别于 the same，强调 variation.
+            viewpoint: 观点。Comment: 立场/看法，区别于 opinion (general), stance (position), perspective (angle).
+            
+            Wait, the example format in Rule 2 is: `"<output>ori-word1 (word1-comment) ...</output>"`.
+            And `<output_without_comment>word1 word2...</output_without_comment>`.
+            I will follow this strictly.
+            
+            Wait, "Output-language: zh-CN".
+            If the first block contains `ori-word`, is that English?
+            Instruction 5: "Annotate the original meaning in the comment, which shown as/in the output language".
+            Instruction 2 Example: `<output>ori-word1 (word1-comment) ...</output>`
+            If `ori-word` means "Original Word", then inside `<output>` is English + Comment.
+            But Rule 6 says "which should be in the output language". This is a contradiction.
+            Usually, translation tasks require the target language text.
+            Let's interpret "output_translation_with_comment" as "Target Word (Comment)".
+            The example `ori-word1` might just be placeholder text for "Input Word".
+            I will prioritize Rule 6 ("should be in the output language") over the literal Example text (`ori-word`).
+            So inside `<output>`, I should write: `Give (给 - comment)`.
+            
+            Wait, actually, looking at the instruction "Input-language: en Output-language: zh-CN".
+            If I write English words in `<output>`, is it violating "should be in the output language"?
+            Yes.
+            So I will translate the words inside `<output>` as well? Or just annotate the original word?
+            Instruction 5: "Annotate the original meaning in the comment, which shown as/in the output language".
+            Okay, so `Comment` is zh-CN. The main text in `<output>`... usually translation tasks expect the target sentence structure.
+            Let's look at the example again: `ori-word1 (word1-comment)`.
+            Maybe it means: `Give (提供 - 给予/传递，区别于 show)`?
+            Okay, I will use Target Language for the main text inside `<output>` as per Rule 6.
+            Actually, to be safe with "Translate", I will provide the Chinese translation in the `<output>` tag with comments attached to each word's translation, and the clean Chinese translation in `<output_without_comment>`.
+            
+            Wait, one more check: "Only allow one output." This likely means don't give a lecture before or after. Just the formatted text.
+            
+            Let's refine the specific words' commentary using the provided list (perspective, angle, viewpoint, outlook, stance, approach).
+            Viewpoint -> 观点 / 视角。Comment: 强调立场或观察的特定角度，区别于 opinion（一般意见）或 outlook（宏观展望）。
+            Another -> 另一个。Comment: 指代不同的选项，区别于 other（泛指）或 same.
+            Give -> 给/提供。Comment: 表示动作的传递，区别于 offer（提议）.
+            Me -> 我。Comment: 第一人称代词宾语。
+            
+            Wait, the output format example puts `<output>` and `<output_without_comment>`.
+            I need to generate exactly that.
+
+            Final check on "Only allow one output." in Rules vs Example Structure.
+            Usually, this means "Do not output markdown code blocks like ```xml ... ```". Just the raw tags.
+            Wait, "Note: Only allow one output." might refer to the fact that I shouldn't output multiple times or add meta text.
+            The Format section shows two tags inside the example response content. I will include both tags as shown in the Format Example, assuming "one output" refers to the overall response content (not repeating the task).
+            Actually, standard practice for these specific constraint prompts is to follow the "Format is:" instruction exactly.
+            
+            Revised Plan for Content:
+            Tag 1: `<output>` contains word-by-word translation + comments.
+            Tag 2: `<output_without_comment>` contains the full sentence translation.
+            
+            Content Construction:
+            Give -> 提供 (Provide - 给予动作，区别于 show 展示或 offer 提议)
+            me -> 我 (Me - 直接宾语，接受者)
+            another -> 另一个 (Another - 强调不同而非相同，区别于 the same 同样的)
+            viewpoint -> 视角/观点 (Viewpoint - 核心意义：立场与观察角度，区别于 opinion 观点或 outlook 展望)
+            
+            Sentence: 请给我一个不同的观点。 (Or similar natural phrasing).
+            Let's go with: 请给我提供另一个观点。
+            
+            One

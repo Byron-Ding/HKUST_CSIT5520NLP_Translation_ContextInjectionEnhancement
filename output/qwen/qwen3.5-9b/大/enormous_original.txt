@@ -1,0 +1,176 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Input:** A list of English synonyms for "large" (huge, enormous, massive, gigantic, colossal, immense) and a specific sentence: "This building is enormous."
+    *   **Task:** Translate the input sentence ("This building is enormous.") from English (en) to Chinese (zh-CN).
+    *   **Input-Output Task Format:** The user provides a specific format for the output.
+    *   **Format Rules:**
+        *   `<output>`: Contains the translation with optional comments in parentheses `(comment)` for each word/phrase. Comments must be in zh-CN and explain the key characteristic/original meaning to distinguish from synonyms.
+        *   `<output_without_comment>`: Contains the plain translation without comments.
+        *   Only one output block allowed (though the example shows two tags, I need to follow the structure provided in the "example" section carefully). Wait, looking at the "Output format" section:
+            ```
+            Format is: 
+            <output>ori-word1 (word1-comment) ori-word2 (word2-comment) ori-word3 (word3-comment)..... ori-ordN (wordN-comment)</output>
+            <output_without_comment>word1 word2 word3..... wordN</output_without_comment>
+            ```
+            *Correction:* The instruction says "Note: Only allow one output." but the example shows two XML-like tags (`<output>` and `<output_without_comment>`). Usually, this means I should provide both blocks as shown in the example structure. Let's look closer at the "Note: Only allow one output." vs the example. The example clearly defines the structure with two distinct blocks. I will follow the structure defined in the "Output format" example section, as that is the specific template.
+        *   **Comment Language:** Chinese (zh-CN).
+        *   **Content of Comments:** Distinguish original meaning from synonyms (huge, massive, etc.). Point out key characteristics based on original meaning.
+        *   **Input Sentence:** "This building is enormous."
+
+2.  **Analyze the Synonyms/Key Terms:**
+    The prompt lists: large, huge, enormous, massive, gigantic, colossal, immense.
+    The input sentence uses: "enormous".
+    However, the format example suggests translating *each word* in the input? Or is it asking to translate the specific words listed at the top plus the sentence?
+    Looking at the Input-Output-Task section:
+    Input: This building is enormous.
+    Output-language: zh-CN
+    Format: `<output>ori-word1 (comment) ...</output>`
+
+    Wait, the format example shows `ori-word1 (word1-comment)`. Usually, this means translating each word of the source sentence with its comment.
+    Source Sentence: "This building is enormous."
+    Words: This, building, is, enormous.
+
+    However, looking at the preamble list (large huge enormous massive gigantic colossal immense), these are synonyms provided for context/reference, possibly to inform the comments about *why* "enormous" is translated specifically compared to those. The instruction says "Compare the similar word of each word -> |point out> the key characteristic |of> each word".
+    Actually, re-reading Rule 1: "Allow optional comments, after Each word; comments should |point out> the key characteristic...".
+    This implies I should annotate the translation of the input sentence words.
+
+    Let's check the format again:
+    `<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ori-word3 (word3-comment)..... ori-ordN (wordN-comment)</output>`
+    It seems `ori-word` refers to the original English word, and `comment` refers to the Chinese explanation.
+    Example: `<output>This (this-comment) building (building-comment) is (is-comment) enormous (enormous-comment)</output>`?
+    Or does it mean translating into the target language and annotating the translation with info about the original?
+    "Output format: <output>ori-word1 (word1-comment)...</output>" -> Usually `word1` in the context of the output tag implies the *translated* word, but the example says `ori-word1`. Let's assume `ori-word` means the original English word provided, followed by its comment, OR it means the structure `<target-translation> (comment)</target-translation>`.
+    Standard practice for this type of prompt (translation with gloss): `<中文翻译> (original english 注释)</中文翻译>`.
+    But the example says: `ori-word1 (word1-comment)`. If I translate "This building is enormous.", the output should be Chinese.
+    Let's interpret `ori-word1` as the *translated word* in the target language, or strictly following the label `ori-word`. Given it's a translation task, usually, you see the translation first.
+    However, the prompt says: `Format is: <output>ori-word1 (word1-comment) ...</output>`.
+    If I write `<输出>` followed by the Chinese text.
+    Let's look at the instruction: "Comment |are> in Output-Language, in zh-CN".
+    So `(comment)` should be Chinese.
+    `word1` inside the output tag: Is it the English original or the translated version?
+    Usually: `EnglishWord (ChineseTranslation)`. But here it says `ori-word1`.
+    Let's assume the structure is: `<output>OriginalWord1 (ChineseComment1) OriginalWord2 (ChineseComment2)...</output>` OR `<output>ChineseTranslation1 (Comment about meaning/nuance)</ChineseTranslation1>`.
+    Re-reading Rule 6: "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language".
+    This implies the text inside `<output>` is in the **output language** (Chinese), followed by comments in Chinese? Or English original followed by comment?
+    "wrap the output_translation_with_comment, which should be in the output language" -> The translation part must be in Chinese.
+    Example: `<output>This (this 意思) building...</output>` -> No, it says "should be in the output language". So the *text* inside the tag must be Chinese (the translation).
+    Wait, the example says `ori-word1 (word1-comment)`.
+    If I strictly follow "Output-language: zh-CN", then `<output>This (This 解释)</output>` is English text. That violates rule 6 ("should be in the output language").
+    Therefore, `ori-word1` likely refers to the position, but the content must be the Chinese translation.
+    So it should look like: `<output>这座 (这栋 building) 是建筑物 (is) 巨大的 (enormous) (comment)</output>`.
+    Actually, simpler interpretation based on "Translate":
+    Input: This building is enormous.
+    Output with comments: `这座大楼 (building-comment) 是 (is-comment) 巨大的 (enormous-comment)`?
+    Or does it mean: `This (this-comment) building...`
+    Rule 6 says: "wrap the output_translation_with_comment, which should be in the output language".
+    This is contradictory with the example format string `<output>ori-word1 (word1-comment) ...</output>` if `ori-word` means English word.
+    If I must put the translation in Chinese, then the string inside `<output>` should be Chinese words representing the sentence structure, with comments attached to specific translated segments explaining nuances.
+    Example interpretation: `<output>这座大楼 (this building - 建筑物/规模) 非常 (is - 状态) 巨大的 (enormous - 强调体积庞大)</output>`
+    But standard glossing often keeps the original word for reference if requested. However, Rule 6 says "should be in the output language". So I will translate the words into Chinese and put comments in parentheses explaining the nuance relative to synonyms like huge/massive etc.
+    
+    Actually, looking at the input list: `large huge enormous massive gigantic colossal immense`. These are the target vocabulary concepts. The sentence uses `enormous`.
+    So for "enormous", I need to specify that compared to "huge" or "massive", what is its specific characteristic (extreme size, often overwhelming).
+    
+    Let's refine the plan based on Rule 6 ("should be in the output language"): The main text inside `<output>` must be Chinese.
+    Format: `ChineseWord (Comment)`
+    But wait, looking at the example provided in the prompt:
+    `<output>ori-word1 (word1-comment) ori-word2 (word2-comment)...</output>`
+    It explicitly writes `ori-word`. This suggests keeping the original English for annotation purposes might be expected, BUT Rule 6 says "should be in the output language".
+    Okay, I will prioritize Rule 6 (Translation text must be Chinese). The example labels `ori-word` might be a template label I should ignore in favor of content compliance, OR I should write `<output>` followed by Chinese characters where each word has a comment.
+    Actually, to be safe and compliant with "Translate" + "Output-language: zh-CN":
+    Inside `<output>`, I will put the Chinese translation words separated by spaces, followed by comments in parentheses explaining the specific nuance of that word compared to synonyms.
+    Example: 这座 (This) building(建筑物) 是 (is) 巨大的 (enormous). Wait, comments should be distinct.
+    Better structure based on "Compare similar word... point out key characteristic":
+    Translation: 这栋大楼是巨大的。
+    With comments: 这 (这) 栋 (栋) 大 (大) ... too granular?
+    Usually, per word of the original sentence?
+    Original: This building is enormous.
+    Chinese: 这座建筑是巨大的。
+    Mapping: This -> 这座，building -> 建筑/大楼，is -> 是，enormous -> 巨大/庞大的.
+    
+    Let's check the specific request for comments: "comments should |point out> the key characteristic, especially the original meaning |of> each word."
+    And "Compare the similar word of each word".
+    For "enormous", I need to comment on why "enormous" is chosen over "huge" or "massive" in this context (e.g., implies overwhelming scale).
+    
+    Let's construct the output string.
+    Text: 这座大楼是巨大的。 (Or similar)
+    Words: 这 | 座 | 大 | 楼 | 是 | 巨 | 大 | 。
+    This is too fragmented. I will group by original word equivalents.
+    Word 1: This -> 这
+    Word 2: building -> 大楼
+    Word 3: is -> 是
+    Word 4: enormous -> 巨大的
+    
+    Comments need to distinguish meanings:
+    - This: (指示代词) pointing to a specific object
+    - building: (建筑物/房子) structure vs house etc.
+    - is: (系动词) state of being
+    - enormous: (极大的/庞大的) extreme size, larger than 'large' or 'big'. Synonyms like huge, massive imply bulk; enormous implies overwhelming magnitude.
+
+    Wait, looking at the "Format" example again: `ori-word1 (word1-comment)`.
+    If I strictly follow "Output-language: zh-CN", `ori-word` (English) is not in the output language.
+    Maybe the prompt means `<output>` wraps the *translated text*, where each translated segment has a comment about its specific meaning compared to synonyms.
+    I will translate to Chinese and append comments.
+    
+    Let's draft the content for "This building is enormous."
+    Translation: 这座大楼是巨大的。
+    Words to annotate: This, building, is, enormous.
+    Chinese equivalents: 这座，大楼，是，巨大的.
+    
+    Wait, Rule 2 says "Note: Only allow one output." but the example has two tags `<output>` and `<output_without_comment>`.
+    Okay, I will follow the example structure strictly (both tags).
+    Rule: "Only allow one output." usually contradicts the example. However, the instruction "Output format:" section shows the example with both tags. The "Note: Only allow one output." might refer to the fact that I shouldn't output multiple *different* variations, but rather follow the requested XML-like structure (which contains two blocks).
+    Actually, looking closely at "Note: Only allow one output." -> This likely means "Don't give me a choice between Option A and Option B". Just give the format defined.
+    
+    Wait, checking Rule 1 & Example again.
+    Format: 
+    `<output>ori-word1 (word1-comment) ...</output>`
+    `<output_without_comment>word1 word2 ...</output_without_comment>`
+    If I follow Rule 6 ("wrap the output_translation_with_comment, which should be in the output language"), then inside `<output>`, I must write Chinese.
+    So: `这座大楼是巨大的 (enormous-comment)`?
+    No, usually it's per word or segment.
+    Let's try to match the input sentence structure.
+    Input: This building is enormous.
+    Output translation: 这座建筑物非常巨大。
+    
+    Wait, "building" in Chinese could be 大楼 (tall/large) or 建筑 (structure). The synonym list includes "massive", "colossal".
+    To distinguish "enormous": It emphasizes the sheer scale/size more than just mass.
+    
+    Let's finalize the format content:
+    Inside `<output>`: `这座大楼是巨大的` annotated with comments.
+    Actually, to match `ori-word1 (word1-comment)`, I should probably keep the original English word in the output?
+    "Note: Comment |are> in Output-Language".
+    If I write `<output>This (this 评论) building (building 评论)...</output>`, that violates Rule 6 ("should be in the output language").
+    If I write `<output>这座大楼是巨大的 (enormous-评论)...</output>`, it mixes words.
+    
+    Let's assume the standard interpretation for these specific "format" prompts: The text inside `<output>` is the translation, but since the format requires `ori-word1`, and Rule 6 says translation must be in output language, I will provide the Chinese word translated from the English word, followed by the comment.
+    Example: `这座 (This) 大楼 (building)...` -> No, comments must be in Output Language (Chinese).
+    So `这座 (这栋建筑的解释)`?
+    Let's look at Rule 1 again: "comments should |point out> the key characteristic...".
+    Okay, I will write the Chinese translation for each word/phrase, followed by a Chinese comment explaining its nuance compared to synonyms.
+    Format: `中文词 (注释内容)`
+    Example from prompt: `"<output>ori-word1 (word1-comment) ...</output>"` -> I will replace `ori-word1` with the Chinese translation of that word for Rule 6 compliance, OR I will stick to the literal format if the example is rigid. Given "Translate" task, keeping original English inside `<output>` might confuse the user who wants Chinese output.
+    However, the prompt says: "Output-language: zh-CN".
+    So the text inside `<output>` MUST be Chinese (mostly).
+    I will use Chinese characters for the translated words and Chinese comments.
+    
+    Structure decision:
+    Word 1: This -> 这 (注释)
+    Word 2: building -> 大楼 (注释)
+    Word 3: is -> 是 (注释)
+    Word 4: enormous -> 巨大的 (注释)
+    
+    Comments content logic:
+    - huge/immense vs enormous: 'enormous' implies a size so large it seems unbelievable or overwhelming.
+    - massive vs enormous: 'massive' emphasizes weight/mass; 'enormous' emphasizes volume/scale.
+    
+    Drafting comments in Chinese:
+    This (这) -> 指示代词，特指当前讨论的对象。
+    building (大楼) -> 建筑物，泛指构造物，区别于 house/structure。
+    is (是) -> 系动词，连接主语和形容词。
+    enormous (巨大的) -> 形容体积或规模极大，比 huge (巨大) 更强调不可估量的庞大，常含压倒性感觉，区别于 massive(厚重/有质量感) 或 gigantic(像巨人般/夸张)。
+    
+    Wait, I need to match the format `word (comment)`.
+    If I translate `This building is enormous.` -> `这座大楼是巨大的。`
+    Output: `这座 (指示代词，特指

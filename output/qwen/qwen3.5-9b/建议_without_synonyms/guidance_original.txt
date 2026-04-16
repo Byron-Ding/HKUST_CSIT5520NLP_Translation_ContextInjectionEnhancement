@@ -1,0 +1,176 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Input:** "Here is a small guidance for you."
+    *   **Input Language:** English (en)
+    *   **Output Language:** Chinese (zh-CN)
+    *   **Task:** Translate the input sentence into the output language.
+    *   **Formatting Rules:**
+        *   Allow optional comments after each word.
+        *   Comments must point out the key characteristic, especially the original meaning, of each word.
+        *   Output format must contain two tags: `<output>` (for translation with comments) and `<output_without_comment>` (for plain translation).
+        *   Comments must be in the output language (zh-CN).
+        *   Use `<output> </output>` to wrap the main translated text with comments.
+        *   Wait, the rules say: "Only allow one output." but the example shows two tags inside a structure. Let's look closely at Rule 1 and the Example.
+        *   Example format:
+            ```
+            <output>ori-word1 (word1-comment) ori-word2 (word2-comment)...</output>
+            <output_without_comment>word1 word2 word3..... wordN</output_without_comment>
+            ```
+        *   Rule 6 says: "Use <output> </output> to wrap the output_translation_with_comment". This implies the final block should follow the example structure.
+        *   However, Rule 1 says "Only allow one output." This might contradict the requirement for two tags if interpreted strictly, but usually, in these prompt engineering contexts, it means "One response block containing the specified format". The example shows both tags present. I will follow the example format as it's more specific about the structure.
+        *   Crucially: Rule 5 says "Annotate the original meaning in the comment".
+        *   Rule 3 says "Compare the similar word... -> point out key characteristic". This is a bit vague but implies comments should explain nuances or definitions.
+        *   Constraint Check: The prompt asks for `<output>` wrapping the translation with comments. It also expects `<output_without_comment>`. I need to make sure both are present based on the example provided in Rule 1, despite the "Only allow one output" note (which likely means don't give multiple separate responses).
+
+2.  **Analyze the Input Sentence:**
+    *   "Here is a small guidance for you."
+    *   Words: Here, is, a, small, guidance, for, you.
+
+3.  **Draft Translation & Comments (zh-CN):**
+    *   Here -> 这里 (Here): Indicates location or presence of what follows. Meaning: 此处/指代下文。
+    *   is -> 是 (Is): Linking verb. Meaning: 系动词，表示判断/存在。
+    *   a -> 一个 (A): Indefinite article. Meaning: 不定冠词，泛指。
+    *   small -> 小小 (Small): Adjective indicating size or extent. Meaning: 尺寸小，引申为少量/简短。
+    *   guidance -> 指南 / 指导 (Guidance): Noun meaning direction or instruction. Meaning: 指引/建议/指导方针。Distinction: 比 advice 更正式/系统性，比 hint 更明确。
+    *   for -> 对 / 为 (For): Preposition indicating beneficiary. Meaning: 介词，表示对象/受益者。
+    *   you -> 你 (You): Pronoun second person. Meaning: 第二人称代词。
+
+    *Refining Comments based on Rule 4 & 5:*
+    *   Must be in zh-CN.
+    *   Must point out original meaning/key characteristic.
+    *   Need to handle "Here is a small guidance for you." -> Note: "guidance" is singular but often used as a mass noun or count noun. "Small guidance" sounds slightly Chinglish, standard translation might be "一点指导" or "简短指南". But I must translate word-for-word with comments first, then provide plain translation.
+    *   Wait, looking at the instruction: "Output format: <output>... </output> ... <output_without_comment>...</output_without_comment>".
+    *   The instruction says "Only allow one output." This usually conflicts with having two tags. However, the example shows both tags. I will generate the response matching the example structure provided in Rule 1/Example section, as that is the specific formatting requirement.
+
+    *Re-evaluating "Only allow one output":*
+    If I look at similar tasks, sometimes it means "Do not add markdown explanation outside the XML-like tags". I will output exactly the required XML structure.
+
+    *Translation with Comments:*
+    这里 (此处，指示) 是 (判断动词) 一个 (不定指量词) 小 (尺寸/程度描述) 指导 (方向/指引/建议) 对 (对象介词) 你 (第二人称代词)。
+    Actually, punctuation should be handled. "Here is..." usually maps to "这是一份...".
+    Let's stick closer to the prompt words for the commented version to show analysis.
+    Here (此处) is (系动词) a (不定冠词) small (微小/简短) guidance (指引/指导) for (对于) you (你)。
+
+    *Translation without Comments:*
+    这是一点给你用的指导意见。Or more literally: 这里有一份小小的指南给你。
+    Standard natural translation: "这是一份简短的指导供你参考。" or "这里是给你的一些小建议。"
+    Let's go with a natural but faithful translation: "这是一份小小的指导给你。"
+
+    Wait, the instruction says "Translate". So `<output>` should contain the translated text with comments.
+    Example: `"<output>ori-word1 (word1-comment) ...</output>"`
+    The output language is zh-CN.
+    So inside `<output>`, it should look like: `这里 (此处指示) 是 (系动词，判断) 一个 (数量词，泛指) 小 (尺寸小/量级低) 指导 (指引/建议/方针) 对 (介词，指向对象) 你 (第二人称代词)。`
+    Inside `<output_without_comment>`: `这里是一个小的指导意见给你。` (Needs to be a valid sentence).
+    Better translation for "guidance": 指南 / 指导.
+    Better translation for "small": 少量 / 简短.
+    Let's refine the natural translation: "这是一点小小的指导供你参考。"
+
+4.  **Finalizing the Content:**
+
+    *   `<output>` block:
+        Here -> 这里 (指示此处)
+        is -> 是 (判断动词，连接主语谓语)
+        a -> 一个 (不定冠词，表单数泛指)
+        small -> 小 (尺寸形容词，表简短或量小)
+        guidance -> 指导 (名词，指方向/建议)
+        for -> 对 (介词，表对象/受益者)
+        you -> 你 (代词，第二人称)
+
+    *   `<output_without_comment>` block:
+        "这是一份简单的指导意见给你。" or "这里有一份简短的指导供你参考。"
+        Let's make it concise: "这是一点小小的指导给你。"
+
+5.  **Reviewing Constraints:**
+    *   Comments in zh-CN? Yes.
+    *   Wrap with `<output>` and `<output_without_comment>`? Yes.
+    *   Only one output block? Yes (the whole response is one block).
+    *   Rule 6: "Use <output> </output> to wrap the output_translation_with_comment". It doesn't explicitly forbid `<output_without_comment>` given the example shows both. I will follow the example structure exactly.
+
+    Wait, looking closer at Rule 1:
+    `Output format:`
+    ```
+    <output>...</output>
+    <output_without_comment>...</output_without_comment>
+    ```
+    Rule 6 says: "Use <output> </output> to wrap the output_translation_with_comment".
+    Okay, I will produce the exact format from the Example section in Rule 1.
+
+    Let's refine the comments to be insightful per Rule 4 & 5.
+    Here: 指示当前位置或引入下文 (indicating location or introducing following text)
+    is: 系动词，连接主语与表语 (linking verb, connecting subject and predicate)
+    a: 不定冠词，表示泛指单数 (indefinite article, generic singular)
+    small: 尺寸或程度形容词 (size/degree adjective)
+    guidance: 指引、方针或建议的总称 (guidance/guideline or advice general)
+    for: 介词，指明对象或受益者 (preposition indicating object/beneficiary)
+    you: 第二人称单数代词 (second person singular pronoun)
+
+    Natural translation without comments: "这是一份简单的指南给你。"
+
+6.  **Constructing Final Output:**
+    Need to ensure no markdown code blocks around the tags if not requested, but usually XML-like tags are better clear. The example doesn't show markdown ticks ` ``` `, just the tags. However, I should ensure it's readable. I will output plain text containing the tags.
+
+    Wait, checking Rule 6 again: "Use <output> </output> to wrap the output_translation_with_comment".
+    Checking Example in Rule 1:
+    ```
+    <output>ori-word1 (word1-comment)...</output>
+    <output_without_comment>word1 word2 word3..... wordN</output_without_comment>
+    ```
+    Okay, I will replicate this structure.
+
+    One more check on "Only allow one output". This usually means don't give multiple explanations before the tags. Just the tags and content.
+
+    Let's finalize the Chinese comments to highlight original meaning (English definition context) as per Rule 5 & 4.
+    Actually, Rule 5 says: "Annotate the original meaning in the comment, which shown as/in the output language". This means the explanation inside the parenthesis should explain the English word's meaning using Chinese.
+
+    Revised Comments:
+    Here -> 这里 (原意：指示此处/引出下文)
+    is -> 是 (原意：系动词/表示存在或判断)
+    a -> 一个 (原意：不定冠词/单数数量)
+    small -> 小 (原意：尺寸微小/程度轻微)
+    guidance -> 指导 (原意：指引方向/方针建议)
+    for -> 对 (原意：介词/指向对象或受益者)
+    you -> 你 (原意：第二人称代词)
+
+    Let's combine into the final string.
+
+    Wait, I need to check if "guidance" is singular or uncountable. "A small guidance" is grammatically slightly awkward (usually 'advice' or 'guideline'), but as a translator task, I should translate the given words.
+    Translation: 这是一份简短的指导给你。
+
+    Wait, Rule 1 says: "Output format: Note: each "(comment)" |is> optional". But then the example shows them. And Rule 1 says "Allow optional comments, after Each word". The output example shows them. I will include them as per the example pattern for consistency with the instruction's primary visual cue (the example).
+
+    Wait, Rule 6 says: "Use <output> </output> to wrap the output_translation_with_comment". It does not mention `<output_without_comment>` in Rule 6 text, but Rule 1 Example shows it. I will include both to satisfy the Example format which is usually the strict template.
+
+    Wait, looking at "Only allow one output." If I provide two tags, is that considered one output? Yes, it's one response string.
+    Okay, ready to generate.
+
+    Wait, I need to be careful about the instruction "Only allow one output". Sometimes this means "Don't output any introductory text". Just the XML block.
+
+    Final check on comments content: "point out> the key characteristic, especially the original meaning |of> each word."
+    Example: "Here (指示此处)".
+    I will make them detailed enough to distinguish meanings.
+
+    Input: Here is a small guidance for you.
+    Word-by-word:
+    Here -> 这里 (指示下文)
+    is -> 是 (系动词，判断)
+    a -> 一个 (不定冠词，泛指)
+    small -> 小 (形容尺寸/量级)
+    guidance -> 指导 (名词，指引建议)
+    for -> 给/对 (介词，对象)
+    you -> 你 (人称代词)
+
+    Plain translation: "这是一份小小的指导意见给你。" or "这里有一些简短的指导供你参考。"
+    I will use: "这是一份小小的指南给你。"
+
+    Wait, Rule 6 says "Use <output> </output> to wrap the output_translation_with_comment".
+    It does not explicitly forbid `<output_without_comment>` in text description of Rule 6, but Rule 1 Example has it. I'll follow Rule 1 Example.
+
+    One detail: The example shows `<output>` and `<output_without_comment>`.
+    Okay.
+
+    Let's write it.
+</think>
+
+<output>这里 (指示此处，引出下文) 是 (系动词，表示判断或存在) 一个 (不定冠词，单数泛指) 小 (形容尺寸或程度轻微) 指导 (名词，指引、方针与建议) 对 (介词，指向对象或受益者) 你 (第二人称代词)</output>
+<output_without_comment>这里是一份简短的指导给你。</output_without_comment>

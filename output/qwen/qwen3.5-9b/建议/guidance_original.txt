@@ -1,0 +1,172 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Input Text:** "Here is a small guidance for you."
+    *   **Input Language:** English (en)
+    *   **Output Language:** Chinese Simplified (zh-CN)
+    *   **Task:** Translate with comments explaining key characteristics/meanings.
+    *   **Rules:**
+        1.  Allow optional comments after each word (in the output language, zh-CN).
+        2.  Output format: `<output>word1(comment) word2(comment) ...</output>` and `<output_without_comment>translation...</output_without_comment>`. Wait, looking at the rules again: "Note: Only allow one output." But the example shows two tags: `<output>...</output>` and `<output_without_comment>...</output_without_comment>`. The instruction says "Only allow one output", but then gives an example with two blocks. Usually, in these types of prompts, "Only allow one output" means don't give me a meta-discussion or multiple options. However, the example format explicitly shows two XML-like tags within the response structure. I need to follow the *example format* strictly regarding the tags provided in the instruction ("Format is: <output>... </output> ... <output_without_comment>...</output_without_comment>"). Wait, looking closer at Rule 6: "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language". This contradicts the example which shows both. Let's re-read carefully.
+        *   Rule 2 says: "Output format: ... <output>input language (translation and output language comment)</output> <output_without_comment>translation without comment</output_without_comment>".
+        *   Rule 6 says: "Use <output> </output> to wrap the output_translation_with_comment". It doesn't explicitly forbid the second tag in the description, but Rule 2 defines the format which includes both. However, often these prompts want a specific structure. Let's look at the example again:
+            `example:`
+            `<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ori-word3 (word3-comment)..... ori-ordN (wordN-comment)</output>`
+            `<output_without_comment>word1 word2 word3..... wordN</output_without_comment>`
+        *   So I should produce both blocks.
+        3.  Comments must be in zh-CN.
+        4.  Compare similar words -> point out key characteristic based on original meaning.
+        5.  Annotate original meaning in the comment.
+        6.  Wrap output_translation_with_comment in `<output>`.
+
+    *   **Wait, there's a contradiction.** The user prompt lists a bunch of dictionary URLs at the beginning (suggestion, advice, recommendation, tip, guidance, counsel). Then gives an Input-Output-Task section. Then gives Rules.
+    *   Rule 2 says: "Format is: <output>... </output> <output_without_comment>...</output_without_comment>".
+    *   Rule 6 says: "Use <output> </output> to wrap the output_translation_with_comment".
+    *   Usually, if there's a conflict between Rule and Example, follow the structure defined in the Example/Rule 2 as the primary format template.
+    *   Constraint Check: "Note: Only allow one output." This usually means don't write back-and-forth with me. Just give the final result. But the example shows two tags. I will provide both tags as per Rule 2's definition of "Output format".
+    *   Wait, looking at the instruction "Note: Each word; comments should |point out> the key characteristic... Output-Language is zh-CN".
+    *   Input Sentence: "Here is a small guidance for you."
+    *   This sentence has grammatical issues ("small guidance" -> "little advice/guidance", "guidance" is usually uncountable). But I must translate it faithfully first, then comment on the words.
+    *   Words to break down: Here, is, a, small, guidance, for, you.
+
+2.  **Drafting Translation & Comments:**
+
+    *   **Here**: (这里) (指示/方位介词，意为“这儿”) vs (here is...) (此处存在). Key meaning: 位置指示。
+    *   **is**: (是) (动词 be 的第三人称单数形式，表示存在或状态)。Key meaning: 系动词/存在。
+    *   **a**: (一个) (不定冠词，用于可数名词前)。Key meaning: 泛指单数。Note: "guidance" is uncountable, so strictly "a guidance" is grammatically questionable, but I will annotate based on its usage here as an indefinite article).
+    *   **small**: (小的) (形容词，指尺寸或规模)。Key meaning: 尺寸小。vs advice/suggestion. Key characteristic: Size/Scope. In context of abstract nouns like "guidance", often implies "brief" or "minor".
+    *   **guidance**: (指导/建议/指引) (名词，意为 direction/advice/help). Key meaning: 方向性帮助。Compare with suggestion(advice tip recommendation counsel). Characteristic: Authority/Formality vs Suggestion (optional).
+    *   **for**: (为了) (介词，表示目的或对象)。Key meaning: 受益对象。
+    *   **you**: (你/你们) (人称代词第二人称)。Key meaning: 接收者。
+
+3.  **Refining Comments per Rules:**
+    *   Compare similar words (suggestion, advice, recommendation, tip, counsel). Focus on "guidance".
+    *   Characteristic based on original meaning (authority/direction).
+    *   Comment in zh-CN.
+    *   Wrap comments in the main output tag.
+
+4.  **Handling the "Only allow one output" rule:**
+    *   If I include two XML tags, is that considered "one output"? Yes, it's one block of text containing the structure.
+    *   Wait, Rule 6 says "Use <output> </output> to wrap the output_translation_with_comment". This might imply I should *only* use `<output>`. But Rule 2 explicitly lists two tags in the "Format is" section. Usually, specific formatting rules override general constraints. However, sometimes "Only allow one output" means don't give a second option like "Alternative A" and "Alternative B". It means don't chat with me.
+    *   Let's look at the instruction: "Output format: ... <output>... </output> <output_without_comment>...</output_without_comment>".
+    *   So I will provide both tags as per Rule 2.
+
+5.  **Addressing the specific words:**
+    *   Input sentence has "guidance". It is uncountable usually, but treated with "a" here (perhaps implying a specific piece of guidance). I should mention this in the comment for 'a' or 'guidance'.
+    *   Comparison needed: guidance vs suggestion/advice/counsel.
+    *   Guidance: implies direction, authority, often formal.
+    *   Suggestion: optional idea.
+    *   Advice: helpful information.
+    *   Recommendation: proposal.
+    *   Tip: practical hint.
+    *   Counsel: legal or professional advice.
+
+6.  **Constructing the content:**
+
+    *   Here (这里/此处) [指示词，表方位]
+    *   is (是) [系动词，表存在或状态]
+    *   a (一个) [不定冠词，修饰单数名词，此处用于抽象名词前]
+    *   small (小的) [形容词，侧重物理尺寸或范围小，引申为简短的]
+    *   guidance (指导/指引) [名词，原意指方向性的帮助，区别于 suggestion(建议) 的随意性，具有权威性或方向性特征]
+    *   for (为了) [介词，表受益对象或目的]
+    *   you (你/你们) [代词，第二人称复数或单数]
+
+7.  **Final Review against Rules:**
+    *   Input: "Here is a small guidance for you."
+    *   Output Language: zh-CN.
+    *   Format: `<output>word(comment)...</output>` + `<output_without_comment>translation</output_without_comment>`.
+    *   Comments in zh-CN.
+    *   Point out key characteristics, especially original meaning.
+    *   Compare similar words for 'guidance'.
+
+    *Wait, the instruction says "Note: Only allow one output."*
+    Does this mean I should not include the `<output_without_comment>` tag?
+    Rule 2 says: "Output format: ... <output>... </output> <output_without_comment>...</output_without_comment>".
+    Rule 6 says: "Use <output> </output> to wrap the output_translation_with_comment".
+    Usually, "Only allow one output" refers to not generating multiple response turns or conflicting content blocks in a chat context. However, within the text generation, the prompt asks for specific formatting (Rule 2). I will follow Rule 2's format exactly because it defines the schema, assuming "One output" means one response block containing the tags.
+
+    Actually, looking at previous similar interactions or strict instruction following:
+    If Rule 2 says Format is A and B, but Rule 6 says Use A to wrap..., I will include both if Rule 2 explicitly shows the structure including both.
+    Wait, let's look closer at Rule 2: "Output format: ... <output>...</output> <output_without_comment>...</output_without_comment>".
+    Okay, I will generate both blocks.
+
+    One more check on "small guidance". Grammatically, "guidance" is uncountable (like water). "A guidance" is often an error, but exists in some contexts or older usage. The comment should reflect the original meaning while noting the distinction if relevant, or just translate based on the word's primary definition to avoid correcting the input unless asked. I will stick to translating and commenting on meaning.
+
+    *Correction on Rule 6*: "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language". This doesn't explicitly ban `<output_without_comment>`. Rule 2 says "Format is: ...". So I will follow Rule 2.
+
+    Wait, I need to check if there are other constraints. "Compare the similar word of each word -> point out the key characteristic of each word".
+    For words like "here", "is", "a", "for", "you", comparison with synonyms is less relevant but I should mention the core meaning. For "guidance", I must compare with suggestion/advice etc (based on the list provided in the prompt intro: suggestion advice recommendation tip guidance counsel).
+    So for 'guidance', I will mention it relates to direction/authority, unlike suggestion which is looser.
+
+    Let's refine the comments to be concise and in zh-CN.
+
+    Word by word:
+    1. Here (这里) -> 方位词，表示位置。vs 其他代词如 there(那里).
+    2. is (是) -> 系动词，be 的变位，表状态或存在。
+    3. a (一个) -> 不定冠词，限定单数名词，虽 guidance 多为不可数，此处表“一份”。
+    4. small (小的) -> 形容词，表物理大小或规模，引申为简短、简单。vs large(大的).
+    5. guidance (指导) -> 名词，核心含义为方向性帮助，区别于 advice(建议)、suggestion(提议)、counsel( counsel)，更具权威性/指导性特征。
+    6. for (为了) -> 介词，表目的或对象。
+    7. you (你) -> 代词，指代听话对象。
+
+    Let's ensure the output matches the format strictly.
+
+    Wait, I noticed "Note: Only allow one output." in Rule 2 description vs Rule 6 description.
+    Actually, reading Rule 2 again: "Output format: <output>input language (translation and output language comment)</output> <output_without_comment>translation without comment</output_without_comment>".
+    This looks like the *entire* response should look like that structure.
+    So I will write exactly that.
+
+    Wait, re-reading Rule 1: "Allow optional comments, after Each word;".
+    Rule 2 example: `<output>ori-word1 (word1-comment)...</output>`.
+    It uses the English word inside the tag followed by (Chinese comment).
+    So for `Here`, it should be `Here(这里...)`.
+    For the `without_comment` block, it should be just Chinese words "这里是一份指导..."
+
+    Let's finalize the translation for `output_without_comment`:
+    "这里有一点指导给你。" or "这是一点指引给你的。" -> "Here is a small guidance for you."
+    Standard translation: "这里有一些小的指导给你。" (Keeping 'small' meaning). Or "这有一份小指南供你参考。"
+    Literal: "这里有一个小的指导给你。"
+
+    Wait, I need to check if the prompt wants me to translate the Input Language words into Chinese inside the `<output>` block or keep the English word and add the comment?
+    Example: `<output>ori-word1 (word1-comment)...</output>`
+    "ori-word1" implies Original Language Word 1. So it should be `Here(这里)` not `这里`.
+    Okay, `Here` then `(这里)`.
+
+    Let's draft the content.
+
+    Input: Here is a small guidance for you.
+    Translation with comments:
+    Here (here：指示词，表此处/方位，区别于 there 的彼处)
+    is (is：be 动词第三人称单数，系动词，表存在或状态)
+    a (a：不定冠词，用于名词前表示单数泛指，此处修饰 guidance)
+    small (small：形容词，原意指物理尺寸小，引申为范围窄、内容少)
+    guidance (guidance：名词，核心义为指引/指导，区别于 suggestion(建议/可选性), advice(忠告/经验), tip(窍门/提示), recommendation(推荐), counsel(咨询/法律顾问)，具有方向性或权威性特征)
+    for (for：介词，表目的、对象或受益者)
+    you (you：人称代词，第二人称单数或复数，指听话对象)
+
+    Translation without comments:
+    这里有一份小的指导给你。
+
+    Wait, looking at the Example in Rule 2 again:
+    `<output>ori-word1 (word1-comment) ori-word2 (word2-comment)...</output>`
+    It implies I should keep the original English word inside the tag.
+    The rule says "Note: Comment are in Output-Language, in zh-CN". So `Here` remains English, `(这里)` is Chinese.
+
+    Final check on Rule 3: "Compare the similar word of each word -> point out the key characteristic of each word".
+    I incorporated this for 'guidance'. For others like 'is', 'a', it's less about synonyms and more about definition, but I will keep comments concise.
+
+    One final constraint check: "Note: Only allow one output."
+    Does this mean I shouldn't provide the `<output_without_comment>` tag?
+    Rule 2 says: "Output format: <output>... </output> <output_without_comment>...</output_without_comment>".
+    This explicitly defines the format as containing two tags.
+    If I add two tags, does it violate "Only allow one output"?
+    Usually, this means "Don't generate a second response block". But within the text, following the format includes both tags. I will follow Rule 2's format definition because it's more specific about the schema than the general "one output" constraint (which likely refers to interaction turns).
+
+    Wait, looking at Rule 6: "Use <output> </output> to wrap the output_translation_with_comment".
+    It doesn't mention `output_without_comment` in Rule 6.
+    But Rule 2 says "Output format is: ... <output>... </output> <output_without_comment>...</output_without_comment>".
+    I will prioritize Rule 2's example structure.
+
+    Wait, one more thing. The prompt lists many URLs and synonyms (suggestion, advice, etc.). This context emphasizes distinguishing meanings. My comment on 'guidance' must reflect this well.
+
+    Drafting content

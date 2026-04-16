@@ -1,0 +1,92 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Task: Translate.
+    *   Input: "The task is hard"
+    *   Input Language: English (en)
+    *   Output Language: Chinese (zh-CN)
+    *   Goal: Provide the translation.
+
+2.  **Translate the Sentence:**
+    *   Source: "The task is hard"
+    *   Meaning: The work/job/assignment given to someone requires a lot of effort or difficulty.
+    *   Key words:
+        *   The task -> 任务 (rèn wù) / 工作 (gōng zuò) / 作业 (zuò yè)
+        *   is -> 是 (shì) / (often omitted in Chinese for adjectives)
+        *   hard -> 困难 (kùn nán) / 难 (nán) / 辛苦 (xīn kǔ - though this leans more towards 'tiring')
+    *   Common translations:
+        *   "任务很难" (Task is very hard)
+        *   "这项任务很困难" (This task is very difficult)
+        *   "任务艰巨" (Task is arduous/challenging - slightly more formal)
+
+3.  **Select the Best Translation:**
+    *   "任务很难" is natural and direct.
+    *   "工作很难" is also possible depending on context, but "task" usually maps to "任务".
+    *   Let's go with a standard, natural translation. "这项任务很困难" or simply "任务很难". Given the simplicity of the input, a simple output is often preferred unless specified otherwise.
+    *   "任务很难" captures the essence well.
+
+4.  **Final Output Generation:**
+    *   Ensure the format matches the example style (just the output text).
+    *   Draft: 任务很难
+
+5.  **Refine:**
+    *   Is there a better word for "hard"? "困难" is more formal than "难". "吃力" implies struggling.
+    *   Let's use "任务很难" or "这项任务很困难".
+    *   Standard translation for "The task is hard": 任务很难 (Rèn wù hěn nán).
+
+6.  **Final Decision:** 任务很难 (Simple and accurate). Or maybe slightly more complete: 这个任务很难。But sticking close to the input structure: 任务很困难/任务很难. Let's choose "任务很难".
+
+    Wait, let's look at common NLP datasets patterns (like WMT). Usually, direct translation is best.
+    Input: The task is hard
+    Output: 任务很难
+
+    Another option: 这项任务很艰难 (A bit more formal).
+    Let's stick to the most natural colloquial/modern standard: "任务很难".
+
+    Actually, "工作" might also be used for "task" in some contexts, but "任务" is the direct translation of "task".
+    Let's provide: 任务很难.
+
+7.  **Output Formatting:** The prompt asks for "Output:" followed by the text. I should just provide the translation text after the colon or as the final response. Based on the prompt structure "Input-Output-Task... Output:", I should provide the translation string.
+
+    Let's refine to: 任务很困难 (Slightly more formal/literal) or 任务很难 (Colloquial). "Hard" in English regarding tasks often translates to "难" or "困难".
+    Let's go with "任务很难".
+
+    Wait, checking if there are specific constraints. No.
+    Okay, I will output the translation.
+
+    Final check: "The task is hard" -> "任务很难"。Seems correct.
+
+    Alternative: "这个任务很棘手" (This task is tricky) - too much added meaning.
+    Alternative: "任务艰巨" (Task is arduous) - a bit stiff.
+
+    Best fit: 任务很难.
+
+    Wait, I should check if the prompt expects me to complete the pattern or just output the translation. The prompt ends with "Output:", implying I need to complete that line.
+    So I will write the translation.
+
+    One more consideration: Sometimes "hard" implies difficulty level. "难度高". But "hard" usually means difficult.
+    Let's provide: 任务很难。
+
+    Wait, looking at similar examples, often a slight sentence expansion is natural in Chinese to make it sound complete, but literal translation is safer for machine tasks.
+    "The task is hard" -> "这项任务很困难" (This task is very difficult).
+    Let's use "任务很难" for brevity matching the input length.
+
+    Okay, decision made.
+
+    Translation: 任务很难
+    Or: 这个任务很困难
+    Let's pick: 任务很难。
+
+    Wait, re-reading the prompt style. It looks like a standard few-shot or direct instruction prompt. I should output just the translation text.
+
+    Final choice: 任务很难 (Task is hard). Or maybe 这项任务很难 (This task is hard) sounds more natural in isolation. But "任务很难" is concise. Let's use "任务很难".
+
+    Actually, looking at general translation norms, "The task is hard" -> "任务很困难" sounds slightly better as a standalone sentence. "任务很难" is also fine. I'll go with "任务很难".
+
+    Wait, let's consider "工作". "Task" can be "工作". But "Task" is specifically "任务".
+    Okay.
+
+    Final Output: 任务很难
+</think>
+
+任务很难

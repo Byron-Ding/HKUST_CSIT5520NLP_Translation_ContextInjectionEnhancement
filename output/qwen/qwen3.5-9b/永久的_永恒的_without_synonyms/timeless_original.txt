@@ -1,0 +1,149 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Task:** Translate "Nothing is timeless" from English (en) to Chinese (zh-CN).
+    *   **Input:** `Nothing is timeless`
+    *   **Input Language:** en
+    *   **Output Language:** zh-CN
+    *   **Rules:**
+        1.  Allow optional comments after each word.
+        2.  Comments must point out the key characteristic, especially the original meaning of each word.
+        3.  Format: `<output>word (comment) ...</output>` followed by `<output_without_comment>translation</output_without_comment>`. *Wait, the prompt says "Only allow one output." but the example shows two tags `<output>` and `<output_without_comment>`. I need to check if this contradicts rule 2 ("Output format: Note: each "(comment)" |is> optional... Only allow one output.").*
+        *   Re-reading Rule 1 & Output Format section: "Output format: <output>input language (translation and output language comment)</output> <output_without_comment>translation without comment</output_without_comment>". This implies a specific structure is expected despite the later note "Only allow one output." usually meaning no extra conversational text. However, the example explicitly shows both tags. I will follow the example's structure as it defines the format better than the conflicting note. Actually, looking closely: "Output format:" section describes the structure. Then "Note: Only allow one output." likely means don't add intro/outro text like "Here is the translation". But the structure itself contains two blocks. I will follow the example structure.
+        4.  Wait, looking at the instruction: "Use <output> </output> to wrap the output_translation_with_comment". It doesn't explicitly mention `<output_without_comment>` in Rule 6, but Rule 1 & Example do. Given the strict formatting examples usually override general text rules, I should include both blocks if the example dictates it, or just the one block if Rule 6 is stricter. Let's look at the "Rules" section again.
+        *   Rule 1: "Allow optional comments... Output format:" shows both tags.
+        *   Rule 6: "Use <output> </output> to wrap the output_translation_with_comment". This doesn't forbid `<output_without_comment>`.
+        *   However, usually, when prompts say "Only allow one output", they mean no markdown code blocks wrapping the whole thing, just the raw text following the structure. But here the structure *is* the content.
+        *   Let's look at the instruction: "Note: Only allow one output." This often means don't generate multiple variations or explanations. I will stick to the format defined in the example under Rule 1/Output Format section, which includes both tags, as that is the specific format template provided.
+        5.  Comments in Output-Language (zh-CN).
+        6.  Characteristic based on original meaning; important for original meaning.
+        7.  Compare similar words -> point out key characteristic.
+        8.  Annotate original meaning in the comment.
+
+    *   **Correction/Refinement on Format:** The instruction says "Use <output> </output> to wrap the output_translation_with_comment". It does not explicitly command `<output_without_comment>` in Rule 6, but Rule 1's "Output format" section shows both. To be safe and follow the example provided in the text, I will include both sections as per the example structure, ensuring they are inside the final response. Wait, looking at "Note: Only allow one output." again. This might mean the entire response should *be* the formatted string, not containing markdown blocks.
+    *   Actually, standard interpretation for these types of constrained generation tasks: The user wants the specific text format shown in the example.
+    *   Let's check the instruction "Use <output> </output> to wrap...". It doesn't say what to do with `<output_without_comment>`. But the example has it. I will include both to be compliant with the Example which is usually the ground truth for formatting.
+    *   Wait, Rule 6 says: "Use <output> </output> to wrap the output_translation_with_comment". It doesn't mention `<output_without_comment>`. But the Output Format section explicitly lists `<output_without_comment>`. I will follow the Output Format section and Example as they are more detailed.
+    *   Wait, I need to check if "Only allow one output" means I shouldn't include `<output_without_comment>` at all? Or just that I shouldn't write explanations? The example shows:
+        ```
+        <output>ori-word1 (word1-comment) ori-word2 (word2-comment)..... ori-ordN (wordN-comment)</output>
+        <output_without_comment>word1 word2 word3..... wordN</output_without_comment>
+        ```
+    *   I will generate both blocks.
+
+    *   **Translation:** "Nothing is timeless"
+    *   **Word-by-word:**
+        1.  Nothing: 没有东西/无物 (meaning: not anything, nothingness). Key: negation of existence.
+        2.  is: 是 (meaning: linking verb, state of being). Key: equates subject to predicate/adjective.
+        3.  timeless: 永恒的/无时间的 (meaning: existing outside time or without decay over time). Key: enduring, eternal.
+
+    *   **Refining Translation:**
+        *   "Nothing is timeless" -> "没有任何事物是永恒的".
+        *   Let's try to map words closer:
+            *   Nothing: 万物莫/无一物 (But usually "nothing" in this context means "No thing").
+            *   Chinese translation: 没有什么 (shén me yǒu) is not good. Better: 世间万物 (everything) -> no, it's negation.
+            *   Standard translation: "没有什么是永恒的".
+            *   Words: 没有 (Nothing), 是 (is), 什么 (thing - implied in 'nothing' usually, but here 'nothing' is the subject). Let's break down "Nothing" as 无物 or keep it semantic.
+            *   Input language breakdown often expects direct word mapping for the comment section.
+            *   Let's map: Nothing -> 无 (wú) / 没什么。is -> 是。timeless -> 永恒的.
+            *   Better Chinese: "无物是无时的" (poetic). Standard: "没有什么是不朽的".
+            *   Let's stick to common translation: "没有什么是永恒的".
+            *   Wait, word-for-word for the comment section requires identifying English words first.
+            *   English words: Nothing, is, timeless.
+            *   Chinese mapping for <output_without_comment>: 没有什么 (nothing) 是 (is) 永恒的 (timeless)? Or just 没有什么是永恒的？
+            *   Let's try: 无物 是 永恒？No, "Nothing" = 没有东西/什么都不是。Common: 没有任何事物是永恒的.
+            *   For the "comment" format: `<output>nothing (注释) is (注释) timeless (注释)</output>`.
+            *   Let's pick a concise translation for the `output_without_comment`: "没有什么 是 永恒的". Or "无一物 能 永恒". Let's go with "没有什么 是 永恒的".
+            *   Actually, to match the word structure better: "Nothing" -> "没有任何事物", "is" -> "是", "timeless" -> "永恒的".
+            *   Wait, strict translation often keeps the flow. "没有什么是永恒的".
+            *   Let's split by English words for the comment block.
+            *   Nothing (无物/没有任何东西)
+            *   is (系动词/是)
+            *   timeless (超越时间的/永恒的)
+            *   Wait, Chinese translation might merge. "没有" + "什么" + "是". "Nothing" covers "没有" + "东西/事物". I will map "Nothing" to "没有任何事物" for the comment to be clear on original meaning.
+            *   Actually, simpler is better for comments.
+            *   Word 1: Nothing -> 无 (Original meaning: 非存在之物).
+            *   Word 2: is -> 是 (Original meaning: 判断/存在状态).
+            *   Word 3: timeless -> 永恒 (Original meaning: 超越时间限制).
+
+    *   **Wait, Rule 3:** "Compare the similar word of each word -> |point out> the key characteristic |of> each word". This means if there are similar words in Chinese, distinguish them. e.g., Timeless vs Eternal vs Ageless.
+    *   **Rule 4:** Characteristic based on original meaning.
+    *   **Rule 6:** Use `<output>` to wrap the translation with comment.
+
+    *   **Drafting Content:**
+        *   Input: Nothing is timeless
+        *   Translation (Commented): nothing (没有任何事物，强调非存在或否定所有) is (作为连接词，表示状态判断) timeless (超越时间限制，指不受岁月侵蚀)
+            *   Wait, need to use zh-CN for comments.
+            *   `nothing` -> `无物 (注释：原义为“没有东西”，强调完全的否定与不存在)`
+            *   `is` -> `是 (注释：系动词，连接主语和表语，表示状态)`
+            *   `timeless` -> `永恒的 (注释：形容不受时间影响，区别于“短暂”或“易逝”的关键特征)`
+        *   Translation (No Comment): 无物是永恒的。(Or "没有什么东西是永恒的")
+            *   Let's make it natural: "没有什么 是 永恒的". Or "无一物 能 永恒".
+            *   Strict translation often keeps structure. "没有事物 是 无时间的". But "timeless" = "永恒的".
+            *   Let's go with: "没有任何事物 是 永恒的".
+
+    *   **Refining Format:**
+        The instruction says:
+        `<output>ori-word1 (word1-comment) ori-word2 (word2-comment)..... ori-ordN (wordN-comment)</output>`
+        `<output_without_comment>word1 word2 word3..... wordN</output_without_comment>`
+
+        Wait, the instruction says "Use <output> </output> to wrap the output_translation_with_comment". It doesn't explicitly forbid `<output_without_comment>`, but Rule 6 focuses on one tag. However, the Example under Rule 1 shows both. I will follow the Example's structure (both tags) because it provides a template for the specific task type.
+
+    *   **Checking Rules again:**
+        *   "Only allow one output." -> This usually conflicts with the example having two tags. However, in these prompts, "one output" means don't give a chat response like "Here is the translation...". The content itself (the tags) counts as the output structure. I will follow the Example format exactly.
+        *   Comments in zh-CN.
+        *   Characteristic/Original Meaning focus.
+
+    *   **Final Polish of Translation:**
+        *   `Nothing`: 没有任何事物 (Any thing is negated). Key characteristic: Absolute negation.
+        *   `is`: 是 (Be). Key characteristic: Linking verb, identity.
+        *   `timeless`: 永恒的 (Eternal/Without time). Key characteristic: Transcends temporal decay. Distinction from "long-lasting".
+
+    *   **Draft:**
+        `<output>nothing (没有任何事物，原义指“非存在”或“无物”，强调绝对的否定而非仅仅是缺乏) is (系动词，原义表示“存在状态”的连接，区别于实义动词如“做”) timeless (超越时间，原义指不受时间流逝影响，区分于“长久”或“短暂”，核心在于时间属性的缺失)</output>`
+        `<output_without_comment>没有任何事物是永恒的</output_without_comment>`
+
+        Wait, I need to check the input words. `Nothing is timeless`.
+        The comment section format in example: `ori-word1 (word1-comment)`. It implies keeping the English word inside the tag for the first part?
+        Example: `<output>ori-word1 (word1-comment) ...</output>`
+        Wait, look at example: `"<output>ori-word1 (word1-comment) ori-word2 (word2-comment)...</output>"`
+        This implies I should write the English word followed by the comment? Or the Chinese translation followed by the comment?
+        Usually in these tasks, it's Translation (with source word reference).
+        Re-reading Example: `"<output>ori-word1 (word1-comment) ...</output>"`. The variable name `ori-word1` suggests the original word might be there? Or does it mean the translation corresponds to ori-word1?
+        Let's look at standard interpretation for this prompt type: "Translate ...".
+        Usually: `<output>Translation_1 (Comment_1) Translation_2 (Comment_2)</output>`
+        BUT the example says `ori-word1 (word1-comment)`. This is ambiguous. Does it mean I should write the English word in the output block?
+        If I translate "Nothing" -> "无物". Is the output `无物` or `nothing`?
+        Prompt: "Output-language: zh-CN".
+        So `<output>` content must be zh-CN translation, right?
+        The example variable name `ori-word1` is likely a placeholder meaning `[Original Word] (Comment)` OR `[Translation] (Comment)`.
+        Given the task is "Translate", the output should be the translation.
+        If I write `nothing (comment)`, that's mixing English.
+        Rule 2 says: "comments should |point out> the key characteristic...".
+        Usually, for word-by-word annotation tasks in Chinese output, it looks like: `无物 (原义：...)`.
+        However, if I strictly follow `<output>ori-word1 (word1-comment)`, it suggests keeping the original English.
+        BUT Rule 1 says "Output format: ... Output-language: zh-CN". So the content inside must be zh-CN mostly?
+        Let's assume the instruction `ori-word1` in the example text literally meant "Original Word" but since the task is translation, I should write the Chinese translation followed by the comment explaining the English word. Or just Chinese word with comment explaining meaning.
+        Let's look at the prompt again: "Translate ... Input-language: en Output-language: zh-CN".
+        If I output `nothing (...)`, that violates Output-language rule potentially if `nothing` is considered part of the text content.
+        But often these specific formatting prompts want `<output>word1 (comment) word2 (comment)</output>`.
+        To be safe on translation language, I will write Chinese characters for the words being translated, followed by comments explaining the English meaning.
+        Example: `无物 (nothing-comment)`.
+        Wait, looking at the example string provided in Rule 1: `"<output>ori-word1 (word1-comment) ori-word2 (word2-comment)..... ori-ordN (wordN-comment)</output>"`
+        This looks like it wants the English words kept for reference with comments. But the task is "Output-language: zh-CN".
+        If I write `无物 (nothing-comment)`, is that allowed?
+        Let's assume the standard pattern for this specific prompt style (Translation + Word Analysis):
+        Content in `<output>` should be the Translation (Chinese), but annotated with comments regarding the original English words or concepts.
+        However, strict adherence to "Example" usually wins. The example shows `ori-word1`. This suggests keeping the original word.
+        Let's check Rule 6: "Use <output> </output> to wrap the output_translation_with_comment". It explicitly says "translation_with_comment".
+        If I write `nothing (comment)`, is `nothing` the translation? No.
+        So I should write `无物 (nothing注释)` or just `无物 (comment)`?
+        Given "Output-language: zh-CN", the primary text must be Chinese.
+        I will write Chinese words for the translation, and the comment explains the original meaning/characteristic.
+        Wait, looking at the example again: `ori-word1 (word1-comment)`. This looks like `[Original Word] ([Translation Comment])` OR `[English] (Chinese Explanation)`.
+        If I put English words there, it's not fully zh-CN output.
+        Let's interpret "output_translation_with_comment" to mean: The translation segments with comments in Chinese explaining the source meaning.
+        Format decision: `无物 (原词 nothing，原义...)`? No, that's too long.
+        I will follow the visual style of `Word (Comment)` where Word is the Chinese translation, and Comment explains the Original Meaning/Characteristics as requested ("Annotate the original meaning in the comment").
+        
+        Actually, looking closely at Rule 1 Example: `ori-word1`. The prefix "ori-" suggests it's a variable for the original word. If I am translating, maybe I should just write the

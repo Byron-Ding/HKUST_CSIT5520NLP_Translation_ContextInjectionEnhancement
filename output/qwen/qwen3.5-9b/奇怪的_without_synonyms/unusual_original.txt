@@ -1,0 +1,160 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Input:** "This result is unusual"
+    *   **Input Language:** en (English)
+    *   **Output Language:** zh-CN (Chinese)
+    *   **Task:** Translate.
+    *   **Rules:**
+        1.  Allow optional comments after each word.
+        2.  Comment format: `<output>input language (translation and output language comment)...</output>` then `<output_without_comment>translation without comment</output_without_comment>`. Wait, the example shows: `"<output>ori-word1 (word1-comment) ... </output>"` but the instruction says "Only allow one output". Let's re-read Rule 1 & 2 carefully.
+            *   Rule 1: "Allow optional comments, after Each word;"
+            *   Rule 2 (under Output format): `<output>input language (translation and output language comment)</output>` ... Wait, the example says: `"<output>ori-word1 (word1-comment) ... </output>"`.
+            *   There is a contradiction in the prompt instructions vs the example.
+            *   Instruction 2 says: "Output format: Note: each "(comment)" |is> optional Format is: <output>input language (translation and output language comment)</output> <output_without_comment>translation without comment</output_without_comment>"
+            *   Instruction 3 says: "Only allow one output."
+            *   Okay, the priority seems to be "Only allow one output" combined with the specific format requested in the example. The example shows `<output>` containing the word-by-word analysis including comments. But Rule 1 says "Allow optional comments". Rule 2 describes a format with two tags (`<output>` and `<output_without_comment>`) but then Instruction 3 says "Only allow one output".
+            *   Let's look at the example provided in the prompt:
+                `example: "<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ori-word3 (word3-comment)..... ori-ordN (wordN-comment)</output>"`
+                Then there is an `<output_without_comment>` part in the "Output format" section, but the example only shows one block.
+                Actually, looking closely at Rule 1: "Allow optional comments, after Each word".
+                Rule 3: "Compare the similar word of each word -> |point out> the key characteristic |of> each word".
+                Rule 4: "Characteristic |based on> the original meaning".
+                Rule 5: "|Annotate> the original meaning in the comment, which shown |as/in> the output language".
+                Rule 6: "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language".
+
+    *   **Conflict Resolution:**
+        *   The prompt starts with a header block `Input-Output-Task...`.
+        *   Then it says `Rules:`.
+        *   Rule 6 explicitly says: "Use <output> </output> to wrap the output_translation_with_comment". It does not mention `<output_without_comment>` in Rule 6, but Section 2 (Output format) mentions it.
+        *   Instruction 3 says: "Only allow one output."
+        *   Therefore, I should follow the structure of the Example which is wrapped in a single `<output>` tag, but wait, the instruction text says `Format is: <output>...</output> <output_without_comment>...</output_without_comment>`. But then says "Only allow one output". Usually, when there are conflicting constraints ("Only one output" vs specific format requiring two tags), the "Only one output" constraint often overrides or implies selecting the detailed one based on Rule 6.
+        *   However, Rule 2 explicitly defines the format with both tags. But Rule 3 says "Only allow one output".
+        *   Let's look at the Example again: `example: "<output>ori-word1 (word1-comment) ... </output>"`. It doesn't show `<output_without_comment>` in the example string, though the text description above it does.
+        *   Most likely, the user wants the word-by-word translation with comments inside one `<output>` tag, as per Rule 6 ("Use <output> </output> to wrap the output_translation_with_comment").
+        *   Wait, looking at the "Input-Output-Task" block at the top: `Output:` is empty.
+        *   Let's synthesize a single `<output>` block containing the word-by-word translation with comments in Chinese, as per Rule 6 and Rule 2's description of comments. The "without comment" part might be secondary or ignored due to "Only allow one output". I will prioritize the comment version inside one tag as per Rule 6 and the example structure.
+        *   Wait, re-reading Rule 2: `Format is: <output>input language (translation and output language comment)</output> <output_without_comment>translation without comment</output_without_comment>`.
+        *   But Rule 3 says "Only allow one output."
+        *   And Rule 6 says "Use <output> </output> to wrap the output_translation_with_comment".
+        *   This is a classic prompt injection/conflict scenario. The safest bet for a strict translation task with annotation is to follow the specific instruction of wrapping in `<output>`.
+        *   I will provide the `<output>` tag containing the word-by-word breakdown with comments in Chinese. I will omit the `<output_without_comment>` block to satisfy "Only allow one output".
+
+    *   **Content:**
+        *   Input: "This result is unusual"
+        *   Words: This, result, is, unusual.
+        *   Translation (zh-CN): 这 结果 是 不寻常的
+        *   Comments need to point out original meaning and key characteristics/usage differences for similar words (per Rule 3 & 4 & 5).
+        *   Language of comments: zh-CN (Rule 2 Note).
+        *   Format: `word (comment)`.
+
+    *   **Drafting the content:**
+        *   This -> 这 (Zhè): Pronoun/Adverb. Key characteristic: Demonstrative pointing to something specific near the speaker. Distinguish from other pronouns like 'that' (那).
+        *   result -> 结果 (Jiéguǒ): Noun. Key characteristic: Outcome of an action/process. Distinguish from 'consequence' (后果) or 'outcome' (成效). Original meaning: The thing that happens after a cause.
+        *   is -> 是 (Shì): Verb/Copula. Key characteristic: Linking verb indicating identity or state. Distinguish from other forms like 'am/are'.
+        *   unusual -> 不寻常的 (Bùchúngxíng de) / 罕见的 (Rǎnjiàn de). Let's pick the most direct translation for "unusual": 不寻常. Key characteristic: Deviating from common norms/customs. Distinguish from 'strange' (奇怪) or 'rare' (稀有).
+
+    *   **Refining Comments (Rule 3, 4, 5):**
+        *   Must annotate original meaning in the comment.
+        *   Compare similar words -> point out key characteristic.
+        *   Original meaning is important.
+        *   Language: zh-CN.
+
+    *   **Constructing the sentence:**
+        *   This (这：代词，指代特定事物) result (结果：名词，事件产生的结局或产物) is (是：动词，系动词连接主语和表语) unusual (不寻常：形容词，原意指不同于惯例，区别于'奇怪'的怪异感).
+
+    *   **Final check on constraints:**
+        *   "Only allow one output." -> I will only output the `<output>` block.
+        *   "Use <output> </output> to wrap..."
+        *   Comments in zh-CN.
+        *   Format matches example: `word (comment)`.
+
+    *   **Wait, one more check on the format:**
+        The prompt says:
+        `Output format:`
+        `Note: each "(comment)" |is> optional`
+        `Format is: <output>input language (translation and output language comment)</output>`
+        `<output_without_comment>translation without comment</output_without_comment>`
+
+        Then Rule 3: "Compare the similar word of each word"
+        Rule 6: "Use <output> </output> to wrap the output_translation_with_comment"
+
+        If I strictly follow "Only allow one output", I should probably just give the `<output>` block. I will assume the user wants the detailed version because that's what Rule 6 specifies ("wrap the output_translation_with_comment"). The `<output_without_comment>` is likely part of a template I need to ignore based on "Only allow one output" and the specific instruction in Rule 6 focusing on the comment version.
+
+        Wait, looking at the example provided in the text:
+        `example: "<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ... </output>"`
+        It does not show `<output_without_comment>`.
+        So I will follow the example structure inside the `<output>` tag.
+
+        Translation: 这结果是不寻常的
+        Word by word: 这 (Zhè) 结果 (Jiéguǒ) 是 (Shì) 不寻常 (Bùcháng) / unusual (Adjective).
+        Wait, "result" is one word. "unusual" is one word.
+        So: `这 (这：代词，指示较近的事物)` `结果 (结果：名词，行动或事件产生的结局)` `是 (是：系动词，表示等同关系)` `不寻常的 (不寻常：形容词，原指偏离常规，区别于'奇怪'的情绪色彩)`
+
+        I need to make sure the comments are in zh-CN and point out original meaning/characteristics.
+
+        Let's refine the "Compare similar words" aspect for the comments.
+        *   This: 指示代词。对比 "那" (that)，此词指向当前或近处的对象，强调确定性。
+        *   result: 名词。对比 "后果" (consequence/aftermath) 或“成效” (outcome/achievement)，原义指行为引发的自然结局。
+        *   is: 系动词。对比其他时态或主语人称，此处用于连接主语与表语，表示状态存在。
+        *   unusual: 形容词。对比 "奇怪" (strange/suspicious) 或“稀有” (rare)，原义指不符合常态或标准，强调偏离普遍经验。
+
+        I will combine these into the required format.
+
+2.  **Finalizing Output String:**
+    `这（这：指示代词，指代眼前或特定对象，区别于"那"）结果（结果：名词，行动产生的自然结局，区别于"后果"的负面义或“成效”的结果导向）是（是：系动词，表示状态存在或等同，区别于其他变体）不寻常的（不寻常：形容词，原意偏离常态或标准，区别于"奇怪"的主观怪异或“稀有”的数量级差异）`
+
+    Wait, I need to check spacing. The example has spaces between words?
+    Example: `ori-word1 (word1-comment) ori-word2...`
+    So: `这（注释） 结果（注释）...` or just `这（注释）结果（注释）...`
+    Usually translation separates words with spaces. I will add spaces for readability.
+    Input: "This result is unusual" -> Words: This, result, is, unusual.
+
+    Let's write it out.
+    `<output> 这 (这：指示代词，指代特定对象，区别于'那'强调近指) 结果 (结果：名词，行动产生的自然结局，区别于'后果'或“成效”) 是 (是：系动词，连接主语与表语表示状态，区别于其他时态变体) unusual (不寻常的：形容词，原意偏离常态标准，区别于'奇怪'的主观情绪或"稀有"的数量概念) </output>`
+    Wait, Rule 5 says "Annotate the original meaning in the comment, which shown |as/in> the output language". So the comment should be in zh-CN describing the English word's meaning.
+    Rule 1 says "comments should |point out> the key characteristic, especially the original meaning |of> each word."
+    Rule 3: "Compare the similar word of each word -> |point out> the key characteristic |of> each word".
+
+    Okay, I will construct the response. I need to be careful not to include `<output_without_comment>` because Rule 3 says "Only allow one output" and Rule 6 specifies wrapping the comment version. The example also shows only `<output>`.
+
+    Wait, looking at the instruction `Output format:` section again:
+    `Format is: <output>input language (translation and output language comment)</output>`
+    `<output_without_comment>translation without comment</output_without_comment>`
+    But Rule 3 says "Only allow one output."
+    And Rule 6 says "Use <output> </output> to wrap the output_translation_with_comment".
+    This implies I should only provide the `<output>` block. The instruction is slightly contradictory, but "Only allow one output" and "Rule 6" (the specific instruction for this task) usually take precedence over the general format description in Rule 2. I will output just the `<output>` tag with the comments.
+
+    Wait, one detail: The input language in the `<output>` block example is `ori-word1`. In Rule 2 it says `input language (translation and output language comment)`.
+    Example: `"<output>ori-word1 (word1-comment) ...</output>"`
+    This suggests I should write the original English word inside the brackets? Or the translation?
+    Rule 6: "Use <output> </output> to wrap the output_translation_with_comment".
+    Example shows `ori-word1`. But the text says `input language (translation...)`.
+    Let's look at the example closely: `ori-word1 (word1-comment)`. This suggests the format is `OriginalWord (Translation + Comment)` or just `OriginalWord (Comment)`.
+    Wait, the instruction says: `Format is: <output>input language (translation and output language comment)</output>`.
+    Example: `<output>ori-word1 (word1-comment) ...`
+    If I follow the example strictly: `This (这：...) result (结果：...)...`
+    Wait, the instruction says "input language (translation and output language comment)". This implies inside the bracket should be translation + comment? Or Input word + Comment?
+    Usually, these tasks want: `Word1 (Translation-Comment)`.
+    Example: `ori-word1 (word1-comment)`.
+    If I look at `Input-language: en` and `Output-language: zh-CN`.
+    The example `ori-word1` suggests writing the original word. But the text says "translation and output language comment".
+    Let's try to interpret: `This (这：指代...)`. This shows original English word, then Chinese translation inside the parenthesis or just the comment?
+    Actually, looking at Rule 6: "wrap the output_translation_with_comment". And "output_language": zh-CN.
+    Usually means the text inside should be the target language words with comments explaining them.
+    However, the example `ori-word1` is confusing if the goal is translation.
+    Let's look at the prompt again: "Translate ... Output-language: zh-CN".
+    If I output `This (这：...)`, that shows both source and target.
+    But Rule 6 says "output_translation_with_comment".
+    Let's stick to the example structure but ensure the content is a translation context.
+    Actually, standard annotation tasks often look like: `Word (Translation-Explanation)`.
+    Given the instruction `input language (translation and output language comment)` vs example `ori-word1 (word1-comment)`.
+    I will use the English word followed by the Chinese translation in parentheses with the explanation. Wait, Rule 4 says "Characteristic based on the original meaning". Rule 5 says "Annotate the original meaning in the comment, which shown |as/in> the output language".
+    If I write: `This (这：代词，表示...)` this fits `ori-word1`.
+    But if I need to translate the whole sentence, usually it's `Word1 Word2 Word3`.
+    Let's check the example again: `<output>ori-word1 (word1-comment) ori-word2 (word2-comment)...</output>`
+    It seems the structure is `EnglishWord (ChineseTranslation-Comment)`.
+    Wait, Rule 1 says "Allow optional comments, after Each word".
+    Let's assume the format is: `EnglishWord (ChineseTranslation : Explanation)`.
+    But to be safe and strictly follow "Translate", I should probably output the Chinese translation primarily.
+    However, Rule 2 Format description says: `<output>input language (translation and output language comment)</output>

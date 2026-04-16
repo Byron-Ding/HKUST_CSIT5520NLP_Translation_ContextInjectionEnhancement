@@ -1,0 +1,114 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Input Text:** "The task is demanding"
+    *   **Input Language:** en (English)
+    *   **Output Language:** zh-CN (Chinese Simplified)
+    *   **Task:** Translate the input sentence into the output language.
+    *   **Constraint 1 (Vocabulary):** Use specific synonyms for "demanding" from the provided list: `difficult`, `hard`, `challenging`, `tough`, `demanding`, `arduous`, `strenuous`. Wait, looking at the input sentence ("The task is demanding"), I need to translate the *whole sentence*, but often in these types of requests (translation + synonym analysis), the user expects me to translate the target word using its synonyms or analyze them. However, looking at the "Input-Output-Task: Translate" section and the "Rules", specifically Rule 2 ("Output format"), it suggests I should output translations for the list of words provided in the prompt header *OR* translate the sentence using one of those words?
+    *   **Re-evaluating the Prompt Structure:** The prompt starts with a list of English synonyms for "difficult/demanding" (`difficult hard challenging tough demanding arduous strenuous`). Then it provides links. Then it specifies an Input-Output-Task: Translate. Input: "The task is demanding".
+    *   **Crucial Interpretation:** Usually, when provided with a list of synonyms like this and asked to translate, the expectation is often to translate the target word ("demanding") using each synonym or explain them. But looking at Rule 1 ("Allow optional comments, after Each word; comments should |point out> the key characteristic..."). And Rule 2 Format: `<output>ori-word1 (word1-comment) ...</output>`.
+    *   **Wait, is the input just "The task is demanding" or is the list of words also part of the translation task?** The header says `difficult hard challenging tough demanding arduous strenuous`. Then there are links to Collins Thesaurus. Then `Input-Output-Task: Translate`. Input: `The task is demanding`.
+    *   **Hypothesis A:** Translate the sentence "The task is demanding" into Chinese, but for the word "demanding", use the synonyms provided in the list (plus themselves) to show nuances? No, that makes no sense grammatically.
+    *   **Hypothesis B:** The prompt is asking me to translate the word "demanding" (from the sentence) along with its synonyms (`difficult`, `hard`, etc.) and provide comments distinguishing their meanings, as per the format example `<output>ori-word1 (word1-comment)...</output>`.
+    *   **Hypothesis C:** The user wants me to translate the *sentence* but annotate the specific word "demanding" with its synonyms? No.
+    *   **Hypothesis D (Most Likely based on format):** The prompt header lists a set of words (`difficult`, `hard`, `challenging`, `tough`, `demanding`, `arduous`, `strenuous`). The instruction is to translate these words (or the core concept represented by them) into Chinese, with comments explaining the nuances of each, specifically distinguishing their original meanings. The input sentence "The task is demanding" might just be the context trigger for the word "demanding", but the format requires listing `ori-word`.
+    *   **Refining Hypothesis D:** Look at the example format: `<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ...</output>`. This implies I need to list all the words from the header (`difficult`, `hard`, `challenging`, `tough`, `demanding`, `arduous`, `strenuous`) and translate them into Chinese, with comments distinguishing their nuances. The input sentence "The task is demanding" seems to be the prompt context, but the output format requires translating the *list* of synonyms provided at the top.
+    *   **Wait, look at the Input-Output section again:**
+        Input: The task is demanding
+        Output: [My Task]
+        Rules 1 & 2 imply I should translate the input sentence? No, the format example shows `<output>ori-word1...</output>`. This contradicts a standard sentence translation.
+    *   **Let's look at the "Input-Output-Task: Translate" block.** It says Input: `The task is demanding`. If I just translate this sentence, I won't have `hard` or `difficult` in the output. The format requires `ori-word1`, `ori-word2` etc.
+    *   **Conclusion:** The user wants me to process the list of synonyms provided at the very beginning (`difficult`, `hard`, `challenging`, `tough`, `demanding`, `arduous`, `strenuous`) along with the context of the input sentence, translating each word from that list into Chinese with specific comments about their nuances, as per the strict output format. The input sentence serves as the theme (translating the concept of "demanding work/task"), but the output must follow the synonym expansion format defined in Rule 2/Example.
+    *   **Actually, looking closer at Rule 2 Example:** `<output>ori-word1 (word1-comment) ...</output>`. The `ori-word` refers to the English original word.
+    *   **Strategy:** I will translate the list of words provided in the header (`difficult`, `hard`, `challenging`, `tough`, `demanding`, `arduous`, `strenuous`) into Chinese, because that matches the `<output>ori-word1...` structure best. The input sentence "The task is demanding" provides the semantic context for "demanding". However, strictly following Rule 2, I need to list the words. If I translate the whole sentence, it won't match `word1 word2`.
+    *   **Alternative Interpretation:** Translate the sentence "The task is demanding", but break down the word "demanding" and its synonyms? No, that violates the input-output mapping usually found in these datasets.
+    *   **Wait, looking at the instruction again:** "Input-Output-Task: Translate". Input: "The task is demanding". If I output a list of words not present in the input sentence (like `hard`, `difficult`), does it make sense?
+    *   **Re-reading Rule 2 Example:** `<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ...</output>`. This strongly suggests listing multiple words. Where do these words come from? The header list: `difficult hard challenging tough demanding arduous strenuous`.
+    *   **Decision:** I will translate the specific word "demanding" (from the input sentence) and its synonyms provided in the header, explaining the nuances as requested by the "Compare the similar word of each word -> |point out> the key characteristic" rule. I need to output the translations for all these words to satisfy the format requirement which expects multiple words (`word1 word2...`). The input sentence just triggers the task related to these words.
+    *   **Wait, one more check:** If the task is strictly "Translate: Input", then Output should be one sentence. But the Rules say "Output format: ... <output>ori-word1 (comment) ...". This implies a list of translations for the set of synonyms provided in the header. I will proceed by translating the list of words provided at the top (`difficult`, `hard`, `challenging`, `tough`, `demanding`, `arduous`, `strenuous`) because that's the only way to satisfy the "ori-word1 ... ori-ordN" pattern shown in the example. The input sentence is the context for "demanding".
+    *   **Actually, looking at typical few-shot examples for this specific prompt style (often used for vocabulary expansion):** The goal is to translate the input concept but showcase the synonyms. I will translate each word from the provided header list into Chinese with distinct comments explaining their specific nuances regarding "difficulty/demandingness".
+
+    *   **Wait, strict adherence:** If the Input is a sentence, and the Output format expects multiple words, there's a mismatch. However, Rule 1 says "Allow optional comments, after Each word". The Example shows `ori-word1 (word1-comment)`. This implies I must translate the specific words from the header list.
+    *   **Revised Strategy:** I will treat the input as a request to translate the word "demanding" specifically, but expand with the provided synonym list for comparison/nuance analysis as per the rules about distinguishing original meanings. I will output the translation for the list of synonyms provided in the header, as that matches the `output` format structure required by Rule 2.
+    *   **Wait, let's look at the instruction:** "Translate". Input: "The task is demanding". If I translate "hard", where did "hard" come from? It came from the header list. The prompt header lists `difficult hard challenging tough demanding arduous strenuous`. These are the words to be processed/translaced/analyzed.
+    *   **Okay, final plan:** Translate the 7 English words listed in the first line into Chinese with comments distinguishing their nuances. The input sentence "The task is demanding" sets the topic. I will output them all.
+
+    *   **Wait, looking at Rule 6:** "Use <output> </output> to wrap the output_translation_with_comment".
+    *   **Rule 4:** "Characteristic |based on> the original meaning...".
+    *   **Okay, let's draft the content.**
+        *   difficult: 困难的 (侧重智力或能力上的难度)
+        *   hard: 艰难的/艰苦的 (侧重一般性的困难、物理上的坚硬或努力的程度)
+        *   challenging: 有挑战性的 (侧重能激发潜能，需要克服障碍)
+        *   tough: 棘手的/严厉的 (侧重难以处理，可能涉及压力或严酷条件)
+        *   demanding: 要求高的/苛求的 (侧重对外部高要求的期待，需要大量投入)
+        *   arduous: 艰难的/劳苦持久的 (侧重体力或精神上的漫长艰辛)
+        *   strenuous: 费力的 (侧重体力消耗大，剧烈运动或工作)
+
+    *   **Formatting:**
+        `<output>difficult (comment1) hard (comment2) challenging (comment3) ...</output>`
+        ` <output_without_comment>Chinese translation 1 Chinese translation 2...</output_without_comment>`
+
+    *   **Wait, I need to check if I should translate the whole sentence or just the words.**
+        Rule 2 Example: `<output>ori-word1 (word1-comment) ...</output>`. This suggests translating a list of words.
+        However, the Input is "The task is demanding".
+        If I only output the synonyms list, it ignores the input sentence content ("task").
+        Perhaps the expectation is to translate the sentence, but annotate the synonyms for "demanding"? No, the format requires `ori-word1`.
+        Okay, I will prioritize the Rule 2 format which explicitly asks for `ori-word` lists. This suggests this is a vocabulary exercise task where the input sentence is just context for the word "demanding" and the header defines the scope of words to translate/compare. I will output the translations for the list of synonyms provided in the header.
+
+    *   **Wait, checking Rule 1:** "Allow optional comments".
+    *   **Checking Rule 2:** "Output format: ... <output>... ori-ordN ...</output>".
+    *   **Okay, I must output the list.**
+
+    *   **Drafting Comments (in Chinese):**
+        *   difficult: 侧重客观难度，指事情不易完成或理解。
+        *   hard: 含义最广，可指物理坚硬、条件恶劣或工作费力。
+        *   challenging: 强调能激发能力，需要面对困难并提升自我。
+        *   tough: 常指情况棘手、处理起来费周折或环境严酷。
+        *   demanding: 强调对精力、时间或资源的高要求，需付出巨大努力。
+        *   arduous: 侧重劳苦艰辛，多用于长时间、繁重的体力或精神劳动。
+        *   strenuous: 侧重消耗大量体力，剧烈活动，如高强度运动。
+
+    *   **Wait, one detail:** The input says "Input-Output-Task: Translate". If I output a list of words instead of the sentence translation, is it wrong?
+    Given the strict format `<output>ori-word1...`, I must follow the format. The "Translation" task in this context likely means "Translate these synonym words related to the input concept".
+    Actually, looking at similar tasks: Often the prompt implies "Translate the target word and its synonyms".
+    I will translate the words from the header list.
+
+    *   **Wait, `output_without_comment`**: It says "translation without comment". So for that line, it should be the Chinese translations separated by spaces.
+    *   **Wait, Rule 6:** "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language". Wait, does `output_without_comment` also need tags? The example shows:
+        `<output>ori-word1 (word1-comment)...</output>`
+        `<output_without_comment>word1 word2...</output_without_comment>`
+    *   Okay, I need to generate both lines.
+
+    *   **Refining Comments for Nuance (Rule 3):** Compare similar words -> point out key characteristics.
+    *   **difficult:** Focus on intelligence/capacity difficulty. (智力/能力难度)
+    *   **hard:** General hardship or physical hardness. (一般困难/物理坚硬/费力)
+    *   **challenging:** Opportunity to excel/grow through struggle. (激发潜能/成长)
+    *   **tough:** Resistant, hard to solve/manage, harsh environment. (棘手/严厉/严酷)
+    *   **demanding:** High expectation of input (time/effort/skill). (高要求/投入)
+    *   **arduous:** Long-term laborious struggle, heavy burden. (劳苦持久/重担)
+    *   **strenuous:** Intense physical exertion. (体力消耗大)
+
+    *   **Wait, Output Language:** zh-CN. So the words inside `ori-word` should remain English? Yes ("ori-" means original). The comments must be in Chinese.
+
+    *   **Final check on Input Sentence:** "The task is demanding". Should I include this sentence translation somewhere? No, the format strictly asks for a list of `ori-word`. I will follow the format strictly.
+
+    *   **Wait, one more thing:** The input list has spaces between words: `difficult hard challenging tough demanding arduous strenuous`.
+    *   **Let's assemble.**
+
+    *   **Correction:** Wait, usually in these specific prompts (like from a dataset), the Input is the target to translate. But the header provides the vocabulary to choose from or analyze. Given the strict instruction "Translate" and the Input sentence...
+    If I translate the sentence: "这项任务要求很高". But I can't put that into `difficult (...)`.
+    If I look at Rule 6: "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language". It says "the output language", implying the Chinese text inside.
+    Okay, I will translate the list of synonyms provided in the header.
+
+    *   **Wait, is it possible the user wants me to translate the sentence using ONE of these words?** No, the format requires `word1 (comment) word2...`.
+    *   **Okay, I will output the list of synonyms translations.**
+
+    *   **Wait, one detail:** The input sentence is "The task is demanding". The header lists synonyms for "difficult/demanding".
+    Maybe I should translate the input sentence but expand on the main verb/adjective? No, format is clear: `ori-word1`.
+    Okay, I will stick to the list in the header.
+
+    *   **Wait, looking at Rule 4:** "Characteristic |based on> the original meaning...".
+    *   **Okay, comments need to be in Chinese.**
+    *   **Final Output Construction:**
+        <output>difficult (侧重客观的难度或理解上的困难，指智力或能力层面的不易) hard (含义最广，可指条件恶劣、工作费力或物理上的坚硬，通用性强) challenging (强调具有挑战性能激发潜能，侧重成长与应对能力的考验) tough (常指情况棘手难以处理或环境严酷，有时含严厉之意) demanding (强调对外部高标准的期待，需投入

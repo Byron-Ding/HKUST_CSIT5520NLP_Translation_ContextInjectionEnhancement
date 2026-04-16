@@ -1,0 +1,151 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Input Sentence:** "The meeting is critical for the success of the project."
+    *   **Source Language:** English (en)
+    *   **Target Language:** Chinese (zh-CN)
+    *   **Task:** Translate with specific formatting rules.
+    *   **Formatting Rules:**
+        1.  Output must contain two sections: `<output>` and `<output_without_comment>`.
+        2.  Inside `<output>`, each word from the source sentence should be followed by an optional comment in parentheses `(comment)`.
+        3.  The structure is: `ori-word1 (word1-comment) ori-word2 (word2-comment)...` (Wait, the example shows `ori-word1`. I need to check if I should keep "ori-" prefix or just translate directly. The example says: `<output>ori-word1 (word1-comment) ori-word2 (word2-comment)..... ori-ordN (wordN-comment)</output>`. However, rule 6 says "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language". This implies the text inside `<output>` should be the translation *with comments*. The example format `ori-word1` suggests marking the original word position. But Rule 2 says "Output-language: zh-CN". Usually, this means translate the meaning into Chinese. Let's look at the example closely: `"<output>ori-word1 (word1-comment) ori-word2 (word2-comment).....</output>"`. This is ambiguous. Does it mean literal English words with comments, or Chinese words with comments?
+        *   Rule 6 says: "wrap the output_translation_with_comment, which should be in the output language". This implies the translation text inside `<output>` must be in Chinese (zh-CN).
+        *   The example `ori-word1` might be a placeholder for "the" or similar.
+        *   Re-reading Rule 2: "Output format: ... Format is: <output>ori-word1 (word1-comment)...</output>".
+        *   Re-reading Rule 6: "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language".
+        *   Conflict: Rule 2 example shows `ori-word1` (English style placeholders) but Rule 6 says output language. Usually, for translation tasks with comments, it means: `中文翻译 (英文词义注释)`. Or does it mean keep English words and add Chinese comments?
+        *   Let's look at Rule 5: "Annotate the original meaning in the comment, which shown as/in the output language". This suggests the comment should be in the target language (Chinese).
+        *   Let's interpret "output_translation_with_comment" as: `中文词义 (英文词性/含义)`? Or `英文词 (中文注释)`?
+        *   Actually, standard instruction following for this specific prompt style (often seen in few-shot prompting contexts) usually expects the translation to be in the target language, and the comment to explain the choice or original meaning.
+        *   However, Rule 2's example: `ori-word1 (word1-comment)` strongly suggests keeping the original word and adding a comment about it. BUT Rule 6 says "in the output language".
+        *   Let's re-read Rule 6 carefully: "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language". This means the *content* inside `<output>` must be Chinese (since target is zh-CN).
+        *   So the format likely needs to be: `会议 (meeting) 是 (is)...` OR `The meeting (会议)`.
+        *   Let's look at Rule 5 again: "Annotate the original meaning in the comment, which shown as/in the output language". This is tricky. "shown as/in the output language" could mean the comment text is in Chinese.
+        *   Let's look at the example structure provided in Rule 2: `<output>ori-word1 (word1-comment) ori-word2 (word2-comment).....</output>`. This looks like a template. If I translate to Chinese, `ori-word1` should be replaced by the Chinese translation word? Or does it mean I must keep the English word and add Chinese comments?
+        *   Given "Input-language: en", "Output-language: zh-CN", usually translation means providing the Chinese text.
+        *   Hypothesis A: Translate to Chinese, wrap each Chinese character/word with an explanation of the original English word's meaning in Chinese. Example: `会议 (原词：meeting)`.
+        *   Hypothesis B: Keep English words, add Chinese comments explaining meaning. This contradicts "output language" rule for the translation content.
+        *   Hypothesis C: The example `ori-word1` is a placeholder meaning "The actual word". Since output language is zh-CN, I should write the Chinese word, and the comment explains the English original or key characteristic.
+        *   Let's look at Rule 3 & 4: "Compare the similar word... point out the key characteristic... based on the original meaning". This implies deep semantic annotation.
+        *   Let's assume the format is: `ChineseWord (OriginalEnglishMeaning/Comment)`. But Rule 5 says comment is in output language. So: `会议 (关键性会议)`.
+        *   Wait, the example `<output>ori-word1 (word1-comment)` suggests the order is Word then Comment.
+        *   Let's check the instruction "Output-language: zh-CN". The whole `<output>` block should likely be readable Chinese.
+        *   Most likely interpretation for this specific constraint-heavy prompt: Translate the sentence into Chinese, but annotate each word with parentheses containing the original English meaning or a comment on why that specific translation is chosen (key characteristic).
+        *   Actually, looking at similar tasks (Instruction Following), often "ori-word1" means I should output the translated word. Let's try to balance: `中文 (英文原词注释)`.
+        *   Wait, Rule 6 says "output_translation_with_comment, which should be in the output language". This implies the main text is Chinese.
+        *   Let's refine: `会议 (meeting-关键) 是 (is-存在/判断)...`
+        *   Actually, simpler: Just translate the sentence into Chinese, and put comments that explain the original meaning of the source word in the parentheses.
+        *   Example format: `会议 (meeting-名词，关键事件) 是...`
+        *   Let's look at Rule 2 example again: `ori-word1 (word1-comment)`. If I treat `ori-word1` as "The Translated Word", then it should be Chinese. The comment explains the original meaning/characteristic in Chinese.
+        *   So: `会议 (meeting-原意为“会面”，指项目成功的关键环节)` -> This might be too long.
+        *   Let's keep comments concise but informative about the key characteristic of the original English word.
+        *   Constraint Check: "Only allow one output." (So I shouldn't print multiple blocks if I have separate `<output>` and `<output_without_comment>` tags). The format requires *both* tags to be present?
+        *   Rule 2 Format section says:
+            `Output format:`
+            `Note: each "(comment)" |is> optional`
+            `Format is:`
+            `    Format is:`
+            `    <output>ori-word1 (word1-comment) ori-word2 (word2-comment)..... ori-ordN (wordN-comment)</output>`
+            `    <output_without_comment>translation without comment</output_without_comment>`
+        *   So I must provide BOTH tags.
+        *   And Rule 6 says "Use <output> </output> to wrap the output_translation_with_comment".
+        *   So structure:
+            <output>Word1 (Comment1) Word2 (Comment2)...</output>
+            <output_without_comment>Pure Translation</output_without_comment>
+        *   Language inside `<output>` text: Chinese (Target). Comments inside parentheses: Chinese (Target language per Rule 5 & 6? Or original meaning?). Rule 5: "Annotate the original meaning in the comment, which shown as/in the output language". This means the explanation of the original meaning should be written in Chinese.
+        *   Okay, Plan:
+            1. Split sentence into words/tokens (English).
+            2. Translate each to Chinese.
+            3. Add comment explaining key characteristic/meaning of English word in Chinese.
+            4. Wrap with `<output>`.
+            5. Provide full translation without comments in `<output_without_comment>`.
+
+        *   Sentence: "The meeting is critical for the success of the project."
+        *   Words: The, meeting, is, critical, for, the, success, of, the, project.
+        *   Translation (Mental): 会议是项目成功的关键。
+        *   Let's process word by word.
+
+        *   Word 1: The -> (定冠词) -> 中文通常省略或译为“那/这”
+        *   Wait, "The" often doesn't have a direct translation if generic. But for annotation: (the-表示特指)
+        *   Better approach: Keep the Chinese word structure.
+        *   Word: The -> (定冠词，特指)
+        *   Word: meeting -> 会议 (meeting-名词，核心讨论事件)
+        *   Word: is -> 是 (is-系动词，连接状态)
+        *   Word: critical -> 关键/至关重要 (critical-形容词，决定性/极重要的)
+        *   Word: for -> 对/对于 (for-介词，表示目的或对象)
+        *   Word: the -> (定冠词)
+        *   Word: success -> 成功 (success-名词，达成目标)
+        *   Word: of -> ...的 (of-介词，表示所属关系)
+        *   Word: the -> (定冠词)
+        *   Word: project -> 项目 (project-名词，工作集合体)
+
+        *   Formatting check: "Format is: <output>ori-word1 (word1-comment)...". This example uses `ori-word`. If I output Chinese, do I prefix with `ori-`? No, that breaks the translation rule. The `ori-word` in the example likely meant "Original Word Placeholder". Since target is zh-CN, I replace placeholder with translated word.
+        *   Rule 6: "wrap the output_translation_with_comment, which should be in the output language". This confirms Chinese text inside `<output>`.
+        *   Wait, looking at the example structure again: `ori-word1 (word1-comment)`.
+        *   If I write `会议 (meeting-关键)` -> Is that compliant? Yes.
+        *   Let's try to make comments distinguish original meaning (Rule 3 & 4).
+        *   Example: `critical` -> `关键/危急 (关键性，非危险)`. No, Rule 4 says "Characteristic based on original meaning".
+        *   Okay, let's finalize the content for `<output>`: `会议 (The-定冠词) 是 (meeting-名词) ...` Wait, order matters. Word then Comment.
+        *   If I translate word "The" -> usually omitted in Chinese unless specifying "that". Let's include it to match word count if possible, or map to closest semantic unit.
+        *   Actually, for translation tasks with comments, usually the comment explains the English word that maps to the Chinese character.
+        *   Format: `中文 (English 原词 + 解释)`? Or just `中文 (中文注释)`? Rule 5 says "Annotate the original meaning... shown as/in the output language". This means I explain the original meaning in Chinese. e.g. `会议 (meeting-名词，指聚集讨论)`。
+        *   Let's refine the comments to be about distinguishing synonyms/characteristics as per Rule 3 ("Compare the similar word of each word -> point out the key characteristic").
+        *   So for `critical`: Not just "important", but "decisive". Comment: `关键性的，决定成败的`.
+        *   For `success`: `成功，达成目标的状态`.
+        *   Let's draft the `<output>` string.
+
+        Wait, I need to check if I should include the English words inside the output text or just Chinese. Rule 6: "wrap the output_translation_with_comment". Translation usually means target language only. But comments explain original meaning. So `会议 (会议 meeting-关键事件)`.
+        Actually, standard practice for this specific prompt template (which looks like a specific dataset format):
+        Usually it expects: `中文翻译 (OriginalEnglishWord (Comment))` OR `中文翻译 (OriginalMeaningDescription)`.
+        Given Rule 5 "Annotate the original meaning in the comment", I will write `中文词 (原词含义/注释)`.
+        Wait, looking at the example `<output>ori-word1 (word1-comment)...` implies the text *before* the parenthesis is the source word?
+        NO. Rule 6 says "output_translation_with_comment". Translation means Target Language. So `中文词 (评论)`.
+        Okay, I will proceed with: `ChineseWord (EnglishOriginalMeaning/Characteristic in Chinese)`.
+
+        Wait, one more check on Rule 2 example: `<output>ori-word1 (word1-comment) ori-word2 (word2-comment).....</output>`.
+        And `<output_without_comment>translation without comment</output_without_comment>`.
+        So the final output should contain both tags.
+
+        Let's construct the content.
+        Sentence: The meeting is critical for the success of the project.
+        Translation: 会议是项目成功的关键。 (Or closer to word count)
+        Word by word:
+        The -> [可省略] -> Let's use "本次" or just omit. Better to translate semantically. But I need to map words.
+        If I omit "The", does it match word count? No.
+        Let's include them for strict adherence to "each word".
+        The -> (the-定冠词)
+        meeting -> 会议 (meeting-聚会/讨论事项)
+        is -> 是 (is-连接/存在)
+        critical -> 关键 (critical-至关重要的)
+        for -> 对 (for-介词，关联)
+        the -> (the-定冠词)
+        success -> 成功 (success-达成目的)
+        of -> ...的 (of-所属关系)
+        the -> (the-定冠词)
+        project -> 项目 (project-工程/计划集合)
+
+        Wait, Rule 4 says "Characteristic based on original meaning; optional for evolute to the extension".
+        So `critical` -> `关键性` or `危急`. Need to point out key characteristic. "决定性的，非普通重要的".
+        Let's keep comments concise but informative per Rule 3 ("Compare similar word... point out key characteristic").
+
+        Draft Output:
+        <output>
+        The (定冠词) 会议 (meeting-聚集讨论事件) 是 (is-判断系动词) 关键 (critical-决定性的，非危急) 对 (for-表示对象关联) 成功 (success-目标达成状态) 的 (of-所属连接) 项目 (project-工程任务集合)。
+        </output>
+        Wait, "The" repeated. Chinese usually drops articles. I will translate them as `（定冠词）` or omit? If I omit, it's not a word mapping. I will keep them to show structure but note they are function words. Or just translate the semantic content and annotate the English ones.
+        Better: `会议 (meeting-名词，核心事件) 是 (is-系动词) ...`
+        Actually, standard translation ignores function words in Chinese often. But the task says "Each word". I will translate everything but keep Chinese for the main text.
+        
+        Revised Plan for `<output>`:
+        会议 (meeting-名词，核心事件) 是 (is-系动词，连接表语) 关键 (critical-形容词，决定成败，区别于次要) 对 (for-介词，引出对象) 成功 (success-名词，正向结果) 的 (of-介词，表示所属关系) 项目 (project-名词，具体工作单元)。
+        Wait, "The" before meeting and project.
+        I should include them to be safe with "Each word".
+        The (the-定冠词，特指) ...
+
+        Wait, Rule 6 says "output_translation_with_comment... should be in the output language".
+        So inside `<output>`, it should be Chinese text + Comments.
+        Structure: `中文 (Comment)`.
+        
+        Let's finalize the content for `<output>` and `<output_without_comment>`.
+        Input Sentence: The meeting is critical for the success of the project.
+        Translation (without comments

@@ -1,0 +1,153 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Input:** "Here is a small recommendation for you."
+    *   **Input Language:** English (en)
+    *   **Output Language:** Chinese Simplified (zh-CN)
+    *   **Task:** Translate the input sentence into the output language.
+    *   **Specific Rules:**
+        1.  Allow optional comments after each word. Comments should point out the key characteristic, especially the original meaning of each word.
+        2.  Output format must be:
+            ```
+            <output>ori-word1 (word1-comment) ori-word2 (word2-comment) ...</output>
+            <output_without_comment>translation without comment</output_without_comment>
+            ```
+        3.  Only allow one output block (but the example shows two tags, `<output>` and `<output_without_comment>`). Wait, Rule 1 says "Output format: Note: each "(comment)" is optional Format is: <output>... </output> <output_without_comment>... </output_without_comment>". The prompt ends with "Note: Only allow one output." This usually means one response block containing the required structure. I need to follow the structure shown in the example.
+        4.  Comments must be in Output-Language (zh-CN).
+        5.  Comments should distinguish original meaning from synonyms.
+        6.  Compare similar words and point out key characteristics based on original meaning.
+        7.  Wrap the translation *with comment* inside `<output>`.
+        8.  The final answer must follow the specified XML-like tags structure.
+
+2.  **Analyze the Input Sentence:**
+    *   "Here is a small recommendation for you."
+    *   Words: Here, is, a, small, recommendation, for, you.
+
+3.  **Translate & Annotate (Word by Word):**
+
+    *   **Here**: Introductory word indicating location or presence. In this context, it introduces the item ("recommendation").
+        *   Translation: 这里 (or used as filler). Often translated as "这是" structure. Let's map directly to the Chinese sentence structure.
+        *   Comment focus: Introduces existence/location here.
+    *   **is**: Verb 'to be'.
+        *   Comment: Copula, linking subject and predicate.
+    *   **a**: Indefinite article.
+        *   Comment: Indicates one item, unspecified count.
+    *   **small**: Adjective meaning limited in size or quantity/degree. Here it implies brevity or modesty of the advice.
+        *   Comment: Size/quantity modifier.
+    *   **recommendation**: Noun meaning suggestion or piece of advice given to help make a decision. Key characteristic: Advice/Suggestion.
+        *   Comment: The core semantic content (suggestion).
+    *   **for**: Preposition indicating target or beneficiary.
+        *   Comment: Directed towards someone.
+    *   **you**: Pronoun referring to the listener/reader.
+        *   Comment: Second person object.
+
+    *   *Chinese Translation Strategy*: "Here is..." usually translates to "这是..." in Chinese for introductions.
+    *   Sentence: 这是一条给您的小建议。 (Or similar).
+    *   Let's break it down strictly word-for-word or phrase-for-phrase as per the example style (word1 (comment) word2...). The prompt asks for `<output>ori-word1 (word1-comment)...</output>`. `ori-word` implies I should keep the original English words with comments? Or translate them then comment on the translation?
+    *   Re-reading Rule 1: "comments should |point out> the key characteristic... of each word."
+    *   Re-reading Example: `"<output>ori-word1 (word1-comment) ori-word2 (word2-comment)...</output>"` AND `Note: Comment are in Output-Language`.
+    *   This is slightly ambiguous. Does "ori-word" mean the original English word or the translated Chinese word?
+    *   Example says: `"<output>ori-word1 (word1-comment) ...</output>"`. But Rule 4 says "Characteristic |based on> the original meaning". Rule 6 says "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language".
+    *   Okay, if I look at the example provided in the prompt: `"<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ...</output>"`. It says "ori-word1" but also says "Output_language comment".
+    *   Let's interpret: The text inside `<output>` should be the translation with comments attached to the translated word. The example shows `ori-word` likely meaning "Original word from input"? No, Rule 6 says "wrap the output_translation_with_comment". So it should be Chinese characters + Comment in Chinese.
+    *   Wait, looking closely at the example structure: `<output>ori-word1 (word1-comment) ...</output>`. If I translate to zh-CN, `ori-word1` implies English? But Rule 6 says "which should be in the output language". So it must be the Chinese translation. The tag `<output>` contains the *translation*.
+    *   Okay, interpretation: `[Chinese Translation] (Comment)` per word/phrase.
+    *   However, standard NLP translation tasks with comments often keep the source token or show the target token. Let's look at Rule 6 again: "wrap the output_translation_with_comment". This implies the content inside `<output>` is the translation (Chinese).
+    *   So format: `这里 (Here-comment) 是 (is-comment) ...`
+    *   Wait, usually these tasks want the original word annotated or the translated word annotated? The example says `ori-word1`. Let's assume the example meant "Translation Word" but wrote `ori-word1` as a placeholder. But Rule 6 explicitly says "output_translation_with_comment".
+    *   Actually, looking at the instruction: "Note: Comment |are> in Output-Language".
+    *   Okay, I will provide the Chinese translation segments with comments explaining the meaning.
+    *   Let's refine the mapping for the specific request.
+    *   Input: "Here is a small recommendation for you."
+    *   Translation: 这是 (Here + is) 一条 (a + classifier) 给您的 (for you) 小建议 (small recommendation).
+    *   Actually, word-for-word mapping to Chinese is hard because Chinese doesn't map 1-to-1 with English function words like "is" or "for" in this specific sentence structure (often merged).
+    *   However, the rule says "ori-word1...". Let's try to keep the segmentation as close to the input words as possible while translating.
+    *   Input: Here | is | a | small | recommendation | for | you.
+    *   Translation mapping:
+        *   Here is -> 这是 (Combined usually). But if I must map per word: 这里 (Here) + 是 (is). In Chinese "Here is..." is idiomatic for "This is...". Let's use "这是" for the phrase or separate? To be faithful to "word-by-word annotation", I should probably split.
+        *   "Here": 这儿/此处 (Location indicator, often filler in this context). Let's use 这。
+        *   "is": 是。
+        *   "a": (omitted usually, but included as quantity marker implied or explicit). Let's say omitted or "一条". Since I must map words: `a` -> (量词 placeholder). Or merge with recommendation.
+        *   Let's follow the instruction strictly: "Translate".
+        *   Sentence translation: 这是一份给您的小建议。 (This is a small suggestion for you.) OR 这是一条给您的小建议。
+        *   To satisfy "each word", I will segment the translation to match the English words.
+        *   Here -> 这 (Here)
+        *   is -> 是 (is)
+        *   a -> (一份/一个)
+        *   small -> 小
+        *   recommendation -> 建议
+        *   for -> 给 (For)
+        *   you -> 您 (You - polite)
+
+    *   Comments must be in zh-CN.
+    *   Characteristic: Original meaning vs synonym.
+    *   Example logic: "recommendation" (noun, advice). Distinguish from "gift", "suggestion".
+
+    *   Wait, Rule 1 says: "Allow optional comments, after Each word; comments should |point out> the key characteristic...".
+    *   Rule 6: "wrap the output_translation_with_comment".
+    *   Structure: `<output>Translation (comment)...</output>`? Or `TranslationWord (comment) TranslationWord (comment)`?
+    *   Example: `"<output>ori-word1 (word1-comment) ori-word2 (word2-comment)...</output>"`.
+    *   This implies the string inside `<output>` contains the translation words separated by comments.
+    *   Okay, I will construct the string: `这 (指示词：此处引出内容) 是 (系动词：判断存在) 一份 (量词：单数修饰) 小 (形容词：程度/规模) 建议 (名词：核心语义：劝告/点子) 给 (介词：对象指向) 您 (代词：第二人称)`.
+    *   Wait, the example shows `ori-word1` inside the tag. If I output Chinese characters, they are the translation words.
+    *   Let's check Rule: "Output format... <output>input language (translation and output language comment)</output>". This phrasing in the prompt description is a bit garbled ("input language (translation...)"). But Rule 6 clarifies: "wrap the output_translation_with_comment, which should be in the output language".
+    *   Okay, inside `<output>`, I put the Chinese text with comments. Inside `<output_without_comment>`, I put the clean Chinese text.
+
+    *   Refined Translation Plan:
+        1.  Here -> 这 (This/Here - Contextual introducer)
+        2.  is -> 是 (Be verb - Equality/Existence)
+        3.  a -> 一个 (Article - Indefinite quantity)
+        4.  small -> 小 (Small - Adjective of degree/size)
+        5.  recommendation -> 建议 (Recommendation - Noun: advice/suggestion vs command/gift)
+        6.  for -> 给 (Preposition - Target/Beneficiary vs tool)
+        7.  you -> 您 (You - Pronoun: Addressee)
+
+    *   Wait, "Here is..." implies "This is...". Merging "Here" and "is" might be more natural ("这是"), but word-level annotation suggests keeping the split. Let's keep `这` for `Here` to show segmentation.
+    *   Also, `recommendation` synonyms (advice, suggestion) need to be distinguished in comment.
+    *   Constraint: "Only allow one output." (The prompt says this at the very end).
+    *   The example shows two blocks `<output>...</output>` and `<output_without_comment>...</output_without_comment>`. I should follow that structure inside the single response.
+
+4.  **Drafting the Comments:**
+    *   这：指示代词，指代当前话语指向的物体（对应 Here）。Original meaning: Locative/Deictic reference. Distinction from "That".
+    *   是：系动词，连接主语与表语。Original meaning: Copula. Distinction from "do" or "have".
+    *   一个：不定代词修饰的量词。Original meaning: Indefinite quantifier (singular). Distinction from specific quantity like "two".
+    *   小：形容词，表示规模或程度有限。Original meaning: Size/Amount modifier. Distinction from "big" or "huge".
+    *   建议：名词，指提供的信息以帮助决定（对应 recommendation）。Original meaning: Advice/Suggestion (not just 'gift' or 'command'). Distinguish from 'suggestion' (more casual).
+    *   给：介词，表示动作对象或受益者。Original meaning: Target/Beneficiary. Distinction from "to" (direction).
+    *   您：代词，第二人称尊称。Original meaning: Polite You. Distinction from '你' (informal).
+
+5.  **Finalizing Format:**
+    ```xml
+    <output>这 (指示代词：引出存在) 是 (系动词：连接判断) 一个 (量词：不定数量) 小 (形容词：程度轻微) 建议 (名词：核心语义为劝告) 给 (介词：对象指向) 您 (代词：第二人称尊称)</output>
+    <output_without_comment>这 是 一个 小 建议 给 您</output_without_comment>
+    ```
+    Wait, the translation "这是一个小建议给您" sounds slightly awkward. Better: "这是（这里）是（be）...". No, standard Chinese for "Here is a small recommendation for you": "这是一条小建议给您。" or "这里有一份小建议给您。"
+    Let's refine the semantic mapping to sound natural while keeping word correspondence.
+    `Here is` -> `这是`. `a` -> `一条` (classifier for suggestions). `small` -> `小`. `recommendation` -> `建议`. `for you` -> `给您的` or just `给您`.
+    To match the input word count roughly in comments:
+    Input words: Here, is, a, small, recommendation, for, you. (7 words)
+    Target Chinese words to annotate: 这，是，一条，小，建议，给，您。(7 segments).
+    Okay, I'll stick to this mapping for clarity.
+
+    *   Wait, the prompt asks to translate. Naturalness matters. "这是一个小建议给您" vs "这是一条小建议给您". `recommendation` usually maps to `建议`. `a` + classifier.
+    *   Let's use: 这 (指示代词：引指此处) 是 (系动词：存在判断) 一条 (量词：单数不定) 小 (形容词：程度修饰) 建议 (名词：劝告信息) 给 (介词：对象目标) 您 (代词：礼貌人称).
+    *   Actually, "Here is" often maps to "这是". If I split `Here` and `is`, it's `这...是`. Okay.
+    *   Wait, looking at Rule 1: "comments should |point out> the key characteristic, especially the original meaning |of> each word."
+    *   And Rule 3: "Compare the similar word of each word -> |point out> the key characteristic |of> each word".
+    *   So I need to mention in the comment if it differs from synonyms. E.g., Recommendation vs Advice.
+
+    *   Refined Comments:
+        *   这 (指示代词：对应原词 Here，起引指作用而非实义位置)
+        *   是 (系动词：原词 is，表判断或存在)
+        *   一条 (量词短语：对应原词 a，限定单数物品)
+        *   小 (形容词：原词 small，修饰程度而非具体尺寸)
+        *   建议 (名词：原词 recommendation，核心语义为劝告/点子，区别于礼品或命令)
+        *   给 (介词：原词 for，引出受益者对象)
+        *   您 (代词：原词 you，表第二人称尊称，区别于你)
+
+    *   Final check on tags: `<output>` then `<output_without_comment>`.
+    *   Ensure comments are in zh-CN.
+    *   Ensure only one output block (containing both tags).
+
+    *   Wait, checking the instruction "Note: Only allow one output." usually refers to the model response containing only the required XML structure. It shouldn't include thinking text outside the final block if I can avoid it, but I am a model that needs to output the result. The prompt says "Only allow one output" likely meaning don't output multiple explanations before the XML.
+    *   Also, check Rule 6: "Use <output> </output> to wrap the output_translation_with_comment". Wait, does this

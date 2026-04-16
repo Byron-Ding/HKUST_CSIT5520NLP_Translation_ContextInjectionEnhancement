@@ -1,0 +1,157 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Input Sentence:** "This building is massive."
+    *   **Input Language:** English (en)
+    *   **Output Language:** Chinese (zh-CN)
+    *   **Task:** Translate the sentence, but with specific formatting requirements regarding comments.
+    *   **Formatting Rules:**
+        1.  Allow optional comments after each word.
+        2.  Comments should point out key characteristics, especially the original meaning of each word.
+        3.  Output format must include two sections wrapped in `<output>` tags (though the example shows a single structure, the rules say "Only allow one output" but the example shows a structure with `output` and `output_without_comment`. Wait, looking closely at the rules:
+            *   Rule 1 says: "Output format: Note: each "(comment)" |is> optional Format is: <output>ori-word1 (word1-comment) ...</output> <output_without_comment>word1 word2 ...</output_without_comment>"
+            *   Rule 6 says: "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language".
+            *   There is a conflict/ambiguity between Rule 1's example structure and Rule 6's instruction. Rule 6 specifically says to use `<output>` to wrap the translation with comment. It doesn't explicitly mention wrapping the `without_comment` part in the same way, but the example shows both inside the response or implies a specific structure.
+            *   However, Rule "Note: Only allow one output" suggests I should probably stick to the final required format which is usually the translated text with annotations, OR strictly follow the example structure provided in Rule 1 if that's the dominant formatting instruction.
+            *   Let's re-read Rule 1 carefully: "Format is: <output>ori-word1 (word1-comment) ...</output> <output_without_comment>word1 word2 ...</output_without_comment>". This implies two blocks.
+            *   Rule 6 says: "Use <output> </output> to wrap the output_translation_with_comment".
+            *   Standard interpretation for this specific prompt style (often associated with LLM training/alignment tasks): The user wants the annotated translation. The "Only allow one output" note often means don't give introductory text or explanations outside the tags.
+            *   Wait, looking at the instruction hierarchy: Rule 1 defines the format. Rule 6 emphasizes wrapping the comment version in `<output>`.
+            *   Let's look at the example provided in Rule 1:
+                ```
+                <output>ori-word1 (word1-comment) ori-word2 (word2-comment)...</output>
+                <output_without_comment>word1 word2... wordN</output_without_comment>
+                ```
+            *   This suggests I should provide both, but Rule 6 says "Use <output> </output> to wrap the output_translation_with_comment".
+            *   To be safe and strictly follow the example format provided in Rule 1 (which is usually the strongest signal for formatting), I will generate the `<output>` block with annotations and the `<output_without_comment>` block with just translation.
+            *   However, Rule "Note: Only allow one output" might mean "Don't add extra text". The example shows two tags. I will follow the example format in Rule 1 as it's the most detailed specification.
+            *   Wait, actually, looking at the instruction "Output-language: zh-CN", the comments must be in zh-CN.
+            *   Let's break down the sentence: "This building is massive."
+            *   Words: This, building, is, massive.
+            *   Translation: 这座建筑是巨大的。
+            *   Word-by-word analysis for comments (in Chinese):
+                *   This -> 这 (指示代词，the/this). Characteristic: demonstrative pronoun pointing to specific object.
+                *   building -> 建筑 (名词，structure/building). Characteristic: noun, structure, human-made structure.
+                *   is -> 是 (动词，to be/state). Characteristic: copula verb linking subject and adjective.
+                *   massive -> 巨大/庞大 (形容词，huge/large/massive). Characteristic: adjective describing size/importance, often implies weight or sheer volume.
+
+            *   Constraint Check:
+                *   "Comment |are> in Output-Language, in zh-CN": Comments must be Chinese.
+                *   "Annotate the original meaning in the comment": The comment should explain the English word's meaning in Chinese.
+                *   "Use <output> </output> to wrap the output_translation_with_comment": This seems to contradict Rule 1's example which has two tags. But Rule 6 is later/specific. However, Rule 1 says "Format is: ...". Usually, the first explicit format rule defines the structure. I will follow Rule 1's example structure but ensure the content inside `<output>` follows the `<output>ori-word (comment)...</output>` pattern with Chinese comments.
+                *   Wait, Rule 6 says: "Use <output> </output> to wrap the output_translation_with_comment". It doesn't forbid `<output_without_comment>`. I will include both to match Rule 1's example structure which is detailed.
+                *   Wait, looking closer at Rule 1: "Output format: ... Format is: <output>...</output> <output_without_comment>...</output_without_comment>".
+                *   Looking at Rule 6: "Use <output> </output> to wrap the output_translation_with_comment".
+                *   I will prioritize the detailed structure in Rule 1 (two blocks) as it defines the specific task format, while adhering to the language constraints.
+
+            *   Wait, I need to check the "Only allow one output" note. Does that mean one block? Or just no conversational text? Usually, in these strict formatting tasks, "one output" means no markdown text outside the tags, or strictly following the schema. The example shows two tags. I will produce the structure defined in Rule 1's example.
+
+            *   Refined Plan:
+                1.  Translate words.
+                2.  Create Chinese comments for each word explaining original meaning/key characteristic.
+                3.  Format inside `<output>` tags (with comments) and `<output_without_comment>` tags (pure translation).
+                4.  Ensure no extra text outside these blocks.
+
+            *   Wait, re-reading Rule 6: "Use <output> </output> to wrap the output_translation_with_comment". It doesn't explicitly say *only* that tag. But it emphasizes wrapping the comment version.
+            *   Let's look at the instruction again. "Output format: ... Format is: <output>...</output> <output_without_comment>...</output_without_comment>".
+            *   Okay, I will follow Rule 1's example structure exactly.
+
+            *   Translation words:
+                *   This -> 这
+                *   building -> 建筑
+                *   is -> 是
+                *   massive -> 巨大 (or 庞大的，massive often implies size/mass/volume)
+                
+            *   Comments (in Chinese):
+                *   这：指示代词，指代近处或特定对象，the/this.
+                *   建筑：名词，人工建造的房屋结构，structure/building.
+                *   是：动词，表示判断或存在状态，copula/to be.
+                *   massive：形容词，形容体积、重量或规模巨大，huge/large/impressive.
+
+            *   Construct the `<output>` block:
+                `这 (指示代词 this-the/this) 建筑 (名词 building-structure) 是 (动词 is-copula) 巨大 (形容词 massive-huge) 的` -> Wait, the example shows space separation between words. "ori-word1 (word1-comment)".
+                Should I include "的" for grammar? Usually word-for-word translation tasks keep close to original order or natural flow. Natural flow: 这座建筑是巨大的。
+                However, the instruction says "Translate". Standard machine translation usually outputs a coherent sentence. The annotation format `ori-word (comment)` suggests a gloss-style output.
+                Example: `<output>ori-word1 (word1-comment) ori-word2 (word2-comment)...</output>`
+                So I should write: `这 (指示代词，指代特定对象) 建筑 (名词，人造结构) 是 (动词，系动词) 巨大的 (形容词，规模大，massive)`
+                
+                Wait, "Only allow one output". The example shows two `<output>` and `<output_without_comment>`. Does "one output" mean I shouldn't provide both? Or just don't provide extra text?
+                Usually, "One output" means the model response should contain the requested format block(s). If the format spec says to include two blocks, that's the one output block structure.
+                Actually, looking at similar tasks, often the user wants *just* the translation with comments. But Rule 1 explicitly gives the `output_without_comment` section. I will include both as per Rule 1 example to be safe, as it satisfies the specific formatting rule.
+
+                Wait, one more check: "Use <output> </output> to wrap the output_translation_with_comment". This implies `<output>` is mandatory for comments. It doesn't ban `<output_without_comment>`.
+                
+                Let's refine the comments to be distinct Chinese explanations of the English word meanings as requested ("Annotate the original meaning in the comment").
+
+                Word: This -> 这 (demonstrative, this/these)
+                Word: building -> 建筑 (noun, structure/building)
+                Word: is -> 是 (verb, to be/copula)
+                Word: massive -> 巨大的 (adjective, very large/heavy/important)
+                Punctuation: . (period)
+
+                Let's draft the content.
+                `<output>这 (指示代词 this-指示特指对象) 建筑 (名词 building-人造结构) 是 (动词 is-系动词连接主谓) 巨大 (形容词 massive-规模庞大/重要) 的</output>`
+                Wait, the example uses `ori-word1 (word1-comment)`. I should follow that.
+                Also, the translation in `<output_without_comment>` should be a coherent sentence: "这座建筑是巨大的。" or "这栋建筑非常巨大。". Let's stick to "巨大的".
+
+                Re-evaluating Rule 6 vs Rule 1.
+                Rule 1 Example:
+                `<output>ori-word1 (word1-comment) ...</output>`
+                `<output_without_comment>word1 word2 ...</output_without_comment>`
+                
+                I will produce exactly this structure.
+
+                Wait, one detail: "Output-language: zh-CN". Comments must be in zh-CN. The translated words inside the comment section should probably be the Chinese translation of the English word to make it readable? Or just the Chinese translation of the whole sentence broken down?
+                Example says: `ori-word1 (word1-comment)`. `ori-word1` implies the original word (English). `word1-comment` implies the explanation.
+                So: `This (这 - 指示代词，指代特定对象)`?
+                Or `这 (this - 指示代词...)`?
+                Usually, in glossing tasks like this, the format is `<ChineseTranslation> (<EnglishMeaning/Comment)>` OR `<OriginalWord> (<ChineseTranslation/Comment)>`.
+                The instruction says: "Translate ... Output-language: zh-CN".
+                If I put `This (这-...)`, it mixes English.
+                Rule 4 says: "Characteristic based on the original meaning; optional for evolute to the extension...".
+                Rule 5: "Annotate the original meaning in the comment, which shown as/in the output language".
+                This is tricky. "Annotate the original meaning". Original meaning = English word's definition. Output Language = Chinese.
+                So the text inside `<output>` should be the translation words separated by spaces, with comments explaining them? Or Original Word + Comment?
+                Example provided: `<output>ori-word1 (word1-comment) ...</output>`
+                `ori-word` likely means original word or output word? In standard glossing, it's usually `Original (Translation/Comment)`. But the prompt says "Translate". If I write "This", that's English. If I write "这", that's Chinese translation.
+                Given "Output-language: zh-CN", the main text should likely be in Chinese characters, with comments explaining the nuances or meanings.
+                Let's look at Rule 5 again: "Annotate the original meaning in the comment". This implies the main text is the Output Language (Chinese), and the comment explains the Original Meaning (English concept).
+                Wait, Example: `ori-word1 (word1-comment)`. If output is Chinese, `ori-word` might be a placeholder in the rule description. I should probably write the Chinese translation followed by the comment explaining the original English meaning/characteristic.
+                Actually, standard practice for these specific "Input-Output-Task" prompts often expects: `<output><Word1> (Translation of Word 1)</Word1></output>`? No.
+                Let's look at the instruction: "Translate ... Output-language: zh-CN".
+                So `<output>` should contain Chinese characters.
+                Example: `This (this-translation)`.
+                If I output `这 (这 - original meaning of this is demonstrative)`, it gets repetitive.
+                Maybe: `这 (指示代词，相当于 this/that 的指称)`?
+                Let's assume the main text is Chinese translation, and the comment explains the English word's characteristic/meaning in Chinese.
+                Example structure from Rule 1: `<output>ori-word1 (word1-comment)</output>`. `ori-word` likely means "Original Word". But since Output Language is zh-CN, I should translate the word first?
+                Actually, usually in these prompts, `ori-word` in the example instruction refers to the token being annotated. If the output language is Chinese, the content inside `<output>` must be Chinese.
+                Let's assume the format is: `ChineseWord (Explanation of English Meaning/Characteristic)`.
+                
+                Revised Plan:
+                Sentence: "这座建筑是巨大的。"
+                Breakdown:
+                这 -> 这 (指示代词，this/these)
+                座 -> 座 (量词，measure word for buildings) - Optional, but makes it natural. Original sentence "This building". "This" includes the concept. I can translate as "这座". Or word by word "这 building". Word-for-word glossing usually keeps boundaries. "Building".
+                Let's try: `这 (this-指示代词，指代特定对象) 建筑 (building-名词，人造结构) 是 (is-动词，系动词连接主谓) 巨大 (massive-形容词，规模庞大/重量大)`.
+                
+                Wait, I need to decide if the `<output>` text should contain English words or Chinese. Rule 6: "wrap the output_translation_with_comment, which should be in the output language". This implies the text inside `<output>` must be in zh-CN (Output Language). So `这` not `This`.
+                But the example says `ori-word1`. This is ambiguous. Does `ori-word` mean the word from the Input? Or does it mean "Original Word" placeholder which I replace with the Output word?
+                Given Rule 6: "...in the output language". I will use Chinese characters for the main text.
+                
+                So: `<output>这 (this-指示代词，指代近处对象) 建筑 (building-名词，人造结构) 是 (is-系动词，表示状态) 巨大 (massive-形容词，体积或规模非常大) 的</output>`
+                Wait, punctuation like "." should be included? "This building is massive."
+                
+                And `<output_without_comment>`: `这座建筑是巨大的。`
+                
+                One more constraint: "Only allow one output". The example shows two tags. If I provide two tags, is that "one output" (the response)? Yes.
+                However, Rule 1 says "Format is: <output>...</output> <output_without_comment>...</output_without_comment>".
+                Rule 6 says "Use <output> </output> to wrap the output_translation_with_comment".
+                It doesn't explicitly forbid `<output_without_comment>`. I will include it to match Rule 1's example.
+
+                Final check on comments: "comments should |point out> the key characteristic, especially the original meaning".
+                Comments must be in zh-CN (Rule 2).
+                
+                Drafting content:
+                Output with comment: `这 (this-指示代词，指代特定对象) 建筑 (building-名词，人造结构) 是 (is-系动词，连接主系表结构) 巨大 (massive-形容词，规模/体积庞大) 。`
+                Wait, "This building" -> "这座". "Massive" -> "巨大的" or just "巨大". I'll use "巨大的

@@ -1,0 +1,103 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Input Sentence:** "I kind of feel furious about this."
+    *   **Input Language:** en (English)
+    *   **Output Language:** zh-CN (Chinese)
+    *   **Task:** Translate with specific formatting rules regarding comments and annotations.
+    *   **Provided Links:** Collins Dictionary Thesaurus links (seem to provide context on synonyms for "angry", "mad", "furious", "irritated", etc., though I cannot browse them, I can use my internal knowledge base which is trained on similar lexical data).
+    *   **Rules:**
+        1.  Allow optional comments after each word (point out key characteristics/original meaning).
+        2.  Output format: `<output>...</output>` and `<output_without_comment>...</output_without_comment>`. Wait, the example shows only one block structure in the description but the "Note: Only allow one output" contradicts the example showing two tags? Let's look closely at the example provided in the prompt:
+            *   Example format: `"<output>ori-word1 (word1-comment) ...</output>"` and `<output_without_comment>...</output_without_comment>`.
+            *   Constraint 6: "Use <output> </output> to wrap the output_translation_with_comment".
+            *   Constraint: "Note: Only allow one output." This is conflicting with the example showing two tags. Usually, in these strict formatting tasks, the final answer should follow the specific structure requested by the "Output format" section. The prompt says "Output format: ... <output_without_comment>translation without comment</output_without_comment>". However, rule 6 says "Use <output> </output> to wrap the output_translation_with_comment".
+            *   Let's re-read the example carefully: `example: "<output>ori-word1 (word1-comment) ... ori-ordN (wordN-comment)</output> <output_without_comment>word1 word2 word3..... wordN</output_without_comment>"`.
+            *   But Rule 6 says "Use <output> </output> to wrap the output_translation_with_comment".
+            *   Usually, when users provide conflicting instructions (Example vs Rule), the specific "Rules" section often takes precedence, or I need to combine them. However, the instruction "Note: Only allow one output." suggests I should probably just follow the main requested format. But looking at the example provided in the "Output format" section of the rules, it explicitly shows *two* XML-like tags: `<output>` and `<output_without_comment>`.
+            *   Wait, looking closer at Rule 6: "Use <output> </output> to wrap the output_translation_with_comment". It doesn't explicitly mention `<output_without_comment>`. But the Output format section explicitly defines two blocks.
+            *   Let's look at the instruction "Note: Only allow one output." This might mean only one *block* of text that contains the required tags, or it might mean don't provide extra chatter. Given the strict formatting examples in these types of prompts, I should follow the structure shown in the "Output format" section, which includes both `<output>` and `<output_without_comment>`.
+            *   Wait, there is a contradiction: Rule 6 says "Use <output> </output> to wrap the output_translation_with_comment". The example shows two tags. The "Note: Only allow one output" might mean don't provide multiple separate responses. I will include both tags as per the example structure because that seems to be the detailed specification for the payload.
+            *   Actually, re-reading Rule 6: "Use <output> </output> to wrap the output_translation_with_comment". This implies `<output>` is mandatory for the main part. The example shows `<output_without_comment>` as well. I will include both to be safe, matching the example structure provided in the Rules' "Output format" section.
+            *   Wait, another interpretation: "Only allow one output" might mean the entire response should be just that one block.
+            *   Let's prioritize the explicit "Output format" example which shows two tags.
+            *   Comments must be in zh-CN.
+            *   Comments should point out key characteristics distinguishing original meaning from synonyms (based on the provided word list: angry, mad, furious, irritated, annoyed, frustrated, upset). The input sentence contains "furious", but I need to translate the whole sentence including "kind of" and "feel about".
+            *   However, the instruction says: "Compare the similar word of each word -> |point out> the key characteristic |of> each word". This suggests annotating synonyms or nuance. The input is "I kind of feel furious about this."
+            *   The prompt provides a list of words: `angry mad furious irritated annoyed frustrated upset`. It also links to thsaurus pages for these words. I should probably annotate the translated words with nuances relative to the intensity spectrum (annoyed -> upset -> frustrated -> angry -> mad -> furious).
+            *   Actually, looking at the task: "Translate". So I need to translate the input sentence.
+            *   Input: `I kind of feel furious about this.`
+            *   Words to translate: I, kind, of, feel, furious, about, this.
+            *   Comments need to be in zh-CN and explain the characteristic/nuance (original meaning vs synonyms).
+            *   Since the prompt provided a list of emotion words (`angry mad furious irritated annoyed frustrated upset`), I should ensure the translation for "furious" reflects its intensity relative to those (e.g., more intense than angry/irritated).
+            *   Format: `<output>word1(comment) word2(comment)...</output>` and `<output_without_comment>translation...</output_without_comment>`.
+
+    *   **Refining the Comment Content:**
+        *   Rule 4: "Characteristic |based on> the original meaning; optional for evolute to the extension".
+        *   Rule 5: "|Annotate> the original meaning in the comment, which shown |as/in> the output language".
+        *   Rule 1: "comments should |point out> the key characteristic, especially the original meaning |of> each word."
+        *   Example comment style: `ori-word1 (word1-comment)`. Wait, the example says `<output>ori-word1 (word1-comment) ori-word2...`? No, looking at the example text: `"<output>ori-word1 (word1-comment) ...</output>"`. This looks like it expects the *original English words* inside the output tag followed by comments. But usually, for translation tasks, `<output>` should contain the translation in the target language (zh-CN). The instruction says "Output-language: zh-CN". So `<output>` content must be Chinese.
+        *   Let's re-read Rule 6: "Use <output> </output> to wrap the output_translation_with_comment". This confirms the content inside `<output>` is the translation.
+        *   But what about `ori-word` in the example? The example shows `ori-word1`. This might mean I should keep the English word for reference, or it's a placeholder. Given "Output-language: zh-CN", keeping the English word inside the `<output>` tag alongside Chinese might be confusing unless the format implies `<word>(comment)` where word is the translation.
+        *   Actually, standard practice for these specific prompt templates (which look like they come from a specific dataset or training style) often expects: `<English Word> (Chinese Translation/Comment)`. But since it's a translation task (`Input: en`, `Output: zh-CN`), the `<output>` should primarily contain the Chinese translation.
+        *   Let's look at the example again: `"<output>ori-word1 (word1-comment) ... ori-ordN (wordN-comment)</output>"`. This implies the structure is `<Original Word> (Target/Comment)`. BUT, if I translate "I kind of feel furious about this" into Chinese, I shouldn't put the English words in there unless it's a glossary style.
+        *   However, Rule 6 says "Use <output> </output> to wrap the output_translation_with_comment". If I put "I (我) (kind of)...", that might be valid. But usually, translations are just the translated text.
+        *   Let's assume the `<output>` tag should contain: `Chinese_Translation (Chinese_Comment)` for each word? Or `English_Word (Chinese_Translation (Comment))`?
+        *   The instruction says "Translate". So the main content must be Chinese.
+        *   Hypothesis 1: `我 (I) 有点 (kind of) 感觉 (feel) 愤怒的 (furious) 对于 (about) 这个 (this)` with comments explaining nuances of 'furious' vs others in the list provided (angry, mad, etc.).
+        *   Hypothesis 2: `I (我) kind (有点) ...`.
+        *   Given "Compare the similar word of each word... original meaning", keeping the English source words in the `<output>` tag is a strong hint from the example `ori-word1`. I will follow the example structure `Ori-English-Word (Chinese_Translation(Comment))` or just `Ori-English-Word (Chinese_Comment)`.
+        *   Wait, Rule 4: "Characteristic |based on> the original meaning".
+        *   Let's try to map the provided list words (`angry mad furious irritated annoyed frustrated upset`) to specific Chinese translations that reflect these nuances.
+        *   Word: `I` -> 我 (wǒ) - Self-reference.
+        *   Word: `kind of` -> 有点 (yǒudiǎn) - "A bit" / "somewhat". Indicates uncertainty or moderation despite the adjective following, but here it contradicts? "feel furious" is strong. So "I am somewhat furious". `kind` softens it.
+        *   Word: `of` -> Part of phrasal/idiom. Skip or attach to kind. Usually skipped in token-level translation, but if forced word-for-word based on example `ori-ordN`, I might include it. But `kind of` is a phrase. Let's treat `kind of` as one logical unit for comment if possible, but strict rules say "Each word". So `kind` and `of`.
+        *   Word: `feel` -> 觉得/感到 (jiàndé/gǎndào). Emotional state.
+        *   Word: `furious` -> 暴怒 (bàonù) or 狂怒 (kuángnù). Key characteristic: Intense anger. Higher than angry/mad, higher than irritated/annoyed.
+        *   Word: `about` -> 对于...感到 (duìyú...gǎndào). Concerning.
+        *   Word: `this` -> 这件事/这个 (zhèjiàn shì/zhège). Referring to the specific situation/event.
+
+    *   **Constraint Check:**
+        *   "Note: Comment |are> in Output-Language, in zh-CN".
+        *   So if I keep English words, the comment is Chinese.
+        *   Format: `Word (comment)`.
+        *   Example provided: `<output>ori-word1 (word1-comment)...</output>`.
+        *   Wait, does `ori-word` mean I should write the original word there? Yes, likely "English Word" then `(Chinese Translation/Comment)`. Or just `(Chinese Translation/Comment)` attached to the English word.
+        *   Example: `ori-word1 (word1-comment)`. This literally means `English Word (Chinese Comment)`.
+        *   So I will output: `I(我 - 代词) kind...` etc.
+        *   Wait, looking at the instruction "Output-language: zh-CN". If I put English words, is it still Output-Language: zh-CN? Yes, because the comments and translation within the comment are zh-CN.
+        *   However, often in these tasks, the `<output>` tag should contain the **translated sentence** where parts might be annotated.
+        *   Let's look at the "Output format" example again. `"<output>ori-word1 (word1-comment) ori-word2...`.
+        *   I will interpret this as: Keep the English word to maintain the structure, followed by Chinese translation/explanation in parentheses.
+        *   Actually, looking at similar tasks, usually `<output>` contains the **Target Language Translation** with annotations attached to the source words if they are kept, OR it translates to pure target language with notes.
+        *   Let's look at the instruction: "Translate". If I output English words inside the translation block, it's not a pure translation. But the example explicitly says `ori-word1`. This implies keeping the original word is expected for annotation purposes.
+        *   Wait, Rule 6: "Use <output> </output> to wrap the output_translation_with_comment". If I put English words there, is it `translation`? Maybe `English Word (Chinese Translation)`.
+        *   Decision: I will keep the English words in `<output>` as per the example `ori-word`, and provide Chinese translations/comments in the parentheses. The second tag `<output_without_comment>` should be pure Chinese translation.
+        *   Wait, "Note: Only allow one output." usually means no markdown explanations, just the XML structure.
+        *   Let's finalize the content of `<output>`.
+        *   Format: `Word (Translation/Comment)`.
+        *   Comments need to distinguish synonyms (angry vs furious etc).
+        *   "furious": 愤怒 (fùnù). Nuance: Intense, explosive anger. Distinguish from "angry" (普通生气), "mad" (情绪激动), "irritated" (烦躁/轻微).
+        *   Input sentence: `I kind of feel furious about this.`
+        *   Translation: 我有点感觉对此非常愤怒。 (A bit feel very angry about this). Or 我有点觉得对这件事感到非常生气。
+        *   Wait, "kind of feel" implies uncertainty or mildness ("sort of feel"). So `furious` is the strong word, `kind of` mitigates it.
+        *   I will translate word-for-word to match the comment requirement.
+
+    *   **Drafting `<output>`:**
+        *   I (我 - 第一人称代词)
+        *   kind (有点 - 程度副词，表示“稍微”或不确定性，与 furious 的强烈情绪形成对比)
+        *   of (介词/虚词) -> "of" is often omitted in Chinese `kind of`. I'll include it or merge. Let's include it: (为...的一部分). Or skip if it doesn't have a distinct comment worth making. But rules say "Each word". So I will include `(连词 - 无实义)` or similar.
+        *   feel (感到 - 动词，表示情感体验，对应英文的“感觉/觉得”)
+        *   furious (暴怒 - 形容词，核心含义为极度的愤怒，区别于 angry (生气)、mad (发疯)、irritated (烦躁)；强调激烈程度)
+        *   about (对于... - 介词，表示对象，指向引发情绪的事物或情境)
+        *   this (此事 - 指示代词，指代特定的人、事、物或情况，具有明确指涉性)
+
+    *   **Drafting `<output_without_comment>`:**
+        *   I will translate naturally: 我对此有点感到非常愤怒。 Or 我有点觉得对这件事很生气。 "Furious" is strong, so translating as "非常生气/暴怒". "Kind of feel" -> "有点感觉/有点觉得".
+        *   Better translation: 我对此有点感到极其愤怒。 (I kind of feel furious about this) -> 我有点对这件事感到暴怒。
+        *   Let's keep it natural: 我有点对此感到非常生气。 (Using 生气 is softer than 暴怒，but 暴怒 captures furious better). Let's use 愤怒 to match furious intensity but acknowledge the mitigation. Or 狂怒？暴怒 fits furious best among synonyms provided (angry/mad/furious/irritated...).
+        *   Translation without comment should be natural Chinese. "我对此有点感到非常愤怒。"
+
+    *   **Refining Comments for Distinction:**
+        *   Need to ensure `furious` is distinguished from others in the list (`angry mad furious irritated annoyed frustrated upset`).
+        *   `angry`: 普通生气 (Ordinary

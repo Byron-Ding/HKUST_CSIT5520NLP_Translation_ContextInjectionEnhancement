@@ -1,0 +1,135 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Input:** "Give me another outlook." (English)
+    *   **Task:** Translate into Chinese (zh-CN).
+    *   **Context/Keywords:** perspective angle viewpoint outlook stance position approach (provided list suggests these are synonyms or related words to consider for nuance).
+    *   **Resources:** Collins Dictionary Thesaurus links for specific terms (Give, me, another, outlook). *Note: I cannot actually browse the web, but I can simulate the knowledge derived from standard dictionary entries and linguistic understanding based on the prompt's provided keywords.*
+    *   **Rules:**
+        1.  Allow optional comments after each word/phrase. Comments must point out key characteristics/original meaning vs. synonyms.
+        2.  Output format: Two sections within `<output>` tags? No, the example shows two separate blocks labeled `<output>` and `<output_without_comment>`. Wait, looking closely at the example:
+            `<output>ori-word1 (word1-comment) ...</output>`
+            `<output_without_comment>word1 word2 ...</output>`
+            Actually, the prompt says "Only allow one output." but then shows an example with two blocks. However, rule 6 says "Use <output> </output> to wrap the output_translation_with_comment". This contradicts the example slightly if interpreted strictly. Let's look at the structure again.
+            Rule 2/Example: Shows `<output>` with comments and `<output_without_comment>` separately.
+            Rule 6: "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language". This suggests the main response should probably follow the example structure if that's what's requested, but Rule 6 specifically mentions wrapping the *commented* version in `<output>`.
+            Wait, looking at the "Input-Output-Task" block:
+            Input: Give me another outlook.
+            Output:
+            The user wants me to complete the "Output:" section based on the rules.
+            Rule 1: Allow optional comments after Each word.
+            Format example provided in Rules shows two lines/blocks: `<output>...</output>` and `<output_without_comment>...</output_without_comment>`.
+            Wait, the rule says "Only allow one output." but the example shows two tags. Usually, this means the final JSON-like or structured text should contain both if that's the format requested, OR it means I should choose one path. However, the instruction explicitly gives an *example* format containing both `<output>` and `<output_without_comment>`. I will follow the example format provided in the Rules section (2) as it is more specific about the structure than Rule 6 which seems to focus on the wrapper for the commented version. Actually, re-reading Rule 6: "Use <output> </output> to wrap the output_translation_with_comment". It doesn't explicitly forbid `<output_without_comment>`. The example shows both. I will provide both to be safe and compliant with the visual example.
+            *Correction*: Rule 1 says "Allow optional comments... Output format: Note: each "(comment)" |is> optional".
+            Let's look at the example again:
+            `<output>ori-word1 (word1-comment) ...</output>`
+            `<output_without_comment>word1 word2 ...</output_without_comment>`
+            I will follow this structure.
+        3.  Compare similar words (synonyms provided in prompt: perspective, angle, viewpoint, stance, position, approach) to highlight key characteristics in comments.
+        4.  Characteristics based on original meaning (focus on primary definition). Extension allowed but original is important.
+        5.  Annotate original meaning in comment (in Output Language: Chinese).
+        6.  Use `<output>` tags for the translated text with comments.
+
+2.  **Analyze the Input Sentence:** "Give me another outlook."
+    *   Word 1: Give -> Verb (提供，给予). Context: Requesting information or a different view.
+    *   Word 2: me -> Pronoun (我). Indirect object.
+    *   Word 3: another -> Adjective/Adverb (另一个，再一个). Context: Different from current one, or subsequent.
+    *   Word 4: outlook -> Noun (观点，展望，前景). Context: Synonyms provided are perspective, angle, viewpoint, stance, position, approach. "Outlook" here likely means a viewpoint or perspective on something, or perhaps the future expectation. Given the synonyms list (perspective, viewpoint), it leans towards "viewpoint/opinion". However, "outlook" often implies "prospects" too. Given the context of "Give me...", "another outlook" usually means "show me a different perspective/view". I need to distinguish from synonyms like "stance", "position", "angle".
+        *   Synonyms in prompt: perspective, angle, viewpoint, stance, position, approach.
+        *   Collins Thesaurus distinctions (simulated):
+            *   Perspective: Way of seeing things mentally/contextually.
+            *   Viewpoint: Opinion or direction looking from a specific spot.
+            *   Outlook: Often implies future prospects OR way of thinking (similar to viewpoint). In this sentence, "outlook" likely means a perspective/view.
+            *   Stance/Position: More rigid, fixed stance on an issue.
+            *   Approach: Method used to tackle something.
+            *   Angle: Physical or figurative direction for viewing.
+    *   Translation of "Give me another outlook": 给我另一个观点/看法 (Gěi wǒ lìngyí gè guāndiǎn/kànfǎ).
+
+3.  **Drafting Translations & Comments:**
+    *   Target: zh-CN.
+    *   Sentence: Give me another outlook.
+    *   Segment 1: Give -> 给 (gěi) / 提供 (tígōng). Meaning: Provide/Give. Characteristic: Transfer of something (abstract or concrete).
+    *   Segment 2: me -> 我 (wǒ) / 我这边 (wǒ zhèbiān). Meaning: The recipient/Me. Characteristic: First-person singular pronoun.
+    *   Segment 3: another -> 另一个 (lìngyí gè) / 另一 (lìng yī). Meaning: Different/Succeeding. Characteristic: Indicates plurality or change from current state.
+    *   Segment 4: outlook -> 观点 (guāndiǎn) / 展望 (zhǎnwàng). Contextual meaning: Perspective/Viewpoint vs Prospects. Given the synonyms list, "perspective/viewpoint" is the intended meaning here. Need to distinguish from "angle", "stance".
+        *   *Comment Requirement:* Compare with similar words (perspective, angle, viewpoint...). Annotate original meaning.
+        *   Selection: 观点 (guāndiǎn) - commonly used for "viewpoint/perspective" in this context. Or 看法 (kànfǎ). Let's use 观点 as it aligns well with the synonym list provided.
+        *   *Comment Detail:* Needs to point out original meaning vs synonyms. E.g., Distinguish from "stance" (fixed position) or "angle" (specific viewing direction). Original: Mental perspective/prospect.
+
+4.  **Refining Comments (Rule 3, 4, 5):**
+    *   Must compare with similar words (perspective, angle, viewpoint, stance, position, approach).
+    *   Key characteristic based on original meaning.
+    *   Language: Chinese.
+
+    *   "Give": Provide/Supply. Comment: 表示给予或提供某种抽象内容，区别于单纯的物理“拿给”。(Indicates giving abstract content, distinct from physical handing over.)
+    *   "Me": Recipient. Comment: 第一人称代词，强调接收方。(First person pronoun, emphasizing the receiver.)
+    *   "Another": Different/Additional. Comment: 指与当前不同的另一样事物或状态，区别于完全相同的。(Refers to a different state/things, distinct from identical ones.)
+    *   "Outlook": 观点/展望. Comment: 此处原意为“观点、看法”，虽同义词有 perspective(视角), viewpoint(立场观点), stance(姿态), position(位置/立场), approach(方法), angle(角度). 重点在于从宏观或思维层面看待事物的方式，而非具体的地理位置 (position) 或方法论 (approach)。*(Meaning: Viewpoint/Perspective. Though synonyms exist like perspective, viewpoint, stance, etc., key is the mental way of viewing things, not physical position or method.)*
+
+    *Wait, need to check Rule 2 Example format strictly.*
+    Example: `<output>ori-word1 (word1-comment) ori-word2 ...</output>`
+    Wait, `ori-word`? Or just `Give (comment)`?
+    Example text in prompt:
+    `<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ori-word3 (word3-comment)..... ori-ordN (wordN-comment)</output>`
+    This implies I should use the original English words inside the tags, followed by comments in Chinese.
+    So: `Give (给 - 动词，给予/提供，区别于单纯物理移交) me (我 - 第一人称代词，指接收者) another (另一个 - 形容词/副词，指与当前不同的) outlook (观点 - 名词，此处核心义为看待事物的思维角度，区别于立场 stance 或方法 approach)`
+    Wait, the example shows `ori-word1`. I should probably keep the original word to match the "Translate" task requirement? Usually translate tasks output the translation. But the example explicitly says `<output>ori-word1 (word1-comment) ...</output>`. This is slightly confusing. "Translate" usually means converting language. However, the format instruction overrides general intuition.
+    Let's re-read Rule 6: "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language".
+    Does "output_translation" mean Chinese text? Yes.
+    So `<output>` should contain Chinese translations of the words + comments.
+    The example shows `ori-word1`. That might be a placeholder in the prompt instructions indicating where the original word goes? But Rule 6 says "which should be in the output language". This implies the *content* inside `<output>` must be in Chinese (the translation), but maybe I need to keep the English word for clarity as per the example's `ori-word` placeholder?
+    Actually, looking at the example: `<output>ori-word1 (word1-comment)...</output>`. If I follow the instruction "Translate", the output is usually just Chinese. But the format says "ori-word". This suggests a mixed format (English source + Chinese target?).
+    However, Rule 6 says: "output_translation_with_comment, which should be in the output language". This strongly implies the text inside must be translated (Chinese).
+    Let's assume the format `<Word/Translation> (Comment)>`. But the example says `ori-word1`.
+    If I look at the prompt structure: "Input-language: en", "Output-language: zh-CN".
+    Usually, a translation task output should be Chinese.
+    But the format constraint is very specific about the example.
+    Let's interpret "output_translation_with_comment" as "Chinese text (possibly including original words for reference) + comments".
+    Given the instruction "Use <output> </output> to wrap the output_translation_with_comment", and Rule 1 says "Allow optional comments, after Each word".
+    If I put Chinese translation, does it match `ori-word`?
+    Let's try to balance. Maybe `Give -> 给 (give-comment)`.
+    But the example says `ori-word1`.
+    Okay, strict adherence to Rule 6: "output_translation_with_comment... in the output language". This means Chinese.
+    If I write `Give (给...)`, is that output language? Mixed.
+    If I write `(给 - ...)`, that's pure comment structure.
+    Let's look at the example again carefully:
+    `<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ...</output>`
+    This example suggests keeping the original words (`ori-word`) and adding comments.
+    But Rule 6 says "translation... in the output language".
+    Conflict: Example vs Rule 6.
+    Resolution: Usually, specific constraints about tags/format take precedence. However, if the task is translation, the primary goal is Chinese text. If I only output English words with Chinese comments, it's not a full translation.
+    Maybe `word1-comment` implies `Word (Translation) (Comment)`? No, example says `ori-word1`.
+    Okay, I will prioritize the "Translate" task logic but follow the format structure. The prompt asks to "Translate". If I output English words with comments, it's an annotated word list, not a sentence translation.
+    However, Rule 2 Example shows a specific string pattern.
+    Let's check the instruction "Output format". It explicitly gives the example with `ori-word`.
+    Maybe I should output: `Give (提供/给予 - 动词，原意为给予或提供，区别于物理动作) me (我 - 人称代词，第一人称单数) another (另一个 - 限定词/副词，指与前述不同的，区别于 identical 的) outlook (观点 - 名词，核心义为看待事物的思维角度，同义词辨析：不同于 angle(角度位置), stance(立场), approach(方法)`
+    Wait, if I translate it to Chinese sentence: "请给我另一种观点".
+    If I follow the example strictly: `Give (给...)`.
+    Let's try to combine. `<output>给 (give-comment) 我 (me-comment) 另一个 (another-comment) 观点 (outlook-comment)</output>`?
+    Or `<output>Give (给 - ...) me (我 - ...) ...</output>`?
+    Rule 6: "output_translation_with_comment, which should be in the output language". This implies the main text must be Chinese.
+    Okay, I will write the Chinese translation of each word inside the tags, but keep the English word for reference if that's what `ori-word` meant? No, "in the output language" means Chinese.
+    So: `给 (give-comment) 我 (me-comment) ...` -> This mixes EN/ZN.
+    Let's assume the prompt wants the format from the example (`ori-word` placeholder) to be replaced by the translation if it's a translation task? No, `ori-word1` in example might mean "Original Word 1".
+    If I look at Rule 6 again: "Use <output> </output> to wrap the output_translation_with_comment".
+    Maybe it wants: `Give (提供/给予 - ...)`.
+    Okay, I will follow the structure of the example (English word + Chinese comment) because Rule 2 Example is usually the strict format template for these types of prompt engineering tasks. The "Translate" instruction might be context, but the output format is rigid. Wait, Rule 6 says "output_translation... in the output language". This suggests the content should be Chinese.
+    Let's look at the instruction again: "Translate ... Input-Language: en ... Output-Language: zh-CN".
+    Standard practice: Output Chinese text.
+    Format Practice: `<output>ChineseWord1 (comment) ...</output>`.
+    If I use English words in the tag, it violates "in the output language" for the content inside? Or does "translation_with_comment" mean "The translation string"?
+    Okay, I will prioritize Chinese text for the main content of `<output>` but keep the format.
+    Actually, to be safe and most helpful:
+    `Give (给 - 动词，表示给予，区别于单纯的物理动作)`...
+    Wait, I should check if "Give" in this context means "Show/Provide".
+    Let's try to make the comments rich as per Rule 3 (Compare similar words).
+    
+    Decision on Format:
+    I will provide the Chinese translation for the words, followed by the comment in brackets/parentheses.
+    Example format from rule: `ori-word1 (word1-comment)`.
+    If I translate, is it `give` or `给`?
+    Rule 6 says "output_translation_with_comment". So `给 (comment)`?
+    Or `Give (给 - comment)`?
+    Given the instruction "only allow one output" and the example shows specific tags.
+    I will interpret `ori-word1` in the example as a placeholder for "The word you are annotating". Since it's a translation task, I should provide the Chinese translation of that word.
+    So: `<output

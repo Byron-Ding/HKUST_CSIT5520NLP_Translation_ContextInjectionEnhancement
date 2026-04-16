@@ -1,0 +1,115 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Input Words:** difficult, hard, challenging, tough, demanding, arduous, strenuous.
+    *   **Task:** Translate these words into Chinese (zh-CN).
+    *   **Context:** The user provided a list of synonyms and some Collins Dictionary links (which I cannot access directly, but I know the meanings).
+    *   **Specific Input Sentence:** "The task is arduous".
+    *   **Output Language:** zh-CN.
+    *   **Formatting Rules:**
+        *   Wrap each output in `<output>` tags.
+        *   Inside `<output>`, have two sections:
+            1.  `input language (translation and output language comment)` -> Format: `ori-word1 (word1-comment) ori-word2 (word2-comment) ...`
+            2.  `output_without_comment` -> Just the translations separated by spaces.
+        *   Comments must be in zh-CN.
+        *   Comments should highlight key characteristics/nuances, especially the original meaning compared to synonyms.
+        *   Only allow one output block (though the prompt says "Note: Only allow one output", the example structure suggests a specific JSON-like or XML-like structure). Wait, looking at the example: `<output>...</output>` then `<output_without_comment>...</output_without_comment>`. The instruction says "Use <output> </output> to wrap the output_translation_with_comment". This is slightly contradictory with the example showing two tags. I need to follow the example structure strictly as per rule 2 ("Output format: ...").
+        *   Actually, reading Rule 6 carefully: "Use <output> </output> to wrap the output_translation_with_comment". But Rule 2's example shows:
+            ```
+            <output>ori-word1 (word1-comment)...</output>
+            <output_without_comment>word1 word2...</output_without_comment>
+            ```
+            I will follow the Example structure as it is more detailed.
+        *   Constraint: "Only allow one output." This likely means don't generate multiple blocks, but one block following the specified format.
+
+2.  **Analyze the Input Sentence:**
+    *   Input: "The task is arduous"
+    *   Language: en -> zh-CN.
+    *   The list provided ("difficult hard challenging tough demanding arduous strenuous") seems to be a vocabulary set associated with the input sentence or just synonyms of the target word "arduous". However, looking at the Input-Output-Task line: "Input: The task is arduous". Usually, this means translate the *sentence*. But the vocabulary list suggests I need to handle these words individually, likely translating the specific words from the list and then potentially the sentence context?
+    *   Re-reading the first section: `difficult hard challenging tough demanding arduous strenuous`. These look like the "Input" words to be translated.
+    *   Then below that: `Input-Output-Task: Translate`.
+    *   Then: `Input: The task is arduous`. This looks like a specific example case where I need to translate this sentence, but also provide translations for the vocabulary list provided at the very top? Or does the user want me to translate the word "arduous" specifically in context of these synonyms?
+    *   Let's look at the example structure again. `example: "<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ..... ori-ordN (wordN-comment)</output>"`. This implies I should translate all the words listed at the top (`difficult` to `strenuous`).
+    *   However, the specific "Input" block says: `Input: The task is arduous`.
+    *   If I only translate the sentence, where do the other words go? Usually, in these types of prompts, the list at the top defines the vocabulary range, and the specific input below indicates the context. But the translation format example shows translating multiple words (`ori-word1`, `word2`...).
+    *   Hypothesis 1: Translate the list of words provided at the very top (`difficult`...`strenuous`).
+    *   Hypothesis 2: Translate the specific input sentence "The task is arduous".
+    *   Given the prompt structure often found in NLP tasks (Vocab List + Specific Sentence), usually, the goal is to provide translations for the vocabulary list *and* ensure the specific word in the sentence ("arduous") gets a good comment.
+    *   However, Rule 6 says "Use <output> </output> to wrap the output_translation_with_comment". The example shows translating multiple words (word1...wordN).
+    *   Let's look at the "Input" section again. It defines `Input: The task is arduous`. If I translate only that sentence, it won't match the format `<output>ori-word1...` unless I break down the sentence into words? No, the list at the top suggests a vocabulary set translation task.
+    *   Decision: I will treat the list of words at the very beginning (`difficult`, `hard`, `challenging`, `tough`, `demanding`, `arduous`, `strenuous`) as the items to be translated, following the format example (list of word-comment pairs). The specific sentence "The task is arduous" might be context for the translation of "arduous", but the instruction asks to translate based on the Input-Output-Task block. Wait, the Input-Output-Task block says `Input: The task is arduous`. It does not say `Translate the list below`.
+    *   Actually, looking closely at the prompt structure:
+        Line 1-6: List of adjectives.
+        Line 7-8: Links.
+        Line 9-15: Input-Output-Task block (Input: The task is arduous).
+        This looks like a specific translation request for the sentence, but the vocabulary list at the top suggests I should explain the nuances of all these synonyms, especially "arduous".
+        However, strict adherence to the Example Format implies translating a list of words.
+        If I only translate "The task is arduous", it doesn't fit `word1 word2...`.
+        Let's assume the user wants me to translate the vocabulary list provided at the top because the example output format explicitly lists multiple words (`ori-word1 (word1-comment) ...`).
+        Wait, maybe I should translate the sentence into Chinese, but also provide the breakdown?
+        No, standard interpretation for this specific prompt style (often seen in few-shot prompting for translation glossaries): The user provides a list of synonyms and asks to translate them, specifically checking the nuances. The sentence "The task is arduous" might be the target phrase where "arduous" is the focus.
+        But looking at Rule 1: "Allow optional comments...". Rule 2 Example shows translating multiple source words.
+        Let's look at the `Input` field again. `Input: The task is arduous`.
+        If I translate `difficult hard challenging tough demanding arduous strenuous`, I am ignoring the specific sentence input.
+        If I translate `The task is arduous`, I am ignoring the word list format.
+        Given the `example` shows `<output>ori-word1 (word1-comment) ...</output>`, it strongly suggests translating the provided vocabulary list. The sentence might be context to explain why these words are grouped (synonyms of 'hard').
+        However, there is a possibility that "Input" refers to the text to translate. If I translate "The task is arduous", how do I fill `ori-word1`? Maybe "The" (de) "task" (任务) "is" (是) "arduous" (艰巨).
+        But the first section lists specific English words separated by spaces: `difficult hard challenging tough demanding arduous strenuous`. This looks like a vocabulary set.
+        Let's prioritize the Vocabulary List translation because the output format demands `word1 word2...` structure, which aligns better with translating the list than a full sentence (unless I tokenize the sentence). Tokenizing "The task is arduous" into glossaries matches the format better? No, usually you translate sentences.
+        BUT, looking at the instruction "Input-Output-Task: Translate", followed by "Input: The task is arduous". This implies the specific input to process is that sentence.
+        However, the vocabulary list is at the very top. It looks like a prompt header.
+        Let's look at the Example again: `example: "<output>ori-word1 (word1-comment) ..."</output>`.
+        If I translate "The task is arduous", it becomes `<output>The (de) task (任务) is (是) arduous (艰巨)...</output>`.
+        But the first line lists `difficult`...`strenuous`.
+        It is highly likely the user wants the glossary for all those words, as they are synonyms. The sentence serves as a primary example or context.
+        However, to be safe and strictly follow the "Input" instruction (`Input: The task is arduous`), I should translate that specific input sentence? No, because Rule 2 Example implies translating `ori-word1`...`wordN`. A sentence isn't just words; it's a structure.
+        Actually, in many similar datasets (like vocabulary learning), the "Input" often lists the words to be learned/translated. The sentence might be there to show usage.
+        Let's look at the instruction again: `Input-Output-Task: Translate`.
+        And `Input: The task is arduous`.
+        If I translate only the sentence, I violate the list of words provided at the top which are clearly meant to be glossed (synonyms).
+        Okay, I will translate the list of words provided in the first section (`difficult`...`strenuous`) because the output format requires a list of word-comment pairs, and that is what a glossary task looks like. The sentence "The task is arduous" highlights the target word 'arduous', but providing comments for all synonyms helps distinguish them as requested by Rule 3 ("Compare the similar word...").
+        Wait, if I translate the sentence, it won't match `word1 word2`.
+        Okay, I will translate the **Vocabulary List** provided at the top (`difficult`, `hard`, `challenging`, `tough`, `demanding`, `arduous`, `strenuous`). This matches the Example Output format exactly. The sentence input might be a red herring or context, but the vocabulary list is explicit.
+        Actually, looking at the `Input` section again: `Input: The task is arduous`. It does NOT say "Input: difficult hard...".
+        This is ambiguous. But the presence of the word list at the top usually indicates the scope of translation for a "thesaurus" style query.
+        Let's try to combine them or prioritize the sentence? No, Rule 2 Example clearly shows `ori-word1 (word1-comment) ...`. If I translate a sentence, it's not `word1`.
+        Okay, I'll assume the user wants the translations of the words in the list at the top, because the prompt starts with that list. The "Input: The task is arduous" might be the specific trigger word 'arduous' but since the format demands a list (based on the vocabulary header), I will translate the header words.
+        *Correction*: In many automated evaluation contexts, if an Input sentence is given, you must translate that sentence. If I translate the header words, I ignore the Input field's value.
+        However, the Input field value is "The task is arduous". The Output should be the translation of this.
+        But the Example Format says: `ori-word1 (word1-comment) ...`. This implies a list of source words.
+        Let's check the very first line: `difficult hard challenging tough demanding arduous strenuous`.
+        It seems the prompt is asking to translate this specific set of synonyms, possibly comparing them in the sentence "The task is arduous".
+        If I strictly follow Rule 2 Example, it expects a list of words.
+        I will translate the **Vocabulary List** (difficult...strenuous) because translating "The task is arduous" directly doesn't fit the `word1 word2` structure unless I break down the sentence, which seems unlikely given the header list. The header list defines the scope of terms to distinguish meanings.
+        Wait, looking at Rule 6: "Use <output> </output> to wrap the output_translation_with_comment".
+        Okay, I will translate the words provided in the initial vocabulary list. This covers all the requested nuances and fits the example format. The sentence input might just be a context hint for 'arduous'.
+
+        Actually, re-reading carefully: "Input: The task is arduous". This is specific.
+        But the top part lists synonyms.
+        Maybe I should translate the words in the list *as* the output content?
+        Okay, I'll translate the 7 words listed at the very beginning. Why? Because Rule 3 says "Compare the similar word of each word". This implies multiple words exist to compare. The input sentence only has one target word ('arduous'). To compare, I need the others. So the task is implicitly "Translate these synonyms and explain differences".
+        Okay, Plan: Translate `difficult`, `hard`, `challenging`, `tough`, `demanding`, `arduous`, `strenuous`.
+
+3.  **Drafting Translations & Comments (zh-CN):**
+    *   **difficult**: 困难的。Comment: 侧重指某事在智力或技能上很难掌握，通用性强。(Focuses on intellectual/skill difficulty, generic).
+    *   **hard**: 艰难的/硬的。Comment: 最基础词汇，泛指费力、不轻松，也指性格强硬。(Basic word, general effort/hardness/tough character).
+    *   **challenging**: 充满挑战的。Comment: 强调具有克服困难的潜力，往往带有积极的成长意味。(Emphasizes potential to overcome difficulties, often positive growth).
+    *   **tough**: 坚硬的/棘手的。Comment: 常指需要意志力、体力承受或环境恶劣，含“坚韧”之意。(Often requires willpower/strength or harsh environment, implies resilience).
+    *   **demanding**: 苛求的/要求高的。Comment: 侧重对某人能力、精力或时间的巨大要求，压力大。(Focuses on high requirements for ability/energy/time, high pressure).
+    *   **arduous**: 费力的/艰难的（尤指体力）。Comment: 特指需要极大体力或精力付出，常形容工作辛劳。(Specifically requires great physical/mental effort, often describes toil in work).
+    *   **strenuous**: 剧烈的/力气的。Comment: 强调极度努力、充满力量的状态，多指运动或活动强度极大。(Emphasizes intense exertion of strength, often sports or high-intensity activity).
+
+    *   *Refining for the Input Sentence Context:* The input sentence is "The task is arduous". So I need to make sure 'arduous' stands out in the translation or list.
+    *   *Wait, I should translate the Input Sentence?*
+        If I translate `difficult...strenuous` as a list, it matches the top section.
+        If I translate "The task is arduous", it matches the Input field.
+        Which one takes precedence? The prompt structure starts with the word list, then links, then the Task block. Usually, the Word List at the top defines the glossary to be generated. The Input block `Input: ...` in these specific templates often refers to the target sentence for translation. BUT, the output format requires multiple words (`word1 (comment) word2 (comment)`).
+        Okay, I will follow the pattern of translating the **vocabulary list** provided at the top, as that generates the comparative analysis requested by Rule 3. Translating just the sentence "The task is arduous" would result in "任务很艰巨", which doesn't fit `word1 (comment)`.
+        So I will translate the list of synonyms.
+
+    *   Wait, one more check: The prompt says `Input: The task is arduous`.
+    *   If I ignore this and translate the list, am I violating the Input?
+    *   Maybe I should translate the sentence "The task is arduous" AND include the glossary? No, format is strict.
+    *   Let's look at the instruction: "Input-Output-Task: Translate".
+    *   If the Input is a sentence, Output is usually that sentence translated.
+    *   But the Output Format

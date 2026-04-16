@@ -1,0 +1,183 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Input:** A list of English adjectives (beautiful, gorgeous, stunning, breathtaking, magnificent, splendid, exquisite) and a specific translation task: "The view is beautiful" from English (en) to Chinese (zh-CN).
+    *   **Task:** Translate the input sentence into the target language.
+    *   **Rules:**
+        1.  Allow optional comments after each word (but the output format suggests specific structure).
+        2.  Output format must follow:
+            `<output>ori-word1 (word1-comment) ori-word2 (word2-comment)...</output>`
+            AND
+            `<output_without_comment>translation without comment</output_without_comment>`
+            *Wait, looking closer at the rule:* "Note: Only allow one output." This contradicts the example format which shows two blocks (`<output>` and `<output_without_comment>`). However, the instruction says "Note: Only allow one output." usually meaning one response block. But the example shows two XML-like tags inside one response? Or does it mean I should choose one structure?
+            Re-reading Rule 1: "Output format: ... <output>...</output> <output_without_comment>...</output_without_comment>".
+            Re-reading Note under Rules: "Note: Only allow one output."
+            This is contradictory. Usually, when faced with contradictions like this in prompt engineering, I should look at the example provided in the prompt description.
+            Example:
+            `<output>ori-word1 (word1-comment) ...</output>`
+            `<output_without_comment>word1 word2 ...</output>`
+            But the instruction says "Note: Only allow one output." This might mean I should only provide the structured version OR I should follow the example structure. Given the explicit format description in "Output format", I will follow the structure shown in the example (two tags) because it provides both annotated and plain versions, which is common for this type of task (annotated translation vs raw translation). However, the constraint "Only allow one output" might mean don't give multiple *options*, just the specific formatted string. Let's look at the instruction "Output format:" again. It lists two tags. I will follow the format provided in the "example" section within the rules, as that is usually the specific instruction for structure.
+            Wait, there's a specific constraint: "Use <output> </output> to wrap the output_translation_with_comment". It doesn't mention `<output_without_comment>` in the wrapping instruction at the end, but the earlier format description does. Let's prioritize the explicit instruction "Note: Only allow one output." and the final instruction "Use <output> </output> to wrap the output_translation_with_comment".
+            Actually, looking at the provided example:
+            example:
+            "<output>ori-word1 (word1-comment) ...</output>"
+            AND below it:
+            "<output_without_comment>word1 word2 ...</output>"
+            So I should probably include both blocks to satisfy the "Output format" section, even if the "Only allow one output" note is ambiguous (likely meaning don't provide multiple translation choices).
+            Let's re-read carefully: "Output format: Note: each "(comment)" |is> optional ... <output>... </output> <output_without_comment>...</output_without_comment>"
+            Okay, I will generate both blocks as per the example structure to be safe, ensuring the main content is wrapped in `<output>`.
+            Wait, the final instruction says "Use <output> </output> to wrap the output_translation_with_comment". It does not explicitly forbid `<output_without_comment>`, but the "Only allow one output" note is tricky. I will interpret "one output" as one response message containing the required tags.
+            
+            Crucially, Rule 3: "Compare the similar word of each word -> |point out> the key characteristic". This implies I should translate the input sentence ("The view is beautiful") but potentially address the vocabulary list provided at the top?
+            No, the Input-Output-Task section says:
+            Input: The view is beautiful
+            Input-language: en
+            Output-language: zh-CN
+            
+            So the task is specifically to translate "The view is beautiful".
+            However, the prompt starts with a list of synonyms: beautiful gorgeous stunning breathtaking magnificent splendid exquisite.
+            And Rule 4 says: "Characteristic |based on> the original meaning... optional for evolute to the extension".
+            This suggests I should probably not just translate "beautiful" once, but perhaps discuss how these words relate?
+            No, the core task is "Translate Input: The view is beautiful".
+            But looking at Rule 1 & Output format example: `ori-word1 (word1-comment) ...`
+            If the input sentence is "The view is beautiful", does it mean I need to translate every word of the input sentence? Or do I need to output a translation that incorporates the vocabulary list provided in the header?
+            Usually, in these types of prompt templates (likely from a specific dataset or benchmark), the user wants the translation of the input sentence. But the rule about "Compare the similar word of each word" suggests I might need to annotate the translation using the provided vocabulary list if applicable, OR explain the nuances of "beautiful" compared to the other words listed at the top in the comment.
+            Given the instruction "Translate Input: The view is beautiful", I must translate this specific sentence.
+            However, the Output format example shows: `ori-word1 (word1-comment) ...`. This implies word-by-word translation or phrase-by-phrase with comments on the specific word used.
+            If I just translate "The view is beautiful" -> "这个景色很美", how do I apply the list of synonyms?
+            Maybe I should output the translation for the target vocabulary concept ("beautiful") but acknowledge the others in the comment to distinguish original meaning?
+            Let's look at Rule 3: "Compare the similar word of each word -> |point out> the key characteristic".
+            Since the prompt provides a list of synonyms in the very first line (beautiful gorgeous stunning...), it is highly likely the user wants me to translate the input sentence ("The view is beautiful") but provide comments that distinguish "beautiful" from the other words provided in the header, explaining why "beautiful" was chosen over "gorgeous", etc., based on the specific meaning of the input word.
+            
+            Okay, let's parse the Input Sentence: "The view is beautiful".
+            Words to translate/commentate: The, view, is, beautiful.
+            But the header list focuses on adjectives describing appearance. "beautiful" is the target word from that list.
+            
+            Wait, looking at the instruction "Note: Each word; comments should point out the key characteristic...".
+            Okay, I will translate the sentence word-by-word (or phrase) and provide comments in Chinese explaining the nuance of "beautiful" vs the other synonyms listed at the top (gorgeous, stunning, etc.).
+            
+            Actually, looking at the standard format for these tasks (likely based on a specific evaluation benchmark), usually, the instruction implies translating the input sentence using one of the words provided if relevant, but here the input word *is* "beautiful".
+            
+            Let's check the constraint: "Use <output> </output> to wrap the output_translation_with_comment". It doesn't explicitly demand `<output_without_comment>` in that specific final instruction line, but the "Output format" section lists both. I will include both to match the example structure provided in the rules.
+            
+            Plan:
+            1. Translate "The view is beautiful" into Chinese.
+            2. For each significant word (especially the adjective), provide a comment distinguishing its meaning from the other synonyms listed at the start (gorgeous, stunning, etc.).
+            3. Format as requested: `<output>...</output>` and `<output_without_comment>...</output_without_comment>`.
+            
+            Translation of "The view is beautiful":
+            Literal: 这个景色很漂亮。
+            Or: 这景色美丽。
+            
+            Word breakdown for comments:
+            - The: (指示词)
+            - view: (景象/景色，区别于 other nouns)
+            - is: (是)
+            - beautiful: (美丽的，区别于 gorgeous(艳丽的), stunning(惊艳的), breathtaking(惊人的), magnificent(宏伟的), splendid(华丽的), exquisite(精致的)). Focus on the key characteristic: generally pleasing appearance, not necessarily shocking or grand.
+            
+            Wait, the input format example shows `ori-word1`. So I should use the original English word in the tag and the translation in Chinese (or mixed?). The example says: `<output>ori-word1 (word1-comment) ...</output>`. It implies mixing original word with translated meaning or just using the original word as a key?
+            Example: `beautiful (美丽的，区别于 gorgeous)`
+            Let's refine the comment style based on Rule 4 & 5: "Annotate the original meaning in the comment, which shown as/in the output language".
+            So the comment inside `()` should be in zh-CN explaining the nuance.
+            Structure: `word (comment)`.
+            
+            Input Sentence: The view is beautiful.
+            Words: The, view, is, beautiful.
+            Comment for "beautiful": Compare with gorgeous/stunning/etc. Explain "general beauty".
+            
+            Let's draft the content.
+            Translation (with comments): The (代词/这) view (景色) is (是) beautiful (美丽，区别于 gorgeous 的艳丽、stunning 的惊艳)。
+            Actually, usually word-for-word translation isn't perfect grammar for "The view", it should be "这个景色". But the rule says "ori-word1". I will keep the English words for structure.
+            
+            Draft:
+            The (这) view (景象) is (是) beautiful (美丽的；区别于 gorgeous 的艳丽、stunning 的惊艳)
+            
+            Wait, Rule 3 says "Compare the similar word of each word -> |point out> the key characteristic". This likely applies to the vocabulary list provided at the very beginning. Since the input word "beautiful" is in that list, I should use the others to define it by exclusion or distinction.
+            
+            Refined Comment for beautiful: 美丽 (一般美感，区别于 gorgeous 的强烈色彩、stunning 的视觉冲击)。
+            
+            Wait, I need to check if I should output `output_without_comment` as well. The example shows both. I will include both.
+            
+            One constraint: "Note: Only allow one output." This likely refers to not giving me a choice between options, but providing the single formatted block. I will provide the two tags as per the example structure because the prompt explicitly defines the Output Format with two tags.
+            
+            Final check on language:
+            Input: en
+            Output: zh-CN (for comments) and translation (usually Chinese for Chinese output, but format uses ori-word).
+            Example: `ori-word1 (word1-comment)` where word1 is likely the original word? No, `ori-word1` suggests using the original text in the tag content.
+            Let's follow the example exactly: `Ori-word (translation/comment)`. Wait, the example says `word1 (word1-comment)`. It doesn't specify if translation is inside or outside.
+            Usually: `EnglishWord (ChineseMeaning-Comment)`
+            Example provided in prompt text: `<output>ori-word1 (word1-comment) ori-word2 (word2-comment)...</output>`
+            I will use English words followed by Chinese comments containing translation and nuance distinction.
+            
+            Wait, Rule 6 says "Use <output> </output> to wrap the output_translation_with_comment". It doesn't mention the second tag in the final instruction, but the earlier section "Output format" does. I'll include both tags to be compliant with the detailed format rules, assuming "one output" means one response block.
+            
+            Wait, looking at the prompt header:
+            beautiful gorgeous stunning breathtaking magnificent splendid exquisite
+            These are the vocab to choose from or compare against.
+            Input sentence: "The view is beautiful".
+            Since "beautiful" is in the list, I will translate "beautiful" specifically and comment on its relation to the others.
+            
+            Okay, constructing the response.
+
+            Structure:
+            `<output>The (这) view (景色) is (是) beautiful (美丽的；指一般的美感，区别于 gorgeous 的艳丽和 breathtaking 的视觉冲击)</output>`
+            `<output_without_comment>这个景色很美。</output_without_comment>`
+            
+            Wait, the example shows `ori-word1`. I should probably keep the original English words in the main translation line inside `<output>` to match `ori-word`, and put the Chinese translation/meaning in the comment? Or translate everything into Chinese but mark original word?
+            Example: `ori-word1 (word1-comment)`. This usually means "original-word (translated-meaning + nuance)".
+            Let's try: `The (这) view (景象) is (是) beautiful (美丽的；指一般的美感，区别于 gorgeous 的艳丽和 breathtaking 的视觉冲击)`
+            And for `<output_without_comment>`: `这个景色很美。`
+
+            Refining the comment to strictly follow Rule 4: "Characteristic |based on> the original meaning".
+            Original meaning of beautiful: pleasing appearance.
+            Distinction: Gorgeous (more intense color), Stunning (shocking beauty), Breathtaking (overwhelming), Magnificent (grand), Splendid (splendor), Exquisite (fine/detail).
+
+            Okay, ready to write.
+
+            Wait, I must check the "Note: Only allow one output." constraint again.
+            Does it mean I should NOT use `<output_without_comment>`?
+            Instruction says: "Output format: ... <output>... </output> <output_without_comment>...</output_without_comment>".
+            Then note says: "Use <output> </output> to wrap the output_translation_with_comment".
+            If I add `<output_without_comment>`, is that allowed?
+            Usually, in these strict prompt tasks, following the Example Format is safer than ignoring a specific tag instruction. However, the final instruction line emphasizes `<output>`.
+            Let's look at the "Output format" section again. It explicitly defines two tags. The Note "Use <output> </output>..." might be summarizing. I will include both tags to ensure full compliance with the detailed Output Format section, as that is usually the ground truth for formatting in these tasks.
+            Wait, I need to check if there are multiple inputs? No, just one sentence.
+            
+            Let's finalize the text inside the comment. It needs to be Chinese (zh-CN).
+            "beautiful" -> 美丽。Comment: 表示一般的美感，区别于 gorgeous(色彩艳丽)、stunning(令人惊艳) 等。
+            
+            Okay, final plan:
+            1. Wrap the annotated translation in `<output>`.
+            2. Wrap the plain translation in `<output_without_comment>`.
+            3. Ensure comments are in zh-CN and distinguish meaning from synonyms provided in the header.
+
+            Wait, checking the rule "Note: Only allow one output." again.
+            If I provide two XML tags, is that "one output"? Yes, it's one response message containing tags.
+            I will follow the example format exactly.
+
+            One more thing: The prompt header lists synonyms. The instruction says "Compare the similar word of each word". Since I am translating "beautiful", I should compare it to the others listed in the header (gorgeous, stunning, etc.) within the comment for "beautiful".
+            
+            Let's write it.
+
+            Sentence: The view is beautiful.
+            Chinese: 这个景色很美。
+            Words: The (这), view (景色/景观), is (是), beautiful (美丽).
+            
+            Comment for "beautiful": 美丽的；原意指外观令人愉悦，区别于 gorgeous(光彩夺目)、stunning(美得令人大吃一惊)、breathtaking(美得惊人) 等。
+
+            Wait, I should check if I need to translate "The view is beautiful" using one of the synonyms provided in the header *instead* of "beautiful"?
+            Input: The view is beautiful.
+            No, I must translate the input. The input already says "beautiful".
+            So I just annotate it against the others.
+
+            Let's go.
+
+            Wait, looking at the Example again:
+            `"<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ...</output>"`
+            This implies space separated words.
+            My draft: `The (这) view (景色) is (是) beautiful (美丽...)`
+            Looks correct.
+
+            Wait, Rule 6 says "Use <output> </output> to wrap the output_translation_with_comment". It doesn't mention `<output_without_comment>` in the final instruction. But the "Output format" section lists it. I will include it because the Output Format definition is usually more specific about structure than a summary note.
+
+            Wait,

@@ -1,0 +1,77 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Task: Translation.
+    *   Input: "I am happy to hear the good news."
+    *   Input Language: English (en).
+    *   Output Language: Chinese (zh-CN).
+
+2.  **Understand the Input Sentence:**
+    *   Meaning: The speaker expresses joy or satisfaction upon receiving or knowing about positive information.
+    *   Tone: Polite, positive, common conversational expression.
+    *   Key components: "I am happy" (情绪表达), "to hear" (得知/听到), "the good news" (好消息).
+
+3.  **Determine the Target Translation:**
+    *   Direct translation: 我很高兴听到这个好消息。 (Wǒ hěn gāoxìng tīng dào zhège hǎo xiāo xī.)
+    *   Natural Chinese equivalents:
+        *   "听到好消息真开心！" (More casual)
+        *   "很高兴听到这个好消息。" (Standard, polite)
+        *   "听到这个消息我很高兴。" (Slightly more formal/neutral)
+    *   Selection: The most standard and natural translation for general contexts is "很高兴听到这个消息" or "我很高兴听到这个好消息". Let's aim for a balance of accuracy and naturalness.
+
+4.  **Drafting the Output:**
+    *   Option 1: 我很高兴听到这个好消息。 (Very direct, accurate)
+    *   Option 2: 收到好消息，我真高兴。 (Slightly more colloquial)
+    *   Option 3: 听闻此喜讯，不胜欢喜。 (Too formal/literary)
+
+    Option 1 is the safest and most common translation for this sentence structure. "很高兴听到这个消息" sounds slightly smoother than repeating "这个好消息", but both are fine. Let's go with "我很高兴听到这个好消息。" or simply "很高兴听到好消息。"
+    Actually, a very natural way to say this in Chinese is "听到这个消息真开心！" or "得知好消息我很高兴。"
+    However, keeping close to the structure: "我很高兴听到这个好消息。"
+
+    Let's refine for standard translation quality.
+    Input: I am happy to hear the good news.
+    Translation: 我很高兴听到这个好消息。
+
+5.  **Final Review:**
+    *   Does it match the language codes? Yes (en -> zh-CN).
+    *   Is the meaning preserved? Yes.
+    *   Is it natural? Yes.
+
+6.  **Construct Final Output:**
+    我很高兴听到这个好消息。
+
+    (Alternative: 听到这个消息我很开心。)
+    Let's stick to a standard, polite translation.
+
+    "很高兴听到这个好消息。" (Dropping the "I am" subject is common in Chinese).
+    But "I am happy" -> "我很高兴".
+    So: "我很高兴听到这个好消息。"
+
+    Let's choose the most natural one.
+    "听到这个好消息，我很高兴。" or "很高兴听到这个好消息。"
+
+    I will provide a standard, fluent translation.
+
+    Output: 我很高兴听到这个好消息。 (or similar)
+
+    Wait, checking common usage. "I am happy to hear the good news" is often translated as "很高兴听到这个消息。"
+    Let's provide that.
+
+    Final decision: 我很高兴听到这个好消息。 (Slightly more explicit about 'good news').
+    Or: 得知这个消息，我很高兴。
+
+    Let's go with: 很高兴听到这个好消息。 (Very common).
+
+    Actually, looking at simple translation tasks, accuracy is key.
+    "I am happy" -> "我很高兴".
+    "to hear" -> "听到".
+    "the good news" -> "这个好消息".
+
+    Combined: 我很高兴听到这个好消息。
+
+7.  **Final Polish:** Just output the translation.
+
+    Output: 我很高兴听到这个好消息。cw
+</think>
+
+我很高兴听到这个好消息。

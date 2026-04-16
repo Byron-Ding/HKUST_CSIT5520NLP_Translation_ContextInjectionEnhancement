@@ -29,33 +29,33 @@
 
 
 
-# # 如何测试
-# - sentence: "The meeting is {keyword} for the success of the project."
-#   input_language: en
-#   output_language: zh-CN
-#   summary: 重要
-#   keywords:
-#     - vital
-#     - important
-#     - significant
-#     - crucial
-#     - critical
-#     - essential
+# 如何测试
+- sentence: "The meeting is {keyword} for the success of the project."
+  input_language: en
+  output_language: zh-CN
+  summary: 重要
+  keywords:
+    - vital
+    - important
+    - significant
+    - crucial
+    - critical
+    - essential
 
-# - sentence: "I am {keyword} to hear the good news."
-#   input_language: en
-#   output_language: zh-CN
-#   summary: 开心
-#   keywords:
-#     - happy
-#     - glad
-#     - joyful
-#     - delighted
-#     - pleased
-#     - content
-#     - satisfied
-#     - cheerful
-#     - ecstatic
+- sentence: "I am {keyword} to hear the good news."
+  input_language: en
+  output_language: zh-CN
+  summary: 开心
+  keywords:
+    - happy
+    - glad
+    - joyful
+    - delighted
+    - pleased
+    - content
+    - satisfied
+    - cheerful
+    - ecstatic
 
 - sentence: "I {keyword} this movie."
   input_language: en
@@ -93,7 +93,7 @@
 - sentence: "Nothing is {keyword}"
   input_language: en
   output_language: zh-CN
-  summary: 永久的/永恒的
+  summary: 永久的_永恒的
   keywords:
     - permanent
     - eternal
@@ -153,7 +153,7 @@
 - sentence: "I kind of feel {keyword} about this."
   input_language: en
   output_language: zh-CN
-  summary: 生气/恼人
+  summary: 生气_恼人
   keywords:
     - angry
     - mad
@@ -179,7 +179,7 @@
 - sentence: "From my {keyword}, I think this is a good idea."
   input_language: en
   output_language: zh-CN
-  summary: 看法/观点
+  summary: 看法_观点
   keywords:
     - opinion
     - view
@@ -214,46 +214,166 @@
     - counsel
 
 
-- sentence: "Which kind of {keyword} happens in that accident?"
-  input_language: en
-  output_language: zh-CN
-  summary: 失误
-  keywords:
-    - mistake
-    - error
-    - blunder
-    - slip-up
-    - oversight
-    - misstep
-    - fault
 
 
-- sentence: "This {keyword} problem cannot be avoided in the experiment."
-  input_language: en
-  output_language: zh-CN
-  summary: 精确度/准确度
-  keywords:
-    - precision 
-    - accuracy 
+# - sentence: "我对这件事很{keyword}"
+#   input_language: zh-cn
+#   output_language: en
+#   summary: 烦
+#   keywords:
+#     # 闷闷地烦
+#     - 心烦
+#     # 主观厌恶
+#     - 厌烦
+#     # 客观烦，并且躁动不安
+#     - 烦躁
+#     # 并不主观厌恶，但客观上很麻烦
+#     - 烦恼
+#     # 只是很麻烦，并且持续性较长
+#     - 烦心
+#     # 强调厌恶
+#     - 讨厌
+# ----------------------- 还没跑 -----------------------
+# - sentence: "Which kind of {keyword} happens in that accident?"
+#   input_language: en
+#   output_language: zh-CN
+#   summary: 失误
+#   keywords:
+#     - mistake
+#     - error
+#     - blunder
+#     - slip-up
+#     - oversight
+#     - misstep
+#     - fault
 
--
+
+# - sentence: "This {keyword} problem cannot be avoided in the experiment."
+#   input_language: en
+#   output_language: zh-CN
+#   summary: 精确度_准确度
+#   keywords:
+#     - precision 
+#     - accuracy 
 
 
-- sentence: "我对这件事很{keyword}"
-  input_language: zh-cn
-  output_language: en
-  summary: 烦
-  keywords:
-    # 闷闷地烦
-    - 心烦
-    # 主观厌恶
-    - 厌烦
-    # 客观烦，并且躁动不安
-    - 烦躁
-    # 并不主观厌恶，但客观上很麻烦
-    - 烦恼
-    # 只是很麻烦，并且持续性较长
-    - 烦心
-    # 强调厌恶
-    - 讨厌
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# - sentence: "Her explanation was very {keyword}."
+#   input_language: en
+#   output_language: zh-CN
+#   summary: 清楚
+#   keywords:
+#     - clear
+#     - coherent
+#     - understandable
+#     - plain
+#     - comprehensible
+#     - unambiguous
+
+
+# - sentence: "She's a really {keyword} girl."
+#   input_language: en
+#   output_language: zh-CN
+#   summary: 奇怪
+#   keywords:
+#     - strange
+#     - odd
+#     - weird
+
+
+# - sentence: "His argument was {keyword}."
+#   input_language: en
+#   output_language: zh-CN
+#   summary: 有说服力的
+#   keywords:
+#     - persuasive
+#     - convincing
+#     - forceful
+#     - cogent
+
+
+# - sentence: "Please do not {keyword} me while I'm working."
+#   input_language: en
+#   output_language: zh-CN
+#   summary: 打扰
+#   keywords:
+#     - disturb
+#     - interrupt
+#     - bother
+
+
+# - sentence: "Please {keyword} this paragraph."
+#   input_language: en
+#   output_language: zh-CN
+#   summary: 概括
+#   keywords:
+#     - summarize
+#     - recap
+#     - outline
+
+
+# - sentence: "You {keyword} my feelings."
+#   input_language: en
+#   output_language: zh-CN
+#   summary: 忽略
+#   keywords:
+#     - neglect
+#     - ignore
+#     - overlook
+#     - omit
+
+
+# - sentence: "I {keyword} skip breakfast."
+#   input_language: en
+#   output_language: zh-CN
+#   summary: 偶尔
+#   keywords:
+#     - occasionally
+#     - seldom
+#     - sometimes
+#     - infrequently
+#     - rarely
+
+
+# - sentence: "The {keyword} of the project was unclear."
+#   input_language: en
+#   output_language: zh-CN
+#   summary: 目标
+#   keywords:
+#     - goal
+#     - aim
+#     - objective
+#     - purpose
+#     - target
+
+
+# - sentence: "There is no {keyword} for his behavior."
+#   input_language: en
+#   output_language: zh-CN
+#   summary: 理由
+#   keywords:
+#     - excuse
+#     - reason

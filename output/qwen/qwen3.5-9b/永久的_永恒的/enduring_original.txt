@@ -1,0 +1,145 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Input Sentence:** "Nothing is enduring"
+    *   **Source Language:** English (en)
+    *   **Target Language:** Chinese (zh-CN)
+    *   **Task:** Translate the sentence, but also include synonyms/comments for key words from a provided list (`permanent`, `eternal`, `everlasting`, `perpetual`, `timeless`, `enduring`, `immortal`). Specifically, I need to handle the word "Nothing" (part of the sentence structure) and the verb/adjective "enduring".
+    *   **Provided Thesaurus Links:** Collins dictionary links for "Nothing", "is", "enduring". This suggests I should consider synonyms for these words, but the core task is translating "Nothing is enduring". The prompt lists many synonyms for "enduring" at the beginning. I need to select the most appropriate one or translate the original word with a focus on distinguishing its meaning from the others using comments based on the rules.
+    *   **Rules:**
+        1.  Allow optional comments after each word (in zh-CN).
+        2.  Format: `<output>ori-word1 (comment) ...</output>` and `<output_without_comment>...</output_without_comment>`.
+        3.  Comments distinguish original meaning from other synonyms.
+        4.  Based on original meaning, optional extension for evolution.
+        5.  Annotate original meaning in the comment (in zh-CN).
+        6.  Wrap output_translation_with_comment using `<output>` tags. Only allow one output block structure containing both with/without comments? The example shows two fields: `<output>...</output>` and `<output_without_comment>...</output_without_comment>`. I need to follow the exact format shown in the example within the rules section, but wrapped correctly. Wait, the rule says "Use <output> </output> to wrap the output_translation_with_comment". But the example shows `<output>...ori-word1 (word1-comment) ...</output>` AND `<output_without_comment>...`. I need to ensure I provide both fields as per the example format inside the final response structure.
+        7.  Input-Output-Task says "Translate".
+        8.  Input-language: en, Output-language: zh-CN.
+        9.  Only allow one output (meaning the final response should contain the structured block).
+
+2.  **Analyze the Words:**
+    *   **Sentence:** "Nothing is enduring"
+    *   **Word 1:** "Nothing"
+        *   Meaning: No thing, no object, non-entity.
+        *   Translation: 没有事物 (méiyǒu shìwù) or 万物皆空 (less literal). Literal: 没有任何东西.
+    *   **Word 2:** "is"
+        *   Meaning: Existence/state of being.
+        *   Translation: 是 / 处于 (shì / chǔyú). Usually omitted in Chinese for state, but keeping structure requires "是".
+    *   **Word 3:** "enduring"
+        *   Context: From the input list (`permanent`, `eternal`, `everlasting`, `perpetual`, `timeless`, `enduring`, `immortal`). The instruction asks to compare similar words of each word. The user provided a list of synonyms for `enduring` at the very top. I should treat the translation of "enduring" while noting its distinction from the other synonymous concepts listed (like permanent, eternal, etc.).
+        *   Translation: 持久的 (chíjiǔ de) / 长久的 (jiǎngjiù de).
+        *   Comment requirement: Distinguish original meaning from others. E.g., focus on "resisting change over time" vs "never dying" vs "forever".
+
+3.  **Drafting the Translation:**
+    *   Word: Nothing -> 无物 (wú wù) or 没有东西 (méiyǒu dōngxī). Let's use a more literary one to match philosophical tone? Or literal? "Nothing is enduring" is likely a philosophical quote. "无物是持久的" sounds okay. Let's stick closer to standard translation first: "没有任何事物是持久的". But the format requires word-by-word mapping usually (`ori-word`). Let's map strictly to the words provided in the input sentence: `Nothing`, `is`, `enduring`.
+    *   Word: Nothing -> 无物 (Wúwù). Comment: 指代抽象概念或具体事物都不存在 (Represents abstract or concrete things do not exist), distinct from 'None'.
+    *   Word: is -> 是 (Shì). Comment: 表示状态存在 (Indicates state of existence), verb linking subject and complement.
+    *   Word: enduring -> 持久的 (Chíjiǔ de). Comment: 强调经受时间考验而保持性质 (Emphasizes maintaining nature through time test). Distinction: vs permanent (static), eternal (infinite/religious), everlasting (relating to never ending), perpetual (uninterrupted), timeless (beyond time), immortal (living forever). Original meaning focuses on resilience against decay/time.
+
+4.  **Formatting Constraints:**
+    *   `<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ...</output>`
+    *   `<output_without_comment>translation without comment</output_without_comment>`
+    *   Comments in zh-CN.
+    *   Wrap the *entire* output block? The rule says "Use <output> </output> to wrap the output_translation_with_comment". But the example shows TWO tags: one for with-comment, one for without. The instruction "Only allow one output" usually means don't give me two different text blocks outside the XML-like structure, but the structure itself defines it. I will follow the example format provided in Rule 2.
+    *   Wait, looking closely at Rule 6: "Use <output> </output> to wrap the output_translation_with_comment". And Rule 1/Example shows `<output>...ori-word...</output>` and `<output_without_comment>...`. I will produce both lines within the response.
+
+    *   Refining Word-by-Word for "Nothing is enduring":
+        1.  Nothing -> 无物 (wú wù) / 没有任何东西。Let's pick **无任何事物**.
+        2.  is -> **是** (or just link). Let's use **存在为** to sound formal? No, keep it close to `is`. **是**.
+        3.  enduring -> **持久的**.
+
+    *   Refining Comments based on synonyms list provided in prompt (`permanent`, `eternal`, `everlasting`, `perpetual`, `timeless`, `enduring`, `immortal`):
+        *   For `Nothing`: Compare to 'Something' or just define meaning.
+        *   For `is`: Standard copula.
+        *   For `enduring`: This is the main focus of the synonyms list. I need to explain how "enduring" differs from "permanent", "eternal", etc. in the comment.
+
+    *   Constraint Check: "Output format: Note: each "(comment)" |is> optional". But Rule 3 says "Compare the similar word... -> point out key characteristic". Rule 6 says "Use <output> </output> to wrap...".
+    *   Let's align with the example structure exactly.
+
+    *   Sentence Structure Translation: "无物是持久的" (Nothing is enduring). Or more natural Chinese philosophical translation: "万物皆不永恒". But strict word mapping is usually required for this specific format ("ori-word1").
+    *   Let's try to keep it word-for-word to satisfy the format `ori-word1 (comment)`.
+    *   Word 1: Nothing -> 无物 (wú wù). Comment: (指代非存在之物，区别于‘某事物’)(Represents non-existent thing, distinguished from 'a thing').
+    *   Word 2: is -> 是 (shì). Comment: (系动词，表示状态连接)(Copula verb indicating state connection).
+    *   Word 3: enduring -> 持久的 (chíjiǔ de). Comment: (强调经受时间考验而不衰，区别于 permanent 的静态存在、eternal 的无限永恒)(Emphasizes resisting decay over time, distinct from permanent's static existence and eternal's infinite eternity).
+
+    *   Wait, the prompt starts with a list of synonyms. It seems the task is to translate "Nothing is enduring" but utilize the context of distinguishing `enduring` from its synonyms (`permanent`, `eternal`, etc.).
+    *   Format: `<output>ori-word1 (word1-comment) ...</output>` AND `<output_without_comment>...</output_without_comment>`.
+
+5.  **Finalizing Content:**
+
+    *   Translation with comments:
+        Nothing -> 无物 (指代没有任何具体或抽象的事物，非‘某事物’)(Refers to no specific or abstract things, not 'some thing')
+        is -> 是 (表示存在与状态的关系，系动词)(Indicates relationship of existence and state, copula)
+        enduring -> 持久的 (强调在时间中持续抵抗变化或衰败的特性，区别于 permanent 的绝对不变、eternal 的超越时间的无限性)(Emphasizes resistance to change/decay over time, distinct from permanent's absolute unchangedness and eternal's infinite timelessness)
+
+    *   Translation without comments:
+        无物是持久的
+
+    *   Wait, looking at the rule example again:
+        `<output>ori-word1 (word1-comment) ...</output>`
+        `<output_without_comment>...`
+        
+        I need to make sure the output contains both tags.
+
+    *   Refining translation for better flow in Chinese while keeping word mapping:
+        "Nothing" -> 任何事物都没有 (Any thing doesn't exist)? No, keep it noun/subject focus. "无物".
+        "is" -> 存在为？Just "是".
+        "enduring" -> 长存的？持久的。Let's use **持久的**.
+
+    *   Checking rule 1: "Allow optional comments, after Each word; comments should |point out> the key characteristic, especially the original meaning |of> each word."
+    *   Checking rule 3: "Compare the similar word of each word -> |point out> the key characteristic".
+    *   Checking rule 5: "Annotate the original meaning in the comment, which shown |as/in> the output language".
+
+    Let's refine the `enduring` comment to explicitly mention the synonyms list provided in the prompt header (`permanent`, `eternal`, etc.).
+    Comment idea: (区别于 permanent(绝对稳定)、eternal(无限时间)、everlasting(无终了) 等，指在时间长河中持续存在的能力)(Distinct from permanent, eternal, everlasting, etc., refers to the ability to persist through time).
+
+    Let's refine `Nothing` comment:
+    Comment idea: (表示不存在的事物，非‘没有东西’的口语化表达，具有哲学意味)(Represents non-existent things, not colloquial 'no thing', has philosophical tone).
+
+    Let's refine `is`:
+    Comment idea: (连接主语与表语，陈述存在的状态)(Connects subject and predicate, stating state of existence).
+
+6.  **Constructing the Final String:**
+
+    `<output>无物 (指代不存在或泛指的一切事物，区别于‘某物’)(shì shí chǔn) 是 (表示存在与状态的连接词，系动词)(xiá yǔ hén gào de jiē lián cí) 持久的 (强调经受时间考验而保持性质，区别于 permanent(静态不变)、eternal(超越时间的无限)、immortal(不死))</output>`
+    Wait, comments must be in zh-CN. The example shows `(word1-comment)`. I will write the comment text in Chinese. I should avoid English explanations inside the comments unless it's for technical terms like `permanent` mentioned as synonyms.
+
+    Revised:
+    `<output>无物 (指代没有任何具体或抽象的事物，区别于‘某事物’)(shì shí wù) 是 (表示存在与状态的连接词，系动词)(xiá yǔ hén gào) 持久的 (强调经受时间考验而保持性质，区别于 permanent(静态不变)、eternal(超越时间的无限)、everlasting(无终了)、timeless(无关时间界限))</output>`
+    Actually, keep comments concise.
+
+    Let's stick to the exact format: `<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ...</output>`
+    `ori-word` is English? Yes, example shows `ori-word1`. So I must write `Nothing`, `is`, `enduring` inside the output tags for the with-comment version.
+    Wait, rule says: `<output>input language (translation and output language comment)</output>`. This implies inside the tag, it's `English Word (Chinese Translation + Chinese Comment)`.
+    Example provided: `"ori-word1 (word1-comment) ori-word2 (word2-comment) ori-word3 (word3-comment)..... ori-ordN (wordN-comment)"`
+    So structure is `EnglishWord (ChineseTranslation (ChineseComment))`? Or just `EnglishWord (ChineseTranslation+Comment)`?
+    Example: `ori-word1 (word1-comment)`. Usually `ori-word1` means the source word. `word1-comment` means the target translation + comment? Or just comment?
+    Rule 5: "Annotate the original meaning in the comment, which shown |as/in> the output language".
+    Rule 2 Format: `<output>ori-word1 (word1-comment) ...</output>`
+    Example text: `<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ori-word3 (word3-comment)..... ori-ordN (wordN-comment)</output>`
+    This implies the string inside parenthesis is the `word1-comment`. Does `word1-comment` include the translation? Rule 5 says "Annotate the original meaning". Usually, in these tasks, `word1-comment` includes `Translation (Comment)`.
+    Let's look at Rule 2: "Format is: <output>ori-word1 (word1-comment) ori-word2 (word2-comment)...</output>".
+    Example text provided: `"ori-word1 (word1-comment) ori-word2 (word2-comment) ori-word3 (word3-comment)..... ori-ordN (wordN-comment)"`
+    Wait, the example uses `ori-word1`. Does it mean I should literally write `Nothing (translation-comment)`?
+    Let's assume `ori-word1` is a placeholder for the actual source word.
+    So: `Nothing (无物：指代非存在的事物，区别于 permanent 等)`.
+    Actually, looking at Rule 6: "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language". This might mean the whole content inside `<output>` is in output language? No, it says "translation with comment". So `EnglishWord (ChineseTranslation (Comment))`?
+    Re-reading Rule 2 Example: `ori-word1 (word1-comment)`.
+    If I interpret strictly: `Nothing` is the word. `(word1-comment)` should contain the translation and distinction.
+    Let's check Rule 5: "Annotate the original meaning in the comment, which shown |as/in> the output language".
+    Okay, to be safe and clear: `Nothing (无物：指代不存在的事物，区别于 permanent/eternal 等)`
+    
+    Wait, `is` translation is usually omitted or `是`. `enduring` is `持久的`.
+    
+    Let's finalize the content for `output_without_comment`: Just Chinese translation.
+    `无物是持久的` OR `没有事物是长久的`. `Nothing` -> 无物。`Enduring` -> 持久。`Is` -> 是.
+    Sentence: `无物是持久的`.
+
+    Let's finalize the content for `output`:
+    `Nothing (无物：指代没有任何具体或抽象的事物，区别于某事物) is (是：表示存在状态的连接词，系动词) enduring (持久的：强调经受时间考验而保持性质，区别于 permanent 的绝对稳定、eternal 的无限永恒、everlasting 的无终了、immortal 的不死特性)`
+    
+    Wait, `is` might be empty in the comment section? No, keep it simple.
+    
+    Constraint: "Only allow one output." This likely means don't give multiple distinct text blocks outside the required tags. I will provide the two XML-like lines as requested in the example structure (one for with comment, one without).
+    
+    Wait, Rule 6 says "Use <output> </output> to wrap

@@ -1,0 +1,122 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Input text: "I am glad to hear the good news."
+    *   Input language: English (en)
+    *   Output language: Chinese Simplified (zh-CN)
+    *   Task: Translate.
+
+2.  **Analyze the Input Sentence:**
+    *   "I am glad": Expressing happiness or pleasure.
+    *   "to hear": The reason for the feeling (hearing something).
+    *   "the good news": A piece of information that is beneficial or happy.
+    *   Overall meaning: I feel happy/satisfied upon receiving this positive information.
+
+3.  **Determine Appropriate Chinese Translation:**
+    *   Literal translation: 我很高兴听到这个好消息。 (Wǒ hěn gāoxìng tīngdào zhège hǎo xiāoxi.)
+    *   Common idiomatic expressions:
+        *   听到这个消息很高兴。(Tīngdào zhège xiaoxi hěn gāoxìng) - Focus on the news.
+        *   我很高兴听到这个好消息。 (Standard, polite).
+        *   听到这个好消息，我真高兴。 (More emotional).
+    *   The original sentence structure is "I am glad to hear...", so keeping the subject first is natural.
+
+4.  **Select the Best Translation:**
+    *   "我很高兴听到这个好消息" is the most direct and standard translation.
+    *   Alternatively: "听说这个消息真好。" (Too colloquial).
+    *   Let's stick with the standard formal/general usage.
+    *   Selected: 我很高兴听到这个好消息。
+
+5.  **Refine for Naturalness:**
+    *   Sometimes "good news" can be translated as "好消息".
+    *   "I am glad" -> "很高兴" or "感到高兴".
+    *   Result: 我很高兴听到这个好消息。
+
+6.  **Final Check:**
+    *   Input: I am glad to hear the good news.
+    *   Output: 我很高兴听到这个好消息。
+    *   Language: zh-CN.
+    *   Matches the task.
+
+7.  **Construct Output:** Just the translation text as usually expected in this format, unless specified otherwise (usually just the output string). The prompt shows "Output:" at the end, implying I should complete it.
+
+    *   Draft: 我很高兴听到这个好消息。
+    *   Alternative: 得知这个消息我很高兴。 (Also good, slightly more formal).
+    *   Let's go with the most direct equivalent.
+
+    *   Final Choice: 我很高兴听到这个好消息。or 很高兴听到这个好消息。
+    *   Including "I" (我) is faithful to the input "I am".
+    *   So: 我很高兴听到这个好消息。
+
+8.  **Final Output Formatting:** Ensure no markdown or extra text unless requested, but since it's a translation task, just the translated sentence is best. However, looking at the prompt structure, it ends with "Output:", so I should provide the text immediately after.
+
+    Wait, checking the prompt style. It looks like a few-shot prompting style where I need to complete the last line.
+    The user wants the translation.
+
+    Translation: 我很高兴听到这个好消息。
+    Or: 得知这个好消息，我真的很高兴。
+    Let's stick to the standard one.
+
+    "I am glad to hear the good news." -> "我很高兴听到这个好消息。"
+
+    Is there a better nuance? "glad" implies happiness. "hear" can be literal or figurative (hearing about). "the good news" specific.
+    Yes, 我很高兴听到这个好消息 is perfect.
+
+    Wait, I should check if punctuation is needed. The input has a period. So the output should have a period.
+
+    Final string: 我很高兴听到这个好消息。
+
+    Let's consider variations:
+    "收到这个好消息，我很高兴。" (Received this good news...)
+    "听到这个好消息，我感到很高兴。" (Hearing this good news, I feel very happy.)
+
+    Simplest is best.
+    "我很高兴听到这个好消息。"
+
+    Wait, one more thing. Sometimes "I am glad to hear the good news" implies a response to someone telling you.
+    "太好了！我听到了这个好消息很高兴。" (Too added).
+    Keep it close to original structure.
+
+    Final decision: 我很高兴听到这个好消息。
+
+    Wait, I need to make sure I don't output the label "Output:" again if the prompt already has it, but usually in these completions, I just provide the content. The prompt ends with "Output:", so I will write the text.
+
+    Actually, looking at the instruction "Translate", and the format "Input: ... Output-language: ... Output: ", I should provide the translation text.
+
+    Let's refine: "很高兴听到这个好消息。" (Subject 'I' implied) vs "我很高兴听到这个好消息。" (Explicit). Input has "I". So explicit is better.
+    Final: 我很高兴听到这个好消息。
+
+    Wait, checking character count or style. Simplified Chinese.
+    Okay.
+
+    One more option: "得知这个消息，我非常高兴。" (A bit more formal).
+    "很高兴听到这个好消息。" (Very common).
+
+    Let's go with "我很高兴听到这个好消息。" as it maps 1:1 well.
+    Or "听到这个好消息，我很高兴。"
+    Let's stick to the main clause first.
+
+    Okay, ready to generate.
+
+    Wait, I should check if there are any specific constraints on the output format. The prompt ends with "Output:", so I should just complete it.
+    However, as an AI model, I usually provide the full response or just the completion. Given the instruction "Translate", providing just the translation is standard.
+
+    Translation: 我很高兴听到这个好消息。
+    Or slightly more natural: 很高兴听到这个好消息。
+    But "I am" -> "我".
+    So "我很高兴听到这个好消息。"
+
+    Let's finalize.
+
+    Wait, is there a nuance of "glad to hear"? It often implies reaction to someone informing you.
+    "听到这个好消息，我真高兴。" adds emotion.
+    "我很高兴听到这个好消息。" is neutral.
+    I will use the standard translation.
+
+    Final check: zh-CN. Simplified Chinese.
+    Text: 我很高兴听到这个好消息。
+    Punctuation: 。 (Chinese period).
+
+    Ready.cw
+</think>
+
+我很高兴听到这个好消息。

@@ -1,0 +1,182 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Input:** "Give me another outlook."
+    *   **Input-language:** English (en)
+    *   **Output-language:** Chinese Simplified (zh-CN)
+    *   **Task:** Translate the input sentence into the output language.
+    *   **Rules:**
+        1.  Allow optional comments after each word in the translation.
+        2.  Output format must follow:
+            ```xml
+            <output>ori-word1 (word1-comment) ori-word2 (word2-comment)...</output>
+            <output_without_comment>translation without comment</output_without_comment>
+            ```
+        3.  Comments must be in the output language (zh-CN).
+        4.  Comments should point out the key characteristic/meaning of each word, distinguishing original meaning from synonyms.
+        5.  Characteristic should be based on original meaning (important) and can optionally show extensions.
+        6.  Only allow one output block (containing both `<output>` and `<output_without_comment>`).
+        7.  Wrap the translation with comment in `<output>`.
+
+    *   **Wait, let's re-read Rule 2 carefully:**
+        "Output format:
+        Note: each "(comment)" |is> optional
+            Format is: 
+            <output>ori-word1 (word1-comment) ori-word2 (word2-comment) ori-word3 (word3-comment)..... ori-ordN (wordN-comment)</output>
+            <output_without_comment>word1 word2 word3..... wordN</output_without_comment>
+            "
+        
+        Actually, looking at the example provided in Rule 2:
+        `"<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ori-word3 (word3-comment)..... ori-ordN (wordN-comment)</output>"`
+        This suggests the `<output>` tag should contain the word-by-word translation with comments.
+        The second line is `<output_without_comment>translation without comment</output_without_comment>`.
+        
+        Wait, Rule 6 says: "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language". This conflicts slightly with the example showing *two* tags (`<output>` and `<output_without_comment>`).
+        However, looking at the initial Instruction header:
+        `Output: //` (empty)
+        Then Rules.
+        
+        Let's look at the structure again.
+        Rule 2 says "Format is: <output>... </output> <output_without_comment>... </output_without_comment>".
+        But Rule 6 says "Use <output> </output> to wrap the output_translation_with_comment".
+        Usually, when there are conflicting rules in a prompt like this, the example in Rule 2 is often the strict formatting guideline.
+        However, Rule 6 specifically mentions `<output>` wrapping the translation with comment. It doesn't explicitly forbid `<output_without_comment>`.
+        Let's combine them: The main output block should probably contain both tags as per the format example, OR just the main one if Rule 6 implies only one tag.
+        "Note: Only allow one output." (Rule from end).
+        This means I should not split into multiple messages.
+        
+        Let's interpret the "Format" in Rule 2 more strictly because it shows two tags. But the final instruction says "Use <output> </output> to wrap...".
+        Actually, re-reading: "Output format: ... Format is: <output>...</output> <output_without_comment>...</output_without_comment>".
+        This implies a single response containing both XML-like blocks.
+        
+        Let's decide on the translation first.
+        Sentence: "Give me another outlook."
+        Translation: 给我另一个视角/看法。 (Gěi wǒ lìngyī gè shìjiē/kànfǎ.)
+        
+        Word breakdown:
+        Give -> 给 (gěi) - to give/provide.
+        me -> 我 (wǒ) - me/I.
+        another -> 另一个 (lìng yī gè) - another/other/one more.
+        outlook -> 视角 (shìjiē) / 展望 (zhǎnwàng) / 看法 (kànfǎ). In this context ("another outlook"), it usually means "perspective" or "viewpoint" (视角), sometimes "prospect" (展望) if looking forward, but "outlook" here is likely metaphorical perspective. Let's choose 视角 (perspective/viewpoint) as the core meaning for "another outlook".
+        
+        Comments (zh-CN):
+        give: 提供/给予 (provide/give) - verb action
+        me: 我 (me) - pronoun self
+        another: 另外 (another) - distinct from previous, additional
+        outlook: 视角 (perspective) - noun viewpoint/opinion/prospects
+        
+        Refining comments for Rule 4 & 5 (Original meaning vs synonyms/characteristics):
+        give: (给予，动词，表示提供动作) [Provide action]
+        me: (第一人称代词，指说话者自己) [First person pronoun, refer to speaker]
+        another: (另外的，形容词，区别于之前或不同的) [Another/alternative, distinct from previous]
+        outlook: (视角/观点，名词，比喻性的观察角度或未来形势的展望) [Perspective/viewpoint, noun, metaphorical observation angle or future trend] -> Since "another outlook" often implies a different perspective on the same subject.
+        
+        Let's draft the `<output>` string:
+        给 (提供动作) 我 (第一人称代词) 另一个 (区别性其他) 视角 (比喻观察角度) 。 (标点)
+        Wait, punctuation handling. Usually, translations keep punctuation separate or attach it to the last word. I will attach it to the last word for structure simplicity or add a token for it.
+        Let's treat "outlook" as the main noun.
+        
+        Draft: 给 (gěi - 给予) 我 (wǒ - 第一人称代词) 另一个 (lìng yī gè - 区别性的) 视角 (shìjiē - 比喻观察角度) .
+        
+        Wait, the rule says "each "(comment)" is optional". But I should follow the format example.
+        Format: `word (comment)`.
+        
+        Let's refine the translation for accuracy.
+        "Give me another outlook." -> 给我一个不同的视角。or 给我另一个展望。
+        Common phrase: "Give me a different point of view" = 给我一个不同的视角.
+        "Outlook" can be 前景 (prospect) or 观点 (viewpoint). Context matters. Without context, 视角 (perspective) is safer for "another outlook" meaning "see it differently". Or 看法 (opinion). Let's use 视角。
+        
+        Comments need to distinguish original meaning from synonyms.
+        Give -> 给予 (giving something to someone), not just 给 (which can be preposition 'to'). Here it is imperative verb.
+        Me -> 我 (pronoun).
+        Another -> 另一个 (another/second), emphasizes quantity/difference, not similar to 'more'.
+        Outlook -> 视角 (visual field/perspective) vs 展望 (forecast). Original meaning here is the perspective.
+        
+        Okay, let's construct the final XML block.
+        
+        Constraint Check: "Only allow one output." -> I will provide one response containing the XML structure.
+        Constraint Check: Comment language must be zh-CN.
+        Constraint Check: Wrap with `<output> </output>`. Wait, the example shows TWO tags: `<output>` (with comment) and `<output_without_comment>`. Rule 6 says "Use <output> </output> to wrap...". This is ambiguous. Usually, the instruction "Output format" overrides if specific.
+        Let's look at the example again:
+        `"<output>ori-word1 (word1-comment)...</output> <output_without_comment>word1 word2...</output_without_comment>"`
+        So I need both tags in my response.
+        
+        Wait, Rule 6 says: "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language".
+        It doesn't explicitly say *exclude* `<output_without_comment>`. But Rule 2 shows a format with both.
+        I will follow Rule 2's example format because it is detailed.
+        
+        Wait, one more check on Rule 6: "Use <output> </output> to wrap the output_translation_with_comment...". It might imply ONLY this tag should exist. But Rule 2 explicitly defines a format with two tags.
+        Let's prioritize the Example in Rule 2 as it's the most specific instruction on structure.
+        However, often prompts like this want the content inside `<output>`.
+        Let's check "Note: Only allow one output." This refers to the model response (not multiple XML blocks).
+        
+        Okay, I will generate the response containing both tags as per Rule 2 Example.
+        
+        Translation:
+        Give -> 给
+        me -> 我
+        another -> 另一个
+        outlook -> 视角
+        
+        Sentence: 给我另一个视角。
+        
+        Comments:
+        give (给予，动词)
+        me (第一人称代词)
+        another (区别性的数量)
+        outlook (比喻观察角度/观点)
+        
+        Let's make the comments more detailed about original meaning vs synonyms as per Rule 3/4.
+        give: 给予（提供，而非仅仅接收）
+        me: 我（说话者自称）
+        another: 另一个（非“更多”，而是指区别于前者的）
+        outlook: 视角（此处指观点，而非物理景观或未来展望）
+        
+        Wait, punctuation? "Give me..." -> No period usually if it's a command, but standard translation adds one. I will add one at the end.
+        
+        Structure:
+        <output>给 (给予，动词) 我 (第一人称代词) 另一个 (区别于前者的) 视角 (比喻观察角度/观点) 。 (标点符号)</output>
+        <output_without_comment>给我另一个视角。</output_without_comment>
+        
+        Wait, rule says "comments should |point out> the key characteristic...".
+        I need to ensure the XML is valid. Spaces between words? The example shows spaces between tokens. `word1 (comment) word2 (comment)`.
+        
+        Final check on constraints:
+        - zh-CN comments.
+        - Output language zh-CN for translation.
+        - Wrap with `<output>`... and `<output_without_comment>`.
+        - One output block (text).
+        
+        Wait, I noticed the prompt says "Only allow one output." This usually means the model should not say anything else before or after the XML.
+        
+        Let's assemble.
+
+        Word: Give -> 给。Comment: (给予，动词，核心是提供动作)
+        Word: me -> 我。Comment: (第一人称代词，指代说话者)
+        Word: another -> 另一个。Comment: (形容词性，区别于已有或前者的不同事物)
+        Word: outlook -> 视角。Comment: (名词，比喻性的观察立场或看法，非物理景观)
+        
+        Combined:
+        <output>给 (给予，动词) 我 (第一人称代词) 另一个 (区别于前者) 视角 (观察立场) 。 (标点)</output>
+        <output_without_comment>给我另一个视角。</output_without_comment>
+        
+        Wait, is the space before/after punctuation? Usually attached.
+        
+        One detail: "Output format: ... Note: each "(comment)" |is> optional". But I should provide them to distinguish meaning (Rule 1).
+        
+        Okay, ready to generate.
+
+        Wait, looking closely at Rule 6: "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language".
+        It does not explicitly forbid `<output_without_comment>`. But often strict instruction following prefers minimal valid blocks. However, Rule 2 example shows both. I will stick to Rule 2 example for formatting since it defines the schema.
+
+        Wait, checking the prompt again: "Output format: ... Format is: <output>... </output> <output_without_comment>...</output_without_comment>".
+        Okay.
+
+        One more check: "Input-output-task: Translate".
+        Input: Give me another outlook.
+        
+        Let's write it.
+</think>
+
+<output>给 (给予，动词，核心动作) 我 (第一人称代词，指代说话者) 另一个 (区别于已有/前者的) 视角 (名词，比喻观察立场或观点，非物理景观) 。 (标点符号)</output>
+<output_without_comment>给我另一个视角。</output_without_comment>

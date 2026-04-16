@@ -1,0 +1,219 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Input Text:** "Nothing is eternal"
+    *   **Input Language:** en (English)
+    *   **Output Language:** zh-CN (Chinese)
+    *   **Task:** Translate.
+    *   **Rules:**
+        1.  Allow optional comments after each word pointing out key characteristics/original meaning.
+        2.  Output format: Two XML-like tags `<output>` (translation with comment) and `<output_without_comment>` (plain translation). Note: The prompt says "Only allow one output", but the example shows two blocks inside a single response structure. However, looking closely at rule 1: "Output format: ... <output>...</output> <output_without_comment>...</output_without_comment>". And Rule: "Note: Only allow one output." This is contradictory. Usually, this means the final response should contain both parts as specified in the example format within a single code block or structure, but not multiple separate blocks labeled "one output". Let's interpret "Only allow one output" as "Do not provide conversational filler, just the formatted string". The example shows two tags concatenated. I will follow the example structure exactly.
+        3.  Comments must be in zh-CN.
+        4.  Comments should distinguish original meaning from synonyms.
+        5.  Focus on original meaning (optional extension).
+        6.  Wrap the commented translation in `<output>` tag.
+        7.  Wait, looking at the example: `<output>ori-word1 (word1-comment)...</output>`. But then there is also `<output_without_comment>`. The prompt says "Use <output> </output> to wrap the output_translation_with_comment". It doesn't explicitly say how to wrap the comment-less version, but the example shows it as a separate block. I will follow the example structure provided in the rules section.
+        8.  Crucial Constraint: "Note: Only allow one output." This likely means I shouldn't add extra text before or after, just the formatted content. However, the format example has *two* tags. I will provide both tags as per the example to satisfy the translation requirement including comments.
+
+2.  **Translate "Nothing is eternal":**
+    *   "Nothing": 没有什么事物 / 任何事物 (Any thing/Nothing) -> zh-CN: 没有任何东西
+    *   "is": 是 (copula)
+    *   "eternal": 永恒的 (lasting forever)
+    *   Sentence meaning: Nothing lasts forever.
+
+3.  **Drafting the Translation with Comments:**
+    *   Word by word or phrase by phrase? The example shows `<output>ori-word1 (word1-comment) ...</output>`. This implies a token-level breakdown. "Nothing" "is" "eternal".
+    *   "Nothing": 无物 (wu wu - no object) / 无一物 (no single thing). Let's use "任何事物不存在" or simply "没有什么". To be concise and match the input structure:
+        *   Input: Nothing is eternal
+        *   Draft: 无 (nothing-comment) 物 (thing-comment) 是 (be-comment) 永恒 (eternal-comment) 的 (possessive-suffix).
+    *   Actually, "Nothing" often translates to "没有什么是". Let's try to keep close to the English word count if possible for the mapping.
+    *   Word: Nothing -> 何物 (What thing - negative) / 无物 (No thing). Original meaning: No specific entity exists. Comment: 指不存在的事物 (referring to non-existent things).
+    *   Word: is -> 是 (is). Comment: 系动词 (copula verb).
+    *   Word: eternal -> 永恒 (eternal). Comment: 永存不息 (lasts forever).
+
+    Let's refine the translation for naturalness vs strict segmentation. The prompt asks to translate "Input-Output-Task". Usually, this means provide the target text.
+    Common translation: "世间万物皆非永恒" or "没有任何东西是永恒的".
+    Strict word mapping:
+    Nothing -> 没有什么 (Nothing-comment)
+    is -> 是 (is-comment)
+    eternal -> 永恒 (eternal-comment)
+
+    Let's try to stick closer to the example format which suggests splitting by spaces.
+    Input: "Nothing is eternal" (3 words).
+    Target words in Chinese corresponding to these concepts.
+    Maybe: "无物 (无物 -指不存在的事物) 是 (是 -系动词) 永恒 (永恒 -永存不息) 的 (助词)"?
+    Or a more fluent translation with annotations:
+    "没有任何事物 (anything-comment) 是 (is-comment) 永恒的 (eternal-comment)".
+
+    Let's follow the instruction: "Compare the similar word of each word -> point out the key characteristic of each word".
+    Word 1: Nothing. Chinese equivalent: 无一物 / 无。Key characteristic: 否定代词 (negative pronoun). Meaning: 没有任何东西 (Nothing exists).
+    Word 2: is. Chinese equivalent: 是。Key characteristic: 系动词 (copula). Meaning: 存在关系/表语标志 (existence relation/predicate marker).
+    Word 3: eternal. Chinese equivalent: 永恒。Key characteristic: 形容词 (adjective). Meaning: 永不消逝/长久 (never disappearing/long lasting).
+
+    Proposed format inside `<output>`:
+    无物 (指代不存在之事物) 是 (系动词连接主语与表语) 永恒 (表示时间上的无限延续)
+    
+    Wait, I need to check the exact output format requirement again.
+    "Output format: ... <output>ori-word1 (word1-comment) ...</output> <output_without_comment>translation without comment</output_without_comment>"
+    So I need two distinct blocks.
+
+    Block 1 (`<output>`): Comma separated or space separated? Example: `ori-word1 (word1-comment) ori-word2...`. It looks like spaces between words.
+    So: `无物 (不存在的事物) 是 (系动词) 永恒 (永久的)`
+    
+    Wait, "Nothing" in Chinese is often translated as a phrase "没有任何..." or "无...". To map to one word unit, maybe use "无何事". But "Nothing is eternal" is a philosophical statement.
+    Standard translation: 万物皆非永恒。But that changes structure.
+    Let's stick to the literal mapping for annotation purposes if requested, but ensure it translates well.
+    Actually, "Nothing" -> 无一物 (One thing none).
+    "is" -> 是.
+    "eternal" -> 永恒.
+    
+    Refined translation:
+    Commented: 无物 (无任何事物) 是 (系动词) 永恒 (永不终结)
+    Plain: 没有任何东西是永恒的
+
+4.  **Refining Comments based on Rules:**
+    *   Rule 4: Characteristic based on original meaning; optional extension.
+    *   Rule 5: Annotate the original meaning in the comment.
+    *   Comment language: zh-CN.
+    
+    Word: Nothing (en) -> 无物 (zh). Comment: 意指世间无一事物存在 (Meaning there is no single thing existing).
+    Word: is (en) -> 是 (zh). Comment: 连接主语与形容词的系动词 (Copula verb connecting subject and adjective).
+    Word: eternal (en) -> 永恒 (zh). Comment: 时间上永不消逝 (Time never disappears).
+
+    Let's check the constraint "Only allow one output". This usually means don't write explanations. I will output the XML-like structure requested.
+    
+    Wait, rule 1 says "Allow optional comments... Output format: ... <output>...</output> <output_without_comment>...</output_without_comment>".
+    Rule "Note: Only allow one output." might refer to not providing multiple versions of the *entire* translation logic, but strictly adhering to the requested format block. I will follow the example format exactly which contains two tags.
+
+    Wait, re-reading: "Output format: Note: each "(comment)" |is> optional ... Format is: <output>...</output> <output_without_comment>...</output_without_comment>".
+    And then "Note: Only allow one output." This is confusing. Does it mean the whole response should be *one* string containing those tags? Yes.
+    
+    Let's finalize the Chinese translation.
+    Input: Nothing is eternal
+    Literal: 无 (Nothing) 物 (is - wait, is doesn't need word).
+    Better mapping:
+    Nothing -> 没有任何事物 (Any object doesn't exist) -> Simplified for comment clarity: "无物" (No thing). Comment: 指不存在的具体实体 (Refers to non-existent concrete entities).
+    is -> 是. Comment: 表示判断或存在的系词 (Indicates judgment or existence copula).
+    eternal -> 永恒。Comment: 永无止境的持续状态 (State of endless continuation).
+
+    Wait, I should check if I can combine words for better Chinese flow in the `<output>` block while keeping annotations per word.
+    Example: `word1 (comment) word2 (comment)`
+    If I translate "Nothing is eternal" as "无物是永恒". It's a bit stiff but accurate for annotation.
+    Or "世间万物皆非永恒" (Too interpretative).
+    Let's go with "无任何事物是永恒的". But that expands "is".
+    Let's try to match the input word count roughly for clarity of mapping.
+    Nothing -> 无物
+    is -> 是
+    eternal -> 永恒
+    
+    Comment for "Nothing": (指代世间无一事物)
+    Comment for "is": (连接前后成分的系动词)
+    Comment for "eternal": (时间上的无限延续性)
+
+5.  **Final Polish:**
+    Check rules again.
+    Rule 2: Output format has two tags.
+    Rule 3 & 4 & 5: Comments explain original meaning/characteristics in zh-CN.
+    Rule 6: Wrap output_translation_with_comment in `<output>`. (Wait, does it want the comment-less one wrapped? The example shows `<output>` for commented and `<output_without_comment>` for plain. So I will follow that).
+
+    Let's construct the string.
+    <output>无物 (指代不存在的具体事物) 是 (起连接作用，表示系动词) 永恒 (时间上永不消逝的形容词)</output>
+    <output_without_comment>没有任何东西是永恒的</output_without_comment>
+    
+    Wait, "Nothing" -> "无物". "is" -> "是". "eternal" -> "永恒".
+    To make the Chinese natural without comments but still reflecting meaning: "世间万物皆不永恒" is better idiomatically. But strict translation is "没有东西是永恒的".
+    Let's use "没有任何事物是永恒的" for `<output_without_comment>`. It is accurate.
+    For `<output>`, I need to segment it like the input words.
+    Input: Nothing (1) is (2) eternal (3).
+    Output Commented: 无物 (注释1) 是 (注释2) 永恒 (注释3).
+    
+    Let's refine comments for Rule 5 ("Annotate the original meaning").
+    "Nothing": 否定概念/零事物.
+    "is": 系动词.
+    "eternal": 形容词/永存.
+
+    Final check on constraint: "Only allow one output." I will interpret this as "Do not add markdown code blocks like ```xml unless the prompt implies, but usually 'output' means the content itself". However, to be safe and clean, I will just output the text string defined by the example format, without extra markdown wrappers if not requested. But looking at the instruction "Use <output> </output>...", it suggests raw text containing tags is fine.
+    
+    Wait, one more check: "Output format: ... Format is: <output>...</output> <output_without_comment>...</output_without_comment>".
+    And "Note: Only allow one output."
+    This might mean I should not include the `<output_without_comment>` tag if strictly following "Only allow one output"? No, the example explicitly shows both tags in the format description. The "One output" likely means don't write a conversational intro/outro.
+    
+    Wait, looking at the instruction again: "Output: \n//////////////////////////////////////////////\nInput-Output-Task..."
+    I need to provide the response that ends with the translation.
+    
+    Okay, I will generate the content matching the example structure exactly.
+
+    Translation selection:
+    Nothing -> 无一物 (Emphasizing 'nothing' as a noun phrase).
+    is -> 为 (Slightly more literary) or 是。Let's use 是 for clarity.
+    eternal -> 永恒.
+    
+    Actually, "Nothing" can be "任何事物都不". But keeping word alignment:
+    Nothing -> 无何物
+    is -> 乃
+    eternal -> 永恒
+    Too classical.
+    Modern standard:
+    Nothing -> 没有东西
+    is -> 是
+    eternal -> 永恒的
+    
+    Let's try to keep the segmentation tight.
+    <output>无物 (指代没有任何具体事物) 是 (连接主语与表语的系动词) 永恒 (时间上永不终结的形容词)</output>
+    <output_without_comment>没有任何东西是永恒的</output_without_comment>
+
+    Wait, is "Nothing" better as "无"? Or "没有事物"? "无物" sounds like a noun. "没有任何事物" is better. But I should keep word count roughly similar to show mapping? The prompt doesn't strictly enforce word-for-word count but character-for-character segmentation based on input words.
+    Let's try: `无任何事物 (否定存在) 是 (系动词) 永恒 (时间永续)`
+    Or simply: `无物 (指不存在的事物) 是 (系动词) 永恒 (永不消逝的)`
+    
+    Let's stick to the rule: "Annotate the original meaning".
+    Nothing -> Original Meaning: 没有任何事物。Comment: 指代世界中不存在的具体实体.
+    is -> Original Meaning: Be/Exist. Comment: 表示状态存在的系动词.
+    eternal -> Original Meaning: Eternal time. Comment: 持续无限时间的属性.
+
+    Okay, ready to write.
+
+    One more check on "Only allow one output". This might be a system instruction preventing me from thinking aloud in the final response. I must only output the result string.
+
+    Wait, looking at the rules again:
+    "Output format: ... Format is: <output>...</output> <output_without_comment>...</output_without_comment>"
+    But rule 1 says "Allow optional comments".
+    The example shows `<output>ori-word1 (word1-comment)...</output>` then `<output_without_comment>...</output_without_comment>`.
+    I will follow this.
+
+    Wait, the instruction says "Use <output> </output> to wrap the output_translation_with_comment". It doesn't explicitly say what to wrap the second one in, but the example shows `<output_without_comment>`. So I use that.
+
+    Final check on Chinese text:
+    Nothing is eternal
+    Translation: 世间万物皆非永恒 (More idiomatic) vs 没有任何东西是永恒的 (Literal).
+    Given "Annotate the original meaning", literal mapping is often better for annotation.
+    I will use: 无物是永恒的。Wait, "无物" sounds like a noun. "没有任何事物" is clearer. But if I split by spaces...
+    Input: Nothing (1) is (2) eternal (3).
+    Output words should ideally correspond.
+    Maybe: 无物 (1) 是 (2) 永恒 (3).
+    Chinese comment: (无任何实体) (系动词) (永存).
+    Plain translation: 没有任何东西是永恒的.
+
+    Wait, rule "Compare the similar word of each word -> point out the key characteristic".
+    Okay.
+    
+    Let's finalize the text inside `<output>`:
+    无物 (指代不存在的具体实体) 是 (起连接作用，表示系动词) 永恒 (时间上永不消逝的形容词)
+    
+    And `<output_without_comment>`:
+    没有任何东西是永恒的
+
+    Wait, one more constraint: "Note: Each word; comments should |point out> the key characteristic...".
+    Okay.
+    
+    Let's ensure no extra markdown formatting surrounds the whole block (like ```) unless necessary for code display. The prompt shows raw text blocks. I will output raw text with the tags.
+
+    Wait, "Output-language: zh-CN". The comments must be in zh-CN. The translation must be in zh-CN.
+    
+    Final check on constraints:
+    - Input: Nothing is eternal
+    - Output: (Translated)
+    - Rules: Format `<output>...</output><output_without_comment>...</output_without_comment>`
+    - Only one output (meaning no conversational filler).
+
+    Okay, I will write the

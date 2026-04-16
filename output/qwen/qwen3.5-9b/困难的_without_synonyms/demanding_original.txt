@@ -1,0 +1,175 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Input Task:** Translate "The task is demanding".
+    *   **Input Language:** English (en).
+    *   **Output Language:** Chinese (zh-CN).
+    *   **Rules:**
+        1.  Allow optional comments after each word (in parentheses), pointing out key characteristics, especially original meaning.
+        2.  Output format must include two sections: `<output>...</output>` and `<output_without_comment>...</output_without_comment>`.
+        3.  Comments are in the output language (zh-CN).
+        4.  Compare similar words (if applicable) to point out key characteristics based on original meaning.
+        5.  Annotate original meaning in the comment.
+        6.  Wrap the translation with comment inside `<output>` tags.
+        7.  **Constraint:** Only allow one output block (though the format description shows two sections inside tags, the note says "Only allow one output", but looking at the example structure provided in the prompt: `<output>...</output> <output_without_comment>...</output_without_comment>`. I need to follow the example format exactly).
+        8.  **Important:** The prompt says "Note: Only allow one output." but the example shows two XML-like tags. Usually, this means one response containing both parts as per the example structure. However, sometimes "Only allow one output" implies strict formatting. I will follow the example format provided in the Rules section which explicitly asks for `<output>` and `<output_without_comment>`.
+        9.  **Crucial Check:** The prompt header says "Input-Output-Task: Translate". The user wants me to translate "The task is demanding" into zh-CN following the specific formatting rules.
+
+2.  **Analyze the Input Sentence:**
+    *   Sentence: "The task is demanding"
+    *   Words:
+        *   The (Article)
+        *   task (Noun)
+        *   is (Verb, copula)
+        *   demanding (Adjective/Participle)
+
+3.  **Draft Translation:**
+    *   The task -> 这项任务 (zh-CN)
+    *   is -> 是 (zh-CN)
+    *   demanding -> 要求高的 / 有挑战性的 / 耗费精力的 (zh-CN)
+        *   Context: "demanding" usually means requiring a lot of effort, skill, or patience. Common translation: 费力的，要求高的，有挑战性的。
+        *   Select best fit: "这项任务要求很高" or simply translate the structure word-for-word for the comment format. Let's aim for natural translation but annotate words.
+        *   Word-by-word mapping:
+            *   The -> 这 (de) / 那个 (that). Let's use 这 for generic reference.
+            *   task -> 任务 (mission/task)
+            *   is -> 是 (be verb)
+            *   demanding -> 费力的 (demanding/easy?) No, demanding = difficult/effort. -> 有挑战性的 (challenging) or 需要大量精力的 (requiring much effort). Let's pick 要求高的 (high requirements) or 艰巨的 (arduous/demanding). "demands" as adjective often means "requiring a lot of attention/effort".
+            *   Translation: 这项任务要求很高。Or strictly word-for-word: 任务 是 费力的.
+            *   Standard Chinese translation: 这项任务很有挑战性。or 这个任务很艰巨。
+            *   To follow the format "ori-word1 (comment)", I need to split it.
+            *   Let's choose a translation that preserves the word order for annotation purposes, or a natural one. Usually, for this specific task type (word-level annotation), keeping the structure close helps identify words, but Chinese is SOV/SVO hybrid often.
+            *   Sentence: "The task is demanding" -> 这个任务要求很高。or 这项任务颇具挑战性。
+            *   Let's break it down for the `<output>` tag: `这 (the-comment) 项 (量词 - optional but good for specific 'a')`. Actually, splitting English words to Chinese characters usually requires mapping conceptually.
+            *   Structure: The(1) task(2) is(3) demanding(4).
+            *   Translation: 这个任务要求很高。
+            *   Mapping:
+                *   The -> 这 (Indefinite article/this)
+                *   task -> 任务 (Noun)
+                *   is -> 是 (Verb/Copula)
+                *   demanding -> 要求高的 (Adjective) - "费力的" or "有挑战性的". Let's use "有挑战性的" (challenging/high demand).
+
+4.  **Develop Comments:**
+    *   Rule 1 & 3 & 4: Comments must point out key characteristics, original meaning, and distinguish from synonyms based on original meaning.
+    *   The -> 冠词，表示特指或泛指。Here implies specific task. "this/that".
+    *   task -> 任务。Work to be done. Can also be job (work). Distinguish from 'job' (职业). Here it is 'task'.
+    *   is -> 是。系动词。连接主语和表语。
+    *   demanding -> 要求高的/艰巨的。Derived from demand. Requires effort/skill. Not just "loud" or "requiring money". Distinguish from "difficult" (maybe too harsh). Distinguish from "tough" (character). Focus on the requirement aspect.
+
+5.  **Refine Translation for Format:**
+    *   The prompt asks for `<output>ori-word1 (word1-comment) ...</output>`.
+    *   I need to decide how to map Chinese characters to English words for the "word-by-word" output with comments.
+    *   Option A: Translate whole sentence, split by concept.
+    *   Option B: Literal translation per word.
+    *   Given the instruction "ori-ordN (wordN-comment)", it implies keeping the English words in the first part or their equivalent? The example says: `"<output>ori-word1 (word1-comment) ori-word2 (word2-comment)...`
+    *   Wait, looking closely at the example: `<output>ori-word1 (word1-comment) ...</output>`. This suggests the first part before parenthesis should be the original word? Or the translation?
+    *   Example: `<output>ori-word1 (word1-comment) ori-word2 (word2-comment)...`
+    *   Wait, the instruction says "Output-language: zh-CN". So the content inside `<output>` must be in Chinese.
+    *   Re-reading Rule 1: "comments should |point out> the key characteristic... of each word."
+    *   Example provided: `<output>ori-word1 (word1-comment) ori-word2 (word2-comment)...`
+    *   Wait, `ori-word1` implies the original word? But the output language is zh-CN. Usually, this format means: `<Chinese Translation Word> (Comment)`.
+    *   Let's look at the example again: `"<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ori-word3 (word3-comment)..... ori-ordN (wordN-comment)</output>"`
+    *   If `ori-word1` means "Original Word 1", then the output contains English words but comments in Chinese? That contradicts "Output-language: zh-CN".
+    *   Interpretation: The text inside `<output>` must be the translation in zh-CN, where each translated word or unit is followed by a comment.
+    *   Actually, looking at similar tasks often seen in this format (LLM alignment): Usually, it means `Translation Word (Chinese Comment)`.
+    *   However, if I strictly follow "ori-word1" in the example description... `ori` stands for original. But since output is zh-CN, maybe it means `中文翻译词 (注释)`?
+    *   Let's re-read Rule 6: "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language".
+    *   Okay, so inside `<output>`, it must be zh-CN. So I shouldn't put "The" there if I'm translating.
+    *   Correction: The example text `ori-word1 (word1-comment)` is a placeholder description, not literal text to copy literally as 'ori'. I should replace 'ori-word1' with the actual Chinese translation.
+    *   So: `<output>这 (the comment) 项 ...</output>`
+    *   Wait, Rule 6 says: "Use <output> </output> to wrap the output_translation_with_comment".
+    *   Okay, so format is: `ChineseWord1 (Comment1) ChineseWord2 (Comment2)`.
+
+    *   Let's refine the translation string.
+    *   Sentence: "The task is demanding"
+    *   Translation: "这个任务很有挑战性" or "这项任务要求很高".
+    *   To keep word count aligned roughly for annotation:
+        1. The (this/that)
+        2. task (task)
+        3. is (is/copula)
+        4. demanding (demanding/adjective)
+    *   Chinese: "这项任务要求很高" (This item task require very high).
+    *   Split: 这 (the) 项 (measure) 任务 (task) 是 (is) 要求 (requirement aspect) 很 (very) 高 (high). Too split.
+    *   Better split for semantic units: "这个" "任务" "是" "有挑战性的".
+    *   Let's try to match the English parts closely.
+    *   "The" -> 这 / 该
+    *   "task" -> 任务
+    *   "is" -> 是 / （系动词）
+    *   "demanding" -> 要求高的 / 艰巨的
+
+    *   Let's construct the `<output>` string:
+    *   `该 (The - 特指) 任务 (task - 具体事项/工作) 是 (is - 系动词/连接) 有挑战性的 (demanding - 需要大量精力/困难)`
+    *   Wait, need to check Rule 2 "Format is: ... example". The example shows `ori-word`. I will replace with translation.
+    *   Let's refine comments for nuance.
+
+    *   Word 1: The -> 这 (指代词 - 特指，定冠词功能)
+    *   Word 2: task -> 任务 (名词 - 需要完成的工作/职责) [Compare with job(职业), assignment(作业)]
+    *   Word 3: is -> 是 (动词 - 系动词，表示状态)
+    *   Word 4: demanding -> 有挑战性的 (形容词 - 要求高/消耗精力) [Distinguish from difficult (难懂), tough (强硬)]
+
+    *   Wait, I need to make sure the translation inside `<output>` is coherent Chinese.
+    *   String: `该 (冠词注释) 任务 (名词注释) 是 (动词注释) 有挑战性的 (形容词注释)` -> `该任务是有挑战性的`
+    *   Or just space separated? Example shows spaces.
+    *   Okay, I will use standard translation with annotations.
+
+    *   Refining comments to be more descriptive per Rule 1 & 4: "original meaning", "key characteristic".
+    *   `The`: 特指/泛指 (Definite article/Specific reference)
+    *   `task`: 任务/工作 (Work/Achievement - Not a job/职业)
+    *   `is`: 系动词 (Copula - Links subject to adjective)
+    *   `demanding`: 要求高/费力的 (Requiring effort/skill - Distinguish from simple difficulty)
+
+    *   Finalizing Output Content for `<output>`:
+    *   `该 (The - 特指代词功能，表示这/那个) 任务 (task - 具体工作内容，区别于职业) 是 (is - 系动词，连接主语与表语) 有挑战性的 (demanding - 原意：需要大量精力和专注力，强调要求高而非单纯难)`
+    *   Wait, Chinese needs spaces? Yes, usually for annotation.
+    *   Finalize `<output_without_comment>`: `该任务是有挑战性的` (Or more natural: `这项任务要求很高`). Let's use a standard translation. "The task is demanding" -> "这个任务很有挑战性".
+    *   I will use "该任务需费心费力" or similar to capture "demanding". "有挑战性的" is good.
+
+    *   Wait, check Rule 6 again: "Use <output> </output> to wrap the output_translation_with_comment". And Rule 2 format shows `<output_without_comment>translation without comment</output_without_comment>` as well.
+    *   The prompt says "Only allow one output." but the example has two tags. I will include both tags in my response text, but ensure it counts as one "block" of response following the template.
+
+    *   Wait, looking at the instruction: "Note: Only allow one output." This might mean don't give me multiple options. Just the single translation result.
+    *   The format requires two XML blocks. I will provide both inside my text response.
+
+    *   Let's check the example again carefully:
+        `<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ori-word3 (word3-comment)..... ori-ordN (wordN-comment)</output>`
+        `<output_without_comment>word1 word2 word3..... wordN</output_without_comment>`
+    *   Okay, I will substitute `ori-word` with the Chinese character for that segment.
+
+    *   Decision on translation: "这项任务要求很高" is good. Or "这个任务很艰巨". "demanding" -> "要求高的" fits best semantically (high demand).
+    *   Let's use: `这 (The) 项 (task measure?)` No, better to group words.
+    *   Groups: This/That task / is / demanding.
+    *   Translation: `该 (The) 任务 (task) 是 (is) 要求高的 (demanding)`
+
+    *   Let's draft comments:
+        *   The (这 - 特指功能，定冠词对应中文指示代词)
+        *   task (任务 - 工作项目/职责，区别于职业职位)
+        *   is (是 - 系动词，连接属性)
+        *   demanding (要求高的 - 核心原意：需要消耗大量精力或技能，区别于简单的“难”)
+
+    *   Wait, Rule 1 says "comments should |point out> the key characteristic... original meaning".
+    *   Okay.
+
+    *   Double Check Rule 6: "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language".
+    *   The prompt example shows TWO tags: `<output>` and `<output_without_comment>`. I must follow the example structure despite the "Only allow one output" note (which likely refers to not providing multiple variations or conversational filler).
+
+    *   Plan:
+        1.  Create ` <output>` block with formatted translation + comments in zh-CN.
+        2.  Create ` <output_without_comment>` block with standard translation in zh-CN.
+        3.  Ensure comments explain original meaning and characteristics (e.g., "task" vs "job").
+
+    *   Drafting content:
+        The -> 该 (特指代词，对应定冠词)
+        task -> 任务 (需完成的工作项目，区别于职业身份)
+        is -> 是 (系动词，表示状态)
+        demanding -> 要求高的 (核心原意：需要大量精力与专注力，区分于单纯的“困难”)
+
+        Combined: `该 (The - 特指代词，对应定冠词) 任务 (task - 需完成的工作项目，区别于职业身份) 是 (is - 系动词，表示状态) 要求高的 (demanding - 核心原意：需要大量精力与专注力，区分于单纯的“困难”)`
+        Translation without comment: `该任务是要求高的`
+
+        Wait, "The task is demanding" -> Natural Chinese: "这项任务要求很高".
+        Let's make the translation natural but annotated.
+        Word mapping for annotation might force a slightly literal structure, but I should prioritize correct translation.
+        Let's stick to the words in order of the sentence for the annotation block.
+        Sentence segments: The / task / is / demanding.
+        Chinese equivalents: 这项 / 任务 / 是 / 要求高的.
+        Or just：这 / 项 / 任务 / ...
+        Let's use semantic chunks to

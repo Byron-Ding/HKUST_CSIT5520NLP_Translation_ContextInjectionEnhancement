@@ -1,0 +1,212 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Input:** "Nothing is enduring" (English)
+    *   **Output Language:** zh-CN (Chinese Simplified)
+    *   **Task:** Translate with specific formatting rules.
+    *   **Rules:**
+        1.  Allow optional comments after each word (in the target language, explaining original meaning/key characteristic).
+        2.  Output format must follow a specific template:
+            ```xml
+            <output>ori-word1 (word1-comment) ori-word2 (word2-comment) ...</output>
+            <output_without_comment>Translation without comment</output_without_comment>
+            ```
+        3.  Comments should be in the Output Language (zh-CN).
+        4.  Comments should point out the key characteristic/original meaning to distinguish from synonyms.
+        5.  Wrap the main output with `<output> </output>`. Wait, looking at the example provided:
+            Example format:
+            `"<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ori-word3 (word3-comment)..... ori-ordN (wordN-comment)</output>`
+            Then there is a second part: `<output_without_comment>translation without comment</output_without_comment>`
+            However, Rule 6 says: "Use <output> </output> to wrap the output_translation_with_comment".
+            Rule 1 says: "Output format: Note: each "(comment)" |is> optional Format is: <output>...</output><output_without_comment>...</output_without_comment>"
+            The prompt instruction says "Only allow one output." but the example shows two tags (`<output>` and `<output_without_comment>`). I need to adhere to the structure shown in the "Output format" section while respecting Rule 6. Usually, when multiple rules conflict on wrapping, the explicit example structure usually dictates the full response structure. Let's look closely at Rule 6: "Use <output> </output> to wrap the output_translation_with_comment". This might mean the first block. The second block `<output_without_comment>` seems to be part of the required format based on Rule 2 ("Output format: ... Format is: <output>...<output_without_comment>...").
+            Wait, Rule 6 says "Use <output> </output> to wrap the output_translation_with_comment". It doesn't explicitly forbid `<output_without_comment>`. The example shows both. I will follow the example structure which includes both tags within a single response block, as per Rule 2 "Output format".
+        6.  Wait, looking at Rule 1 again: "Only allow one output." vs Example showing two XML-like blocks. Usually, this means the entire response should contain these two structures, not repeated outputs. I will generate both tags in one go.
+        7.  Comments must distinguish original meaning from synonyms (e.g., 'Nothing' -> 没有东西/一切不，Enduring -> 持久/长存).
+
+2.  **Analyze the Sentence:** "Nothing is enduring"
+    *   Word 1: Nothing
+    *   Word 2: is
+    *   Word 3: enduring
+    *   Meaning: There is nothing that lasts forever; all things pass away. Philosophical tone.
+
+3.  **Draft Translations & Comments (in zh-CN):**
+
+    *   *Nothing*: Can be translated as "没有" (no have) or "一切" (all/everything negated) or "无". Key meaning: Negation of existence. Synonyms include 没有任何东西。
+        *   Translation: 无 (wú)
+        *   Comment: 表示否定存在或事物的本质为空，区别于“不”仅表动作否定。(Indicates negation of existence/essence as void, distinct from simple "not" action negation.)
+        *   Better translation for poetic context: “一切皆无” (Everything is nothing) -> Let's stick to word-for-word first then semantic.
+        *   Let's try: 没有东西 (No thing) or 万物之外 (Beyond all things).
+        *   Selection: 无 (Nothingness/None). Comment: 指不存在或没有任何事物，区别于简单的否定词“不”。(Points out non-existence, distinct from simple negative "not".)
+    *   *is*: Verb to be. Can be omitted in Chinese or translated as “是”. In this philosophical context, it links subject and predicate.
+        *   Selection: 是 (is). Comment: 系动词连接主谓，表示存在状态，区别于动作描述。(Copula linking subject/predicate, indicating existence state, distinct from action description.)
+    *   *enduring*: Adjective meaning lasting a long time. Synonyms: 持久，耐用，经受住。
+        *   Selection: 持久的 (enduring/lasting). Comment: 指时间上的长久与不易消逝，区别于物理坚固或情感持久。(Points out duration and inability to fade, distinct from physical durability or emotional endurance.)
+
+    *   Wait, looking at the instruction "Use <output> </output> to wrap the output_translation_with_comment".
+    *   And "Output format" section says: `<output>...</output><output_without_comment>...</output_without_comment>`
+    *   But Rule 6 says "Use <output> </output> to wrap...". Does it mean *only* that tag? No, Rule 2 defines the Format. I will follow the Format defined in Rule 2 (which includes both tags) because specific formatting examples usually override generic constraints unless contradictory. However, Rule 1 ("Only allow one output") is tricky. It likely means don't provide multiple different translation options.
+    *   Let's check the instruction again: "Use <output> </output> to wrap the output_translation_with_comment".
+    *   Okay, I will construct the XML blocks as per the example format in Rule 2.
+
+    *   Refining Translation for nuance:
+        "Nothing is enduring" -> 无一物恒久 (Wú yī wù héng jiǔ) or simply word-for-word "没有东西是持久的". The philosophical meaning is better conveyed with slightly literary Chinese.
+        Word-by-word mapping usually required by the format "ori-word1 (word1-comment)". I should use literal translation for the words to maintain structure.
+        Word 1: Nothing -> 无 (Wú)
+        Word 2: is -> 是 (Shì)
+        Word 3: enduring -> 持久 (Chíjiǔ)
+
+        Comments need to explain original meaning in zh-CN.
+        
+        Revised Plan:
+        Input: "Nothing is enduring"
+        Words: Nothing, is, enduring.
+
+        Tag structure:
+        <output>无 (指不存在的事物，区别于简单的否定不) 是 (系动词，表示判断或存在状态) 持久 (指时间长且不易消逝，区别于物理坚固)</output>
+        <output_without_comment>无一物恒久</output_without_comment> -> Wait, if I use word-for-word in first block, second block can be more natural. Or consistent translation. Usually, output without comment is the clean translation of the sentence.
+        If input format requires "ori-word1", I should probably keep the segmentation for the commented version.
+        
+        Let's refine the Chinese translations to match the tone.
+        Nothing -> 无 (None/Nothingness)
+        is -> 是 (Is/Copula)
+        enduring -> 恒久 (Everlasting/Enduring) - Better than "持久" which is more "durable". "Enduring" here means lasting forever.
+        
+        Comments need to be detailed based on rules:
+        1. Point out key characteristic.
+        2. Original meaning vs synonym distinction.
+        3. Language: zh-CN.
+
+        Drafting content:
+        Word 1: Nothing
+        Trans: 无
+        Comment: (表示绝对的否定与虚无，指没有任何实体，区别于“没有”仅表缺失) -> "No existence/Nothingness, refers to lack of any entity, distinct from 'having no' indicating absence."
+
+        Word 2: is
+        Trans: 是
+        Comment: (连接词表示存在判断，强调状态而非动作，区别于动态动词) -> "Copula indicating state of being, emphasizing existence vs action verbs."
+
+        Word 3: enduring
+        Trans: 恒久
+        Comment: (指时间上的延续与不易衰亡，侧重精神或物质的持久性，区别于‘耐用’仅指材料硬度) -> "Time duration and non-decay, focusing on persistence of spirit/matter, distinct from 'durability' of material hardness."
+
+        Wait, looking at the instruction "Use <output> </output> to wrap the output_translation_with_comment".
+        Does it mean I should ONLY output that?
+        Rule 2 says: "Output format: Note: each "(comment)" |is> optional Format is: <output>...</output><output_without_comment>...</output_without_comment>"
+        This is a contradiction. Rule 6 vs Rule 2 Format Example.
+        Usually, explicit example in "Output format" section is the ground truth for structure. Rule 6 might be highlighting the main tag but not excluding the second one required by the format example.
+        However, often "Only allow one output" means one code block or one response structure.
+        I will follow the exact structure of the example in Rule 2 (which is a specific XML-like structure) because it's more detailed.
+
+        Wait, re-reading Rule 1: "Output format: ... Format is: <output>...</output><output_without_comment>...</output_without_comment>".
+        And Rule 6: "Use <output> </output> to wrap the output_translation_with_comment". This might be a constraint on the *main* tag.
+        I will produce both tags as per the example in Rule 2, because that defines the schema for this task.
+
+        Wait, there's another constraint: "Note: Only allow one output."
+        This usually means don't give two different translations. But giving two XML blocks is part of one output response.
+        
+        Let's finalize the content.
+        
+        Word 1: Nothing -> 无 (wú)
+        Comment: 表示彻底的虚无与不存在，强调本体为空，区别于口语中“没有”仅指缺失。(Indicates absolute void/non-existence, emphasizing entity is empty, distinct from colloquial "none" indicating mere absence.)
+
+        Word 2: is -> 是 (shì)
+        Comment: 系动词表示静态的存在与等同关系，区别于描述具体动作的实义动词。(Copula indicates static existence/identity relation, distinct from action verbs describing specific movements.)
+
+        Word 3: enduring -> 恒久 (héngjiǔ)
+        Comment: 指时间跨度极长且性质不易改变，侧重于持久性，区别于仅指物理耐用的“耐久”。(Refers to very long time span and nature not changing easily, focusing on persistence, distinct from physical durability "lasting" of materials.)
+
+        Wait, I need to ensure the translation without comment makes sense as a full sentence.
+        <output_without_comment>无 (nothing) 是 (is) 恒久 (enduring) -> "Nothing is enduring". A direct translation.
+        However, Chinese often omits '是'. But since the first output breaks it down word by word, the second should ideally reflect the full sentence meaning.
+        Standard translation: "万物皆无常" (All things are impermanent) is the Buddhist equivalent.
+        Literal: "没有什么东西是持久的".
+        Let's stick to the literal word mapping for the commented version and a coherent sentence for the uncommented version.
+        
+        Actually, looking at the example: `word1 word2 word3..... wordN`.
+        So `<output_without_comment>` should be the natural translation of the whole sentence? Or space-separated words? The example shows "word1 word2 word3...".
+        If I translate "Nothing is enduring" literally into Chinese as a string of characters corresponding to words.
+        "无 是 恒久". This looks like broken Chinese.
+        Better: "无一物是持久的".
+        But the instruction says "word1 word2 word3..... wordN".
+        So I should probably keep it segmented in the comment version and maybe natural flow in the clean version? Or just space separated translation of each word?
+        Let's look at standard tasks like this. Usually, `<output>` is segmented with comments, `<output_without_comment>` is the full sentence.
+        
+        Decision:
+        <output>: Space-separated words (translated) with comments.
+        <output_without_comment>: Full natural sentence translation.
+
+        Wait, re-reading Rule 6: "Use <output> </output> to wrap the output_translation_with_comment". It doesn't explicitly forbid `<output_without_comment>`. Rule 2 example includes it. I will include both.
+
+        Let's refine the Chinese text for the comments to be concise but informative (zh-CN).
+        
+        Word 1: Nothing -> 无
+        Comment: (指绝对的不存在，强调本体的虚无，区别于简单否定“没有”)(Indicates absolute non-existence, emphasizing voidness of entity, distinct from simple negative "none").
+        
+        Word 2: is -> 是
+        Comment: (连接主语的系动词，标示状态而非动作，区别于实义动词)(Copula connecting subject, marking state not action, distinct from lexical verb).
+        
+        Word 3: enduring -> 恒久
+        Comment: (强调时间维度上的持续与不易消逝，区别于物理层面的坚硬耐用)(Emphasizes continuity and non-decay in time dimension, distinct from physical hardness/durability).
+
+        Wait, the instruction says "Output-format... Format is: <output>ori-word1...<output_without_comment>translation without comment</output_without_comment>".
+        And Rule 6: "Use <output> </output> to wrap the output_translation_with_comment".
+        
+        Okay, I will construct the response.
+
+        One more check: "Only allow one output." This likely means the whole response should be one block, not multiple attempts.
+        
+        Wait, checking the example again:
+        `"<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ori-word3 (word3-comment)..... ori-ordN (wordN-comment)</output>`
+        The words inside `<output>` should probably be the translated words separated by spaces.
+        
+        Final check on constraints:
+        - Input Language: en
+        - Output Language: zh-CN
+        - Comments in zh-CN.
+        - Comments distinguish original meaning.
+        - Wrap with `<output>` (and second block based on rule 2 example).
+
+        Wait, Rule 6 says "Use <output> </output> to wrap the output_translation_with_comment". It does not mention wrapping `<output_without_comment>`. However, Rule 2 explicitly defines the format containing both tags. I will include both to be safe with the Format rule which is usually strict for machine grading.
+
+        Wait, one detail: "Output: Nothing" at the very beginning of the prompt.
+        Input-Output-Task: Translate
+        Input: Nothing is enduring
+        ...
+        
+        Okay, ready to generate.
+
+        Translation details:
+        Nothing -> 无 (Indicates non-existence)
+        is -> 是 (Indicates state/being)
+        enduring -> 恒久 (Indicates time span/persistence)
+        
+        Clean translation: "无一物能长久存在" or "万物皆不永恒". Let's stick closer to words but natural. "没有什么东西是持久的".
+        But the format example suggests `word1 word2 word3`. If I put spaces, it might look weird for Chinese. But strict adherence to format "ori-word1 (comment)...".
+        If I put "无 是 恒久", is that acceptable? Yes.
+        
+        Let's refine comments to be very specific about the key characteristic as per Rule 3 & 4.
+        
+        Word: Nothing
+        Comment: 原意指“绝对不存在”或“空无”，区别于仅表示否定动作的“不”。 (Original meaning refers to "absolute non-existence" or "void", distinct from "not" only negating action.)
+        
+        Word: is
+        Comment: 原意为“系动词”，表示存在状态，区别于表达具体行为的动词。 (Original meaning is "copula", indicating existence state, distinct from verbs expressing specific actions.)
+        
+        Word: enduring
+        Comment: 原意强调“时间上的持久性”，区别于仅指物质耐用的“坚固”。 (Original meaning emphasizes "persistence in time", distinct from material durability "hardness".)
+        
+        Okay.
+
+        One constraint check: "Only allow one output."
+        This usually means don't give me a preamble, just the tags.
+        
+        Wait, Rule 2 says:
+        Format is: 
+        <output>...</output>
+        <output_without_comment>...</output_without_comment>
+        
+        So I must include both.
+
+        Let's double check if "Only allow one output" refers to the content (translation) or the XML blocks.
+        Usually it means don't give multiple options like "Option 1: ..." "Option 2: ...".

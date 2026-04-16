@@ -1,0 +1,247 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Input:** "Nothing is everlasting"
+    *   **Input Language:** English (en)
+    *   **Output Language:** Chinese (zh-CN)
+    *   **Task:** Translate with specific formatting rules regarding comments and output structure.
+    *   **Rules Breakdown:**
+        1.  Allow optional comments after each word.
+        2.  Comments must point out the key characteristic, especially the original meaning, of each word.
+        3.  Output format:
+            ```xml
+            <output>ori-word1 (word1-comment) ori-word2 (word2-comment)...</output>
+            <output_without_comment>translation without comment</output_without_comment>
+            ```
+        4.  Notes:
+            *   Only allow one output block (based on "Only allow one output" note, though the example shows two tags inside one structure, I need to follow the example's XML-like structure strictly). Wait, the instruction says "Note: Only allow one output." but the example shows `<output>...</output>` and `<output_without_comment>...</output_without_comment>`. Usually, this means the entire response should contain these tags.
+            *   Comments are in Output-Language (zh-CN).
+            *   Use `<output>` to wrap the translation *with* comment. (Wait, looking at the example: `<output>ori-word1 (word1-comment)...</output>` and then a separate tag `<output_without_comment>...</output_without_comment>`). The instruction says "Use <output> </output> to wrap the output_translation_with_comment". This implies there might be two parts required based on the example.
+            *   Compare similar words to point out key characteristics (Rule 3) - this seems to imply the comment should differentiate nuances.
+            *   Original meaning is important (Rule 4, 5).
+        5.  Specific Instruction: "Use <output> </output> to wrap the output_translation_with_comment". The example shows two tags: `<output>` and `<output_without_comment>`. I will follow the example structure closely.
+        6.  Wait, looking closer at Rule 1 & Example:
+            Format is:
+            `<output>ori-word1 (word1-comment) ori-word2 (word2-comment)..... ori-ordN (wordN-comment)</output>`
+            `<output_without_comment>word1 word2 word3..... wordN</output_without_comment>`
+            So I need to produce both lines/blocks.
+
+    *   **Constraint:** "Note: Only allow one output." -> This might mean I shouldn't add extra conversational text, just the structured output. Or it might conflict with the example having two tags. Usually, in these tasks, "One output" means don't talk back, just give the requested format. The example shows the format contains two XML-like tags. I will follow the example format.
+
+    *   **Translation:** "Nothing is everlasting" -> "万无一失是永恒的" (No, that's wrong). "Nothing lasts forever".
+        *   Nothing: 没有任何事物 / 一切皆无
+        *   is: 是 (be verb)
+        *   everlasting: 永恒的 / 长存的
+
+        Standard translation: "没有什么是永恒不变的" or "世间万物无不消逝" (poetic). Literal: "没有什么是永存的". Let's aim for natural yet faithful. "万物皆有尽头，无一永恒" (Nothing is everlasting). Or simply "没有什么是不朽的/永恒的".
+        Let's pick: "没有什么事物是永恒的" (Nothing things are eternal) or "万事无常，没有永恒" (Everything changes, nothing is eternal).
+        Strict literal translation for translation task usually preferred. "Nothing" -> "任何事物都不", "is" -> "是", "everlasting" -> "永恒的".
+        Phrase: "没有任何事物是永恒的".
+
+        Word by word mapping for the comment format:
+        *   Nothing: 没有任何事物 (No specific thing exists / Absolute negation)
+        *   is: 是 (Link verb / Existence/State)
+        *   everlasting: 永恒的 (Timeless / Unchanging forever)
+
+        Let's refine the Chinese translation to be natural but word-aligned.
+        "Nothing" -> 没有什么 (No thing)
+        "is" -> 是
+        "everlasting" -> 永恒不变的
+
+        Better alignment for semantic granularity:
+        Nothing (没有任何事物) is (存在/是) everlasting (长存不灭的).
+        
+        Let's try to keep the structure close to English tokens.
+        Word 1: Nothing -> 没有 (Negation) / 任何事物 (Thing)
+        Word 2: is -> 是 (Be verb)
+        Word 3: everlasting -> 永恒的 (Everlasting)
+
+        Chinese sentence: "没有任何事物是永恒的"
+        
+        Actually, for "Nothing", one word often translates to a phrase. I should represent the concept clearly.
+        Option A: 没有 (No) + 什么 (Thing) + 是 (Is) + 永恒 (Eternal) + 的 (Adj marker)
+        Original: Nothing is everlasting.
+        
+        Let's try to segment logically for the comment requirement.
+        "Nothing" -> 无一事物 (Characteristic: Absolute negation of existence)
+        "is" -> 是 (Characteristic: Predication/State)
+        "everlasting" -> 长存不息 (Characteristic: Duration without end)
+
+        Let's finalize the translation line first for `<output_without_comment>`.
+        "没有任何事物是永恒的" is good.
+        
+        Now the `<output>` line needs to be word-aligned with comments.
+        Format: `ori-word1 (comment) ori-word2 (comment)...`
+        Since Chinese is morphologically different, I should try to match the English words or use character segments that correspond.
+        Example: `no thing is everlasting` -> `没有 事物 是 永恒 (的)`
+        
+        Let's map:
+        Nothing -> 任何事物都不 (No specific things do / None exist)
+        is -> 存在/为 (State of being)
+        everlasting -> 长存不坏的 (Lasting forever)
+        
+        Actually, simpler is better to match the instruction "ori-word1". I will use the Chinese translation segments corresponding to the English words.
+        
+        Nothing: 没有什么 (Nothing specific exists)
+        is: 是 (is/are)
+        everlasting: 永恒的 (everlasting)
+        
+        Wait, the instruction says "ori-word1 (word1-comment)".
+        Example: `no (not-exist) thing (object)`
+        So I should write the Chinese translation words in sequence.
+        "没有任何事物是永恒的" -> 4-5 character phrases?
+        Let's try to split it like English structure.
+        Nothing (什么事物都不) is (是) everlasting (永恒不变的).
+        
+        Comments need to be in zh-CN, pointing out original meaning/key characteristic.
+        Example: `nothing(无实体的存在)` `is(系动词表状态)` `everlasting(无限延续的)`.
+
+        Let's draft the output string.
+        `<output>任何事物都不 (否定存在特征) 是 (连词/系动词) 永恒不变的 (时间上的无限特征)</output>`
+        This looks a bit heavy on characters. Let's try to match the English tokens visually if possible, but in Chinese context.
+        
+        Better approach: Translate "Nothing" as `没有 (no)` + `什么 (anything)`? No, keep it semantic.
+        Translation: `没有任何事物是永恒的`
+        Split:
+        1. Nothing -> 没有任何事物 (Characteristic: Absolute negation of existence)
+        2. is -> 是 (Characteristic: Link between subject and predicate)
+        3. everlasting -> 永恒不变的 (Characteristic: Timeless duration)
+        
+        Wait, the rule says "Compare the similar word of each word". This might mean differentiate nuances if synonyms exist (e.g., eternal vs immortal).
+        Original meaning annotation is key.
+        
+        Let's try to make it concise.
+        `<output>无一物 (无实存之物) 是 (系词表状态) 长存不灭的 (时间无限性)</output>`
+        Wait, "Nothing" is one word. I will translate it as a phrase representing the word's meaning.
+        
+        Let's refine the translation string to be natural but mapped.
+        Input: "Nothing is everlasting"
+        Output Translation (No comment): "没有任何事物是永恒的"
+        Output Translation (With Comment): "没有 (否定词) 有什么 (存在对象) 是 (系动词) 永恒不变的 (持续时间长)"
+        
+        Actually, looking at the instruction "ori-word1", it implies I should keep the original token order but translate.
+        `Nothing` -> `没有任何事物` (No specific thing exists)
+        `is` -> `是` (Is/Be)
+        `everlasting` -> `永恒的` (Timeless)
+        
+        Let's construct the XML block exactly as requested.
+
+        Rule 6: Use `<output>` to wrap the output_translation_with_comment.
+        Wait, the example shows TWO tags in the example description:
+        `<output>ori-word1...</output>`
+        `<output_without_comment>word1 word2...</output_without_comment>`
+        
+        I need to follow the "Format is:" section strictly.
+        Format:
+        `<output>...with comments...</output>`
+        `<output_without_comment>...clean translation...</output_without_comment>`
+        
+        Wait, rule 6 says "Use <output> </output> to wrap the output_translation_with_comment". It doesn't explicitly mention the second tag in Rule 6 description, but Rule 1/Example includes it. I will include both tags as per the Example section which defines the Format.
+        
+        Also, Rule 2: "Comment |are> in Output-Language, in zh-CN".
+        Rule 3: Compare similar words -> Point out key characteristic.
+        
+        Final check on "Nothing is everlasting".
+        Translation: 没有任何事物是永恒的 (No thing is eternal)
+        Words for commenting:
+        1. Nothing (没有任何事物) - Key: Absolute negation of existence.
+        2. is (是) - Key: Verbal connection/State definition.
+        3. everlasting (永恒不变的) - Key: Timelessness/Endurance.
+
+        Let's refine the comment text to be concise and point out original meaning in Chinese.
+        
+        Word 1: `没有任何事物` (Nothing) -> Comment: (无具体对象存在，彻底否定)
+        Word 2: `是` (is) -> Comment: (判断系词，连接主谓)
+        Word 3: `永恒不变的` (everlasting) -> Comment: (超越时间的存续状态)
+
+        Wait, I need to check if I should separate words like `没 有` or keep as `没有任何事物`.
+        Given the input is one phrase per word concept usually.
+        "Nothing" is one token.
+        "is" is one token.
+        "everlasting" is one token.
+        
+        So I will treat them as semantic units.
+        
+        Let's finalize the content inside tags.
+        
+        Wait, Rule 2 says "Comment |are> in Output-Language".
+        Format: `output (word1-comment) word2 (comment)...`
+        Example shows: `<output>ori-word1 (word1-comment) ori-word2 (word2-comment).....</output>`
+        Note the "ori-" prefix in the example description text? "Format is: <output>ori-word1 (word1-comment) ...".
+        Does "ori" mean original word or placeholder? The example says `<output>ori-word1 (word1-comment) ori-word2 (word2-comment)..... ori-ordN (wordN-comment)</output>`.
+        It likely means I should output the translation words with comments.
+        Wait, does it want `Nothing` written in English inside the tag? Or Chinese translation?
+        "Output-language: zh-CN". So I must use Chinese characters for the content, even if the example shows `ori-word1`. That is probably a placeholder instruction description.
+        Instruction says: "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language".
+        So inside `<output>`, I put Chinese translation segments + comments.
+        
+        Example interpretation:
+        Input: Hello
+        Output: <output>Hello (问候语) </output>? No, Output Language is zh-CN. So:
+        <output>你好 (greeting) </output>.
+        
+        Okay, applying to "Nothing is everlasting".
+        <output>没有任何事物是永恒的</output> -> But needs comments after each word/segment.
+        <output>没有任何事物 (无实存之特定对象特征) 是 (系动词表状态连接) 永恒的 (时间无限性特征)</output>
+        
+        Wait, the example format has spaces between `ori-word1` and `(comment)`.
+        `<output>no (not-exist) thing (object)...</output>`
+        
+        I will ensure there are spaces or separators as per standard text flow.
+        
+        Refined Plan:
+        1. Create translation string with segments.
+        2. Add comments in parentheses after each segment.
+        3. Ensure comments explain original meaning and key characteristics in Chinese.
+        4. Ensure second tag `<output_without_comment>` exists with clean translation.
+        
+        Wait, Rule 6 says "Use <output> </output> to wrap the output_translation_with_comment". It doesn't mention `<output_without_comment>` in Rule 6, but Rule 1/Example defines two tags. I will follow Example structure (2 tags).
+        
+        Final Polish on Translation:
+        Nothing -> 没有任何事物
+        is -> 是
+        everlasting -> 永恒的
+        
+        Comments:
+        Nothing -> (彻底否定存在的特征)
+        is -> (主谓关系的连接特征)
+        everlasting -> (超越时间流逝的持续特征)
+        
+        Wait, "Nothing" translates to "任何事物都不" or "没有什么". "没有任何事物" is a bit clunky but accurate. Let's use "没有事物存在" or similar? No, simple is better. "没有任何事物".
+        Actually, standard translation is "万物皆无常" (Too idiomatic).
+        "Nothing is everlasting" -> "世间没有永恒之物".
+        But word-for-word: "没有什么是不朽的".
+        Let's stick to: `没有什么 是 永恒的` or `没有任何事物 是 永恒的`.
+        I will use `没有任何事物 (无特定实存对象特征)` `是 (系词连接特征)` `永恒的 (时间无限存续特征)`.
+        
+        Wait, checking Rule 1: "Allow optional comments". But the example implies they are required for the `<output>` tag format described. "Format is: <output>ori-word1 (word1-comment)...". I will include comments as per the Format instruction example.
+
+        Checking Rule 6 again: "Use <output> </output> to wrap the output_translation_with_comment". This might imply ONLY that tag? But Example shows two. I'll stick to the Example format as it's more specific on structure ("Format is: ...").
+
+        Wait, one more check on Rule 6: "Use <output> </output> to wrap the output_translation_with_comment...". It doesn't explicitly forbid `<output_without_comment>`. The Example has both. I will include both to be safe and accurate to the Format section.
+
+        Final Check on Content Language:
+        All text inside tags must be zh-CN, except potentially "ori-" if that was a literal placeholder? The instruction says "Comment |are> in Output-Language". The example shows `ori-word1`. I should probably replace `ori-word1` with the actual Chinese translation segment to make it valid output.
+        
+        Wait, instruction: "Format is: <output>ori-word1 (word1-comment) ...</output>". This looks like a template description. If I put Chinese words there, does it violate? No, because Output Language is zh-CN. The `ori-word` is likely a placeholder for the translated word.
+        
+        Okay, let's assemble.
+
+        Segment 1: Anything/Nothing -> 没有任何事物 (Characteristic: Absolute negation of specific entity)
+        Segment 2: is -> 是 (Characteristic: Copula/State connection)
+        Segment 3: everlasting -> 永恒的 (Characteristic: Duration beyond time)
+
+        Let's make sure the translation sounds natural. "没有任何事物是永恒的" is fine.
+        
+        Wait, Rule 4 & 5 says: "Compare the similar word... original meaning... Annotate the original meaning".
+        So comment should focus on original English meaning annotation in Chinese.
+        Example for `nothing`: (无实体的否定词).
+        Example for `everlasting`: (意指永不终结).
+
+        Let's write it.
+
+        One constraint: "Only allow one output." -> This usually means don't add markdown text like "Here is the translation:". Just the XML tags.
+
+        Wait, looking at the instruction hierarchy.
+        Rules section overrides general notes?
+        "

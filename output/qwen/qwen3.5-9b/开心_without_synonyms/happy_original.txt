@@ -1,0 +1,168 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Input:** "I am happy to hear the good news."
+    *   **Input Language:** en (English)
+    *   **Output Language:** zh-CN (Chinese)
+    *   **Task:** Translate with specific formatting rules.
+    *   **Rules:**
+        1.  Allow optional comments after each word.
+        2.  Output format must be:
+            `<output>input language (translation and output language comment)</output>`
+            `<output_without_comment>translation without comment</output_without_comment>`
+            *Wait, looking closely at the rules:* "Note: Only allow one output." vs "Output format: <output>... </output>". The example shows two tags inside a structure, but the rule says "Only allow one output". Usually, this means the final response should follow the specified XML-like tag structure provided in the rules. Let's re-read the example carefully:
+            Example:
+            `"<output>ori-word1 (word1-comment) ... </output>`
+            `<output_without_comment>word1 ... </output_without_comment>`
+            *Wait, the prompt says "Note: Only allow one output."* This contradicts the example which shows two blocks. However, often in these strict instruction tasks, the "Output format" section defines the structure I must use. If the rule says "Only allow one output", it might mean "Don't give extra conversational text". But the format explicitly asks for `<output>` and `<output_without_comment>`.
+            Let's look at Rule 6: "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language". This implies the primary expected structure is wrapping the commented version.
+            However, the "Output format" section lists *both* `<output>` and `<output_without_comment>`.
+            Let's interpret "Only allow one output" as "Don't add conversational filler before/after", but follow the provided XML schema defined in the "Output format" section.
+            Actually, looking at the example again:
+            `"<output>ori-word1 (word1-comment) ori-word2 (word2-comment) ori-word3 (word3-comment)..... ori-ordN (wordN-comment)</output>`
+            `<output_without_comment>word1 word2 word3..... wordN</output_without_comment>`
+            This looks like two blocks. But Rule 1 says "Note: Only allow one output." This is a common conflict in prompt engineering. Usually, the most specific formatting instruction wins. The "Output format" section defines the structure. The "Only allow one output" usually means "Don't add extra text outside the tags".
+            Wait, looking at Rule 6 again: "Use <output> </output> to wrap the output_translation_with_comment...". It doesn't explicitly mention `<output_without_comment>` in Rule 6, but the "Output format" section does.
+            Let's check the instruction hierarchy. The user provided a specific template. I should follow the template shown in "Output format" and "example".
+            However, if I strictly follow "Only allow one output", maybe I should combine them or just choose one? No, the example shows both. I will assume "Only allow one output" refers to not adding chatter like "Here is the translation:".
+            Wait, another interpretation: The user wants me to generate the response exactly as per the example structure.
+            Let's refine the plan:
+            1. Translate each word/segment.
+            2. Add comments in Chinese (zh-CN) explaining original meaning/key characteristic vs synonyms.
+            3. Wrap the commented string in `<output>`.
+            4. Wrap the plain translation string in `<output_without_comment>`.
+            5. Ensure no other text is outside these tags.
+
+    *   **Constraint Checklist & Confidence Score:**
+        1. Translate en -> zh-CN? Yes.
+        2. Allow optional comments after each word? Yes.
+        3. Comment points out key characteristic/original meaning? Yes.
+        4. Output format matches example? Yes (two XML-like tags).
+        5. Comment in Output Language (zh-CN)? Yes.
+        6. Use `<output>` to wrap commented version? Yes.
+        7. "Only allow one output"? This is tricky. Does it mean one code block or no extra text? I will provide the requested structure without extra conversation.
+        Wait, looking at the instruction: "Output format: ... example: ...".
+        Rule 6 says: "Use <output> </output> to wrap the output_translation_with_comment...". It doesn't explicitly forbid `<output_without_comment>` in Rule 6, but Rule 6 focuses on the commented one. The "Output format" header shows both. I will include both blocks as per the example, assuming "Only allow one output" means "One block of response content" containing these tags, not multiple turns or chat.
+        *Correction*: Sometimes "Only allow one output" means the system should not generate two separate messages. Since this is a single turn, I will output the text with both tags in one message.
+        *Wait, another look at Rule 1*: "Note: each "(comment)" |is> optional".
+        *Another look at Rule 2*: "Output format: <output>... </output> <output_without_comment>...</output_without_comment>".
+        Okay, I will follow the example structure.
+
+    *   **Translation Strategy:**
+        Input: "I am happy to hear the good news."
+        Segments:
+        I -> 我 (wǒ) - Pronoun, first person singular.
+        am -> 是 (shì) / 处于状态 (be) - Copula here indicating state of being.
+        happy -> 高兴 (gāoxìng) - Emotion/feeling.
+        to hear -> 听到 (tīngdào) - Verb + Resultative Complement or Infinitive marker context. Here it's part of the structure "happy to do".
+        the -> 这 (zhè) / the definite article function. In Chinese, often omitted or represented by demonstratives/context. Let's translate meaningfully: (定冠词指示).
+        good -> 好 (hǎo) - Positive quality.
+        news -> 消息 (xiāoxi) / 新闻 (xīnwén) - Information/Update.
+
+    *   **Refining Translation:**
+        "I am happy to hear the good news."
+        Common translation: 听到这好消息我很高兴。 (Hearing this good news, I am very happy.) OR 听到这个消息我倍感欣慰。 (A bit too formal). Let's stick closer to word-for-word for the formatting task.
+        "我 (I) 是 (am/being) 高兴 (happy) 听到 (to hear) 这 (the) 好消息 (good news)。"
+        Wait, Chinese word order is different. "I am happy" -> "我很高兴". "To hear the good news" -> "听到这个消息".
+        Let's split for the `<output>` block to match "after Each word".
+        So: I(我) am(感到/是) happy(快乐/高兴) to hear(得知/听) the(这) good(好) news(消息).
+
+        Let's draft the comments based on Rule 1 (key characteristic/original meaning in zh-CN).
+        I -> (第一人称代词 "I"，指说话者本人)
+        am -> (系动词 "am"，连接主语与形容词)
+        happy -> (形容词 "happy"，描述情感状态)
+        to hear -> (不定式结构 "to hear"，表目的或原因)
+        the -> (定冠词 "the"，特指)
+        good -> (形容词 "good"，修饰性质)
+        news -> (名词 "news"，消息内容)
+
+        Full Sentence Translation (without comment): 听到这好消息我很高兴。
+        Wait, the example format implies a word-by-word mapping structure: `ori-word1 (word1-comment) ...`.
+        So I need to map the English words to Chinese translations inside the parentheses.
+
+        Structure: `<output>I(我) am(是) happy(快乐) to hear(听到) the(这) good(好) news(消息).</output>`
+        Wait, the example shows: `ori-word1 (word1-comment) ori-word2...`
+        So I should keep the original English words in the `<output>` block followed by comments?
+        Example: `" "<output>ori-word1 (word1-comment) ...</output>"`
+        Yes, "ori-word" suggests the original word stays.
+        So: `I (我 - 第一人称代词) am (是 - 系动词) happy (高兴 - 情感形容词) to hear (听到 - 动词不定式结构) the (这 - 定冠词指示) good (好 - 正面修饰语) news (消息 - 名词信息)</output>`
+        Then `<output_without_comment>`: `I am happy to hear the good news.`? Or the translation?
+        Rule: "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language". Wait.
+        The example shows: `ori-word1 (word1-comment)`. This implies the original English word is kept in the `<output>` tag.
+        But Rule 6 says: "wrap the output_translation_with_comment, which should be in the output language".
+        This contradicts the example (`ori-word1`).
+        Let's look at the Example closely: `"<output>ori-word1 (word1-comment) ori-word2...`
+        The example text `ori-word1` likely means "Original Word 1", not the string literal "ori-word1".
+        But Rule 6 says "wrap the output_translation_with_comment, which should be in the output language". If it's in the output language (zh-CN), where is the English word?
+        The example clearly shows `ori-word1 (word1-comment)`. This usually means: [Original Word] ([Translation/Comment]).
+        But Rule 6 says "wrap the output_translation_with_comment, which should be in the output language".
+        If I follow Rule 6 strictly, the content inside `<output>` should be Chinese?
+        But the example shows English words with comments.
+        Let's look at Rule 1: "Allow optional comments, after Each word; comments should |point out> the key characteristic... of each word."
+        Usually, in these tasks, the format `[English] (Chinese Translation/Comment)` is standard for "annotated translation".
+        However, the instruction says: "Output-language: zh-CN". And Rule 6 says "wrap the output_translation_with_comment, which should be in the output language". This suggests the main text inside `<output>` should be Chinese translation.
+        But the example shows `ori-word1`.
+        Let's reconcile. The Example is usually the ground truth for formatting. The Example: `"<output>ori-word1 (word1-comment) ...` implies [Original Word] followed by [Comment].
+        If I output `I (我)` inside `<output>`, the text inside is mixed English and Chinese.
+        If Rule 6 means "The translation part should be in the output language", then `[Original Word] ([Translation])`.
+        Wait, let's look at the instruction again: "Output-language: zh-CN".
+        If I just translate it to Chinese: `听到这好消息我很高兴` inside `<output>`, where does the comment go?
+        The Example shows `ori-word1 (word1-comment)`. This is an English word followed by a comment.
+        If the requirement is "Translate", usually the final result should be in the target language.
+        But with these specific formatting rules, often users want to see the source + target annotation.
+        Let's assume the Example structure is priority: `Original Word (Chinese Comment/Translation)`.
+        Wait, Rule 5: "|Annotate> the original meaning in the comment".
+        So inside parentheses should be the Chinese meaning/comment.
+        And outside? The Example uses `ori-word1`. So keep English source word.
+        But then what is `<output_without_comment>`? "translation without comment". If the output is mixed English+Comment, the version without comment should probably be just the pure translation in Target Language (zh-CN).
+        Let's check Rule 6 again: "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language". This phrasing suggests the whole string inside `<output>` might need to be target language? Or does it mean the *translation part* (the comment) is the target language?
+        Given the Example explicitly uses `ori-word1`, I will follow the Example's visual structure: English Word + (Chinese Comment).
+        And for `<output_without_comment>`, I will put the pure Chinese Translation of the sentence.
+        This makes sense semantically.
+
+        Let's refine the text for `<output>`:
+        `I (我 - 第一人称代词，指说话者) am (是/处于...状态 - 系动词) happy (高兴 - 表达喜悦情感) to hear (得知 - 动作不定式) the (这/特指 - 定冠词功能) good (好 - 正面评价形容词) news (消息 - 信息名词)</output>`
+        
+        Wait, for `<output_without_comment>`, it says "translation without comment". If I use `I am happy...` inside the commented block, should the uncommented block be English? No, Output Language is zh-CN. So the translation block should be Chinese characters only.
+        
+        So:
+        Block 1: `I (我) am (是) ... news (消息).` -> Mixed text representing annotation.
+        Block 2: `听到这好消息我很高兴。`
+
+        Wait, one more constraint check: "Output format: <output>... </output> <output_without_comment>...</output_without_comment>".
+        And "Note: Only allow one output." (This likely means don't add markdown code blocks around the text if it's not requested, or just don't talk). I will output raw text with tags.
+        
+        Let's finalize the comments to ensure they meet Rule 1 & 4 & 5.
+        Rule 1: "point out> the key characteristic, especially the original meaning".
+        Rule 3: "Compare the similar word of each word -> point out> the key characteristic". (This means distinguishing nuances).
+        
+        I will draft the content now.
+
+        Input: I am happy to hear the good news.
+        
+        Words & Analysis:
+        I -> 我。Meaning: Pronoun. Characteristic: First person singular subject.
+        am -> 是/感到。Meaning: Copula/Being. Characteristic: Links state to subject (Present tense).
+        happy -> 高兴。Meaning: Emotion. Characteristic: Positive affective state, synonym to delighted but less strong.
+        to hear -> 听到。Meaning: Verb + Complement. Characteristic: Infinitive indicating reason/cause in this context.
+        the -> 这/特指。Meaning: Definite article. Characteristic: Specific instance (distinguishes from generic 'a').
+        good -> 好。Meaning: Adjective of quality. Characteristic: Positive evaluation, synonym to fine/bright etc but here means 'positive'.
+        news -> 消息。Meaning: Noun. Characteristic: Information about recent events (distinct from general 'news' as in media).
+
+        Let's construct the `<output>` string carefully.
+        `I (我 - 第一人称代词) am (是 - 系动词连接状态) happy (高兴 - 形容情绪积极) to hear (听到 - 动作补语结构) the (这 - 特指指示词) good (好 - 正面修饰语) news (消息 - 信息名词)</output>`
+        Wait, punctuation. The sentence ends with a period.
+        
+        For `<output_without_comment>`, it should be the Chinese translation: `听到这则好消息我倍感欣慰。` or simply `我很高兴听到这个好消息。`. Let's use standard natural translation: `我很高兴听到这个好消息。`
+
+        Wait, re-reading Rule 6: "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language".
+        This is slightly ambiguous. Does it mean *only* Chinese inside? Or English + Chinese Comment?
+        Given the Example: `"<output>ori-word1 (word1-comment) ...`
+        The `ori-word1` clearly implies the original word text remains visible.
+        So I will keep the English words inside `<output>` tag.
+        
+        One detail: "Input-language (translation and output language comment)".
+        Wait, look at the Example again: `Format is: <output>ori-word1 (word1-comment) ...`
+        But Rule 6 says "wrap the output_translation_with_comment".
+        Usually, this task format implies `[Original] ([Translation/Comment])`.
+        Okay, I will proceed with that

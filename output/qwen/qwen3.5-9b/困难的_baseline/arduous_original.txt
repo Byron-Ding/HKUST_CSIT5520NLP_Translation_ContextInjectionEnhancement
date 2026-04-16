@@ -1,0 +1,94 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   Task: Translate.
+    *   Input: "The task is arduous"
+    *   Input Language: English (en)
+    *   Output Language: Chinese (zh-CN)
+    *   Target Output: The translation of the input sentence into Chinese.
+
+2.  **Analyze the Input Sentence:**
+    *   Sentence: "The task is arduous"
+    *   Meaning: Something requiring great effort; difficult, laborious, or demanding.
+    *   Key Word: "arduous" (adj.) - characterized by or involving strenuous physical, mental, or emotional effort.
+
+3.  **Determine the Translation:**
+    *   Direct translation of "The task": 这个任务 (Zhège rènwù).
+    *   Translation of "is": 是 (shì).
+    *   Translation of "arduous": 艰巨的 (jiānjū de), 繁重的 (fánzhòng de), 艰难的 (jiānnán de).
+    *   Common phrase: "这个任务很艰巨" or simply "这项任务艰巨".
+
+4.  **Select the Best Equivalent:**
+    *   "The task is arduous" implies the nature of the task is hard.
+    *   Option 1: 这个任务是艰巨的 (Zhège rènwù shì jiānjū de) - Literal and accurate.
+    *   Option 2: 这项任务很繁重 (Zhè xiàng rènwù hěn fánzhòng) - Focuses on workload.
+    *   Option 3: 这个任务很难 (Zhège rènwù hěn nán) - Too simple, loses the nuance of "arduous".
+    *   "艰巨的" (arduous/demanding) is the most precise adjective for "arduous" in this context.
+
+5.  **Finalize Output:**
+    *   Chinese: 这个任务很艰巨。or 这项任务是艰巨的。
+    *   Standard translation often omits the subject if context allows, but the input has "The task". So keep the subject.
+    *   Let's go with a natural sounding sentence: "这个任务很艰巨" or "这项任务十分艰巨".
+    *   Simplest accurate translation: 这项任务是艰巨的。
+
+6.  **Refine for Output Format:**
+    *   The prompt asks for "Output:". I should provide just the translation text.
+    *   Selected translation: 这项任务很艰巨 (This task is quite arduous). Or simply 这个任务很艰巨.
+    *   Let's use "这个任务是艰巨的" or "此项任务艰巨".
+    *   Most common natural Chinese: 这个任务很艰巨。
+
+    Let's check dictionary definitions for "arduous": 艰苦的; 艰巨的 (hard to endure; difficult).
+    So, "这个任务很艰巨" is good.
+
+    Decision: 这项任务是艰巨的 (This task is arduous) or 这个任务很艰巨 (This task is very arduous). "很" adds the emphasis of description. Let's provide a clear, standard translation.
+
+    Translation: 这项任务很艰巨。or 该任务艰巨。
+    Let's stick to a slightly formal but natural tone.
+    "这项任务是艰巨的" matches the structure well.
+    But "这个任务很艰巨" is more colloquial and direct.
+    Given "The task is arduous", I will translate it naturally.
+
+    Final choice: 这个任务很艰巨。 (This task is very arduous)
+    Or: 这项任务极其艰巨。 (This task is extremely arduous)
+    Let's go with: 这个任务是艰巨的。or 这项任务艰巨。
+
+    Wait, I should check if there are specific constraints. No. Just translate.
+    "The task is arduous" -> 这项任务很艰巨。
+
+    Let's finalize on: 这项任务是艰巨的。 (Matches "is" structure).
+    Actually, Chinese often drops the "是...的" structure for adjectives. "这项任务艰巨" works too but sounds a bit like a headline.
+    "这个任务很艰巨" is the most natural translation.
+
+7.  **Construct Final Output:**
+    这个任务很艰巨。 (Or similar).
+
+    Let's write: 这项任务很艰巨。
+
+    Wait, I need to make sure I don't add extra text like "Output:". The prompt says "Output:", so I should just provide the content after that. But looking at the format provided in the prompt example:
+    Input-Output-Task: Translate
+    Input: ...
+    Output-language: ...
+    Output:
+
+    I need to complete the "Output:" section.
+    So I will write the Chinese text.
+
+    Text: 这个任务很艰巨。
+    Alternative: 这项任务相当艰巨。
+    Let's pick "这个任务很艰巨" as it's the most standard translation for "The task is arduous".
+
+    Wait, looking at similar tasks, often the output should be clean.
+    Translation: 这项任务很艰巨。
+
+    Let's consider if "arduous" implies physical or mental effort. Usually both. "艰巨" covers this well.
+
+    Final decision: 这个任务很艰巨。
+
+    Wait, one more check. Is there a more formal way? "此项任务之艰巨". No, that's too literary.
+    "The task is arduous." -> "这项任务十分艰巨。" (Adding emphasis).
+    Let's keep it simple: 这个任务是艰巨的。
+
+    Okay, I will output: 这个任务很艰巨。
+</think>
+
+这个任务很艰巨。

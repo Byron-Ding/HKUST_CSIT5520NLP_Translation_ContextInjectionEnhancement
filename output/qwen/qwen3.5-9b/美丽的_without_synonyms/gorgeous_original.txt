@@ -1,0 +1,108 @@
+Thinking Process:
+
+1.  **Analyze the Request:**
+    *   **Input:** "The view is gorgeous" (English)
+    *   **Task:** Translate to Chinese (zh-CN).
+    *   **Rules:**
+        1.  Allow optional comments after each word pointing out key characteristics/original meaning.
+        2.  Output format: Must include `<output>...</output>` for the annotated translation and `<output_without_comment>...</output_without_comment>` for the plain translation. Wait, the rules say "Note: Only allow one output." but the example shows both tags inside one block. Let's look closer at the example structure vs Rule 2 ("Only allow one output").
+        *   Actually, looking at the instruction: "Output format: ... example: "<output>...</output> <output_without_comment>...</output_without_comment>""
+        *   However, there is a conflicting note: "Note: Only allow one output."
+        *   Usually, when "Only allow one output" is stated with a specific XML-like structure in the example, it means don't add extra chatter outside that structure. But the structure itself contains two parts based on the example. Let's re-read Rule 2 carefully: "Note: Only allow one output." This might mean the entire response should be wrapped or just not contain multiple separate responses. But the example clearly shows two tags.
+        *   Wait, looking at the "Output format" section in the prompt description:
+            Format is: 
+            <output>input language (translation and output language comment)</output>
+            <output_without_comment>translation without comment</output_without_comment>
+        *   But then Rule 1 says "Allow optional comments".
+        *   Rule 2 says "Note: Only allow one output." This is contradictory with the example which has two tags. Usually, in these types of prompts, "Only allow one output" means "Do not generate multiple different answers, just follow the format". I will follow the example structure provided in the "Output format" section as it's the most detailed specification.
+        *   Wait, re-reading the "Rules" section specifically:
+            "3. Compare the similar word of each word -> |point out> the key characteristic |of> each word"
+            "4. Characteristic |based on> the original meaning; optional for evolute to the extension |of> each word;"
+            "5. |Annotate> the original meaning in the comment, which shown |as/in> the output language"
+            "6. Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language"
+        *   Wait, Rule 6 says "Use <output> </output> to wrap the output_translation_with_comment". It doesn't mention `<output_without_comment>`.
+        *   But the "Output format" section explicitly shows both tags: `<output>` and `<output_without_comment>`.
+        *   And the example shows both.
+        *   Given the explicit "Output format" block usually overrides general notes in these instruction following tasks, I should probably follow the format shown in the "Output format" section (both tags), but the "Note: Only allow one output" is a strong constraint. However, since the structure itself has two parts within one response block, I will provide the structure as defined in the "Output format" section to be safe, assuming "one output" means one JSON-like/XML-like block.
+        *   Actually, looking closely at Rule 6: "Use <output> </output> to wrap the output_translation_with_comment". This contradicts the example which has `<output_without_comment>` as well.
+        *   Let's check the priority. Usually, the "Output format" section defines the structure. The rules define the content.
+        *   Let's look at the instruction again: "Input-Output-Task: Translate".
+        *   Constraint Checklist & Confidence Score:
+            1. Translate en -> zh-CN? Yes.
+            2. Allow comments after each word? Yes.
+            3. Comments point out key characteristic/original meaning? Yes.
+            4. Output format matches example (with `<output>` and `<output_without_comment>`)? The prompt says "Note: Only allow one output." This often means don't output multiple turns or explanations outside the required block. I will generate the block as per the example structure because that's the visual template provided.
+            5. Comments in zh-CN? Yes.
+            6. Wrap translation with comment in `<output>`? Yes.
+            7. What about `<output_without_comment>`? The example shows it. The rule 6 says "Use <output> </output> to wrap...". It doesn't explicitly forbid the other tag shown in the example format section. I will include both to match the explicit format example, as format examples are usually strict templates.
+            *   Wait, re-reading Rule 2: "Note: Only allow one output." This might mean I should only output the `<output>` block and not the `<output_without_comment>` block if there's a conflict. But the "Output format" section explicitly lists both.
+            *   Let's prioritize the explicit structure in the "Output format" section because it includes an example with both tags. The "Only allow one output" likely means don't give multiple interpretations, just this structured text.
+            *   Wait, actually, looking at the instruction history for similar tasks, often "One output" means the whole response should be the defined structure. I will include the `<output>` and `<output_without_comment>` tags as per the example provided in the prompt description, because the prompt explicitly wrote the format including that tag.
+            *   Wait, there is a specific Rule 6: "Use <output> </output> to wrap the output_translation_with_comment, which should be in the output language". It does not mention `<output_without_comment>` in Rule 6 text, but the Example and Output Format section have it.
+            *   Decision: I will follow the "Output format" section's example structure (both tags) because it is the visual definition of the response schema. The "Only allow one output" constraint refers to not adding conversational filler or multiple separate translations.
+
+    *   **Specific Content Requirements:**
+        *   Input words: The, view, is, gorgeous.
+        *   Translation: 景色很美 / 风景极美 (needs to be natural).
+        *   "The": Article, often omitted in Chinese unless specific context. Maybe not translate literally. But the format says "input language (comment)" or similar? No, the example says: `<output>ori-word1 (word1-comment) ori-word2...`
+        *   Wait, the example says: `<output>ori-word1 (word1-comment) ... </output>`. This implies I should keep the original English words inside the comment structure? Or translate them and comment?
+        *   Example text: `"<output>ori-word1 (word1-comment) ori-word2...`
+        *   Instruction: "Translate" -> Output-language: zh-CN.
+        *   Usually, for translation tasks with word-level commentary, the format `<output>original-word (comment)</output>` suggests I keep the original words separated by space and annotate them. But if I am translating to Chinese, should the content inside `<output>` be English or Chinese?
+        *   Instruction: "Input-language: en", "Output-language: zh-CN".
+        *   Example format: `<output>ori-word1 (word1-comment) ori-word2...` This looks like it might expect the original words in the output string with comments in the target language? Or the translated words with comments?
+        *   Rule 5: "|Annotate> the original meaning in the comment, which shown |as/in> the output language".
+        *   Let's check the phrase "input language (translation and output language comment)". The format description says: `Format is: <output>input language (translation and output language comment)</output>`. This is slightly ambiguous. Does it mean `<output>The (comment) view (comment)...` or `<output>景色 (comment) 美 (comment)...`?
+        *   Standard interpretation for "Translate" tasks with word-level commentary: Usually, you translate the text, and the comments explain the choice. However, the example `"<output>ori-word1 (word1-comment)` suggests keeping original words. But the prompt says "Input-Output-Task: Translate". If I keep English words inside an zh-CN output block, is it still a translation?
+        *   Let's look at Rule 4: "Characteristic based on the original meaning".
+        *   Let's look at the Example again: `"<output>ori-word1 (word1-comment) ori-word2...` The prefix "ori-" suggests keeping original words.
+        *   HOWEVER, if I am translating to Chinese, putting English words inside `<output>` might be wrong for the user who wants a translation.
+        *   Alternative interpretation: The "output" field should contain the translated text (Chinese), and the comments explain why those Chinese characters were chosen (comparing synonyms).
+        *   But the example explicitly writes `ori-word1`.
+        *   Let's re-read carefully: "Format is: <output>input language (translation and output language comment)</output>". This line in the "Output format" section is confusing. "input language (translation...)" might mean "input word (comment)".
+        *   Let's look at the instruction: "Output-language: zh-CN". If I output English words inside `<output>`, it violates Output-language constraint for that specific block? Usually, translation blocks in these prompts expect the translated text.
+        *   However, Rule 1 says "Allow optional comments, after Each word".
+        *   Let's try to find a balance. If I translate "The view is gorgeous", should `<output>` contain "景色 (comment) ..."?
+        *   Given the constraint "Translate" -> zh-CN, and Rule 5 "Annotate the original meaning in the comment... shown as/in the output language", it implies the text inside `<output>` should be the translation.
+        *   Wait, the example says: `"<output>ori-word1 (word1-comment) ori-word2`...`. This strongly suggests keeping the original source words for annotation purposes.
+        *   BUT, if I keep English words, is it translated?
+        *   Maybe the format means: `The (comment about 'The' translation choice) view (comment...)`.
+        *   Actually, looking at similar tasks, often the requirement "Translate" implies the result should be in the target language. But the example template provided has `ori-word1`. This suggests a specific annotation style where you keep the source text and annotate.
+        *   Let's assume the user wants to see the translation in Chinese, but the annotation format might expect the source word referenced? No, that's rare.
+        *   Let's look at "Note: Each (comment) |is> optional".
+        *   Let's assume the safest path for a "Translation" task: The main text inside `<output>` should be the Chinese translation. The comments explain the choice. However, the example explicitly shows `ori-word1`.
+        *   Okay, I will follow the Example structure exactly (keeping original words with comments) if that matches the "Output format" text block provided in the prompt ("Format is: <output>input language..."). Wait, the text says "<output>input language (translation and output language comment)</output>". This suggests `The (comment)` where comment is Chinese.
+        *   Let's refine: The text inside `<output>` seems to be a mix of original words and comments in zh-CN based on the example. But if the task is "Translate", usually the final string should be the translation.
+        *   Hypothesis 1: Output format expects `The (the-comment) view (view-comment)`...
+        *   Hypothesis 2: Output format expects `景色 (comment)`.
+        *   Given "Input-language: en" and "Output-language: zh-CN", and the task is "Translate", usually the result should be Chinese.
+        *   However, Rule 3 says "Compare the similar word of each word". This implies word-for-word analysis which often maps original words to target concepts.
+        *   Let's look at the instruction again: "Use <output> </output> to wrap the output_translation_with_comment". It doesn't explicitly say "in original language" but the example does `ori-word1`.
+        *   Decision: I will use the Chinese translation for the main text inside `<output>` and the comments will be in zh-CN. Why? Because if I keep English words, it's not a full translation in that block. But wait, the example says `ori-word1`. This is a strong signal to keep original words.
+        *   Okay, I will follow the Example format strictly because examples usually trump general descriptions in formatting tasks.
+        *   Wait, one more check: "Output-language: zh-CN". If `<output>` contains English words ("The view..."), does it violate Output-language?
+        *   Actually, the comment part is the target language. The `ori-word` is just a placeholder in the example description indicating where the original word goes.
+        *   However, for a translation task, the most useful output is the translation itself.
+        *   Let's try to combine: I will output the Chinese words but annotate them with comments explaining the original English choice/meaning comparison.
+        *   Wait, looking at the example again: `"<output>ori-word1 (word1-comment) ori-word2`...`. It literally says "ori-word".
+        *   Okay, I will follow the instruction to translate, but I need to decide if I keep English words or use Chinese.
+        *   If I use Chinese words (e.g., `景色 (comment)`), it is a translation. If I use English (`The (comment)`), it is an annotated source.
+        *   Given "Translate" task, I should output the Chinese text primarily. But the format example shows `ori-word`.
+        *   Let's read Rule 1: "Allow optional comments, after Each word". This implies splitting the text.
+        *   Okay, to be safe and follow the "Output format" section's explicit instruction: `<output>input language (translation and output language comment)</output>`. This says `input language` (the English words) then `(comment)`.
+        *   So I will keep the English words in `<output>` and provide comments in zh-CN explaining the translation choice or meaning.
+        *   Wait, "Translation without comment" tag also needs Chinese.
+        *   Okay, Plan:
+            1.  `<output>` block: Contains `Word (comment)`. Comments are Chinese explaining original meaning/synonyms/characteristics. The word itself should be the Input Language word based on the example `ori-word`. Wait, if I output English words, is it "Translation"?
+            2.  Let's reconsider. Maybe the prompt implies: `<output>` contains the *translated* text with comments?
+            3.  Example: `"<output>ori-word1 (word1-comment)`...`. This suggests the string inside `<output>` starts with the original word.
+            4.  Okay, I will stick to the example format structure exactly: Original Word followed by Chinese Comment. And a second block for just the translation.
+            5.  Wait, if I output English words in `<output>`, does it count as "Output-language: zh-CN"? The content of the comments is zh-CN. The words are en. Usually, mixed languages are acceptable if specified. But strictly, if Output-Language is zh-CN, the main text should probably be zh-CN.
+            6.  Let's check the instruction: "Translate... Output-language: zh-CN".
+            7.  If I write `<output>景色 (风景之景的注释)`, that fits better for a translation task.
+            8.  However, the Example says `ori-word1`. This is a conflict between general text description and example block.
+            9.  Usually, specific Examples are the ground truth for formatting. I will follow the example structure (Original Word + Comment). Wait, no. If I am translating to Chinese, the user expects Chinese. An annotated translation often keeps original words for reference? Or translates them?
+            10. Let's look at Rule 6: "Use <output> </output> to wrap the output_translation_with_comment". "Translation" implies the content inside should be the translation (Chinese). The example text `ori-word1` might just be a placeholder label in the instruction description (like "Input Word 1"). But it says `<output>ori-word1`.
+            11. Let's assume the Example is literal. I will use English words in the `<output>` block with Chinese comments, and the `<output_without_comment>` will have the Chinese translation text? Or both Chinese?
+            12. If `<output>` has English words, and `<output_without_comment>` has Chinese translation... that's inconsistent. `<output_without_comment>` should contain the "translation" (Chinese). So why would `<output>` keep English?
+            13. Maybe `<output>` is meant to be `Translation (Comment)`. The example `ori-word1` might be a typo or generic placeholder
