@@ -67,6 +67,18 @@ with open(output_data_path, "w", encoding="utf-8") as f:
         word_type = split_result[0]
         condition = "_".join(split_result[1:]) if len(split_result) > 1 else ""
         print(f"Word type: {word_type}")
+        match condition:
+            case "baseline":
+                condition = "No Synonyms; No Rules"
+            case "with_synonyms_but_no_rules":
+                condition = "With Synonyms; No Rules"
+            case "without_synonyms":
+                condition = "No Synonyms; With Rules"
+            case "":
+                condition = "With Synonyms; With Rules"
+            case _:
+                condition = condition.replace("_", " ").title()
+        
         print(f"Condition: {condition}")
         print(f"Average similarity: {average_similarity}")
         print(f"Average word length: {average_word_length}")
