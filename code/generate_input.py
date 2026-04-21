@@ -1,15 +1,33 @@
 import lmstudio as lms
 import pathlib
-import os
 import yaml
 import regex
-from typing import Optional
+from typing import Optional, Callable
+from typing import TypeIs
 import aiofiles
 import sys
+import inspect
 
 # set the root path and chdir to the root path
 project_root = pathlib.Path(__file__).parent.parent
 sys.path.append(str(project_root))
+
+
+
+# Type checking
+# check Callable[[str, str, str, str], str] and Callable[[str, str, str], str]
+def is_callable_with_4_args(func: Callable[..., str]) -> TypeIs[Callable[[str, str, str, str], str]]:
+    function_information: inspect.FullArgSpec = inspect.getfullargspec(func)
+    return len(function_information.args) == 4
+
+def is_callable_with_3_args(func: Callable[..., str]) -> TypeIs[Callable[[str, str, str], str]]:
+    function_information: inspect.FullArgSpec = inspect.getfullargspec(func)
+    return len(function_information.args) == 3
+
+
+
+
+
 
 from data.dataclass.template import general_translate as general_translate_module
 
@@ -50,13 +68,13 @@ bytedance_seed_oss_36b_path: str = r"bytedance/seed-oss-36b"
 project_root_path: pathlib.Path = pathlib.Path(__file__).parent.parent
 
 # load data
-data_path = project_root_path / "data" / r"config" / "test.yaml"
+data_path = project_root_path / r"data" / r"source" / r"synonyms_data.yaml"
 # store data
-output_data_base_path = project_root_path / "output"
+output_data_base_path = project_root_path / r"output"
 
 # general template
 # import from /data/dataclass/template/general_translate.py
-general_translate_module_path = project_root_path / "data" / "dataclass" / "template" / "general_translate.py"
+general_translate_module_path = project_root_path / r"data" / r"dataclass" / r"template" / r"general_translate.py"
 
 
 
@@ -75,12 +93,14 @@ with open(data_path, "r", encoding="utf-8") as f:
 general_template: general_translate_module.GeneralTemplate = general_translate_module.GeneralTemplate()
 
 
-
-
+    
 # ------------------------------------------------ AI test ------------------------------------------------
 async def generate_input(
-    model_path: str = qwen_path
-):
+    input_generation_function: Callable[
+        ..., str
+    ],
+    model_path: str = qwen_path,
+) -> None:
     # ------------------------ Initialize client and model -----------------------
     async with lms.AsyncClient() as client:
         model = await client.llm.model(
@@ -114,7 +134,7 @@ async def generate_input(
                 current_output_data_path.parent.mkdir(parents=True, exist_ok=True)
                 
                 # ---------- Generate input  ----------
-                each_sentence = each_sentence_template.format(
+                each_sentence: str = each_sentence_template.format(
                     keyword = each_keyword
                 )
                 
@@ -125,12 +145,23 @@ async def generate_input(
                         for each_keyword in each_sentence.split()
                     ])
                 
-                full_template: str = general_template.format_translate_template_with_synonyms_but_no_rules(
-                    input_text=each_sentence,
-                    input_language=each_sentence_input_language,
-                    output_language=each_sentence_output_language,
-                    input_key_synonyms=synonyms_hint
-                )
+                
+                full_template: str
+                if is_callable_with_4_args(input_generation_function):
+                    full_template: str = input_generation_function(
+                        each_sentence,
+                        each_sentence_input_language,
+                        each_sentence_output_language,
+                        synonyms_hint,
+                    )
+                elif is_callable_with_3_args(input_generation_function):
+                    full_template: str = input_generation_function(
+                        input_text=each_sentence,
+                        input_language=each_sentence_input_language,
+                        output_language=each_sentence_output_language,
+                    )
+                else:
+                    raise ValueError("Input generation function must have either 3 or 4 arguments.")
                 
                 # [Debug] Print the full template to check if it's correct
                 # print(model.get_load_config())
@@ -178,6 +209,20 @@ def extract_translate_with_comment_from_result(
         
 if __name__ == "__main__":
     import asyncio
+    
     asyncio.run(generate_input(
+        general_translate_module.GeneralTemplate.format_translate_template_with_synonyms_with_rules,
+        model_path=qwen_path
+    ))
+    asyncio.run(generate_input(
+        general_translate_module.GeneralTemplate.format_translate_template_no_synonyms_no_rules,
+        model_path=qwen_path
+    ))
+    asyncio.run(generate_input(
+        general_translate_module.GeneralTemplate.format_translate_template_with_synonyms_no_rules,
+        model_path=qwen_path
+    ))
+    asyncio.run(generate_input(
+        general_translate_module.GeneralTemplate.format_translate_template_no_synonyms_with_rules,
         model_path=qwen_path
     ))

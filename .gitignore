@@ -1,4 +1,15 @@
+# RStudio / R 项目临时文件
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
+# 版本管理 文件
+.jj
+.git
+# Visual Studio Code 非个人文件上传
+# 屏蔽其他个人文件
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/tasks.json
+!.vscode/launch.json
