@@ -2,7 +2,7 @@ import os
 import pathlib
 
 # root path
-project_root_path = pathlib.Path(__file__).parent.parent
+project_root_path = pathlib.Path(__file__).parent.parent / r"qwen/qwen3.5-9b"
 
 
 

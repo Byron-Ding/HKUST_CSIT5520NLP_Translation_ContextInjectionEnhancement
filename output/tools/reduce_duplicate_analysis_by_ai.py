@@ -8,7 +8,7 @@ import yaml
 project_root_path = pathlib.Path(__file__).parent.parent
 
 # data path
-data_path = project_root_path
+data_path = project_root_path / r"qwen/qwen3.5-9b"
 # current folder path
 current_folder_path = pathlib.Path(__file__).parent
 

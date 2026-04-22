@@ -12,8 +12,8 @@ model = SentenceTransformer('paraphrase-multilingual-MiniLM-L12-v2', device=devi
 
 
 # data path
-data_path = pathlib.Path(__file__).parent.parent
-project_root_path = data_path.parent.parent.parent
+data_path = pathlib.Path(__file__).parent.parent / r"qwen/qwen3.5-9b"
+project_root_path = pathlib.Path(__file__).parent.parent.parent
 data_config_path = project_root_path / "data" / "config" / "test.yaml"
 
 

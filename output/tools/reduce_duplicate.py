@@ -4,7 +4,7 @@ import os
 import jieba
 
 # root path
-project_root_path = pathlib.Path(__file__).parent.parent
+project_root_path = pathlib.Path(__file__).parent.parent / r"qwen/qwen3.5-9b"
 
 # data path
 data_path = project_root_path

@@ -20,7 +20,7 @@ if __name__ == "__main__":
     import asyncio
     import os 
     
-    correction_path_base = os.path.join(os.path.dirname(__file__), "..", "开心")
+    correction_path_base = os.path.join(os.path.dirname(__file__), "../qwen/qwen3.5-9b", "开心")
     ls_files = os.listdir(correction_path_base)
     
     for file in ls_files:
