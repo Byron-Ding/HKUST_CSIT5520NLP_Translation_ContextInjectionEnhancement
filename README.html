@@ -1,0 +1,888 @@
+<h3> HKUST_CSIT5520NLP_Translation_ContextInjectionEnhancement
+</h3>
+<style>
+    .language_hr_separator {
+        border: none;
+        border-top: 1px solid grey;
+        background-color: white;
+        margin: 10px 0;
+        width: 100%;
+        overflow: visible;
+    }
+    .main_hr_separator {
+        border: none;
+        border-top: 4px double black;
+        background-color: white;
+        margin: 10px 0;
+        width: 100%;
+        overflow: visible;
+    }
+    .main_hr_separator::after {
+        display: block;
+        text-align: center;
+        font-weight: bold;
+        margin-top: -20px;
+        background-color: white;
+        width: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: visible;
+    }
+    .small_item_separator {
+        border: none;
+        border-top: 2px dashed grey;
+        background-color: white;
+        margin: 5px 0;
+        width: 100%;
+        overflow: visible;
+    }
+    .formula {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0px;              /* 元素之间的间距更紧凑 */
+        margin: 20px 0;
+    }
+    .formula table {
+        display: inline-table;   /* 让表格在行内显示 */
+        padding: 0;              /* 去掉表格默认内边距 */
+        margin: 0;               /* 去掉表格默认外边距 */
+        border: 1px solid #000;    /* 给表格加边框 */
+        border-collapse: collapse; /* 去掉表格内部空隙 */
+        font-family: sans-serif;
+        font-size: 14px;           /* 字体稍微小一点 */
+    }
+    .formula td {
+        padding: 2px 6px;          /* 单元格紧凑 */
+        margin: 0;               /* 去掉单元格默认外边距 */
+        text-align: center;
+    }
+    .matrix {
+        border: 1px solid #000;    /* 给矩阵加边框 */
+        border-collapse: collapse; /* 去掉矩阵内部空隙 */
+    }
+</style>
+<h4>
+Full Problem Solving Process / 问题的完整解决过程
+</h4>
+<h5>Rely on</h5>
+<ol>
+  <li>https://github.com/kreuzberg-dev/html-to-markdown for convert the HTML to this readMe file.</li>
+  <li>opencc (pip package) for converting the AI accidentally generated traditional Chinese to simplified Chinese, to standardize the data.</li>
+  <li>sentence_transformers + torch (pip package) for calculating the similarity between the response with the instruction and the response without the instruction, to verify whether the response is related to the instruction. (Tried, but not AI cannot be both the judge and the player, so this method is not used in the final analysis. The judgement of whether the response is related to the instruction is done by human. The similarity and information is using traditional algorithm.)</li>
+  <li>jieba (pip package) is for cutting the Chinese sentence into words, used for calculating the unique word count for the response in Chinese.</li>
+  <li>pyyaml (pip package) is for reading the input from the YAML file, which is used for generating the input for the AI.</li>
+  <li>Python, R and ggplot2 (R package) is for analyzing the result and drawing the graph for the result.</li>
+  <li>lmstudio for generating the response from the AI. (For easy testing)</li>
+  <li>lmstudio (pip package) for generating the response from the AI, which is used for generating the response from the AI.</li>
+  <li>aiofiles (pip package) for reading and writing the files asynchronously, which is used for generating the response from the AI and storing the response in the output folder.</li>
+  <li>textdistance (pip package) for calculating the similarity between the response with the instruction and the response without the instruction, to verify the increase of information, lower the similarity, means more information is generated. (This is using traditional method to verify the increase of information, so it is ok for validation.)</li>
+</ol>
+<h5>依赖</h5>
+<ol>
+  <li>https://github.com/kreuzberg-dev/html-to-markdown 用于将HTML转换为这个ReadMe文件。</li>
+  <li>opencc（pip包）用于将AI偶尔生成的繁体中文转换为简体中文，以标准化数据。</li>
+  <li>sentence_transformers + torch（pip包）用于计算带有指令的回答与不带指令的回答之间的相似度，以验证回答是否与指令相关。（尝试过，但AI不能既当裁判又当运动员，所以这个方法没有被用于最终分析。是否与指令相关的判断由人来完成，相似度和信息使用传统算法。）</li>
+  <li>jieba（pip包）用于将中文句子切分成词，用于计算中文回答的独特词汇数量。</li>
+  <li>pyyaml（pip包）用于从YAML文件中读取输入，用于生成AI的输入。</li>
+  <li>Python, R和ggplot2（R包）用于分析结果并绘制结果的图表。</li>
+  <li>lmstudio用于生成AI的回答。（为了方便测试）</li>
+  <li>lmstudio（pip包）用于生成AI的回答，用于生成AI的回答。</li>
+  <li>aiofiles（pip包）用于异步读取和写入文件，用于生成AI的回答并将回答存储在输出文件夹中。</li>
+  <li>textdistance（pip包）用于计算带有指令的回答与不带指令的回答之间的相似度，以验证信息的增加，较低的相似度意味着生成了更多的信息。（这是使用传统方法来验证信息的增加，所以对于验证来说是可以的。）</li>
+</ol>
+<ol>
+<li>
+    <span>
+        <b>The Base of AI / AI 的本质</b>
+    </span>
+    <ul>
+        <li>Based on the Matrix calculation;</li>
+        <li>these matrixes combines together;</li>
+        <li>mixes in the non-Linear activation function;</li>
+    </ul>
+    <span>
+        Because of <u>"Economic base determines the superstructure"</u>, \
+        this is the base of AI.
+    </span>
+    <hr class="language_hr_separator"/>
+    <ul>
+        <li>基于矩阵运算</li>
+        <li>这些矩阵层层叠加在一起</li>
+        <li>混合了非线性函数（黑话叫激活函数）</li>
+    </ul>
+    <span>
+        因为<u>"经济基础决定上层建筑"</u>，所以这是AI的本质。
+    </span>
+</li>
+<hr class="main_hr_separator"/>
+<li>
+<span>
+    <b>What is the base / 本质是什么</b>
+</span>
+
+<span>
+        Think about one small matrix with data and get the output:
+   </span>
+<div class="formula">
+Output = Matrix × Data + Bias
+</div>
+<ul>
+<li>
+   <b>Matrix</b> is the weight of the model.
+</li>
+<li>
+   <b>Data</b> is the input data.
+</li>
+<li>
+   <b>Output</b> is the result of the calculation.
+</li>
+<li>
+   <b>Bias</b> is the additional term added to the output.
+   (also can be "Embedding" in the context of NLP, as human word as "attribute tag")
+</li>
+</ul>
+<ul>
+<li>
+We already have the <b>Input</b> and the <b>Output<sub>expected</sub></b>.
+</li>
+<li>
+<span>
+Target of training:  
+</span>
+<p>
+    Adjust the <b>Matrix</b> to make the <b>Output</b> close to the expected result (<b>Output<sub>expected</sub></b>).
+</p>
+</li>
+</ul>
+<hr class="language_hr_separator"/>
+<span>
+    每个小线性层的计算可以表示为：
+</span>
+<div class="formula">
+输出 = 矩阵 × 数据 + 偏置
+</div>
+<ul>
+    <li><b>矩阵</b> 是模型的权重。</li>
+    <li><b>数据</b> 是输入数据。</li>
+    <li><b>输出</b> 是计算的结果。</li>
+    <li><b>偏置</b> 是加到输出上的额外项 (也可以是自然语言处理中的“嵌入”，人话叫“属性标记”)。</li>
+</ul>
+<ul>
+    <li>我们已经有了 <b>输入</b> 和 <b>输出<sub>期望</sub></b>。</li>
+    <li>训练的目标:</li>
+    <p>
+        调整 <b>矩阵</b> 使得 <b>输出</b> 接近 <b>输出<sub>期望</sub></b>。
+    </p>
+</ul>
+<hr class="main_hr_separator"/>
+<li>
+<span>
+    <b>
+        Change a view / 换个视角
+    </b>
+</span>
+<div>
+    Change the symbols to the one in the textbook;
+    which <b>Input</b> is x, <b>Output</b> is y, <b>Matrix</b> is <b>a</b>, and <b>Bias</b> is b.
+</div>
+<hr class="language_hr_separator"/>
+<div>
+    换成课本上的符号，<b>输入</b> 是 x，<b>输出</b> 是 y，<b>矩阵(变量)</b> 是 <b>a</b>，<b>偏置</b> 是 b。
+</div>
+<hr class="main_hr_separator"/>
+It is obvious that this is a linear function.
+<hr class="language_hr_separator"/>
+线性函数一眼顶真
+<div class="formula">
+    y = ax + b
+</div>
+<hr class="main_hr_separator"/>
+<p>
+In the AI model, we have multiple inputs and outputs, which can be represented as a matrix multiplication
+</p>
+<p>
+It is just the extension of dimension, from single variable to multi-variable.
+</p>
+<hr class="language_hr_separator"/>
+<p>在AI中，多个输入和输出，即可表示为矩阵乘法</p>
+<p>仅仅是维度多了，单变量成了多变量。</p>
+<div class="formula">
+  <!-- 左边向量 -->
+  <table>
+    <tr><td>y₁</td></tr>
+    <tr><td>y₂</td></tr>
+    <tr><td>⋮</td></tr>
+    <tr><td>yₙ</td></tr>
+  </table>
+<!-- 等号 -->
+<span>=</span>
+<!-- 中间矩阵 -->
+<table class="matrix">
+    <tr><td>a₁₁</td><td>a₁₂</td><td>⋯</td><td>a₁ₙ</td></tr>
+    <tr><td>a₂₁</td><td>a₂₂</td><td>⋯</td><td>a₂ₙ</td></tr>
+    <tr><td>⋮</td><td>⋮</td><td>⋯</td><td>⋮</td></tr>
+    <tr><td>aₘ₁</td><td>aₘ₂</td><td>⋯</td><td>aₘₙ</td></tr>
+  </table>
+<!-- 乘号 -->
+  <span>×</span>
+<!-- 右边向量 -->
+<table>
+    <tr><td>x₁</td></tr>
+    <tr><td>x₂</td></tr>
+    <tr><td>⋮</td></tr>
+    <tr><td>xₙ</td></tr>
+  </table>
+</div>
+<!-- 多维情况 -->
+<div class="formula">
+  <table border="0" cellspacing="0" cellpadding="4">
+    <tr>
+        <td>
+            y<sub>1</sub>
+        </td>
+        <td>=</td>
+        <td>
+        <span>a<sub>11</sub>×x<sub>1</sub></span></td>
+        <td>+</td>
+        <td>
+        <span>a<sub>12</sub>×x<sub>2</sub></span></td>
+        <td> <span> + ⋯ + </span></td>
+        <td>
+        <span>a<sub>1n</sub>×x<sub>n</sub></span></td>
+    </tr>
+    <tr>
+    <td>y<sub>2</sub></td>
+    <td>=</td>
+    <td><span>a<sub>21</sub>×x<sub>1</sub></span></td>
+    <td>+</td>
+    <td><span>a<sub>22</sub>×x<sub>2</sub></span></td>
+    <td> <span> + ⋯ + </span></td>
+    <td><span>a<sub>2n</sub>×x<sub>n</sub></span></td>
+    </tr>
+    <tr><td colspan="7">⋮</td></tr>
+    <tr>
+    <td>y<sub>m</sub></td>
+    <td>=</td>
+    <td><span>a<sub>m1</sub>×x<sub>1</sub></span></td>
+    <td>+</td>
+    <td><span>a<sub>m2</sub>×x<sub>2</sub></span></td>
+    <td> <span> + ⋯ + </span></td>
+    <td><span>a<sub>mn</sub>×x<sub>n</sub></span></td>
+    </tr>
+  </table>
+</div>
+<!-- 简化为单变量情况 -->
+<div class="formula">
+  <table border="0" cellspacing="0" cellpadding="4">
+    <tr>
+    <td>y<sub>1</sub></td>
+    <td>=</td>
+    <td>a<sub>11</sub> × x<sub>1</sub></td></tr>
+    <tr><td>y<sub>2</sub></td><td>=</td><td>a<sub>21</sub> × x<sub>1</sub></td></tr>
+    <tr><td>⋮</td></tr>
+    <tr><td>y<sub>m</sub></td><td>=</td><td>a<sub>m1</sub> × x<sub>1</sub></td></tr>
+  </table>
+</div>
+</li>
+<hr class="main_hr_separator"/>
+<li>
+<span>
+    <b>Simple AI Properties / AI的简单性质</b>
+</span>
+<p>
+    The AI model is a kind of function, which is a mapping from the input space to the output space.
+</p>
+<p>
+    <u>
+    If we combine the <b>Input</b> and the <b>Output</b> together, we can get a set of data points (x, y).
+    (Call it as the <b>"Data"</b>)
+    </u>
+</p>
+<p>
+    <ul>
+    <li>
+    The training process is to find a parameter group.
+    </li>
+    <li>
+    We are doing Linear/Non-Linear Regression to fit the <b>"Data"</b> (Include <b>Input</b> and <b>Output</b>) to <b> y = ax + b </b> (or the extension of it).
+    </li>
+    </ul>
+</p>
+
+<b>
+The Linear/Non-Linear Regression Do
+</b>
+<ol>
+<li>
+<u>Prediction</u> (Assume unseen data follows the rule of dataset)
+</li>
+<li>
+<u>Classification</u> (It is above or below the line)
+</li>
+</ol>
+
+<b>
+∴ AI is doing Classification and Prediction basically.
+</b>
+<hr class="language_hr_separator"/>
+<p>
+AI可被看作是个映射输入和输出的函数
+</p>
+<p>
+将输入和输出看作一个整体，我们就得到了一个数据点集合 (x, y)，暂时管他叫<b>"数据集"</b>。
+</p>
+<ul>
+<li>
+训练的过程就是寻找一组参数。
+</li>
+<li>让线性/非线性回归函数拟合这个<b>"数据集"</b>（包含输入和输出）。
+</li>
+</ul>
+<b>线性/非线性回归其实在做两件事</b>
+<ol>
+<li><u>预测</u>（假设未见过的数据遵循数据集的规律）</li>
+<li><u>分类</u>（在回归曲线的上方还是下方）</li>
+</ol>
+<b>∴ AI的本质是简单的分类和预测。</b>
+<br/>
+<span style="color: grey; font-size: small;">
+启发：就好像梯度下降是牛顿法，我们也可以用二分法等等去优化参数（人话：解方程，解没有解析解的方程）
+</span>
+</li>
+<hr class="main_hr_separator"/>
+<li>
+<span>
+    <b>
+        Found Problem / 发现的问题
+    </b>
+</span>
+<p>
+    Since AI is doing classification and prediction,
+    we are seeking the problem of classification and prediction.
+</p>
+<dl>
+<dt>
+    <u>Prediction</u>
+</dt>
+<dd>
+<p>
+    <i style="font-size: small;">Not tested in this project, but might be a direction</i>
+</p>
+</dd>
+<dt>
+    <u>Classification</u>
+</dt>
+<dd>
+<p>
+    Possible problem:
+    <ul>
+    <li>
+    Accuracy
+    </li>
+    <li>
+    Recursion Depth (How many levels of classification we can do)
+    <p style="font-size: 12px; font-style: italic;">
+    Classification has recursive problem.
+    There are categories under categories.
+    </p>
+    </li>
+    </ul>
+</p>
+</dd>
+</dl>
+<div>
+<ul style="list-style-type: none;">
+<li>∵ Time limit of this project.</li>
+<li>∴ Consider a easy possible problem.</li>
+<li>∵ And inspired from translation problem,</li>
+<li>and this class is about NLP.</li>
+<li>∴ We are trying to find out whether there is Recursive depth problem in the translation task.</li>
+</ul>
+</div>
+<hr class="language_hr_separator"/>
+已知AI本质为分类和预测，我们便可在分类和预测中寻找AI的问题。
+<dl>
+<dt><u>预测</u></dt>
+<dd><p><i style="font-size: small;">
+没测试过，也没有思考过
+但可能是个方向</i></p></dd>
+<dt><u>分类</u></dt>
+<dd><p>可能的问题：</p>
+<ul>
+<li>准确率</li>
+<li>递归深度（嵌套分类/多级目录）</li>
+</ul>
+</dd>
+</dl>
+<div>
+<ul style="list-style-type: none;">
+<li>∵ 时间限制</li>
+<li>∴ 我们决定做一个相对简单的问题</li>
+<li>∵ 启发自翻译问题，</li>
+<li>又∵ 此课程内容为自然语言处理</li>
+<li>∴ 尝试思考是否有分类递归深度（多层分类）问题</li>
+</ul>
+</div>
+
+<hr class="main_hr_separator"/>
+<p><b>
+What kind of problem related to deeper classification in the translation task?
+</b>
+</p>
+<p>
+<b>
+思考：翻译中什么情况涉及多次分类，细分小类？
+</b>
+</p>
+<br/>
+<p>
+<b>Answer:</b>
+The distinguish of synonym (Words have similar meanings) and polysemy (Words have multiple meanings) in the translation task.
+</p>
+<p>
+<b>答案：</b>
+在翻译中分辨近义词与多义词
+</p>
+<p>
+Here, we only test the synonym problem. 
+The synonyms are always not have the exact same meaning, a lot of them contains extra emotional or cultural, or even context information/omission. While this difference will be enlarged in the translation.
+</p>
+<p>
+此处，我们仅针对近义词问题。诸多“同义词”其意思并不完全等同。
+这些细微差异往往包含额外的情感、文化，甚至是上下文信息/省略。
+而此差异会在翻译中被放大。
+</p>
+<p>
+This might be quite important in the task of professional translation. (Culture and context background will influence reader in the understanding and the choice of words in responses.)
+</p>
+<p>
+这在专业翻译中或许非常重要（文化和上下文背景会影响读者的理解和反馈用词）
+</p>
+<p>
+When we have multiple levels of classification, humans can easily classify the data into a more precise category (Even we do not speak out the detail, but we know that; and this will influence our judgement and choice of future conversation and actions).
+</p>
+<p>
+人能非常轻松地将事物更细致的分类（这会影响判断，但有时不会直接说出）
+</p>
+<p>
+Here, we try the most typical random example thought out from us; all of the following words has the similar meaning of "Important", but they have different contexts.
+</p>
+<p>
+如下随机例子包含中文皆为“重要”的词汇，但含有细微语境差别。
+</p>
+<ul>
+<p>
+<span style="font-family: Consolas;">Note:</span>
+<small style="color: grey; font-style: italic;">
+The true definition and meaning are here are according to the Cambridge Dictionary, and from the Etymology (Word origin) aspect, the concepts are extended from different original meaning.
+</small>
+</p>
+<p>
+<span style="font-family: Consolas;">注：</span>
+<small style="color: grey; font-style: italic;">
+此处词汇含义参考剑桥词典及词源学（词义流变）。即如何从原始含义引申出当前概念。
+</small>
+</p>
+<li>
+<a href="https://dictionary.cambridge.org/dictionary/english/important" target="_blank">Important</a>; necessary or of great value or from General/Subjective aspect
+<br/>
+对于某人某事有重大价值或者十分被需要（一般/主观角度）
+</li>
+<li>
+<a href="https://dictionary.cambridge.org/dictionary/english/crucial" target="_blank">Crucial</a>; Decisive or critical, especially in the success or failure of something
+<br/>
+对于某事的成功或失败起决定性作用
+</li>
+<li>
+<a href="https://dictionary.cambridge.org/dictionary/english/vital" target="_blank">Vital</a>; Necessary for life (from Life aspect)
+<br/>
+如生命般重要，生死攸关，拿掉就崩
+</li>
+<li>
+<a href="https://dictionary.cambridge.org/dictionary/english/significant" target="_blank">Significant</a>; important, large, or great, esp. in leading to a different result or to an important change, with reasonable reason (from Meaning aspect)
+<br/>
+重要的，重大的，尤其是导致不同结果或重要改变的(不关心成功失败)，且有合理理由的
+</li>
+<li>
+<a href="https://dictionary.cambridge.org/dictionary/english/essential" target="_blank">Essential</a>; relating to something's or someone's basic or most important qualities
+<br/>
+重要是因为某人/某事具有基本或最重要的特质/质量，或生存必须，长期必要，持续需要
+</li>
+<li>
+<a href="https://dictionary.cambridge.org/dictionary/english/critical" target="_blank">Critical</a>; important that saying someone or something is going bad or wrong if not done correctly (Negative aspect)
+<br/>
+关键的，如果不正确完成，某人或某事将出问题 （侧重重要因为会导致结果不好）
+</li>
+</ul>
+<p>
+Note: the Chinese has one general word "重要" to cover all of the above words. But it does not give out "How/Why" important it is. (
+This simple translation is common in the internet, but might not be appropriate in a professional translation scenario.
+)
+</p>
+<p>
+注：上述英文词汇在中文中皆为“重要”，但通常并不表达出“重要的程度/方式/原因”。（这种翻译简化在网络常见，但私认为在专业翻译中并不合适）
+</p>
+<hr class="main_hr_separator"/>
+<b>Find:</b> 
+<p>
+In the translate task,
+the AI just translate everything into "重要".
+The output does not have any decoration or comment with bracket.
+</p>
+<hr class="language_hr_separator"/>
+<b>发现：</b>
+<p>
+在翻译任务中，AI把所有词都翻译成了“重要”，且无词汇修饰或者括号注释。
+</p>
+<hr class="main_hr_separator"/>
+<p>
+Example (with image):
+<br/>
+The word "peasant" has raised meaning. But the AI just translate it into "农民", which is a neutral word for "field/
+farmland worker" especially for jobs caring and growing plants, crops and vegetables.
+</p>
+<p>
+例子（附图）：
+<br/>
+"peasant"有歧视义，但AI把它译成了“农民”。在中文中，这是个中性词，指的是照料和种植植物、农作物和蔬菜的工作。
+</p>
+<div>
+<span>
+Small Model / 小模型
+</span>
+<img src="image/README/wrong_translate_peasant_model_q.png" alt="wrong_translate_peasant_model_q" style="width: 100%;"/>
+</div>
+<div>
+<span>
+Large Model / 大模型
+</span>
+<img src="image/README/wrong_translate_peasant_model_c.png" alt="wrong_translate_peasant_model_c" style="width: 100%;"/>
+</div>
+</li>
+<hr class="main_hr_separator"/>
+<li>
+<span>
+    <b>
+        Possible Solution / 可能的解决方案
+    </b>
+</span>
+<p>
+    Imagine we have a tree start from the root, if we classified the data into the first layer but not the second layer;
+    It doesn't means we do not know the existence of the sub-categories and the relationship. We just stop at the first layer and do not classify further. This is the problem of recursive depth in classification.
+    <br/>
+    <small>
+    Note: Human will classify the things by small details unconsciously/subliminally. But AI are doing it rigidly like a real machine. It only does what you instructed.
+    </small>
+</p>
+<p>
+    想象一棵树，从根开始，如果我们只将数据粗分到第一层；你无法判断我们是否知道有第二层，也不能说我们不知道第一层节点和第二层节点之间的关系。即唯一可能为看到了第一层就停止了思考。此为分类深度的问题。
+<br/>
+    <small>
+    注：人会在潜意识里通过事物细节分类，但AI非常死板，你说一它就是一，它只会做你设定好的事情。
+    </small>
+</p>
+<hr class="main_hr_separator"/>
+<p>
+A Possible Simple solution:
+<br/>
+If we do not know the relationship of the layer 1 and layer 2, list out the possible sub-categories in the input and point out there will be relationship between them; this will help the AI to recall the possible sub-categories and do a deeper classification.
+<br/>
+<small>
+Note: Both 2 things need to be done: 
+<ol>
+<li>List out the possible sub-categories in the input (for comparison and activate the memory of the sub-categories);
+<br/>
+Because AI is a classifier (comparer) and predictor, it will do all detail comparison between possible sub-categories and get the difference. (Classification)
+<br/>
+Although because the current model is mostly based on addition, the ability to enlarge the difference might be a little bit weak compare to the expected, it is enough to show the difference.
+</li>
+<li>Point out there will be relationship between them (the instruction for asking the AI to do deeper classification)</li>
+</ol>
+Activate/Let Recall + Instruction/Ask for detail jobs (both are necessary)
+</small>
+</p>
+<p>
+一个简单的可能方案：
+<br/>
+如果我们不知道第一层和第二层的关系，那么列出输入中可能的子类别，并指出它们之间会有关系。这将帮助AI回忆起可能的子类别并进行更细致的分类。
+<br/>
+<small>
+注：两件事都需要做：
+<ol>
+<li>列出输入中可能的子类别（用于比较和激活子类别的记忆）；
+<br/>
+因为AI是个分类器（比较器）和预测器，所以列出所有的子类别能激活AI的分类比较能力，让子类的细节（关系）被比较出来
+<br/>
+虽然由于现在的模型以加法算法为主，放大差异的能力可能比预计略差，但足够展示差异
+</li>
+<li>指出它们之间会有关系（用于指示AI进行更深入的分类）</li>
+</ol>
+激活回忆 + 指示任务 （缺一不可）
+</small>
+</p>
+</li>
+<hr class="main_hr_separator"/>
+<li>
+<span>
+    <b>
+        Aims and Results / 目标与结果
+    </b>
+</span>
+<p>
+    This project find that the way assigned above is a solution of this kind of problem, and roughly test it in the translation task.
+</p>
+<p>
+    The result is good, the method works.
+</p>
+<p>
+    The AI will point out (vital is in life way important in the brackets) the key difference and the extended meaning of the word as expected.
+</p>
+<p class="formula">
+<b>
+with_instruction_with_recall &gt; 
+with_instruction_without_recall 
+(Information increase, 
+but says rubbish when read by human; 
+the AI generates a lot of random examples 
+which increase the number of unique vocabulary, 
+but fails to highlight subtle differences) &gt; 
+without_instruction_with_recall &gt;
+without_instruction_without_recall
+</b>
+</p>
+<p>
+∴ The correctness of the methodology is also verified by practice.
+</p>
+<p>
+Note: You cannot use AI to judge the quality of the response; it is AI becomes both the judge and the player.
+And some things cannot be quantified as said it is a kind of "Academic", but only judged by human.
+</p>
+<hr class="language_hr_separator"/>
+<p>
+该项目发现上述方法能有效解决问题。我们在翻译任务中粗略的测试了这个方法，结果很好，方法有效。
+</p>
+<p>
+∴ 经过实践，方法论应该也没大问题
+</p>
+<p>AI会指出（如：vital为生死攸关）词汇的关键差别和扩展含义，符合预期。</p>
+<p class="formula">
+with_instruction_with_recall &gt;
+ with_instruction_without_recall 
+ (信息增加，但人读起来感觉乱七八糟，
+ 人判定没有给出想要的额外的信息，
+ 实际情况是AI自己举了一堆随机的杂七杂八的例子增加了词汇量，
+ 但是就是点不出来微妙的差异) &gt;
+without_instruction_with_recall &gt;
+without_instruction_without_recall
+</p>
+<p>
+注：绝对不可以图省事或者所谓严谨“学术”用AI来判断回答的质量和信息量，因为这样AI既当了裁判又当了运动员。
+而且有的东西无法量化，只能靠人判断。
+</p>
+</li>
+<hr class="main_hr_separator"/>
+<li>
+<span>
+    <b>
+        Test Method / 测试方法
+    </b>
+</span>
+<p>
+    The test method is to measure whether there is extra information generated.
+</p>
+<p>
+    If there is any information from the second layer, compare to the response only with the first layer information, the amount of information grows.
+</p>
+<p>
+    Also, the response will be longer compared to the response without the second layer information.
+</p>
+<p>
+    ∵ AI generated is unstable
+    <br/>
+    ∴ Use unique word number as a measurement of the amount of information.
+<br/>
+<br/>
+    ∵ Each response has different length
+    <br/>
+    ∴ Multi-Dimensional judgement is needed
+    <br/>
+    ∴ Unique word count + Response Length + Unique word count per length (Density of information) are all used as measurement.
+</p>
+<hr class="language_hr_separator"/>
+<p>
+测试方法是测量是否有额外信息被生成。
+如果有第二层的信息，那么与只有第一层信息的回答相比，信息量会增加，且回答的长度也会更长。
+</p>
+<p>∵ AI生成的内容不稳定
+<br/>
+∴ 使用独特词汇数量作为信息量的衡量标准。
+<br/>
+<br/>∵ 每个回答的长度不同
+<br/>
+∴ 要综合判断
+<br/>
+∴ 独特词汇数量 + 回答长度 + 每长度的独特词汇数量（信息密度）都会被纳入参考。
+</p>
+</li>
+<hr class="main_hr_separator"/>
+<li>
+<span>
+    <b>
+        File Structure / 文件结构
+    </b>
+</span>
+<p>
+    The file structure is as follows:
+</p>
+<p>
+    文件结构如下：
+</p>
+<hr class="small_item_separator"/>
+<ol>
+<li>
+    <span>
+        <b>README.md</b>; the main file of this project, which contains the main content and the result of this project.
+        <hr class="language_hr_separator"/>
+        项目介绍文件，包含项目的主要内容，方法，代码和结果。
+    </span>
+</li>
+<hr class="small_item_separator"/>
+<li>
+    <span>
+        <b>image/</b>; the folder contains the image used in this project. (Current ReadMe only)
+        <hr class="language_hr_separator"/>
+        静态图片文件夹（目前仅ReadMe中有使用图片）
+    </span>
+</li>
+<hr class="small_item_separator"/>
+<li>
+    <span>
+        <b>./data/</b>; the folder contains the data used in this project. 
+        <hr class="language_hr_separator"/>
+        数据文件夹
+        <ol>
+        <li>
+        <b>./dataclass/</b> are prompt templates in string form in python dataclass.
+        <hr class="language_hr_separator"/>
+        以python dataclass形式存储的字符串格式的提示词模板
+        </li>
+        <hr class="small_item_separator"/>
+        <li>
+        <b>./source/</b> are the replaceable part of the prompt template, which is the input for the AI. (In YAML format) (Remove the comment in your needed, or you can also write your own input in the same format)
+        <hr class="language_hr_separator"/>
+        提示词模板中可替换的部分，即AI的输入（YAML格式）。（根据需要去掉注释，或者你也可以按照同样的格式写入你自己的输入）
+        </li>
+        </ol>
+    </span>
+</li>
+<hr class="small_item_separator"/>
+<li>
+    <span>
+        <b>./code/</b>; the folder contains the code used in this project.
+        <ol>
+        <li>
+        <b>generate_input.py</b> is the code to generate the input for the AI, which will replace the specified part in the prompt template (from the YAML file), and automatically ask the AI and generate the response. The response will be stored in the <b>output/{model_name}/{word}_{prompt_type}/synonyms</b> folder.
+        <hr class="language_hr_separator"/>
+        生成AI输入的代码，会将提示词模板中的指定部分替换成输入(详见YAML文件)，并自动询问AI并生成回答。回答会被存储在<b>output/{model_name}/{word}_{prompt_type}/synonyms</b>文件夹中。
+        </li>
+        <hr class="small_item_separator"/>
+        <li>
+        <b>analysis.py</b> is the code to analyze the response generated by the AI, which will calculate the unique word count, response length, and unique word count per length (Density of information) for each response, and store the result in the <b>result/analysis_result.csv</b> file.
+        <hr class="language_hr_separator"/>
+        分析AI生成的回答的代码，会计算每个回答的独特词汇数量、回答长度和每长度的独特词汇数量（信息密度），并将结果存储在<b>result/analysis_result.csv</b>文件中。
+        </li>
+        <hr class="small_item_separator"/>
+        <li>
+            <b>draw_graph.r</b> is the code to draw the graph for the result, which will read the <b>result/analysis_result.csv</b> file and draw the graph for the unique word count, response length, and unique word count per length (Density of information) for each response, and store the graph in the <b>result/img/{name}_{plot_type}.png</b> file. You can also edit the code using View() to view the plot directly in R/RStudio.
+            <hr class="language_hr_separator"/>
+            绘制结果图表的代码，会读取<b>result/analysis_result.csv</b>文件，并绘制每个回答的独特词汇数量、回答长度和每长度的独特词汇数量（信息密度）的图表，并将图表存储在<b>result/img/{name}_{plot_type}.png</b>文件中。也可以编辑代码，改成View()，在R/RStudio中直接查看图表。
+        </li>
+        </ol>
+    </span>
+</li>
+<hr class="small_item_separator"/>
+<li>
+    <span>
+        <b>./result/</b>; the folder contains the result of this project.
+        <hr class="language_hr_separator"/>
+        代码结果文件夹
+        <ol>
+        <li>
+        <b>./analysis_result.csv</b> is the file to store the analysis result of the response generated by the AI, which contains the unique word count, response length, and unique word count per length (Density of information) for each response.
+        <hr class="language_hr_separator"/>
+        存储AI生成的回答的分析结果的文件，包含每个回答的独特词汇数量、回答长度和每长度的独特词汇数量（信息密度）。
+        </li>
+        <hr class="small_item_separator"/>
+        <li>
+        <b>./img/</b> is the folder to store the graph for the result, which contains the graph for the unique word count, response length, and unique word count per length (Density of information) for each response.
+        <hr class="language_hr_separator"/>
+        存储结果图表的文件夹，包含每个回答的独特词汇数量、回答长度和每长度的独特词汇数量（信息密度）的图表。
+        </li>
+        </ol>
+    </span>
+</li>
+<hr class="small_item_separator"/>
+<li>
+    <span>
+        <b>./output/</b>; the folder contains the response generated by the AI, which is stored in the <b>output/{model_name}/{general_word}_{prompt_type}/synonyms</b> folder.
+        <hr class="language_hr_separator"/>
+        存储AI生成的回答的文件夹，存储在<b>output/{模型名字(LMstudio虚拟路径)}/{近义词总义}_{提示词类型}/近义词</b>文件夹中。
+        <hr class="small_item_separator"/>
+        <ol>
+        <li>
+        <b>tools/</b> is the folder to store the tools used in this project, which contains several python files for clearing the output from AI, collect the unique word, remove the non-related word like conjunction words. 
+        <hr class="language_hr_separator"/>
+        存储项目中使用的工具的文件夹，包含若干Python文件，用于清洗AI的输出，统计独特词汇，去除非相关词汇如连接词等。
+        </li>
+        </ol>
+    </span>
+</li>
+<hr class="small_item_separator"/>
+<li>
+    <span>
+        <b>./method_and_idea/</b>; the folder contains the method and idea of this project, there are draft files for thinking process and notes. (For reference only, feel free to check it out if you think it is valuable)
+        <hr class="language_hr_separator"/>
+        项目的方法和思路文件夹，包含思考过程和笔记的草稿文件。（仅供参考，感觉可能有价值，遂放出来参考）
+    </span>
+</li>
+<hr class="small_item_separator"/>
+<li>
+    <span>
+        <b>GroupProject.Rproj</b>; this is the root of R file can be execute, else the path of the csv storing result will be wrong when running the R code. (FileNotExistError) 
+        <hr class="language_hr_separator"/>
+        R代码的根目录文件，否则运行R代码时存储结果的csv路径会出错（FileNotExistError）
+    </span>
+</li>
+<hr class="main_hr_separator"/>
+<li>
+<span>
+<p>
+    <b>
+        Optional Appreciation / 可有可无的致谢
+    </b>
+</p>
+    <p>
+    <small style="color: grey; font-style: italic;">
+    (Just for filling the format and blank space)
+    (单纯凑数用的)
+    </small>
+    </p>
+</span>
+<hr class="small_item_separator"/>
+<p>
+    Thanks to the teacher and the teaching assistant for their guidance and support throughout the project. 
+    Also, thanks to the classmates for their valuable feedback and suggestions.
+        As the famous philosopher said: "human nature is not abstract or fixed, but defined by active relationships within society, production, and history."; to my parents, friends and everyone helped me in my life and study, for their support and encouragement.
+    Thanks also to those who keen on practice engineering science instead of "over-precised 'beautiful' data", "terminology" and "rigorous", which give me the confidence of using the "Seek truth from facts", "Solving problem is the things we need to do" methodology, instead of innovations with no bases, and treating innovation and language decoration skills as KPI.
+</p>
+<hr class="language_hr_separator"/>
+<p>
+    感谢老师和助教在整个项目中的指导和支持。
+    也感谢同学们的宝贵反馈和建议。
+    正如著名某哲学家说过：“人是一切社会关系的总和”；
+    我非常感谢我的父母、朋友和所有在我的生活和学习中帮助过我的人，感谢他们的支持和鼓励，帮我调整身体以及精神状态。
+    还要感谢那些热衷于实践工程科学而不是“过于精确的‘漂亮’数据”、“术语”和“严谨”的人，他们给了我使用“实事求是”、“解决问题才是我们需要做的事”的方法论的信心，而不是在一味的追求创新，把创新和文字功夫当成KPI。
+</p>
+</li>
+</ol>
