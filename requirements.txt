@@ -1,0 +1,7 @@
+lmstudio
+pyyaml
+textdistance
+opencc-python-reimplemented
+html-to-markdown
+aiofiles
+jieba
